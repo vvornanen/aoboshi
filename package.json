@@ -7,9 +7,9 @@
   "scripts": {
     "postinstall": "husky install",
     "lint": "eslint --ext .ts,.tsx .",
-    "make": "yarn workspace aoboshi-app make && open packages/aoboshi-app/out/aoboshi-app-darwin-arm64",
-    "start": "yarn workspace aoboshi-app start",
-    "storybook": "yarn workspace aoboshi-app storybook"
+    "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
+    "start": "yarn workspace @vvornanen/aoboshi-app start",
+    "storybook": "yarn workspace @vvornanen/aoboshi-app storybook"
   },
   "lint-staged": {
     "*.{html,css,md,mdx,json}": "prettier --write",

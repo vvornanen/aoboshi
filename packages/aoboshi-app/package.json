@@ -1,5 +1,5 @@
 {
-  "name": "aoboshi-app",
+  "name": "@vvornanen/aoboshi-app",
   "version": "1.0.0",
   "private": true,
   "main": ".vite/build/main.js",
@@ -40,5 +40,5 @@
     "storybook": "^7.0.12",
     "typescript": "^5.0.4"
   },
-  "productName": "aoboshi-app"
+  "productName": "アオボシ"
 }

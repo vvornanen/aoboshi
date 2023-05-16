@@ -7,11 +7,6 @@ import { app, BrowserWindow } from "electron";
 declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require("electron-squirrel-startup")) {
-  app.quit();
-}
-
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

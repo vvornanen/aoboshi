@@ -1,0 +1,13 @@
+{
+  "name": "@vvornanen/aoboshi",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "yarn@3.5.1",
+  "engines": {
+    "node": ">=20",
+    "npm": "Please use yarn instead of npm",
+    "yarn": ">=3.5"
+  }
+}

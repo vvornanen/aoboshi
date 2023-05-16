@@ -8,17 +8,27 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:import/recommended",
     "plugin:import/electron",
     "plugin:import/typescript"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "react-refresh"],
   "rules": {
     "import/first": "error",
     "import/no-duplicates": "error",
     "import/order": "error",
-    "import/newline-after-import": "error"
+    "import/newline-after-import": "error",
+    "react-refresh/only-export-components": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

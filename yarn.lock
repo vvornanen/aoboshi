@@ -4111,6 +4111,7 @@ __metadata:
     "@types/react-dom": ^18.2.4
     "@vitejs/plugin-react": ^4.0.0
     electron: 24.3.0
+    eslint: ^8.40.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-react: ^7.32.2
     eslint-plugin-react-hooks: ^4.6.0
@@ -4121,6 +4122,7 @@ __metadata:
     react-dom: ^18.2.0
     storybook: ^7.0.12
     typescript: ^5.0.4
+    vite: ^4.3.7
   languageName: unknown
   linkType: soft
 
@@ -12469,7 +12471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.1.1":
+"vite@npm:^4.1.1, vite@npm:^4.3.7":
   version: 4.3.7
   resolution: "vite@npm:4.3.7"
   dependencies:

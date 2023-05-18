@@ -1,3 +1,4 @@
 .yarn
 packages/*/.vite
 packages/*/out
+coverage

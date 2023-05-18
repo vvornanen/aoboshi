@@ -1,5 +1,10 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    appBundleId: "com.github.vvornanen.aoboshi",
+    appCopyright: "© 2023 Ville Vornanen",
+    icon: "src/resources/aoboshi",
+    extraResource: ["src/resources/ja.lproj"],
+  },
   rebuildConfig: {},
   makers: [
     {

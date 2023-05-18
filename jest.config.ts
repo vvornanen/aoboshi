@@ -19,7 +19,10 @@ const config: Config = {
           },
         ],
       },
-      testMatch: ["<rootDir>/packages/aoboshi-anki/src/**/*.test.ts"],
+      testMatch: [
+        "<rootDir>/packages/aoboshi-anki/src/**/*.test.ts",
+        "<rootDir>/packages/aoboshi-anki/tests/**/*.test.ts",
+      ],
     },
   ],
 };

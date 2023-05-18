@@ -7,6 +7,8 @@
   "scripts": {
     "postinstall": "husky install",
     "lint": "eslint --ext .ts,.tsx .",
+    "test": "jest --testPathIgnorePatterns=integration",
+    "test:integration": "jest --testPathPattern=integration",
     "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
     "start": "yarn workspace @vvornanen/aoboshi-app start",
     "storybook": "yarn workspace @vvornanen/aoboshi-app storybook"

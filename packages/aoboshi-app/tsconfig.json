@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "es2022",
     "jsx": "react-jsx",
     "module": "esnext",
@@ -10,5 +11,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "files": []
 }

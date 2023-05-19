@@ -37,11 +37,14 @@ jobs:
       - name: Install
         run: yarn --immutable
 
+      - name: Build
+        run: yarn build
+
       - name: Lint
         run: yarn lint
 
       - name: Prettier
         run: yarn prettier --check .
 
-      - name: Run Unit Tests
+      - name: Run unit tests
         run: yarn test

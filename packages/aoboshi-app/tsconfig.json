@@ -1,15 +1,16 @@
 {
+  "extends": "../../tsconfig.options.json",
   "compilerOptions": {
-    "composite": true,
-    "target": "es2022",
+    "rootDir": "./src",
+    "emitDeclarationOnly": false,
+    "noEmit": true,
     "jsx": "react-jsx",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
+    "moduleResolution": "bundler"
   },
-  "files": []
+  "include": ["src/**/*", "*.ts", "*.tsx"],
+  "references": [
+    {
+      "path": "../aoboshi-core/tsconfig.json"
+    }
+  ]
 }

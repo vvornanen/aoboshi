@@ -24,6 +24,19 @@ const config: Config = {
         "<rootDir>/packages/aoboshi-anki/tests/**/*.test.ts",
       ],
     },
+    {
+      displayName: "aoboshi-core",
+      testEnvironment: "node",
+      transform: {
+        "^.+\\.ts$": [
+          "ts-jest",
+          {
+            isolatedModules: true,
+          },
+        ],
+      },
+      testMatch: ["<rootDir>/packages/aoboshi-core/src/**/*.test.ts"],
+    },
   ],
 };
 

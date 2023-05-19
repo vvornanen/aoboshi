@@ -1,4 +1,5 @@
 .yarn
 packages/*/.vite
 packages/*/out
+packages/*/dist
 coverage

@@ -9,6 +9,8 @@
     "lint": "eslint --ext .ts,.tsx .",
     "test": "jest --testPathIgnorePatterns=integration",
     "test:integration": "jest --testPathPattern=integration",
+    "build": "tsc --build",
+    "dev": "concurrently 'yarn build --watch' 'yarn storybook'",
     "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
     "start": "yarn workspace @vvornanen/aoboshi-app start",
     "storybook": "yarn workspace @vvornanen/aoboshi-app storybook"
@@ -26,6 +28,7 @@
     "@types/jest": "^29.5.1",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",

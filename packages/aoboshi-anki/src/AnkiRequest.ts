@@ -19,5 +19,5 @@ export interface AnkiRequest {
   action: AnkiAction;
   version: 6;
   key: string;
-  params: Record<string, unknown>;
+  params?: Record<string, unknown>;
 }

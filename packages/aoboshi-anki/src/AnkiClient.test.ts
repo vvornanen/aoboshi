@@ -10,7 +10,7 @@ afterEach(() => {
   mockFetch.mockReset();
 });
 
-const mockResponse = (status: number, body) => {
+const mockResponse = (status: number, body: unknown) => {
   mockFetch.mockImplementationOnce(async () => ({
     status,
     json: async () => body,

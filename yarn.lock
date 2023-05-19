@@ -4381,6 +4381,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@vvornanen/aoboshi-core@workspace:packages/aoboshi-core":
+  version: 0.0.0-use.local
+  resolution: "@vvornanen/aoboshi-core@workspace:packages/aoboshi-core"
+  languageName: unknown
+  linkType: soft
+
 "@vvornanen/aoboshi@workspace:.":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi@workspace:."

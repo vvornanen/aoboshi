@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "outDir": "./build",
     "target": "es2022",
     "module": "esnext",
     "isolatedModules": true,
@@ -8,16 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "files": [],
-  "references": [
-    {
-      "path": "packages/aoboshi-anki"
-    },
-    {
-      "path": "packages/aoboshi-app"
-    },
-    {
-      "path": "packages/aoboshi-core"
-    }
-  ]
+  "include": ["src"],
+  "exclude": ["*.test.ts"]
 }

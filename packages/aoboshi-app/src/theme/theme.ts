@@ -1,4 +1,9 @@
-import { createTheme, PaletteOptions } from "@mui/material";
+import {
+  alpha,
+  createTheme,
+  PaletteOptions,
+  ThemeOptions,
+} from "@mui/material";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 declare module "@mui/material/styles" {
@@ -39,12 +44,37 @@ const darkPalette = {
   mode: "dark",
 } satisfies PaletteOptions;
 
-export const lightTheme = createTheme({
+const createAppTheme = (themeOptions: ThemeOptions) => {
+  const theme = createTheme(themeOptions);
+
+  const tooltipColor = alpha(theme.palette.grey[900], 0.92);
+
+  return createTheme(theme, {
+    components: {
+      MuiTooltip: {
+        defaultProps: {
+          arrow: true,
+        },
+        styleOverrides: {
+          tooltip: {
+            ...theme.typography.body2,
+            backgroundColor: tooltipColor,
+          },
+          arrow: {
+            color: tooltipColor,
+          },
+        },
+      },
+    },
+  });
+};
+
+export const lightTheme = createAppTheme({
   palette: lightPalette,
   typography,
 });
 
-export const darkTheme = createTheme({
+export const darkTheme = createAppTheme({
   palette: darkPalette,
   typography,
 });

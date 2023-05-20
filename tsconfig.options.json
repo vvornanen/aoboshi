@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "module": "ESNext",
     "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "target": "ES2022"

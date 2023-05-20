@@ -48,3 +48,6 @@ jobs:
 
       - name: Run unit tests
         run: yarn test
+
+      - name: Chromatic
+        run: yarn chromatic

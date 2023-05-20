@@ -13,7 +13,8 @@
     "dev": "concurrently 'yarn build --watch' 'yarn storybook'",
     "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
     "start": "yarn workspace @vvornanen/aoboshi-app start",
-    "storybook": "yarn workspace @vvornanen/aoboshi-app storybook"
+    "storybook": "yarn workspace @vvornanen/aoboshi-app storybook",
+    "chromatic": "yarn workspace @vvornanen/aoboshi-app chromatic --exit-zero-on-changes"
   },
   "lint-staged": {
     "*.{html,css,md,mdx,json}": "prettier --write",

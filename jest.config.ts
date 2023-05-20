@@ -25,6 +25,19 @@ const config: Config = {
       ],
     },
     {
+      displayName: "aoboshi-app",
+      testEnvironment: "jsdom",
+      transform: {
+        "^.+\\.ts$": [
+          "ts-jest",
+          {
+            isolatedModules: true,
+          },
+        ],
+      },
+      testMatch: ["<rootDir>/packages/aoboshi-app/src/**/*.test.ts"],
+    },
+    {
       displayName: "aoboshi-core",
       testEnvironment: "node",
       transform: {

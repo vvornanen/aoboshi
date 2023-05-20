@@ -1,0 +1,78 @@
+import { ColorItem, ColorPalette } from "@storybook/blocks";
+import { lightTheme, darkTheme } from "./theme";
+
+# Palette
+
+## Light theme
+
+<ColorPalette>
+  <ColorItem title="common" subtitle="" colors={lightTheme.palette.common} />
+  <ColorItem title="primary" subtitle="" colors={lightTheme.palette.primary} />
+  <ColorItem
+    title="secondary"
+    subtitle=""
+    colors={lightTheme.palette.secondary}
+  />
+  <ColorItem title="grey" subtitle="" colors={lightTheme.palette.grey} />
+  <ColorItem title="error" subtitle="" colors={lightTheme.palette.error} />
+  <ColorItem title="warning" subtitle="" colors={lightTheme.palette.warning} />
+  <ColorItem title="info" subtitle="" colors={lightTheme.palette.info} />
+  <ColorItem title="success" subtitle="" colors={lightTheme.palette.success} />
+  <ColorItem title="text" subtitle="" colors={lightTheme.palette.text} />
+  <ColorItem
+    title="Background"
+    subtitle=""
+    colors={lightTheme.palette.background}
+  />
+  <ColorItem
+    title="action"
+    subtitle=""
+    colors={Object.fromEntries(
+      Object.entries(lightTheme.palette.action).slice(0, 6)
+    )}
+  />
+  <ColorItem
+    title=""
+    subtitle=""
+    colors={Object.fromEntries(
+      Object.entries(lightTheme.palette.action).slice(6)
+    )}
+  />
+</ColorPalette>
+
+## Dark theme
+
+<ColorPalette>
+  <ColorItem title="common" subtitle="" colors={darkTheme.palette.common} />
+  <ColorItem title="primary" subtitle="" colors={darkTheme.palette.primary} />
+  <ColorItem
+    title="secondary"
+    subtitle=""
+    colors={darkTheme.palette.secondary}
+  />
+  <ColorItem title="grey" subtitle="" colors={darkTheme.palette.grey} />
+  <ColorItem title="error" subtitle="" colors={darkTheme.palette.error} />
+  <ColorItem title="warning" subtitle="" colors={darkTheme.palette.warning} />
+  <ColorItem title="info" subtitle="" colors={darkTheme.palette.info} />
+  <ColorItem title="success" subtitle="" colors={darkTheme.palette.success} />
+  <ColorItem title="text" subtitle="" colors={darkTheme.palette.text} />
+  <ColorItem
+    title="background"
+    subtitle=""
+    colors={darkTheme.palette.background}
+  />
+  <ColorItem
+    title="action"
+    subtitle=""
+    colors={Object.fromEntries(
+      Object.entries(darkTheme.palette.action).slice(0, 6)
+    )}
+  />
+  <ColorItem
+    title=""
+    subtitle=""
+    colors={Object.fromEntries(
+      Object.entries(darkTheme.palette.action).slice(6)
+    )}
+  />
+</ColorPalette>

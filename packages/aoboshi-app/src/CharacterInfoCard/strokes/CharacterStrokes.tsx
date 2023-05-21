@@ -1,8 +1,10 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Character } from "../Character";
+import { InfoBox } from "../InfoBox";
 import { StrokeBackground } from "./StrokeBackground";
-import { Character } from "./Character";
-import { InfoBox } from "./InfoBox";
+import { Stroke } from "./Stroke";
+import { useStrokePaths } from "./useStrokePaths";
 
 type CharacterStrokesProps = {
   character: Character;
@@ -24,6 +26,7 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
   columns,
 }) => {
   const { t } = useTranslation();
+  const [strokePaths] = useStrokePaths(character.literal);
 
   const span = 2;
   const numberOfStrokesPerRow = columns / span;
@@ -35,13 +38,13 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
 
   return (
     <>
-      {Array.from({ length: numberOfCells }, (x, i) => i + 1).map((i) => (
+      {Array.from({ length: numberOfCells }, (x, i) => i + 1).map((n) => (
         <InfoBox
-          key={i}
-          role={i <= character.strokeCount ? "figure" : "presentation"}
+          key={n}
+          role={n <= character.strokeCount ? "figure" : "presentation"}
           aria-label={
-            i <= character.strokeCount
-              ? t("CharacterInfoCard.strokeLabel", { stroke: i })
+            n <= character.strokeCount
+              ? t("CharacterInfoCard.strokeLabel", { stroke: n })
               : undefined
           }
           sx={{
@@ -49,7 +52,15 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
             gridRow: `span ${span}`,
           }}
         >
-          <StrokeBackground />
+          <StrokeBackground>
+            {n <= character.strokeCount && (
+              <Stroke
+                literal={character.literal}
+                svg={strokePaths || ""}
+                n={n}
+              />
+            )}
+          </StrokeBackground>
         </InfoBox>
       ))}
     </>

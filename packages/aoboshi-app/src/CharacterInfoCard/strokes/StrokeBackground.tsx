@@ -17,6 +17,10 @@ export const StrokeBackground: FC<StrokeBackgroundProps> = ({
   sx,
 }) => {
   const theme = useTheme();
+  const strokeColor =
+    theme.palette.mode === "dark"
+      ? theme.palette.grey[700]
+      : theme.palette.grey[400];
 
   const grid = (
     <svg viewBox="0 0 100 100">
@@ -25,7 +29,7 @@ export const StrokeBackground: FC<StrokeBackgroundProps> = ({
         y1="50"
         x2="100"
         y2="50"
-        stroke={theme.palette.grey[400]}
+        stroke={strokeColor}
         strokeWidth="2"
         strokeDasharray="4 8"
       />
@@ -34,7 +38,7 @@ export const StrokeBackground: FC<StrokeBackgroundProps> = ({
         y1="0"
         x2="50"
         y2="100"
-        stroke={theme.palette.grey[400]}
+        stroke={strokeColor}
         strokeWidth="2"
         strokeDasharray="4 8"
       />

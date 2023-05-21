@@ -47,3 +47,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/aoboshi-app
           zip: true
+          exitOnceUploaded: true

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Character } from "../Character";
+import { InfoBox } from "../InfoBox";
 import { StrokeBackground } from "./StrokeBackground";
-import { Character } from "./Character";
-import { InfoBox } from "./InfoBox";
 import { Stroke } from "./Stroke";
 import { useStrokePaths } from "./useStrokePaths";
 

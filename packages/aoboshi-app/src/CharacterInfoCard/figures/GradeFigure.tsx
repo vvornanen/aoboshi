@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "@mui/material";
-import { Character, Grade, KANA_REGEXP } from "./Character";
+import { Character, Grade, KANA_REGEXP } from "../Character";
 import { CircledFigure } from "./CircledFigure";
 
 type GradeFigureProps = {

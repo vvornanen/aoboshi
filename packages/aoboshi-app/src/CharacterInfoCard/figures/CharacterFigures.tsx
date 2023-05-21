@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { Character } from "./Character";
+import { Character } from "../Character";
 import { JlptLevelFigure } from "./JlptLevelFigure";
 import { GradeFigure } from "./GradeFigure";
 

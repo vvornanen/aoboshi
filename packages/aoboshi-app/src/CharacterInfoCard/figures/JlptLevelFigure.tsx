@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Character, JLPT } from "./Character";
+import { Character, JLPT } from "../Character";
 import { CircledFigure } from "./CircledFigure";
 
 type JlptFigureProps = {

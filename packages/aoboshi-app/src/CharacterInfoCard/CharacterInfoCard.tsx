@@ -3,9 +3,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Character } from "./Character";
 import { CharacterType } from "./CharacterType";
-import { CharacterFigures } from "./CharacterFigures";
-import { CharacterReadings } from "./CharacterReadings";
-import { CharacterStrokes } from "./CharacterStrokes";
+import { CharacterFigures } from "./figures/CharacterFigures";
+import { CharacterReadings } from "./readings/CharacterReadings";
+import { CharacterStrokes } from "./strokes/CharacterStrokes";
 import { InfoBox } from "./InfoBox";
 
 type CharacterInfoCardProps = {

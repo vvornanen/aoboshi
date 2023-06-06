@@ -48,7 +48,7 @@
     "prop-types": "^15.8.1",
     "storybook": "^7.0.12",
     "typescript": "^5.0.4",
-    "vite": "^4.3.7"
+    "vite": "^4.3.9"
   },
   "productName": "Aoboshi"
 }

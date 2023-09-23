@@ -1,5 +1,5 @@
-import type { Preview } from "@storybook/react";
-import { withThemeFromJSXProvider } from "@storybook/addon-styling";
+import type { Preview, ReactRenderer } from "@storybook/react";
+import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 import { darkTheme, lightTheme } from "../src/theme/theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "../src/i18n";
@@ -15,7 +15,7 @@ const preview: Preview = {
     },
   },
   decorators: [
-    withThemeFromJSXProvider({
+    withThemeFromJSXProvider<ReactRenderer>({
       themes: {
         light: lightTheme,
         dark: darkTheme,

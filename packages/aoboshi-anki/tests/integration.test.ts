@@ -27,7 +27,7 @@ test("integration", async () => {
 
   const reviewsInFuture = await client.getReviews(
     "test",
-    "2023-05-19T12:00:00.000Z"
+    "2023-05-19T12:00:00.000Z",
   );
   expect(reviewsInFuture).toHaveLength(0);
 

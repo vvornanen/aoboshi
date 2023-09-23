@@ -35,9 +35,9 @@ const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <StrictMode>
     <App />
-  </StrictMode>
+  </StrictMode>,
 );
 
 console.log(
-  '👋 This message is being logged by "renderer.js", included via Vite'
+  '👋 This message is being logged by "renderer.js", included via Vite',
 );

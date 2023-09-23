@@ -2,7 +2,10 @@
  * A tool for handling KanjiVG svg data.
  */
 export class KanjiVG {
-  constructor(public literal: string, public element: SVGSVGElement) {}
+  constructor(
+    public literal: string,
+    public element: SVGSVGElement,
+  ) {}
 
   /**
    * Returns the code used in KanjiVG filenames for the given character.
@@ -73,7 +76,7 @@ export class KanjiVG {
 
   removeStrokeNumbers(): void {
     const strokeNumbers = this.element.querySelector(
-      `#kvg\\:StrokeNumbers_${this.getCode()}`
+      `#kvg\\:StrokeNumbers_${this.getCode()}`,
     );
 
     if (strokeNumbers) {

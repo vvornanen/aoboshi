@@ -23,7 +23,7 @@ export type AnkiCardReviewTuple = [
   number, // previousInterval
   number, // newFactor
   number, // reviewDuration
-  number // reviewType
+  number, // reviewType
 ];
 
 /**

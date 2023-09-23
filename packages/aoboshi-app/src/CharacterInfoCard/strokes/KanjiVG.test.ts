@@ -22,7 +22,7 @@ describe("getCodeForLiteral", () => {
 
   test("throws error on invalid literal", () => {
     expect(() => KanjiVG.getCodeForLiteral("")).toThrowError(
-      "Invalid literal []"
+      "Invalid literal []",
     );
   });
 });
@@ -108,7 +108,7 @@ describe("showStroke", () => {
     const result = KanjiVG.fromString("学", data) as KanjiVG;
     result.showStroke(2);
     expect(
-      result.element.querySelectorAll("path")[0].getAttribute("class")
+      result.element.querySelectorAll("path")[0].getAttribute("class"),
     ).toEqual("stroke");
   });
 
@@ -116,7 +116,7 @@ describe("showStroke", () => {
     const result = KanjiVG.fromString("学", data) as KanjiVG;
     result.showStroke(2);
     expect(
-      result.element.querySelectorAll("path")[1].getAttribute("class")
+      result.element.querySelectorAll("path")[1].getAttribute("class"),
     ).toEqual("stroke current-stroke");
   });
 
@@ -124,7 +124,7 @@ describe("showStroke", () => {
     const result = KanjiVG.fromString("学", data) as KanjiVG;
     result.showStroke(2);
     expect(
-      result.element.querySelectorAll("path")[2].getAttribute("class")
+      result.element.querySelectorAll("path")[2].getAttribute("class"),
     ).toEqual("hidden-stroke");
   });
 
@@ -132,13 +132,13 @@ describe("showStroke", () => {
     const result = KanjiVG.fromString("学", data) as KanjiVG;
     result.showStroke(4);
     expect(
-      result.element.querySelectorAll("path")[0].getAttribute("class")
+      result.element.querySelectorAll("path")[0].getAttribute("class"),
     ).toEqual("stroke");
     expect(
-      result.element.querySelectorAll("path")[1].getAttribute("class")
+      result.element.querySelectorAll("path")[1].getAttribute("class"),
     ).toEqual("stroke");
     expect(
-      result.element.querySelectorAll("path")[2].getAttribute("class")
+      result.element.querySelectorAll("path")[2].getAttribute("class"),
     ).toEqual("stroke");
   });
 });

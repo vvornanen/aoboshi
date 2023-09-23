@@ -18,7 +18,7 @@ describe("getReviewType", () => {
 
   test.each([-1, 4])("throws error on %s", (value) => {
     expect(() => getReviewType(value)).toThrowError(
-      `Unknown review type ${value}`
+      `Unknown review type ${value}`,
     );
   });
 });

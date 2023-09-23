@@ -15,7 +15,10 @@ import { AnkiResponse } from "./AnkiResponse";
  * @see https://foosoft.net/projects/anki-connect/
  */
 export class AnkiClient {
-  constructor(private url: string, private apiKey: string) {}
+  constructor(
+    private url: string,
+    private apiKey: string,
+  ) {}
 
   /**
    * Returns timestamp of the latest review in the given deck.
@@ -143,7 +146,7 @@ export class AnkiClient {
 
   private createRequest(
     action: AnkiAction,
-    params?: Record<string, unknown>
+    params?: Record<string, unknown>,
   ): AnkiRequest {
     return {
       action,
@@ -155,7 +158,7 @@ export class AnkiClient {
 
   private async doFetch<T>(
     action: AnkiAction,
-    params?: Record<string, unknown>
+    params?: Record<string, unknown>,
   ): Promise<T> {
     const ankiRequest = this.createRequest(action, params);
     const response = await fetch(this.url, {

@@ -97,7 +97,7 @@ export const ManyStrokes: Story = {
 
     expect(canvas.getByText("常用")).toHaveAttribute(
       "aria-label",
-      "中学校の3年間に学習する漢字"
+      "中学校の3年間に学習する漢字",
     );
   },
 };
@@ -124,7 +124,7 @@ export const Jinmeiyo: Story = {
 
     expect(canvas.getByText("人名用")).toHaveAttribute(
       "aria-label",
-      "常用漢字の異体字でないもの"
+      "常用漢字の異体字でないもの",
     );
   },
 };

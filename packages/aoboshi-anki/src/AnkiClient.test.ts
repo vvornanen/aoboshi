@@ -25,7 +25,7 @@ test("not found", () => {
   mockResponse(404, null);
 
   expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
-    "Anki request failed"
+    "Anki request failed",
   );
 });
 
@@ -36,7 +36,7 @@ test("invalid api key", () => {
   });
 
   expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
-    "Anki request failed: valid api key must be provided"
+    "Anki request failed: valid api key must be provided",
   );
 });
 

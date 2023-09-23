@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "module": "ESNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,

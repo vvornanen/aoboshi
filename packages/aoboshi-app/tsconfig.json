@@ -5,6 +5,7 @@
     "emitDeclarationOnly": false,
     "noEmit": true,
     "jsx": "react-jsx",
+    "module": "ESNext",
     "moduleResolution": "bundler"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],

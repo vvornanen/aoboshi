@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { CharacterInfoCard } from "./CharacterInfoCard";
-import { Grade, JLPT } from "./Character";
+import { Grade, JLPT } from "./CharacterInfo";
 
 const meta = {
   component: CharacterInfoCard,

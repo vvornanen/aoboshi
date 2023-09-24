@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { Character } from "../Character";
+import { CharacterInfo } from "../CharacterInfo";
 import { JlptLevelFigure } from "./JlptLevelFigure";
 import { GradeFigure } from "./GradeFigure";
 
 type CharacterFiguresProps = {
-  character: Character;
+  character: CharacterInfo;
 };
 
 /**

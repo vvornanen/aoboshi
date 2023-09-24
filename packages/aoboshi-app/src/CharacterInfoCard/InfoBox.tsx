@@ -8,5 +8,4 @@ export const InfoBox = styled("div")(({ theme }) => ({
   borderWidth: 1,
   borderStyle: "solid",
   borderColor: theme.palette.text.primary,
-  backgroundColor: theme.palette.background.paper,
 }));

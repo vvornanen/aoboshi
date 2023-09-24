@@ -40,6 +40,15 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
           fontFamily: theme.typography.textbook,
           fontWeight: 400,
           fontSize: "1.5rem",
+          "&:hover": {
+            backgroundColor: theme.palette.action.hover,
+            ...(character.highlight && {
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                theme.palette.action.hoverOpacity,
+              ),
+            }),
+          },
           ...(!character.seen && {
             color: alpha(theme.palette.text.primary, 0.1),
           }),

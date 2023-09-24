@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "../Character";
+import { CharacterInfo } from "../CharacterInfo";
 import { InfoBox } from "../InfoBox";
 import { StrokeBackground } from "./StrokeBackground";
 import { Stroke } from "./Stroke";
 import { useStrokePaths } from "./useStrokePaths";
 
 type CharacterStrokesProps = {
-  character: Character;
+  character: CharacterInfo;
 
   /** Number of columns in the parent grid. */
   columns: number;

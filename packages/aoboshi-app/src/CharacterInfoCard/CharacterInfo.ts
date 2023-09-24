@@ -21,7 +21,8 @@ export enum Grade {
   JinmeiyoVariant = 10,
 }
 
-export type Character = {
+/** Detailed info about a single character */
+export type CharacterInfo = {
   literal: string;
   radical: number | null;
   grade: Grade | null;

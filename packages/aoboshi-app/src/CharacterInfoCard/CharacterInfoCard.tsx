@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "./Character";
+import { CharacterInfo } from "./CharacterInfo";
 import { CharacterType } from "./CharacterType";
 import { CharacterFigures } from "./figures/CharacterFigures";
 import { CharacterReadings } from "./readings/CharacterReadings";
@@ -9,7 +9,7 @@ import { CharacterStrokes } from "./strokes/CharacterStrokes";
 import { InfoBox } from "./InfoBox";
 
 type CharacterInfoCardProps = {
-  character: Character;
+  character: CharacterInfo;
   size?: number;
 };
 

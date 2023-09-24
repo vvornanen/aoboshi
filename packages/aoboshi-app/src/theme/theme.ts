@@ -1,6 +1,7 @@
 import {
   alpha,
   createTheme,
+  lighten,
   PaletteOptions,
   ThemeOptions,
 } from "@mui/material";
@@ -38,9 +39,16 @@ const typography = {
   },
 } satisfies TypographyOptions;
 
-const lightPalette = {} satisfies PaletteOptions;
+const lightPalette = {
+  primary: {
+    main: "#0099f7",
+  },
+} satisfies PaletteOptions;
 
 const darkPalette = {
+  primary: {
+    main: lighten(lightPalette.primary.main, 0.5),
+  },
   mode: "dark",
 } satisfies PaletteOptions;
 

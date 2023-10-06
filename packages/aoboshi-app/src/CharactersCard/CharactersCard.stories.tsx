@@ -14,6 +14,12 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const UnseenAndHighlight: Story = {
+  args: {
+    characters: someSeenAndHighlighted,
+  },
+};
+
 export const AllSeen: Story = {
   args: {
     characters: allSeen,
@@ -23,12 +29,6 @@ export const AllSeen: Story = {
 export const AllUnseen: Story = {
   args: {
     characters: allUnseen,
-  },
-};
-
-export const UnseenAndHighlight: Story = {
-  args: {
-    characters: someSeenAndHighlighted,
   },
 };
 

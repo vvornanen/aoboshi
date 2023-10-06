@@ -32,3 +32,17 @@ ANKI_API_KEY=secret
 ```
 yarn test:integration
 ```
+
+## Upgrading dependencies
+
+First, upgrade Storybook to the latest version with
+
+```bash
+yarn workspace @vvornanen/aoboshi-app dlx storybook@latest upgrade
+```
+
+Then all other dependencies with
+
+```bash
+yarn upgrade-interactive
+```

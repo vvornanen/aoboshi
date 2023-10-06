@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, useRef, useState } from "react";
 import { useTheme } from "@mui/material/styles";
-import ButtonBase from "@mui/material/ButtonBase";
+import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 import { alpha } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import Box from "@mui/material/Box";
@@ -31,6 +31,7 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
       <ButtonBase
         ref={buttonRef}
         onClick={handleClick}
+        tabIndex={0}
         sx={{
           width: 36,
           height: 36,
@@ -47,6 +48,15 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
               backgroundColor: alpha(
                 theme.palette.primary.main,
                 theme.palette.action.hoverOpacity,
+              ),
+            }),
+          },
+          [`&.${buttonBaseClasses.focusVisible}`]: {
+            backgroundColor: theme.palette.action.focus,
+            ...(character.highlight && {
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                theme.palette.action.focusOpacity,
               ),
             }),
           },

@@ -6,17 +6,22 @@ import Popover from "@mui/material/Popover";
 import Box from "@mui/material/Box";
 import { CharacterInfoCard } from "../CharacterInfoCard/CharacterInfoCard";
 import { useCharacterInfo } from "../CharacterInfoCard/useCharacterInfo";
-import { CharacterStatus } from "./CharacterStatus";
 
 type CharacterButtonProps = {
-  character: CharacterStatus;
+  literal: string;
+  highlight?: boolean;
+  seen?: boolean;
 };
 
-export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
+export const CharacterButton: FC<CharacterButtonProps> = ({
+  literal,
+  highlight,
+  seen,
+}) => {
   const theme = useTheme();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const { data } = useCharacterInfo(character.literal);
+  const { data } = useCharacterInfo(literal);
 
   const handleClick: MouseEventHandler = () => {
     setPopoverOpen(true);
@@ -44,7 +49,7 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
           borderRadius: `${theme.shape.borderRadius}px`,
           "&:hover": {
             backgroundColor: theme.palette.action.hover,
-            ...(character.highlight && {
+            ...(highlight && {
               backgroundColor: alpha(
                 theme.palette.primary.main,
                 theme.palette.action.hoverOpacity,
@@ -53,17 +58,17 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
           },
           [`&.${buttonBaseClasses.focusVisible}`]: {
             backgroundColor: theme.palette.action.focus,
-            ...(character.highlight && {
+            ...(highlight && {
               backgroundColor: alpha(
                 theme.palette.primary.main,
                 theme.palette.action.focusOpacity,
               ),
             }),
           },
-          ...(!character.seen && {
+          ...(!seen && {
             color: alpha(theme.palette.text.primary, 0.1),
           }),
-          ...(character.highlight && {
+          ...(highlight && {
             opacity: 1,
             color: theme.palette.primary.main,
             outlineColor: theme.palette.primary.main,
@@ -75,7 +80,7 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
             backgroundColor: theme.palette.action.selected,
           }),
           ...(popoverOpen &&
-            character.highlight && {
+            highlight && {
               backgroundColor: alpha(
                 theme.palette.primary.main,
                 theme.palette.action.selectedOpacity,
@@ -83,7 +88,7 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
             }),
         }}
       >
-        {character.literal}
+        {literal}
       </ButtonBase>
       <Popover
         anchorEl={buttonRef.current}

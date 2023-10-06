@@ -59,6 +59,7 @@ export const CharacterButton: FC<CharacterButtonProps> = ({ character }) => {
             outlineColor: theme.palette.primary.main,
             outlineWidth: 2,
             outlineStyle: "dashed",
+            outlineOffset: -2,
           }),
           ...(popoverOpen && {
             backgroundColor: theme.palette.action.selected,

@@ -8,7 +8,12 @@
     "module": "ESNext",
     "moduleResolution": "bundler"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.json"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.json",
+    ".storybook/*.ts"
+  ],
   "references": [
     {
       "path": "../aoboshi-core/tsconfig.json"

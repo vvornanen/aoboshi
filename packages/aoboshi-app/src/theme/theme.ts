@@ -58,6 +58,9 @@ const createAppTheme = (themeOptions: ThemeOptions) => {
   const tooltipColor = alpha(theme.palette.grey[900], 0.92);
 
   return createTheme(theme, {
+    shape: {
+      borderRadius: 9,
+    },
     components: {
       MuiTooltip: {
         defaultProps: {

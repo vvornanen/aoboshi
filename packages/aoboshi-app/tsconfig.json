@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.options.json",
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDirs": ["./src", ".storybook"],
     "emitDeclarationOnly": false,
     "noEmit": true,
     "jsx": "react-jsx",

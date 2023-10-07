@@ -24,6 +24,7 @@
     "import/first": "error",
     "import/no-duplicates": "error",
     "import/order": "error",
+    "import/namespace": "off",
     "import/newline-after-import": "error",
     "react-refresh/only-export-components": "warn"
   },

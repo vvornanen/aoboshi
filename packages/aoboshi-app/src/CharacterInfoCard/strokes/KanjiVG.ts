@@ -1,4 +1,4 @@
-import { strokeClasses } from "./strokeClasses";
+import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
 
 /**
  * A tool for handling KanjiVG svg data.
@@ -96,8 +96,8 @@ export class KanjiVG {
    */
   showStroke(n: number): void {
     this.element.querySelectorAll("path").forEach((path) => {
-      path.classList.remove("stroke", strokeClasses.current);
-      path.classList.add(strokeClasses.hidden);
+      path.classList.remove("stroke", currentStroke);
+      path.classList.add(hiddenStroke);
     });
 
     Array.from({ length: n }, (x, i) => i + 1).forEach((i) => {
@@ -107,11 +107,11 @@ export class KanjiVG {
         return;
       }
 
-      path.classList.remove(strokeClasses.hidden);
-      path.classList.add(strokeClasses.stroke);
+      path.classList.remove(hiddenStroke);
+      path.classList.add(stroke);
 
       if (i === n) {
-        path.classList.add("stroke", strokeClasses.current);
+        path.classList.add("stroke", currentStroke);
       }
     });
   }

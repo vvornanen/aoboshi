@@ -1,6 +1,5 @@
 import { keyframes, style } from "@vanilla-extract/css";
 import { vars } from "../../theme/theme.css";
-import { strokeClasses } from "./strokeClasses";
 
 const strokeActive = keyframes({
   "0%": {
@@ -12,19 +11,23 @@ const strokeActive = keyframes({
   },
 });
 
+export const strokeContainer = style({});
+
 export const stroke = style({
   strokeWidth: 4,
   stroke: vars.color.unseen,
+});
+
+export const hiddenStroke = style({
+  visibility: "hidden",
+});
+
+export const currentStroke = style({
+  stroke: vars.color.onSurface,
   selectors: {
-    [`&.${strokeClasses.hidden}`]: {
-      visibility: "hidden",
+    [`.${strokeContainer}:hover &`]: {
+      animation: `${strokeActive} 5s ease-in-out forwards`,
     },
-    [`&.${strokeClasses.current}`]: {
-      stroke: vars.color.onSurface,
-    },
-  },
-  [`&.${strokeClasses.current}:hover`]: {
-    animation: `${strokeActive} 5s ease-in-out forwards`,
   },
 });
 

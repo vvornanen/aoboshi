@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from "react";
 import { KanjiVG } from "./KanjiVG";
-import { stroke } from "./Stroke.css";
+import { strokeContainer } from "./Stroke.css";
 
 type StrokeProps = {
   literal: string;
@@ -33,5 +33,5 @@ export const Stroke: FC<StrokeProps> = ({ literal, svg, n }) => {
     kanji.showStroke(n);
   }, [literal, svg, n]);
 
-  return <svg className={stroke} ref={ref} viewBox="0 0 100 100" />;
+  return <svg className={strokeContainer} ref={ref} viewBox="0 0 100 100" />;
 };

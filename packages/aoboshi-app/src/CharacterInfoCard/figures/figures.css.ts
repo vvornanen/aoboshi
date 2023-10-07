@@ -4,8 +4,8 @@ import { bodyMedium } from "../../Typography/Typography.css";
 
 export const circledFigure = style({
   display: "inline-block",
-  height: 20,
-  borderRadius: 14,
+  height: 22,
+  borderRadius: 11,
   borderWidth: 1,
   borderStyle: "solid",
   borderColor: vars.color.outline,

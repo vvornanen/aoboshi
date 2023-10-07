@@ -15,6 +15,8 @@ globalStyle("body", {
   WebkitFontSmoothing: "antialiased",
   backgroundColor: vars.color.surface,
   color: vars.color.onSurface,
+  fontFamily: vars.typography.fontFamily,
+  fontSize: vars.typography.fontSize,
 });
 
 globalStyle("img, picture, video, canvas, svg", {

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo } from "../CharacterInfo";
 import { JlptLevelFigure } from "./JlptLevelFigure";
@@ -15,7 +15,9 @@ type CharacterFiguresProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const CharacterFigures: FC<CharacterFiguresProps> = ({ character }) => {
+export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   return (

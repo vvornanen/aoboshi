@@ -1,4 +1,4 @@
-import { FC, FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo, Grade, KANA_REGEXP } from "../CharacterInfo";
 import { circledFigure } from "./figures.css";
@@ -21,7 +21,9 @@ type GradeFigureProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const GradeFigure: FC<GradeFigureProps> = ({ character }) => {
+export const GradeFigure: FunctionComponent<GradeFigureProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   const props = {

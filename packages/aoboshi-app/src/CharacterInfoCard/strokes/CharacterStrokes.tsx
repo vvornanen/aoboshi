@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo } from "../CharacterInfo";
 import { infoBox } from "../CharacterInfoCard.css";
@@ -21,7 +21,7 @@ type CharacterStrokesProps = {
  * and returns always full rows, padding the end of the last row with empty
  * boxes.
  */
-export const CharacterStrokes: FC<CharacterStrokesProps> = ({
+export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
   character,
   columns,
 }) => {

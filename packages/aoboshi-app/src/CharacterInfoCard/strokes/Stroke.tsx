@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FunctionComponent, useEffect, useRef } from "react";
 import { KanjiVG } from "./KanjiVG";
 import { strokeContainer } from "./Stroke.css";
 
@@ -16,7 +16,7 @@ type StrokeProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const Stroke: FC<StrokeProps> = ({ literal, svg, n }) => {
+export const Stroke: FunctionComponent<StrokeProps> = ({ literal, svg, n }) => {
   const ref = useRef<SVGSVGElement>(null);
 
   useEffect(() => {

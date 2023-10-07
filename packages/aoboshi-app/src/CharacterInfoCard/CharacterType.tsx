@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { printDisplay, textbookDisplay } from "../Typography/Typography.css";
 
@@ -17,7 +17,10 @@ type CharacterTypeProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const CharacterType: FC<CharacterTypeProps> = ({ literal, variant }) => (
+export const CharacterType: FunctionComponent<CharacterTypeProps> = ({
+  literal,
+  variant,
+}) => (
   <svg viewBox="0 0 64 64">
     <text
       x="50%"

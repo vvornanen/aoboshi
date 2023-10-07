@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo, JLPT } from "../CharacterInfo";
 import { circledFigure } from "./figures.css";
@@ -12,7 +12,9 @@ type JlptFigureProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const JlptLevelFigure: FC<JlptFigureProps> = ({ character }) => {
+export const JlptLevelFigure: FunctionComponent<JlptFigureProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   const props = {

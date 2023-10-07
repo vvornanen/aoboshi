@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, useRef, useState } from "react";
+import { FunctionComponent, MouseEventHandler, useRef, useState } from "react";
 import { Button } from "@mui/base/Button";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
 import { ClickAwayListener } from "@mui/base";
@@ -14,7 +14,7 @@ type CharacterButtonProps = {
   seen?: boolean;
 };
 
-export const CharacterButton: FC<CharacterButtonProps> = ({
+export const CharacterButton: FunctionComponent<CharacterButtonProps> = ({
   literal,
   highlight,
   seen,

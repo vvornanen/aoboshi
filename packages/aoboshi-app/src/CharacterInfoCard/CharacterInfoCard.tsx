@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FC } from "react";
+import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { labelSmall } from "../Typography/Typography.css";
 import { CharacterInfo } from "./CharacterInfo";
@@ -16,7 +16,7 @@ type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
 /**
  * Displays facts, readings and strokes for the given character.
  */
-export const CharacterInfoCard: FC<CharacterInfoCardProps> = ({
+export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
   character,
   size = 22,
   ...props

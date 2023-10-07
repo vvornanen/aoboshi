@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { formatReading } from "./formatReading";
 import { characterReadings, readingsContainer } from "./CharacterReadings.css";
@@ -14,7 +14,7 @@ type CharacterReadingsProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const CharacterReadings: FC<CharacterReadingsProps> = ({
+export const CharacterReadings: FunctionComponent<CharacterReadingsProps> = ({
   onyomi,
   kunyomi,
   max,

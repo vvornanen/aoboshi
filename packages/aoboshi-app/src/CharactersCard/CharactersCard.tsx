@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { CharacterButton } from "../CharacterButton/CharacterButton";
 import { Card } from "../Card/Card";
 import { CharacterStatus } from "./CharacterStatus";
@@ -8,7 +8,9 @@ type CharactersCardProps = {
   characters: CharacterStatus[];
 };
 
-export const CharactersCard: FC<CharactersCardProps> = ({ characters }) => {
+export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
+  characters,
+}) => {
   return (
     <Card className={charactersCard}>
       {characters.map((character) => (

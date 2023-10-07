@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { useTheme } from "@mui/material";
+import { clsx } from "clsx";
+import { printDisplay, textbookDisplay } from "../Typography/Typography.css";
 
 type CharacterTypeProps = {
   /**
@@ -8,7 +9,7 @@ type CharacterTypeProps = {
    */
   literal: string;
 
-  fontFamily?: string;
+  variant: "textbook" | "print";
 };
 
 /**
@@ -16,25 +17,20 @@ type CharacterTypeProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const CharacterType: FC<CharacterTypeProps> = ({
-  literal,
-  fontFamily,
-}) => {
-  const theme = useTheme();
-
-  return (
-    <svg viewBox="0 0 64 64">
-      <text
-        x="50%"
-        y="50%"
-        dominantBaseline="central"
-        textAnchor="middle"
-        fill={theme.palette.text.primary}
-        fontSize={64}
-        fontFamily={fontFamily}
-      >
-        {literal.charAt(0)}
-      </text>
-    </svg>
-  );
-};
+export const CharacterType: FC<CharacterTypeProps> = ({ literal, variant }) => (
+  <svg viewBox="0 0 64 64">
+    <text
+      x="50%"
+      y="50%"
+      dominantBaseline="central"
+      textAnchor="middle"
+      fill="currentColor"
+      className={clsx({
+        [textbookDisplay]: variant === "textbook",
+        [printDisplay]: variant === "print",
+      })}
+    >
+      {literal.charAt(0)}
+    </text>
+  </svg>
+);

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo, JLPT } from "../CharacterInfo";
-import { CircledFigure } from "./CircledFigure";
+import { circledFigure } from "./figures.css";
 
 type JlptFigureProps = {
   character: CharacterInfo;
@@ -26,6 +26,10 @@ export const JlptLevelFigure: FC<JlptFigureProps> = ({ character }) => {
   } else if (character.jlpt === JLPT.N1) {
     return <span {...props}>{character.jlpt}</span>;
   } else {
-    return <CircledFigure {...props}>{character.jlpt}</CircledFigure>;
+    return (
+      <span className={circledFigure} {...props}>
+        {character.jlpt}
+      </span>
+    );
   }
 };

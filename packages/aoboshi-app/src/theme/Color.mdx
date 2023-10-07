@@ -1,0 +1,22 @@
+import { ColorItem, ColorPalette } from "@storybook/blocks";
+import { lightPalette, darkPalette } from "./theme.css";
+
+# Palette
+
+## Light theme
+
+<ColorPalette>
+  <ColorItem title="primary" subtitle="" colors={lightPalette.primary} />
+  <ColorItem title="surface" subtitle="" colors={lightPalette.surface} />
+  <ColorItem title="outline" subtitle="" colors={lightPalette.outline} />
+  <ColorItem title="states" subtitle="" colors={lightPalette.states} />
+</ColorPalette>
+
+## Dark theme
+
+<ColorPalette>
+  <ColorItem title="primary" subtitle="" colors={darkPalette.primary} />
+  <ColorItem title="surface" subtitle="" colors={darkPalette.surface} />
+  <ColorItem title="outline" subtitle="" colors={darkPalette.outline} />
+  <ColorItem title="states" subtitle="" colors={darkPalette.states} />
+</ColorPalette>

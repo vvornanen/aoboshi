@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
-import { darkTheme, lightTheme } from "./theme/theme";
+import { useMediaQuery } from "@mui/material";
 import "./i18n";
+import { darkThemeClass, lightThemeClass } from "./theme/theme.css";
 
 export const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -12,11 +12,7 @@ export const App = () => {
     setDarkMode(prefersDarkMode);
   }, [prefersDarkMode]);
 
-  const theme = darkMode ? darkTheme : lightTheme;
+  const themeClass = darkMode ? darkThemeClass : lightThemeClass;
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-    </ThemeProvider>
-  );
+  return <div className={themeClass}></div>;
 };

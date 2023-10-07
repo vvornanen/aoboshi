@@ -5,7 +5,8 @@ import { ClickAwayListener } from "@mui/base";
 import { clsx } from "clsx";
 import { CharacterInfoCard } from "../CharacterInfoCard/CharacterInfoCard";
 import { useCharacterInfo } from "../CharacterInfoCard/useCharacterInfo";
-import { characterButton, popupContent } from "./CharacterButton.css";
+import { Card } from "../Card/Card";
+import { characterButton } from "./CharacterButton.css";
 
 type CharacterButtonProps = {
   literal: string;
@@ -43,15 +44,19 @@ export const CharacterButton: FC<CharacterButtonProps> = ({
       >
         {literal}
       </Button>
-      <ClickAwayListener onClickAway={handleClose}>
-        <Popup
-          anchor={buttonRef.current}
-          open={popoverOpen}
-          placement="bottom-start"
-        >
-          <CharacterInfoCard character={data} className={popupContent} />
-        </Popup>
-      </ClickAwayListener>
+      {popoverOpen && (
+        <ClickAwayListener onClickAway={handleClose}>
+          <Popup
+            anchor={buttonRef.current}
+            open={popoverOpen}
+            placement="bottom-start"
+          >
+            <Card>
+              <CharacterInfoCard character={data} />
+            </Card>
+          </Popup>
+        </ClickAwayListener>
+      )}
     </>
   );
 };

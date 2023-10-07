@@ -9,6 +9,8 @@ export const characterButton = style([
   {
     width: 36,
     height: 36,
+    backgroundColor: "transparent",
+    borderStyle: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -20,8 +22,15 @@ export const characterButton = style([
       [`&.${characterButtonClasses.highlight}:hover`]: {
         backgroundColor: vars.color.hoverPrimary,
       },
+      [`&.${characterButtonClasses.highlight}.${buttonClasses.active}`]: {
+        backgroundColor: vars.color.activatedPrimary,
+      },
+      [`&.${buttonClasses.active}`]: {
+        backgroundColor: vars.color.activated,
+      },
       [`&.${buttonClasses.focusVisible}`]: {
         backgroundColor: vars.color.focus,
+        outline: "none",
       },
       [`&.${characterButtonClasses.highlight}.${buttonClasses.focusVisible}`]: {
         backgroundColor: vars.color.focusPrimary,
@@ -47,7 +56,3 @@ export const characterButton = style([
     },
   },
 ]);
-
-export const popupContent = style({
-  padding: 16,
-});

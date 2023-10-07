@@ -6,6 +6,7 @@ const darkPrimaryColor = lighten(lightPrimaryColor, 0.5);
 const hoverOpacity = 0.04;
 const selectedOpacity = 0.08;
 const focusOpacity = 0.12;
+const activatedOpacity = 0.12;
 
 const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   hover: alpha(stateColor, hoverOpacity),
@@ -14,6 +15,8 @@ const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   focusPrimary: alpha(primaryColor, focusOpacity),
   selected: alpha(stateColor, selectedOpacity),
   selectedPrimary: alpha(primaryColor, selectedOpacity),
+  activated: alpha(stateColor, activatedOpacity),
+  activatedPrimary: alpha(primaryColor, activatedOpacity),
   unseen: alpha(stateColor, 0.1),
 });
 

@@ -1,9 +1,21 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { card } from "./Card.css";
+import { card, outlined, raised } from "./Card.css";
 
-type CardProps = ComponentPropsWithoutRef<"div">;
+type CardProps = ComponentPropsWithoutRef<"div"> & {
+  variant?: "outlined" | "raised";
+};
 
-export const Card: FunctionComponent<CardProps> = ({ className, ...props }) => (
-  <div className={clsx(card, className)} {...props} />
+export const Card: FunctionComponent<CardProps> = ({
+  variant = "outlined",
+  className,
+  ...props
+}) => (
+  <div
+    className={clsx(card, className, {
+      [outlined]: variant === "outlined",
+      [raised]: variant === "raised",
+    })}
+    {...props}
+  />
 );

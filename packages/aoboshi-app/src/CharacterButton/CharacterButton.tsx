@@ -51,7 +51,7 @@ export const CharacterButton: FunctionComponent<CharacterButtonProps> = ({
             open={popoverOpen}
             placement="bottom-start"
           >
-            <Card>
+            <Card variant="raised">
               <CharacterInfoCard character={data} />
             </Card>
           </Popup>

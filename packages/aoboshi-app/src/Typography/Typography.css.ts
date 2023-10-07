@@ -14,29 +14,35 @@ const createVariant = ({
   fontWeight,
   lineHeight,
 }: VariantParameters = {}) => {
-  return style({
+  return {
     fontFamily: fontFamily || vars.typography.fontFamily,
     fontSize: fontSize ? `${fontSize}px` : vars.typography.fontSize,
     fontWeight: fontWeight || 400,
     lineHeight: lineHeight || 1.5,
-  });
+  };
 };
 
-export const textbookDisplay = createVariant({
-  fontFamily: vars.typography.textbook.fontFamily,
-  fontSize: 64,
-});
+export const textbookDisplay = style(
+  createVariant({
+    fontFamily: vars.typography.textbook.fontFamily,
+    fontSize: 64,
+  }),
+);
 
-export const textbookLarge = createVariant({
-  fontFamily: vars.typography.textbook.fontFamily,
-  fontSize: 24,
-});
+export const textbookLarge = style(
+  createVariant({
+    fontFamily: vars.typography.textbook.fontFamily,
+    fontSize: 24,
+  }),
+);
 
-export const printDisplay = createVariant({
-  fontFamily: vars.typography.print.fontFamily,
-  fontSize: 64,
-});
+export const printDisplay = style(
+  createVariant({
+    fontFamily: vars.typography.print.fontFamily,
+    fontSize: 64,
+  }),
+);
 
-export const bodyMedium = createVariant();
+export const bodyMedium = style(createVariant());
 
-export const labelSmall = createVariant({ fontSize: 11 });
+export const labelSmall = style(createVariant({ fontSize: 11 }));

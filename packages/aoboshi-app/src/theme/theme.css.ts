@@ -1,5 +1,11 @@
 import { createTheme } from "@vanilla-extract/css";
-import { alpha, lighten } from "@mui/material";
+import chroma from "chroma-js";
+
+const alpha = (color: string, value: number): string =>
+  chroma(color).alpha(value).hex();
+
+const lighten = (color: string, value: number): string =>
+  chroma(color).brighten(value).hex();
 
 const lightPrimaryColor = "#0099f7";
 const darkPrimaryColor = lighten(lightPrimaryColor, 0.5);

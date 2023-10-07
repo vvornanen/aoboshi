@@ -1,62 +1,29 @@
-import { FunctionComponent, MouseEventHandler, useRef, useState } from "react";
-import { Button } from "@mui/base/Button";
-import { Popup } from "@mui/base/Unstable_Popup/Popup";
-import { ClickAwayListener } from "@mui/base";
+import { FunctionComponent } from "react";
+import { Button, ButtonProps } from "@mui/base/Button";
 import { clsx } from "clsx";
-import { CharacterInfoCard } from "../CharacterInfoCard/CharacterInfoCard";
-import { useCharacterInfo } from "../CharacterInfoCard/useCharacterInfo";
-import { Card } from "../Card/Card";
 import { characterButton } from "./CharacterButton.css";
 
-type CharacterButtonProps = {
-  literal: string;
+type CharacterButtonProps = ButtonProps & {
   highlight?: boolean;
   seen?: boolean;
+  selected?: boolean;
 };
 
 export const CharacterButton: FunctionComponent<CharacterButtonProps> = ({
-  literal,
   highlight,
   seen,
+  selected,
+  className,
+  ...props
 }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [popoverOpen, setPopoverOpen] = useState(false);
-  const { data } = useCharacterInfo(literal);
-
-  const handleClick: MouseEventHandler = () => {
-    setPopoverOpen(true);
-  };
-
-  const handleClose = () => {
-    setPopoverOpen(false);
-  };
-
   return (
-    <>
-      <Button
-        ref={buttonRef}
-        onClick={handleClick}
-        className={clsx(characterButton, {
-          unseen: !seen,
-          highlight,
-          selected: popoverOpen,
-        })}
-      >
-        {literal}
-      </Button>
-      {popoverOpen && (
-        <ClickAwayListener onClickAway={handleClose}>
-          <Popup
-            anchor={buttonRef.current}
-            open={popoverOpen}
-            placement="bottom-start"
-          >
-            <Card variant="raised">
-              <CharacterInfoCard character={data} />
-            </Card>
-          </Popup>
-        </ClickAwayListener>
-      )}
-    </>
+    <Button
+      className={clsx(characterButton, className, {
+        unseen: !seen,
+        highlight,
+        selected,
+      })}
+      {...props}
+    />
   );
 };

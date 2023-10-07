@@ -15,6 +15,8 @@ export const characterButton = style([
     alignItems: "center",
     justifyContent: "center",
     borderRadius: vars.shape.borderRadius,
+    overflow: "hidden",
+    whiteSpace: "nowrap",
     selectors: {
       "&:hover": {
         backgroundColor: vars.color.hover,

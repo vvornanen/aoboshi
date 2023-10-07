@@ -1,11 +1,21 @@
 import { CharacterInfo, Grade } from "./CharacterInfo";
 
+type CharacterInfoReturnValue = {
+  data: CharacterInfo | null;
+};
+
 /**
  * Fetches detailed info for the given character.
  *
  * @param literal character to fetch
  */
-export const useCharacterInfo = (literal: string) => {
+export const useCharacterInfo = (
+  literal: string | null,
+): CharacterInfoReturnValue => {
+  if (!literal) {
+    return { data: null };
+  }
+
   const data: CharacterInfo = {
     literal: literal,
     radical: null,

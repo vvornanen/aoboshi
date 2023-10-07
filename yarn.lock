@@ -6582,6 +6582,7 @@ __metadata:
     "@vitejs/plugin-react": ^4.1.0
     "@vvornanen/aoboshi-core": "workspace:^"
     chromatic: ^7.2.3
+    clsx: ^2.0.0
     electron: 26.3.0
     eslint: ^8.50.0
     eslint-plugin-jsx-a11y: ^6.7.1

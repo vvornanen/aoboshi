@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { CharacterButton } from "../CharacterButton/CharacterButton";
+import { Card } from "../Card/Card";
 import { CharacterStatus } from "./CharacterStatus";
 import { charactersCard } from "./CharactersCard.css";
 
@@ -9,7 +10,7 @@ type CharactersCardProps = {
 
 export const CharactersCard: FC<CharactersCardProps> = ({ characters }) => {
   return (
-    <div className={charactersCard}>
+    <Card className={charactersCard}>
       {characters.map((character) => (
         <CharacterButton
           key={character.literal}
@@ -18,6 +19,6 @@ export const CharactersCard: FC<CharactersCardProps> = ({ characters }) => {
           highlight={character.highlight}
         />
       ))}
-    </div>
+    </Card>
   );
 };

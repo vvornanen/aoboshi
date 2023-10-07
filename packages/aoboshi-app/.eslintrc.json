@@ -26,6 +26,7 @@
     "import/order": "error",
     "import/namespace": "off",
     "import/newline-after-import": "error",
+    "import/no-unresolved": "off",
     "react-refresh/only-export-components": "warn"
   },
   "settings": {

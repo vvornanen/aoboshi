@@ -96,7 +96,7 @@ export class KanjiVG {
    */
   showStroke(n: number): void {
     this.element.querySelectorAll("path").forEach((path) => {
-      path.classList.remove("stroke", currentStroke);
+      path.classList.remove(stroke, currentStroke);
       path.classList.add(hiddenStroke);
     });
 
@@ -111,7 +111,7 @@ export class KanjiVG {
       path.classList.add(stroke);
 
       if (i === n) {
-        path.classList.add("stroke", currentStroke);
+        path.classList.add(stroke, currentStroke);
       }
     });
   }

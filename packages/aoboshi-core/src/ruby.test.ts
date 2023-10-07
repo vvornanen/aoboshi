@@ -1,3 +1,4 @@
+import { test, expect } from "vitest";
 import { parseRuby } from "./ruby";
 
 test.each([

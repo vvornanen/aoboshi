@@ -19,6 +19,7 @@
     "import/first": "error",
     "import/no-duplicates": "error",
     "import/order": "error",
-    "import/newline-after-import": "error"
+    "import/newline-after-import": "error",
+    "import/no-unresolved": "off"
   }
 }

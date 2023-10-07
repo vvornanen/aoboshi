@@ -1,3 +1,4 @@
+import { test, expect } from "vitest";
 import { formatReading } from "./formatReading";
 
 test.each([

@@ -29,7 +29,7 @@ export const textbookDisplay = createVariant({
 
 export const textbookLarge = createVariant({
   fontFamily: vars.typography.textbook.fontFamily,
-  fontSize: 20,
+  fontSize: 24,
 });
 
 export const printDisplay = createVariant({

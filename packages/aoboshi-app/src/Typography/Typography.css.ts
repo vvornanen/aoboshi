@@ -43,6 +43,8 @@ export const printDisplay = style(
   }),
 );
 
-export const bodyMedium = style(createVariant());
+export const bodyLarge = style(createVariant({ fontSize: 15 }));
+
+export const bodyMedium = style(createVariant({ fontSize: 13 }));
 
 export const labelSmall = style(createVariant({ fontSize: 11 }));

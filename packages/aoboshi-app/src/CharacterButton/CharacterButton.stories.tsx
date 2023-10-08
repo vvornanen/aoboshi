@@ -10,7 +10,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Seen: Story = {
   args: {
-    literal: "学",
+    children: "学",
     seen: true,
     highlight: false,
   },
@@ -18,7 +18,7 @@ export const Seen: Story = {
 
 export const Unseen: Story = {
   args: {
-    literal: "学",
+    children: "学",
     seen: false,
     highlight: false,
   },
@@ -26,7 +26,7 @@ export const Unseen: Story = {
 
 export const Highlight: Story = {
   args: {
-    literal: "学",
+    children: "学",
     seen: false,
     highlight: true,
   },

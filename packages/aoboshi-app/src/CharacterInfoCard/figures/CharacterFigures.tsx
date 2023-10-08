@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { Box, Typography } from "@mui/material";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo } from "../CharacterInfo";
 import { JlptLevelFigure } from "./JlptLevelFigure";
 import { GradeFigure } from "./GradeFigure";
+import { figures, figure } from "./figures.css";
 
 type CharacterFiguresProps = {
   character: CharacterInfo;
@@ -15,80 +15,62 @@ type CharacterFiguresProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const CharacterFigures: FC<CharacterFiguresProps> = ({ character }) => {
+export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   return (
-    <Box
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr",
-        gridTemplateRows: "1fr",
-        height: "100%",
-      }}
-    >
-      <Box
-        sx={{
+    <div className={figures}>
+      <div
+        className={figure}
+        style={{
           gridColumn: 1,
           gridRow: 1,
           justifySelf: "start",
           alignSelf: "start",
-          whiteSpace: "nowrap",
         }}
+        aria-label={t("CharacterInfoCard.referenceLabel")}
       >
-        <Typography
-          variant="body2"
-          aria-label={t("CharacterInfoCard.referenceLabel")}
-        >
-          {Object.values(character.references)[0]}
-        </Typography>
-      </Box>
-      <Box
-        sx={{
+        {Object.values(character.references)[0]}
+      </div>
+      <div
+        className={figure}
+        style={{
           gridColumn: 1,
           gridRow: 1,
           justifySelf: "end",
           alignSelf: "start",
-          whiteSpace: "nowrap",
         }}
+        aria-label={t("CharacterInfoCard.strokeCountLabel")}
       >
-        {character.strokeCount > 0 && (
-          <Typography
-            variant="body2"
-            aria-label={t("CharacterInfoCard.strokeCountLabel")}
-          >
-            {t("CharacterInfoCard.strokeCount", {
-              strokeCount: character.strokeCount,
-            })}
-          </Typography>
-        )}
-      </Box>
-      <Box
-        sx={{
+        {character.strokeCount > 0 &&
+          t("CharacterInfoCard.strokeCount", {
+            strokeCount: character.strokeCount,
+          })}
+      </div>
+      <div
+        className={figure}
+        style={{
           gridColumn: 1,
           gridRow: 1,
           justifySelf: "start",
           alignSelf: "end",
-          whiteSpace: "nowrap",
         }}
       >
-        <Typography variant="body2">
-          <JlptLevelFigure character={character} />
-        </Typography>
-      </Box>
-      <Box
-        sx={{
+        <JlptLevelFigure character={character} />
+      </div>
+      <div
+        className={figure}
+        style={{
           gridColumn: 1,
           gridRow: 1,
           justifySelf: "end",
           alignSelf: "end",
-          whiteSpace: "nowrap",
         }}
       >
-        <Typography variant="body2">
-          <GradeFigure character={character} />
-        </Typography>
-      </Box>
-    </Box>
+        <GradeFigure character={character} />
+      </div>
+    </div>
   );
 };

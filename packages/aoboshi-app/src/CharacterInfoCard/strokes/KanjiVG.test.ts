@@ -1,8 +1,10 @@
+import { afterEach, describe, test, expect, vi, Mock } from "vitest";
 import { KanjiVG } from "./KanjiVG";
+import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
 
-const mockFetch = jest.fn();
+const mockFetch = vi.fn();
 
-global.fetch = mockFetch as jest.Mock;
+global.fetch = mockFetch as Mock;
 
 afterEach(() => {
   mockFetch.mockReset();
@@ -109,7 +111,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[0].getAttribute("class"),
-    ).toEqual("stroke");
+    ).toEqual(stroke);
   });
 
   test("adds class to current stroke", () => {
@@ -117,7 +119,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[1].getAttribute("class"),
-    ).toEqual("stroke current-stroke");
+    ).toEqual(`${stroke} ${currentStroke}`);
   });
 
   test("adds class to following strokes", () => {
@@ -125,7 +127,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[2].getAttribute("class"),
-    ).toEqual("hidden-stroke");
+    ).toEqual(hiddenStroke);
   });
 
   test("missing stroke", () => {
@@ -133,12 +135,12 @@ describe("showStroke", () => {
     result.showStroke(4);
     expect(
       result.element.querySelectorAll("path")[0].getAttribute("class"),
-    ).toEqual("stroke");
+    ).toEqual(stroke);
     expect(
       result.element.querySelectorAll("path")[1].getAttribute("class"),
-    ).toEqual("stroke");
+    ).toEqual(stroke);
     expect(
       result.element.querySelectorAll("path")[2].getAttribute("class"),
-    ).toEqual("stroke");
+    ).toEqual(stroke);
   });
 });

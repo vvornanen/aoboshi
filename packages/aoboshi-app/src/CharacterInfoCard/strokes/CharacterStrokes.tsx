@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo } from "../CharacterInfo";
-import { InfoBox } from "../InfoBox";
+import { infoBox } from "../CharacterInfoCard.css";
 import { StrokeBackground } from "./StrokeBackground";
 import { Stroke } from "./Stroke";
 import { useStrokePaths } from "./useStrokePaths";
@@ -21,7 +21,7 @@ type CharacterStrokesProps = {
  * and returns always full rows, padding the end of the last row with empty
  * boxes.
  */
-export const CharacterStrokes: FC<CharacterStrokesProps> = ({
+export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
   character,
   columns,
 }) => {
@@ -39,7 +39,8 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
   return (
     <>
       {Array.from({ length: numberOfCells }, (x, i) => i + 1).map((n) => (
-        <InfoBox
+        <div
+          className={infoBox}
           key={n}
           role={n <= character.strokeCount ? "figure" : "presentation"}
           aria-label={
@@ -47,7 +48,7 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
               ? t("CharacterInfoCard.strokeLabel", { stroke: n })
               : undefined
           }
-          sx={{
+          style={{
             gridColumn: `span ${span}`,
             gridRow: `span ${span}`,
           }}
@@ -61,7 +62,7 @@ export const CharacterStrokes: FC<CharacterStrokesProps> = ({
               />
             )}
           </StrokeBackground>
-        </InfoBox>
+        </div>
       ))}
     </>
   );

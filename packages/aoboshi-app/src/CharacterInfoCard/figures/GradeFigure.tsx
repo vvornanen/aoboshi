@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "@mui/material";
 import { CharacterInfo, Grade, KANA_REGEXP } from "../CharacterInfo";
-import { CircledFigure } from "./CircledFigure";
+import { Tooltip } from "../../Tooltip/Tooltip";
+import { circledFigure } from "./figures.css";
 
 type GradeFigureProps = {
   character: CharacterInfo;
@@ -13,7 +13,9 @@ type GradeFigureProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const GradeFigure: FC<GradeFigureProps> = ({ character }) => {
+export const GradeFigure: FunctionComponent<GradeFigureProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   const props = {
@@ -33,7 +35,9 @@ export const GradeFigure: FC<GradeFigureProps> = ({ character }) => {
           grade: character.grade,
         })}
       >
-        <CircledFigure>{t("CharacterInfoCard.grade.kyoiku")}</CircledFigure>
+        <span className={circledFigure}>
+          {t("CharacterInfoCard.grade.kyoiku")}
+        </span>
       </Tooltip>
     );
   } else if (character.grade === Grade.Joyo) {

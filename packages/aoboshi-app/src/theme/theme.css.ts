@@ -64,7 +64,7 @@ const themeDefaults = {
     fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont",
     fontSize: "13px",
     textbook: {
-      fontFamily: "YuKyokasho",
+      fontFamily: "YuKyokasho Yoko",
     },
     print: {
       fontFamily: "serif",

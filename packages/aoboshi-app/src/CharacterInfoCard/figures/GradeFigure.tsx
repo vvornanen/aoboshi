@@ -1,16 +1,8 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo, Grade, KANA_REGEXP } from "../CharacterInfo";
+import { Tooltip } from "../../Tooltip/Tooltip";
 import { circledFigure } from "./figures.css";
-
-type TooltipProps = {
-  title: string;
-  children?: ReactNode;
-};
-
-const Tooltip: FunctionComponent<TooltipProps> = ({ title, children }) => {
-  return <span title={title}>{children}</span>;
-};
 
 type GradeFigureProps = {
   character: CharacterInfo;

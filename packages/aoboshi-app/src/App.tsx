@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
-import { darkTheme, lightTheme } from "./theme/theme";
 import "./i18n";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { darkThemeClass, lightThemeClass } from "./theme/theme.css";
+import { useMediaQuery } from "./useMediaQuery";
 
 export const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
+  const { i18n } = useTranslation();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const themeClass = prefersDarkMode ? darkThemeClass : lightThemeClass;
 
   useEffect(() => {
-    setDarkMode(prefersDarkMode);
-  }, [prefersDarkMode]);
+    document.documentElement.className = themeClass;
+  }, [prefersDarkMode, themeClass]);
 
-  const theme = darkMode ? darkTheme : lightTheme;
+  useEffect(() => {
+    document.documentElement.setAttribute("lang", i18n.language);
+  }, [i18n.language]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-    </ThemeProvider>
-  );
+  return <div></div>;
 };

@@ -1,10 +1,11 @@
+import { afterEach, describe, test, expect, vi, Mock } from "vitest";
 import { AnkiClient } from "./AnkiClient";
 import { card1, card2, note1, note2 } from "./fixtures";
 import { AnkiCardReview, ReviewType } from "./AnkiCardReview";
 
-const mockFetch = jest.fn();
+const mockFetch = vi.fn();
 
-global.fetch = mockFetch as jest.Mock;
+global.fetch = mockFetch as Mock;
 
 afterEach(() => {
   mockFetch.mockReset();

@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CharacterInfo, JLPT } from "../CharacterInfo";
-import { CircledFigure } from "./CircledFigure";
+import { circledFigure } from "./figures.css";
 
 type JlptFigureProps = {
   character: CharacterInfo;
@@ -12,7 +12,9 @@ type JlptFigureProps = {
  *
  * Subcomponent of {@link CharacterInfoCard}.
  */
-export const JlptLevelFigure: FC<JlptFigureProps> = ({ character }) => {
+export const JlptLevelFigure: FunctionComponent<JlptFigureProps> = ({
+  character,
+}) => {
   const { t } = useTranslation();
 
   const props = {
@@ -26,6 +28,10 @@ export const JlptLevelFigure: FC<JlptFigureProps> = ({ character }) => {
   } else if (character.jlpt === JLPT.N1) {
     return <span {...props}>{character.jlpt}</span>;
   } else {
-    return <CircledFigure {...props}>{character.jlpt}</CircledFigure>;
+    return (
+      <span className={circledFigure} {...props}>
+        {character.jlpt}
+      </span>
+    );
   }
 };

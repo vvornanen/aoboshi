@@ -1,10 +1,14 @@
 import * as dotenv from "dotenv";
-import { AnkiClient } from "../src/AnkiClient";
+import { test, expect } from "vitest";
+import { AnkiClient } from "../src";
 
 dotenv.config();
 
 test("integration", async () => {
-  const client = new AnkiClient(process.env.ANKI_URL, process.env.ANKI_API_KEY);
+  const client = new AnkiClient(
+    process.env.ANKI_URL || "",
+    process.env.ANKI_API_KEY || "",
+  );
 
   const imported = await client.importPackage(`${__dirname}/test.apkg`);
   expect(imported).toBeTruthy();

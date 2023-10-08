@@ -10,7 +10,11 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
-    options: {},
+    options: {
+      builder: {
+        viteConfigPath: "vite.renderer.config.mjs",
+      },
+    },
   },
   docs: {
     autodocs: "tag",

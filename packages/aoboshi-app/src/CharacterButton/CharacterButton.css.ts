@@ -10,6 +10,7 @@ export const characterButton = style([
     width: 36,
     height: 36,
     backgroundColor: "transparent",
+    color: vars.color.onSurface,
     borderStyle: "none",
     display: "flex",
     alignItems: "center",

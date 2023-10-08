@@ -4,56 +4,119 @@ import chroma from "chroma-js";
 const alpha = (color: string, value: number): string =>
   chroma(color).alpha(value).hex();
 
-const lighten = (color: string, value: number): string =>
-  chroma(color).brighten(value).hex();
-
-const lightPrimaryColor = "#0099f7";
-const darkPrimaryColor = lighten(lightPrimaryColor, 0.5);
 const hoverOpacity = 0.04;
 const selectedOpacity = 0.08;
 const focusOpacity = 0.12;
 const activatedOpacity = 0.12;
 
+type TonalValue =
+  | 0
+  | 10
+  | 20
+  | 30
+  | 40
+  | 50
+  | 60
+  | 70
+  | 80
+  | 90
+  | 95
+  | 99
+  | 100;
+type TonalPalette = Record<TonalValue, string>;
+const tonalValues: TonalValue[] = [
+  0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100,
+];
+
 const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   hover: alpha(stateColor, hoverOpacity),
-  hoverPrimary: alpha(primaryColor, hoverOpacity),
   focus: alpha(stateColor, focusOpacity),
-  focusPrimary: alpha(primaryColor, focusOpacity),
   selected: alpha(stateColor, selectedOpacity),
-  selectedPrimary: alpha(primaryColor, selectedOpacity),
   activated: alpha(stateColor, activatedOpacity),
+  hoverPrimary: alpha(primaryColor, hoverOpacity),
+  focusPrimary: alpha(primaryColor, focusOpacity),
+  selectedPrimary: alpha(primaryColor, selectedOpacity),
   activatedPrimary: alpha(primaryColor, activatedOpacity),
-  unseen: alpha(stateColor, 0.1),
 });
+
+const createPalette = (color: string): TonalPalette => {
+  const scale = chroma
+    .scale(["black", color, "white"])
+    .domain([0, 40, 100])
+    .colors(tonalValues.length);
+
+  return tonalValues.reduce((palette, tonalValue, index) => {
+    palette[tonalValue] = scale[index];
+    return palette;
+  }, {} as TonalPalette);
+};
+
+const neutralTones = chroma
+  .scale(["black", "white"])
+  .domain([0, 100])
+  .colors(101)
+  .reduce(
+    (palette, color, index) => {
+      palette[index] = color;
+      return palette;
+    },
+    {} as Record<string, string>,
+  );
+
+const primaryColor = "#0099f7";
+
+export const keyColors = {
+  primary: createPalette(primaryColor),
+  neutral: tonalValues.reduce((palette, tonalValue) => {
+    palette[tonalValue] = neutralTones[tonalValue];
+    return palette;
+  }, {} as TonalPalette),
+};
 
 export const lightPalette = {
   primary: {
-    primary: lightPrimaryColor,
+    primary: primaryColor,
   },
   surface: {
-    surface: "#ffffff",
-    onSurface: alpha("#000000", 0.87),
+    surface: neutralTones[100],
+    surfaceContainer: neutralTones[99],
+    surfaceContainerHigh: neutralTones[96],
+    onSurface: alpha(neutralTones[0], 0.87),
   },
   outline: {
-    outline: "#000000",
-    outlineVariant: alpha("#000000", 0.12),
+    outline: neutralTones[0],
+    outlineVariant: alpha(neutralTones[0], 0.12),
   },
-  states: createStatesPalette("#000000", lightPrimaryColor),
+  additional: {
+    unseen: alpha(neutralTones[0], 0.1),
+    stroke: neutralTones[13],
+    strokeDim: neutralTones[88],
+    strokeGrid: neutralTones[80],
+  },
+  states: createStatesPalette(neutralTones[0], primaryColor),
 };
 
 export const darkPalette = {
   primary: {
-    primary: darkPrimaryColor,
+    primary: keyColors.primary[80],
   },
   surface: {
-    surface: "#121212",
-    onSurface: "#ffffff",
+    surface: neutralTones[6],
+    surfaceContainer: neutralTones[12],
+    surfaceContainerHigh: neutralTones[17],
+    onSurface: alpha(neutralTones[100], 0.87),
   },
   outline: {
-    outline: "#ffffff",
-    outlineVariant: alpha("#ffffff", 0.12),
+    outline: neutralTones[60],
+    outlineVariant: neutralTones[25],
   },
-  states: createStatesPalette("#ffffff", darkPrimaryColor),
+  additional: {
+    unseen: neutralTones[20],
+    stroke: neutralTones[90],
+    strokeDim: neutralTones[28],
+    strokeGrid: neutralTones[28],
+  },
+  states: createStatesPalette(neutralTones[100], keyColors.primary[80]),
 } satisfies typeof lightPalette;
 
 const themeDefaults = {
@@ -79,6 +142,7 @@ export const [lightThemeClass, vars] = createTheme({
     ...lightPalette.surface,
     ...lightPalette.outline,
     ...lightPalette.states,
+    ...lightPalette.additional,
     tooltip: alpha("#212121", 0.92),
   },
 });
@@ -90,6 +154,7 @@ export const darkThemeClass = createTheme(vars, {
     ...darkPalette.surface,
     ...darkPalette.outline,
     ...darkPalette.states,
+    ...darkPalette.additional,
     tooltip: alpha("#212121", 0.92),
   },
 });

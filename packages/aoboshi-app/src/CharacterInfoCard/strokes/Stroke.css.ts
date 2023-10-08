@@ -15,7 +15,7 @@ export const strokeContainer = style({});
 
 export const stroke = style({
   strokeWidth: 4,
-  stroke: vars.color.unseen,
+  stroke: vars.color.strokeDim,
 });
 
 export const hiddenStroke = style({
@@ -23,7 +23,8 @@ export const hiddenStroke = style({
 });
 
 export const currentStroke = style({
-  stroke: vars.color.onSurface,
+  stroke: vars.color.stroke,
+  zIndex: 1,
   selectors: {
     [`.${strokeContainer}:hover &`]: {
       animation: `${strokeActive} 5s ease-in-out forwards`,
@@ -42,7 +43,7 @@ export const strokeGrid = style({
   top: 0,
   bottom: 0,
   pointerEvents: "none",
-  color: vars.color.outlineVariant,
+  color: vars.color.strokeGrid,
 });
 
 export const strokeContent = style({

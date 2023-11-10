@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import SvgIcon from "@mui/material/SvgIcon";
+import { SvgIcon, SvgIconProps } from "./SvgIcon";
 
-export const SidebarIcon: FunctionComponent = () => (
-  <SvgIcon>
+export const SidebarIcon: FunctionComponent<SvgIconProps> = (props) => (
+  <SvgIcon {...props}>
     <svg viewBox="0 0 28 28">
       <defs>
         <rect

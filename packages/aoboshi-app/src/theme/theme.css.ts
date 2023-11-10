@@ -8,6 +8,7 @@ const hoverOpacity = 0.04;
 const selectedOpacity = 0.08;
 const focusOpacity = 0.12;
 const activatedOpacity = 0.12;
+const disabledOpacity = 0.38;
 
 type TonalValue =
   | 0
@@ -33,6 +34,8 @@ const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   focus: alpha(stateColor, focusOpacity),
   selected: alpha(stateColor, selectedOpacity),
   activated: alpha(stateColor, activatedOpacity),
+  disabled: alpha(stateColor, 0.12),
+  disabledOpacity: String(disabledOpacity),
   hoverPrimary: alpha(primaryColor, hoverOpacity),
   focusPrimary: alpha(primaryColor, focusOpacity),
   selectedPrimary: alpha(primaryColor, selectedOpacity),

@@ -13,7 +13,7 @@ const createWindow = () => {
     width: 1000,
     height: 600,
     titleBarStyle: "hiddenInset",
-    trafficLightPosition: { x: 20, y: 20 },
+    trafficLightPosition: { x: 20, y: 18 },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

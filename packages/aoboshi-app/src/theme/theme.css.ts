@@ -38,7 +38,7 @@ const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   disabledOpacity: String(disabledOpacity),
   hoverPrimary: alpha(primaryColor, hoverOpacity),
   focusPrimary: alpha(primaryColor, focusOpacity),
-  selectedPrimary: alpha(primaryColor, selectedOpacity),
+  selectedPrimary: alpha(primaryColor, 0.12),
   activatedPrimary: alpha(primaryColor, activatedOpacity),
 });
 

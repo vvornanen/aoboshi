@@ -23,5 +23,12 @@
       "jinmeiyoVariantTooltip": "常用漢字の異体字であるもの",
       "other": "常用外"
     }
+  },
+  "Layout": {
+    "toggleSidebar": "サイドバーを表示します"
+  },
+  "Sidebar": {
+    "library": "ライブラリ",
+    "recentlyStudied": "最近の学習"
   }
 }

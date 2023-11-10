@@ -1,4 +1,4 @@
-import { globalStyle } from "@vanilla-extract/css";
+import { createVar, globalStyle } from "@vanilla-extract/css";
 import { vars } from "./theme/theme.css";
 
 // CSS reset based on https://www.joshwcomeau.com/css/custom-css-reset/
@@ -34,4 +34,14 @@ globalStyle("p, h1, h2, h3, h4, h5, h6", {
 
 globalStyle("#root", {
   isolation: "isolate",
+});
+
+export const windowControlsHeight = createVar();
+export const windowControlsWidth = createVar();
+
+globalStyle("html", {
+  vars: {
+    [windowControlsHeight]: "52px",
+    [windowControlsWidth]: "90px",
+  },
 });

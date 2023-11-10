@@ -81,6 +81,7 @@ export const lightPalette = {
     surface: neutralTones[100],
     surfaceContainer: neutralTones[99],
     surfaceContainerHigh: neutralTones[96],
+    surfaceContainerHighest: neutralTones[90],
     onSurface: alpha(neutralTones[0], 0.87),
   },
   outline: {
@@ -101,9 +102,10 @@ export const darkPalette = {
     primary: keyColors.primary[80],
   },
   surface: {
-    surface: neutralTones[6],
-    surfaceContainer: neutralTones[12],
-    surfaceContainerHigh: neutralTones[17],
+    surface: neutralTones[12],
+    surfaceContainer: neutralTones[15],
+    surfaceContainerHigh: neutralTones[18],
+    surfaceContainerHighest: neutralTones[22],
     onSurface: alpha(neutralTones[100], 0.87),
   },
   outline: {

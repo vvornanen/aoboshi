@@ -96,6 +96,7 @@ export const lightPalette = {
     stroke: neutralTones[13],
     strokeDim: neutralTones[88],
     strokeGrid: neutralTones[80],
+    icon: neutralTones[50],
   },
   states: createStatesPalette(neutralTones[0], primaryColor),
 };
@@ -120,6 +121,7 @@ export const darkPalette = {
     stroke: neutralTones[90],
     strokeDim: neutralTones[28],
     strokeGrid: neutralTones[28],
+    icon: neutralTones[40],
   },
   states: createStatesPalette(neutralTones[100], keyColors.primary[80]),
 } satisfies typeof lightPalette;

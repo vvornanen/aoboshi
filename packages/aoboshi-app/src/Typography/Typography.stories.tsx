@@ -37,6 +37,7 @@ const TypographyDisplay: FunctionComponent<TypographyDisplayProps> = ({
     </div>
     <TypographyComponent
       variant={variant}
+      component="div"
       style={{ display: "flex", flexDirection: "column", gap: 8 }}
     >
       {children}

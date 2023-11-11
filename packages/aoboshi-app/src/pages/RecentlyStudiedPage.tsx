@@ -11,7 +11,9 @@ export const RecentlyStudiedPage: FunctionComponent = () => {
   return (
     <main>
       <PageMeta title={title} />
-      <Typography variant="headlineLarge">{title}</Typography>
+      <Typography variant="headlineLarge" component="h1">
+        {title}
+      </Typography>
     </main>
   );
 };

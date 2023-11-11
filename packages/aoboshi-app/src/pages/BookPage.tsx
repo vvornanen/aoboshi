@@ -11,7 +11,9 @@ export const BookPage: FunctionComponent = () => {
   return (
     <main>
       <PageMeta title={book.title} />
-      <Typography variant="headlineLarge">{book.title}</Typography>
+      <Typography variant="headlineLarge" component="h1">
+        {book.title}
+      </Typography>
     </main>
   );
 };

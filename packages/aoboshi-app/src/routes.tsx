@@ -1,9 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import { SidebarLayout } from "./SidebarLayout/SidebarLayout";
 import { RecentlyStudiedPage } from "./pages/RecentlyStudiedPage";
 import { BookPage } from "./pages/BookPage";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <SidebarLayout />,

@@ -1,0 +1,21 @@
+import { Canvas, IconGallery, IconItem, Meta } from "@storybook/blocks";
+import { SidebarIcon } from "./SidebarIcon";
+import * as SvgIconStories from "./SvgIcon.stories";
+
+<Meta title="Theme/Icons" />
+
+# Icons
+
+Svg icons from [SF Symbols](https://www.figma.com/community/file/886999666531731323/sf-symbols-5-0-5296-svg-icons).
+
+<IconGallery>
+  <IconItem name="Sidebar">
+    <SidebarIcon />
+  </IconItem>
+</IconGallery>
+
+# Color
+
+Icons inherit color by default, but it can be changed with the `color` prop or style.
+
+<Canvas of={SvgIconStories.Color} />

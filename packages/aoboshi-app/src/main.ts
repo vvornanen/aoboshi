@@ -10,8 +10,10 @@ declare const MAIN_WINDOW_VITE_NAME: string;
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
+    titleBarStyle: "hiddenInset",
+    trafficLightPosition: { x: 20, y: 18 },
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },

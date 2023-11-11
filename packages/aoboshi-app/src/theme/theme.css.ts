@@ -8,6 +8,7 @@ const hoverOpacity = 0.04;
 const selectedOpacity = 0.08;
 const focusOpacity = 0.12;
 const activatedOpacity = 0.12;
+const disabledOpacity = 0.38;
 
 type TonalValue =
   | 0
@@ -33,9 +34,11 @@ const createStatesPalette = (stateColor: string, primaryColor: string) => ({
   focus: alpha(stateColor, focusOpacity),
   selected: alpha(stateColor, selectedOpacity),
   activated: alpha(stateColor, activatedOpacity),
+  disabled: alpha(stateColor, 0.12),
+  disabledOpacity: String(disabledOpacity),
   hoverPrimary: alpha(primaryColor, hoverOpacity),
   focusPrimary: alpha(primaryColor, focusOpacity),
-  selectedPrimary: alpha(primaryColor, selectedOpacity),
+  selectedPrimary: alpha(primaryColor, 0.12),
   activatedPrimary: alpha(primaryColor, activatedOpacity),
 });
 
@@ -76,12 +79,17 @@ export const keyColors = {
 export const lightPalette = {
   primary: {
     primary: primaryColor,
+    onPrimary: keyColors.primary[100],
+    primaryContainer: keyColors.primary[95],
+    onPrimaryContainer: keyColors.primary[10],
   },
   surface: {
     surface: neutralTones[100],
     surfaceContainer: neutralTones[99],
     surfaceContainerHigh: neutralTones[96],
+    surfaceContainerHighest: neutralTones[90],
     onSurface: alpha(neutralTones[0], 0.87),
+    onSurfaceVariant: alpha(neutralTones[0], 0.54),
   },
   outline: {
     outline: neutralTones[0],
@@ -92,6 +100,7 @@ export const lightPalette = {
     stroke: neutralTones[13],
     strokeDim: neutralTones[88],
     strokeGrid: neutralTones[80],
+    icon: neutralTones[50],
   },
   states: createStatesPalette(neutralTones[0], primaryColor),
 };
@@ -99,12 +108,17 @@ export const lightPalette = {
 export const darkPalette = {
   primary: {
     primary: keyColors.primary[80],
+    onPrimary: keyColors.primary[10],
+    primaryContainer: keyColors.primary[30],
+    onPrimaryContainer: keyColors.primary[95],
   },
   surface: {
-    surface: neutralTones[6],
-    surfaceContainer: neutralTones[12],
-    surfaceContainerHigh: neutralTones[17],
+    surface: neutralTones[12],
+    surfaceContainer: neutralTones[15],
+    surfaceContainerHigh: neutralTones[18],
+    surfaceContainerHighest: neutralTones[22],
     onSurface: alpha(neutralTones[100], 0.87),
+    onSurfaceVariant: alpha(neutralTones[100], 0.5),
   },
   outline: {
     outline: neutralTones[60],
@@ -115,6 +129,7 @@ export const darkPalette = {
     stroke: neutralTones[90],
     strokeDim: neutralTones[28],
     strokeGrid: neutralTones[28],
+    icon: neutralTones[40],
   },
   states: createStatesPalette(neutralTones[100], keyColors.primary[80]),
 } satisfies typeof lightPalette;
@@ -122,6 +137,7 @@ export const darkPalette = {
 const themeDefaults = {
   shape: {
     borderRadius: "9px",
+    borderRadiusSm: "5px",
   },
   typography: {
     fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont",

@@ -13,8 +13,8 @@ export const sidebar = style({
   borderRightStyle: "solid",
   borderRightWidth: 1,
   borderRightColor: vars.color.outlineVariant,
-  paddingLeft: 16,
-  paddingRight: 16,
+  paddingLeft: 8,
+  paddingRight: 8,
   selectors: {
     "&.open": {
       transform: "translateX(0%)",

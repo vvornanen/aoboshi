@@ -1,7 +1,9 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
-import { Typography } from "../Typography/Typography";
+import { List } from "../List/List";
+import { ListItem } from "../ListItem/ListItem";
+import { ListSubheader } from "../ListSubheader/ListSubheader";
 import { sidebar } from "./Sidebar.css";
 
 type SidebarProps = ComponentPropsWithoutRef<"aside"> & {
@@ -27,19 +29,19 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
   return (
     <aside className={clsx(sidebar, { open })} style={{ width }} {...props}>
       <nav>
-        <ul>
-          <li>
-            <a href="/">{t("Sidebar.recentlyStudied")}</a>
-          </li>
-        </ul>
-        <Typography variant="labelSmall">{t("Sidebar.library")}</Typography>
-        <ul>
+        <List>
+          <ListItem href="/" selected>
+            {t("Sidebar.recentlyStudied")}
+          </ListItem>
+        </List>
+        <ListSubheader>{t("Sidebar.library")}</ListSubheader>
+        <List>
           {books.map((book) => (
-            <li key={book.id}>
-              <a href={`/books/${book.id}`}>{book.title}</a>
-            </li>
+            <ListItem key={book.id} href={`/books/${book.id}`}>
+              {book.title}
+            </ListItem>
           ))}
-        </ul>
+        </List>
       </nav>
     </aside>
   );

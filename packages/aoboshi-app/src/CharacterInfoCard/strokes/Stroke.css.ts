@@ -3,8 +3,8 @@ import { vars } from "../../theme/theme.css";
 
 const strokeActive = keyframes({
   "0%": {
-    strokeDasharray: 1000,
-    strokeDashoffset: 1000,
+    strokeDasharray: 400,
+    strokeDashoffset: 400,
   },
   "100%": {
     strokeDashoffset: 0,
@@ -27,7 +27,7 @@ export const currentStroke = style({
   zIndex: 1,
   selectors: {
     [`.${strokeContainer}:hover &`]: {
-      animation: `${strokeActive} 5s ease-in-out forwards`,
+      animation: `${strokeActive} 8s cubic-bezier(.24,.08,0,.71) forwards`,
     },
   },
 });

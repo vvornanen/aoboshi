@@ -3,10 +3,9 @@ import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { noDrag } from "../App.css";
+import { noDrag, windowControlsWidth } from "../styles.css";
 import { SidebarIcon } from "../icons/SidebarIcon";
 import { IconButton } from "../IconButton/IconButton";
-import { windowControlsWidth } from "../styles.css";
 import {
   content,
   dragRegion,

@@ -54,6 +54,16 @@ export const Typography: Story = {
         maxWidth: 800,
       }}
     >
+      <TypographyDisplay variant="headlineLarge">
+        目出し
+        <br />
+        Headline
+      </TypographyDisplay>
+      <TypographyDisplay variant="headlineMedium">
+        目出し
+        <br />
+        Headline
+      </TypographyDisplay>
       <TypographyDisplay variant="bodyLarge">
         <p>
           タイポグラフィは、活字（あるいは一定の文字の形状を複製し反復使用して印刷するための媒体）を用い、それを適切に配列することで、印刷物における文字の体裁を整える技芸である。

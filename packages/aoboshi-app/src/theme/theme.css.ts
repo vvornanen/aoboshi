@@ -79,6 +79,7 @@ export const keyColors = {
 export const lightPalette = {
   primary: {
     primary: primaryColor,
+    onPrimary: keyColors.primary[100],
   },
   surface: {
     surface: neutralTones[100],
@@ -104,6 +105,7 @@ export const lightPalette = {
 export const darkPalette = {
   primary: {
     primary: keyColors.primary[80],
+    onPrimary: keyColors.primary[10],
   },
   surface: {
     surface: neutralTones[12],

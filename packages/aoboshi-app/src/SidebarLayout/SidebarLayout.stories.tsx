@@ -12,7 +12,7 @@ const meta = {
     layout: "fullscreen",
     reactRouter: reactRouterParameters({
       location: {},
-      routing: { path: "/" },
+      routing: "/*",
     }),
   },
 } satisfies Meta<typeof SidebarLayoutComponent>;

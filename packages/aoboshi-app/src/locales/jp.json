@@ -33,5 +33,6 @@
   "Sidebar": {
     "library": "ライブラリ",
     "recentlyStudied": "最近の学習"
-  }
+  },
+  "pageTitle": "{{title}} - アオボシ"
 }

@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import { Typography } from "../Typography/Typography";
+import { PageMeta } from "./PageMeta";
 
 export const BookPage: FunctionComponent = () => {
   // TODO: Get data from storage
@@ -8,8 +9,9 @@ export const BookPage: FunctionComponent = () => {
   };
 
   return (
-    <div>
+    <main>
+      <PageMeta title={book.title} />
       <Typography variant="headlineLarge">{book.title}</Typography>
-    </div>
+    </main>
   );
 };

@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "./Layout/Layout";
+import { SidebarLayout } from "./SidebarLayout/SidebarLayout";
 import { RecentlyStudiedPage } from "./pages/RecentlyStudiedPage";
 import { BookPage } from "./pages/BookPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <SidebarLayout />,
     children: [
       {
         index: true,

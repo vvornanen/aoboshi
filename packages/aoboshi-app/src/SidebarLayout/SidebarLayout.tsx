@@ -13,9 +13,9 @@ import {
   layout,
   toggleButton,
   toolbar,
-} from "./Layout.css";
+} from "./SidebarLayout.css";
 
-export const Layout: FunctionComponent = () => {
+export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const sidebarId = useId();

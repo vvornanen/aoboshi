@@ -131,6 +131,7 @@ export const darkPalette = {
 const themeDefaults = {
   shape: {
     borderRadius: "9px",
+    borderRadiusSm: "5px",
   },
   typography: {
     fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont",

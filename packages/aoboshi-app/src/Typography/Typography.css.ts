@@ -25,7 +25,7 @@ const createVariant = ({
 export const headlineLarge = style(
   createVariant({
     fontFamily: vars.typography.fontFamily,
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: 700,
     lineHeight: 1.1,
   }),
@@ -34,7 +34,7 @@ export const headlineLarge = style(
 export const headlineMedium = style(
   createVariant({
     fontFamily: vars.typography.fontFamily,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 700,
     lineHeight: 1.2,
   }),

@@ -34,5 +34,8 @@
     "library": "ライブラリ",
     "recentlyStudied": "最近の学習"
   },
+  "books": {
+    "progressLabel": "{{reviewed}}/{{total}}字（{{percent}}%）"
+  },
   "pageTitle": "{{title}} - アオボシ"
 }

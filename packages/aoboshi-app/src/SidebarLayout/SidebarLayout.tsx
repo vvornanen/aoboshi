@@ -3,16 +3,11 @@ import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { noDrag, windowControlsWidth } from "../styles.css";
+import { noDrag, windowControlsHeight } from "../styles.css";
 import { SidebarIcon } from "../icons/SidebarIcon";
 import { IconButton } from "../IconButton/IconButton";
-import {
-  content,
-  dragRegion,
-  layout,
-  toggleButton,
-  toolbar,
-} from "./SidebarLayout.css";
+import { Toolbar } from "../Toolbar/Toolbar";
+import { content, dragRegion, layout, toggleButton } from "./SidebarLayout.css";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -41,15 +36,15 @@ export const SidebarLayout: FunctionComponent = () => {
         className={content}
         style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
       >
+        <Toolbar sidebarOpen={sidebarOpen}>{/* Toolbar content */}</Toolbar>
         <div
-          className={toolbar}
           style={{
-            marginLeft: sidebarOpen ? 0 : `calc(${windowControlsWidth} + 28px)`,
+            maxHeight: `calc(100vh - ${windowControlsHeight})`,
+            overflowY: "auto",
           }}
         >
-          {/* Toolbar content */}
+          <Outlet />
         </div>
-        <Outlet />
       </div>
     </div>
   );

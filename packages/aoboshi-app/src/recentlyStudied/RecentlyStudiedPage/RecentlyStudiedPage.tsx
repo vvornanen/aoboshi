@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Typography } from "../../Typography/Typography";
 import { PageMeta } from "../../PageMeta/PageMeta";
+import { Container } from "../../Container/Container";
 
 export const RecentlyStudiedPage: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -11,9 +12,11 @@ export const RecentlyStudiedPage: FunctionComponent = () => {
   return (
     <main>
       <PageMeta title={title} />
-      <Typography variant="headlineLarge" component="h1">
-        {title}
-      </Typography>
+      <Container style={{ paddingTop: 16, paddingBottom: 48 }}>
+        <Typography variant="headlineLarge" component="h1">
+          {title}
+        </Typography>
+      </Container>
     </main>
   );
 };

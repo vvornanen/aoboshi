@@ -26,18 +26,7 @@ export const toggleButton = style({
   zIndex: zIndex.drawer + 1,
 });
 
-export const toolbar = style({
-  display: "flex",
-  alignItems: "center",
-  height: windowControlsHeight,
-  transitionProperty: "margin-left",
-  transitionDuration: "600ms",
-  transitionTimingFunction: "cubic-bezier(.2,0,0,1)",
-});
-
 export const content = style({
-  paddingLeft: 16,
-  paddingRight: 16,
   flexGrow: 1,
   transitionProperty: "margin-left",
   transitionDuration: "600ms",

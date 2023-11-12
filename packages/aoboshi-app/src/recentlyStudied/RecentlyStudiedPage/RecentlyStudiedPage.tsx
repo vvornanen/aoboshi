@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Typography } from "../Typography/Typography";
-import { PageMeta } from "./PageMeta";
+import { Typography } from "../../Typography/Typography";
+import { PageMeta } from "../../PageMeta/PageMeta";
 
 export const RecentlyStudiedPage: FunctionComponent = () => {
   const { t } = useTranslation();

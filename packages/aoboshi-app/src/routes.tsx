@@ -1,7 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 import { SidebarLayout } from "./SidebarLayout/SidebarLayout";
-import { RecentlyStudiedPage } from "./pages/RecentlyStudiedPage";
-import { BookPage } from "./pages/BookPage";
+import { RecentlyStudiedPage } from "./recentlyStudied/RecentlyStudiedPage/RecentlyStudiedPage";
+import { BookPage } from "./books/BookPage/BookPage";
 
 export const router = createHashRouter([
   {

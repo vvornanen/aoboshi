@@ -4,14 +4,12 @@ import {
   useId,
   useMemo,
 } from "react";
-import { useTranslation } from "react-i18next";
-import { Typography } from "../../Typography/Typography";
 import { CharactersCard } from "../../CharactersCard/CharactersCard";
 import { Chapter } from "../Book";
 import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
 import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
 import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";
-import { progress } from "./ChapterSection.css";
+import { ChapterProgress } from "../ChapterProgress/ChapterProgress";
 
 type ChapterSectionProps = Omit<
   ComponentPropsWithoutRef<"section">,
@@ -32,7 +30,6 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
   chapter,
   ...props
 }) => {
-  const { t } = useTranslation();
   const headingId = useId();
   const literals = getLiterals(chapter);
 
@@ -61,13 +58,7 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
       />
       {characters.length > 0 && (
         <>
-          <Typography variant="bodyMedium" component="p" className={progress}>
-            {t("books.progressLabel", {
-              reviewed: statisticsByChapter.numberOfReviewedCharacters,
-              total: characters.length,
-              percent: Math.round(statisticsByChapter.reviewedRatio * 100),
-            })}
-          </Typography>
+          <ChapterProgress data={statisticsByChapter} />
           <CharactersCard characters={characters} />
         </>
       )}

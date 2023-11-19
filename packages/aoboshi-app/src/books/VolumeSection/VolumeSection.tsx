@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, FunctionComponent, useId } from "react";
 import { Volume } from "../Book";
 import { ChapterSection } from "../ChapterSection/ChapterSection";
-import { Typography } from "../../Typography/Typography";
+import { Typography } from "../../common/Typography/Typography";
 import { volumeHeading } from "./VolumeSection.css";
 
 type VolumeSectionProps = ComponentPropsWithoutRef<"section"> & {

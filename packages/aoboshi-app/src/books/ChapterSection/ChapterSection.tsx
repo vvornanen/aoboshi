@@ -4,12 +4,14 @@ import {
   useId,
   useMemo,
 } from "react";
+import { clsx } from "clsx";
 import { CharactersCard } from "../../CharactersCard/CharactersCard";
 import { Chapter } from "../Book";
 import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
 import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
 import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";
 import { ChapterProgress } from "../ChapterProgress/ChapterProgress";
+import { chapterSection, progress, sectionHeader } from "./ChapterSection.css";
 
 type ChapterSectionProps = Omit<
   ComponentPropsWithoutRef<"section">,
@@ -28,6 +30,7 @@ const getLiterals = (chapter: Chapter): string[] => {
 
 export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
   chapter,
+  className,
   ...props
 }) => {
   const headingId = useId();
@@ -50,15 +53,21 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
     Math.abs(1 - statisticsByChapter.reviewedRatio) < Number.EPSILON;
 
   return (
-    <section key={chapter.code} {...props} aria-labelledby={headingId}>
+    <section
+      key={chapter.code}
+      className={clsx(chapterSection, className)}
+      {...props}
+      aria-labelledby={headingId}
+    >
       <ChapterSectionHeader
         id={headingId}
         title={chapter.title}
         completed={completed}
+        className={sectionHeader}
       />
       {characters.length > 0 && (
         <>
-          <ChapterProgress data={statisticsByChapter} />
+          <ChapterProgress data={statisticsByChapter} className={progress} />
           <CharactersCard characters={characters} />
         </>
       )}

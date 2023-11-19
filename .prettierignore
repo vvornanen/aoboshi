@@ -1,6 +1,7 @@
 .idea/fileTemplates
 .yarn
+coverage
 packages/*/.vite
 packages/*/out
 packages/*/dist
-coverage
+packages/aoboshi-app/public/kanjivg

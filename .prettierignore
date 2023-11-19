@@ -1,3 +1,4 @@
+.idea/fileTemplates
 .yarn
 packages/*/.vite
 packages/*/out

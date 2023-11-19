@@ -22,6 +22,24 @@ const createVariant = ({
   };
 };
 
+export const headlineLarge = style(
+  createVariant({
+    fontFamily: vars.typography.fontFamily,
+    fontSize: 22,
+    fontWeight: 700,
+    lineHeight: 1.1,
+  }),
+);
+
+export const headlineMedium = style(
+  createVariant({
+    fontFamily: vars.typography.fontFamily,
+    fontSize: 16,
+    fontWeight: 700,
+    lineHeight: 1.2,
+  }),
+);
+
 export const textbookDisplay = style(
   createVariant({
     fontFamily: vars.typography.textbook.fontFamily,

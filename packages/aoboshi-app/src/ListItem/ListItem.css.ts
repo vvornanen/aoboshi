@@ -12,7 +12,7 @@ export const listItem = style([
     borderStyle: "none",
     textDecoration: "none",
     outline: "none",
-    cursor: "pointer",
+    cursor: "default",
     paddingTop: 4,
     paddingBottom: 4,
     paddingLeft: 16,

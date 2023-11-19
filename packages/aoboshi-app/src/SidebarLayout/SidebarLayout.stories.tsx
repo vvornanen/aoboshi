@@ -3,10 +3,10 @@ import {
   reactRouterParameters,
   withRouter,
 } from "storybook-addon-react-router-v6";
-import { Sidebar } from "./Sidebar";
+import { SidebarLayout as SidebarLayoutComponent } from "./SidebarLayout";
 
 const meta = {
-  component: Sidebar,
+  component: SidebarLayoutComponent,
   decorators: [withRouter],
   parameters: {
     layout: "fullscreen",
@@ -15,14 +15,10 @@ const meta = {
       routing: "/*",
     }),
   },
-} satisfies Meta<typeof Sidebar>;
+} satisfies Meta<typeof SidebarLayoutComponent>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    width: 200,
-    open: true,
-  },
-};
+export const SidebarLayout: Story = {};

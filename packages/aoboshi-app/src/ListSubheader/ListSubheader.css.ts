@@ -9,5 +9,6 @@ export const listSubheader = style([
     marginTop: 16,
     marginLeft: 8,
     marginBottom: 8,
+    userSelect: "none",
   },
 ]);

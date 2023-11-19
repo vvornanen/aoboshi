@@ -1,20 +1,15 @@
 import { FunctionComponent, useId, useState } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { noDrag } from "../App.css";
+import { noDrag, windowControlsHeight } from "../styles.css";
 import { SidebarIcon } from "../icons/SidebarIcon";
 import { IconButton } from "../IconButton/IconButton";
-import { windowControlsWidth } from "../styles.css";
-import {
-  content,
-  dragRegion,
-  layout,
-  toggleButton,
-  toolbar,
-} from "./Layout.css";
+import { Toolbar } from "../Toolbar/Toolbar";
+import { content, dragRegion, layout, toggleButton } from "./SidebarLayout.css";
 
-export const Layout: FunctionComponent = () => {
+export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const sidebarId = useId();
@@ -41,15 +36,15 @@ export const Layout: FunctionComponent = () => {
         className={content}
         style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
       >
+        <Toolbar sidebarOpen={sidebarOpen}>{/* Toolbar content */}</Toolbar>
         <div
-          className={toolbar}
           style={{
-            marginLeft: sidebarOpen ? 0 : `calc(${windowControlsWidth} + 28px)`,
+            maxHeight: `calc(100vh - ${windowControlsHeight})`,
+            overflowY: "auto",
           }}
         >
-          {/* Toolbar content */}
+          <Outlet />
         </div>
-        <main>{/* Page content */}</main>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { createVar, globalStyle } from "@vanilla-extract/css";
+import { createVar, globalStyle, style } from "@vanilla-extract/css";
 import { vars } from "./theme/theme.css";
 
 // CSS reset based on https://www.joshwcomeau.com/css/custom-css-reset/
@@ -44,4 +44,30 @@ globalStyle("html", {
     [windowControlsHeight]: "52px",
     [windowControlsWidth]: "90px",
   },
+});
+
+/** Visually hidden content for screen reader */
+export const visuallyHidden = style({
+  border: 0,
+  clipPath: "inset(100%)",
+  height: 1,
+  margin: -1,
+  overflow: "hidden",
+  padding: 0,
+  position: "absolute",
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
+export const drag = style({
+  // Ignore ts error because vanilla-extract does not understand electron-specific style
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  "-webkit-app-region": "drag",
+});
+
+export const noDrag = style({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  "-webkit-app-region": "no-drag",
 });

@@ -30,14 +30,12 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
     <aside className={clsx(sidebar, { open })} style={{ width }} {...props}>
       <nav>
         <List>
-          <ListItem href="/" selected>
-            {t("Sidebar.recentlyStudied")}
-          </ListItem>
+          <ListItem to="/">{t("Sidebar.recentlyStudied")}</ListItem>
         </List>
         <ListSubheader>{t("Sidebar.library")}</ListSubheader>
         <List>
           {books.map((book) => (
-            <ListItem key={book.id} href={`/books/${book.id}`}>
+            <ListItem key={book.id} to={`/books/${book.id}`}>
               {book.title}
             </ListItem>
           ))}

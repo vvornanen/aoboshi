@@ -33,7 +33,7 @@ export const CharacterType: FunctionComponent<CharacterTypeProps> = ({
         [printDisplay]: variant === "print",
       })}
     >
-      {literal.charAt(0)}
+      {[...literal][0]}
     </text>
   </svg>
 );

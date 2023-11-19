@@ -12,16 +12,16 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@mui/base": "^5.0.0-beta.23",
+    "@mui/base": "^5.0.0-beta.24",
     "@vanilla-extract/css": "^1.14.0",
     "@vvornanen/aoboshi-core": "workspace:^",
     "chroma-js": "^2.4.2",
     "clsx": "^2.0.0",
-    "i18next": "^23.7.3",
+    "i18next": "^23.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^13.4.0",
-    "react-router-dom": "^6.18.0"
+    "react-i18next": "^13.5.0",
+    "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.4.2",
@@ -39,11 +39,11 @@
     "@types/chroma-js": "^2.4.3",
     "@types/react": "18.2.37",
     "@types/react-dom": "^18.2.15",
-    "@vanilla-extract/vite-plugin": "^3.9.0",
-    "@vitejs/plugin-react-swc": "^3.4.1",
-    "chromatic": "^9.0.0",
-    "electron": "27.0.4",
-    "eslint": "^8.53.0",
+    "@vanilla-extract/vite-plugin": "^3.9.1",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "chromatic": "^9.1.0",
+    "electron": "27.1.0",
+    "eslint": "^8.54.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",

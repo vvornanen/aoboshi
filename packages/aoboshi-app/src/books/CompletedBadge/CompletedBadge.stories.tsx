@@ -12,6 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const CompletedBadge: Story = {
   args: {
+    seed: "ほげ",
     invisible: false,
   },
   render: (args) => (

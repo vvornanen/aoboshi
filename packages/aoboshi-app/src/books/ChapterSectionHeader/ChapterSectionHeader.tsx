@@ -11,12 +11,15 @@ export const ChapterSectionHeader: FunctionComponent<
   ChapterSectionHeaderProps
 > = ({ id, title, completed = false, className, ...props }) => {
   return (
-    <div>
-      <CompletedBadge className={className} invisible={!completed} {...props}>
-        <Typography id={id} variant="bodyLarge" component="h3">
-          {title}
-        </Typography>
-      </CompletedBadge>
-    </div>
+    <CompletedBadge
+      className={className}
+      invisible={!completed}
+      seed={title}
+      {...props}
+    >
+      <Typography id={id} variant="bodyLarge" component="h3">
+        {title}
+      </Typography>
+    </CompletedBadge>
   );
 };

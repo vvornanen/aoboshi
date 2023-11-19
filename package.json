@@ -41,7 +41,7 @@
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
   },
-  "packageManager": "yarn@3.6.3",
+  "packageManager": "yarn@4.0.2",
   "engines": {
     "node": ">=20",
     "npm": "Please use yarn instead of npm",

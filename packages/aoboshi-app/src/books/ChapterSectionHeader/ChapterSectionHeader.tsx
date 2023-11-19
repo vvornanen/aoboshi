@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
-import { Typography } from "../../Typography/Typography";
+import { Typography } from "../../common/Typography/Typography";
 import { CompletedBadge } from "../CompletedBadge/CompletedBadge";
 
 type ChapterSectionHeaderProps = ComponentPropsWithoutRef<"div"> & {

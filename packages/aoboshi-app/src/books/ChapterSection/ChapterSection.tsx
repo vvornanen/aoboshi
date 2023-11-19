@@ -5,7 +5,7 @@ import {
   useMemo,
 } from "react";
 import { clsx } from "clsx";
-import { CharactersCard } from "../../CharactersCard/CharactersCard";
+import { CharactersCard } from "../../characters/CharactersCard/CharactersCard";
 import { Chapter } from "../Book";
 import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
 import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";

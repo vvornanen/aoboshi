@@ -6,7 +6,7 @@ import {
 } from "./Typography";
 
 const meta: Meta<typeof TypographyComponent> = {
-  title: "theme/Typography",
+  title: "Typography",
   component: TypographyComponent,
 };
 

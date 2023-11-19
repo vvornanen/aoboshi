@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
-import { Typography } from "../../Typography/Typography";
-import { PageMeta } from "../../PageMeta/PageMeta";
+import { Typography } from "../../common/Typography/Typography";
+import { PageMeta } from "../../common/PageMeta/PageMeta";
 import { grades } from "../grades";
 import { VolumeSection } from "../VolumeSection/VolumeSection";
-import { Container } from "../../Container/Container";
+import { Container } from "../../common/Container/Container";
 
 export const BookPage: FunctionComponent = () => {
   // TODO: Get data from storage

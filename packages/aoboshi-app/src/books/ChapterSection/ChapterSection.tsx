@@ -10,7 +10,7 @@ import { CharactersCard } from "../../CharactersCard/CharactersCard";
 import { Chapter } from "../Book";
 import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
 import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
-import { CompletedBadge } from "../CompletedBadge/CompletedBadge";
+import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";
 import { progress } from "./ChapterSection.css";
 
 type ChapterSectionProps = Omit<
@@ -54,14 +54,11 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
 
   return (
     <section key={chapter.code} {...props} aria-labelledby={headingId}>
-      <CompletedBadge
-        style={{ marginTop: 24, marginBottom: 16 }}
-        invisible={!completed}
-      >
-        <Typography id={headingId} variant="bodyLarge" component="h3">
-          {chapter.title}
-        </Typography>
-      </CompletedBadge>
+      <ChapterSectionHeader
+        id={headingId}
+        title={chapter.title}
+        completed={completed}
+      />
       {characters.length > 0 && (
         <>
           <Typography variant="bodyMedium" component="p" className={progress}>

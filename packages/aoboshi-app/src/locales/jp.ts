@@ -1,0 +1,41 @@
+export const jp = {
+  CharacterInfoCard: {
+    caption: "活字体　筆字体　課／画数／級／種別　音読み／訓読み　書き順",
+    strokeCount: "{{strokeCount}}画",
+    noJLPT: "級外",
+    printTypeLabel: "活字体",
+    textbookTypeLabel: "筆字体",
+    referenceLabel: "課",
+    strokeCountLabel: "画数",
+    jlptLabel: "級",
+    gradeLabel: "種別",
+    onyomiLabel: "音読み",
+    kunyomiLabel: "訓読み",
+    strokeLabel: "書き順: 第{{stroke}}画",
+    grade: {
+      kana: "かな",
+      kyoiku: "教育",
+      kyoikuTooltip: "第{{grade}}学年",
+      joyou: "常用",
+      joyouTooltip: "中学校の3年間に学習する漢字",
+      jinmeiyo: "人名用",
+      jinmeiyoTooltip: "常用漢字の異体字でないもの",
+      jinmeiyoVariantTooltip: "常用漢字の異体字であるもの",
+      other: "常用外",
+    },
+  },
+  Layout: {
+    toggleSidebar: "サイドバーを表示します",
+  },
+  RecentlyStudiedPage: {
+    title: "最近の学習",
+  },
+  Sidebar: {
+    library: "ライブラリ",
+    recentlyStudied: "最近の学習",
+  },
+  books: {
+    progressLabel: "{{reviewed}}/{{total}}字（{{percent}}%）",
+  },
+  pageTitle: "{{title}} - アオボシ",
+};

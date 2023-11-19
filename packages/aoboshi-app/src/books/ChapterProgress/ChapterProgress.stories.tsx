@@ -11,8 +11,23 @@ type Story = StoryObj<typeof meta>;
 
 const chapterId = "63Rk6NlcC8diP7nGvHKGOW";
 
-export const AllUnseen: Story = {
+export const Default: Story = {
   args: {
+    data: {
+      chapterId,
+      numberOfAddedCharacters: 60,
+      numberOfUnreviewedCharacters: 13,
+      numberOfReviewedCharacters: 47,
+      totalNumberOfCharacters: 80,
+      reviewedRatio: 0.5875,
+    },
+  },
+};
+
+export const AllUnseen: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
     data: {
       chapterId,
       numberOfAddedCharacters: 0,
@@ -25,9 +40,9 @@ export const AllUnseen: Story = {
 };
 
 export const SomeReviewed: Story = {
-  ...AllUnseen,
+  ...Default,
   args: {
-    ...AllUnseen.args,
+    ...Default.args,
     data: {
       chapterId,
       numberOfAddedCharacters: 80,
@@ -40,9 +55,9 @@ export const SomeReviewed: Story = {
 };
 
 export const Completed: Story = {
-  ...AllUnseen,
+  ...Default,
   args: {
-    ...AllUnseen.args,
+    ...Default.args,
     data: {
       chapterId,
       numberOfAddedCharacters: 80,

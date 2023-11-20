@@ -1,6 +1,5 @@
-import { initReactI18next } from "react-i18next";
-import { use } from "i18next";
-import jp from "./locales/jp.json";
+import { InitOptions } from "i18next";
+import { jp } from "./locales/jp";
 
 export const defaultNS = "translation";
 export const resources = {
@@ -9,9 +8,9 @@ export const resources = {
   },
 } as const;
 
-use(initReactI18next).init({
+export const options = {
   lng: "jp",
   ns: [defaultNS],
   defaultNS,
   resources,
-});
+} satisfies InitOptions;

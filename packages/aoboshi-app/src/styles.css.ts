@@ -12,7 +12,6 @@ globalStyle("*", {
 
 globalStyle("body", {
   lineHeight: 1.5,
-  WebkitFontSmoothing: "antialiased",
   backgroundColor: vars.color.surface,
   color: vars.color.onSurface,
   fontFamily: vars.typography.fontFamily,

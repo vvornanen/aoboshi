@@ -43,6 +43,7 @@ export const jp = {
     edit: "編集",
     enterFullscreen: "フルスクリーンにする",
     file: "ファイル",
+    front: "すべてを手前に移動",
     help: "ヘルプ",
     hide: "アオボシを非表示",
     hideOthers: "ほかを非表示",

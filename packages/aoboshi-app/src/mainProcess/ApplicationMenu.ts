@@ -233,6 +233,13 @@ export class ApplicationMenu {
             label: t("applicationMenu.zoom"),
             role: "zoom",
           },
+          {
+            type: "separator",
+          },
+          {
+            label: t("applicationMenu.front"),
+            role: "front",
+          },
         ],
       },
       {

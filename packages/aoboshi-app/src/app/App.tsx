@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import { darkThemeClass, lightThemeClass } from "../theme/theme.css";
 import { useMediaQuery } from "../common/useMediaQuery";
-import "../i18n";
 import { router } from "./routes";
 
 export const App = () => {

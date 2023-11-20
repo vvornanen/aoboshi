@@ -8,29 +8,27 @@ type PageMetaProps = {
 };
 
 export const PageMeta: FunctionComponent<PageMetaProps> = ({ title }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [alertVisible, setAlertVisible] = useState(false);
-
-  const documentTitle = t("pageTitle", { title });
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", i18n.language);
   }, [i18n.language]);
 
   useEffect(() => {
-    document.title = documentTitle;
+    document.title = title;
     setAlertVisible(true);
 
     const timeout = setTimeout(() => setAlertVisible(false), 5000);
 
     return () => clearTimeout(timeout);
-  }, [documentTitle]);
+  }, [title]);
 
   return (
     alertVisible && (
       <Portal>
         <div className={visuallyHidden} aria-live="polite">
-          {documentTitle}
+          {title}
         </div>
       </Portal>
     )

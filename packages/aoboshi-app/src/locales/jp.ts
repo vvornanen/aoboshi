@@ -72,5 +72,4 @@ export const jp = {
   books: {
     progressLabel: "{{reviewed}}/{{total}}字（{{percent}}%）",
   },
-  pageTitle: "{{title}} - アオボシ",
 };

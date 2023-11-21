@@ -5,8 +5,8 @@ import {
   useMemo,
 } from "react";
 import { clsx } from "clsx";
+import { Chapter } from "@vvornanen/aoboshi-core/books/Book";
 import { CharactersCard } from "../../characters/CharactersCard/CharactersCard";
-import { Chapter } from "../Book";
 import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
 import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
 import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";

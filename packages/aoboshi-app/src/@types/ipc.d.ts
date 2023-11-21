@@ -1,4 +1,4 @@
-import { IpcApi, IPC_API_KEY } from "../ipc";
+import { IpcApi, IPC_API_KEY } from "../main/IpcApi";
 
 declare global {
   interface Window {

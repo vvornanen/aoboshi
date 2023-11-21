@@ -1,6 +1,6 @@
 import { BrowserWindow, Menu, MenuItem, shell } from "electron";
 import { t } from "i18next";
-import { IpcEventType } from "../ipc";
+import { IpcEventType } from "./IpcApi";
 
 type ApplicationMenuState = {
   sidebarOpen: boolean;

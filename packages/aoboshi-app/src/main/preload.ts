@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IpcApi, IpcEventType, IPC_API_KEY } from "./ipc";
+import { IpcApi, IpcEventType, IPC_API_KEY } from "./IpcApi";
 
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts

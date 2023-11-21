@@ -1,8 +1,11 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import "./i18n.main";
-import { IpcEventType } from "./ipc";
-import { ApplicationMenu } from "./mainProcess/ApplicationMenu";
-import { MainWindow } from "./mainProcess/MainWindow";
+import { init } from "i18next";
+import { options } from "../i18n";
+import { ApplicationMenu } from "./ApplicationMenu";
+import { MainWindow } from "./MainWindow";
+import { IpcEventType } from "./IpcApi";
+
+init(options);
 
 const applicationMenu = new ApplicationMenu({
   sidebarOpen: true,

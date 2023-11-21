@@ -1,9 +1,12 @@
 import type { Preview, ReactRenderer } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { darkThemeClass, lightThemeClass } from "../src/theme/theme.css";
-import "../src/styles.css";
+import {
+  darkThemeClass,
+  lightThemeClass,
+} from "../src/renderer/theme/theme.css";
+import "../src/renderer/styles.css";
 import "../src/i18n.renderer";
-import { IPC_API_KEY, IpcApi } from "../src/ipc";
+import { IPC_API_KEY, IpcApi } from "../src/main/IpcApi";
 
 window[IPC_API_KEY] = {
   onToggleSidebar: () => {},

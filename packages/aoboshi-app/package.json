@@ -4,10 +4,10 @@
   "private": true,
   "main": ".vite/build/main.js",
   "scripts": {
-    "make": "electron-forge make",
-    "package": "electron-forge package",
-    "publish": "electron-forge publish",
-    "start": "electron-forge start",
+    "make": "electron-rebuild && electron-forge make",
+    "package": "electron-rebuild && electron-forge package",
+    "publish": "electron-rebuild && electron-forge publish",
+    "start": "electron-rebuild && electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
@@ -28,6 +28,7 @@
     "@electron-forge/cli": "^7.1.0",
     "@electron-forge/maker-zip": "^7.1.0",
     "@electron-forge/plugin-vite": "^7.1.0",
+    "@electron/rebuild": "^3.3.1",
     "@storybook/addon-essentials": "7.5.3",
     "@storybook/addon-interactions": "7.5.3",
     "@storybook/addon-links": "7.5.3",

@@ -1,12 +1,12 @@
-import { Database } from "better-sqlite3";
+import { ApplicationContext } from "../ApplicationContext";
 import migration01 from "./01-books-structure";
 import { Migration } from "./Migration";
 
 export class MigrationService {
-  constructor(private db: Database) {}
+  constructor(private context: ApplicationContext) {}
 
   run(): void {
-    this.db.exec(`
+    this.context.database.exec(`
         create table if not exists Migration
         (
             id        text primary key,
@@ -17,7 +17,7 @@ export class MigrationService {
     const migrations: Migration[] = [migration01];
 
     migrations.forEach((migration) => {
-      const { count } = this.db
+      const { count } = this.context.database
         .prepare("select count(*) as count from Migration where id = ?")
         .get(migration.id) as { count: number };
 
@@ -26,9 +26,9 @@ export class MigrationService {
       }
 
       console.log(`Run migration ${migration.id}`);
-      migration.run(this.db);
+      migration.run(this.context);
 
-      this.db
+      this.context.database
         .prepare(
           "insert into Migration (id, timestamp) values (@id, @timestamp)",
         )

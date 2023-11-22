@@ -1,6 +1,6 @@
-import { Database } from "better-sqlite3";
+import { ApplicationContext } from "../ApplicationContext";
 
 export interface Migration {
   id: string;
-  run(db: Database): void;
+  run(context: ApplicationContext): void;
 }

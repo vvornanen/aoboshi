@@ -7,7 +7,7 @@
     "make": "electron-rebuild && electron-forge make",
     "package": "electron-rebuild && electron-forge package",
     "publish": "electron-rebuild && electron-forge publish",
-    "start": "electron-rebuild && electron-forge start",
+    "start": "electron-rebuild && DB_FILENAME=dev.db electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },

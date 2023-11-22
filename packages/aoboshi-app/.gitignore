@@ -92,3 +92,5 @@ typings/
 out/
 
 storybook-static
+
+dev.db

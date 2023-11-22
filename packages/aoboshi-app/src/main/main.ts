@@ -1,11 +1,17 @@
 import { app, BrowserWindow, ipcMain } from "electron";
+import path from "path";
 import { init } from "i18next";
 import { options } from "../i18n";
 import { ApplicationMenu } from "./ApplicationMenu";
 import { MainWindow } from "./MainWindow";
 import { IpcEventType } from "./IpcApi";
+import { getDatabase } from "./db/db";
 
 init(options);
+
+const dbFilename =
+  process.env.DB_FILENAME || path.join(app.getPath("userData"), "aoboshi.db");
+getDatabase(dbFilename, true);
 
 const applicationMenu = new ApplicationMenu({
   sidebarOpen: true,

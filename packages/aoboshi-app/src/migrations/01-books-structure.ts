@@ -1,7 +1,7 @@
-import { Migration } from "./Migration";
+import { Migration } from "../main/migration/Migration";
 
 export default {
-  id: "01-books-structure",
+  description: "Create book table",
   async run({ database }): Promise<void> {
     database.exec(`
         create table Book

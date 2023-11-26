@@ -1,6 +1,7 @@
-import { BrowserWindow, Menu, MenuItem, shell } from "electron";
+import { BrowserWindow, ipcMain, Menu, MenuItem, shell } from "electron";
 import { t } from "i18next";
 import { IpcEventType } from "./IpcApi";
+import { OnAfterInit } from "./ApplicationContext";
 
 type ApplicationMenuState = {
   sidebarOpen: boolean;
@@ -14,11 +15,17 @@ type ApplicationMenuState = {
  *
  * @see https://www.electronjs.org/docs/latest/api/menu#examples
  */
-export class ApplicationMenu {
+export class ApplicationMenu implements OnAfterInit {
   private state: ApplicationMenuState;
 
   constructor(initialState: ApplicationMenuState) {
     this.state = { ...initialState };
+  }
+
+  onAfterInit() {
+    ipcMain.on(IpcEventType.ToggleSidebar, (_, value) => {
+      this.sidebarOpen = value;
+    });
   }
 
   get sidebarOpen(): boolean {

@@ -4,34 +4,66 @@ import { Database } from "better-sqlite3";
 import { ApplicationMenu } from "./ApplicationMenu";
 import { getDatabase } from "./database";
 import { MainWindow } from "./MainWindow";
-import { MigrationService } from "./migrations/MigrationService";
 
-export interface ApplicationContext {
-  database: Database;
-  applicationMenu: ApplicationMenu;
-  mainWindow: MainWindow | null;
+/**
+ * Services may implement this interface if they need to call other services
+ * when the application context is ready for use.
+ */
+export interface OnAfterInit {
+  /**
+   * Called when all services in the application context are ready for use
+   */
+  onAfterInit: () => void;
 }
 
-export const createApplicationContext = (): ApplicationContext => {
-  const dbFilename =
-    process.env.DB_FILENAME || path.join(app.getPath("userData"), "aoboshi.db");
-  const database = getDatabase(dbFilename, true);
+const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
+  return (
+    service !== null &&
+    typeof service === "object" &&
+    typeof (service as OnAfterInit).onAfterInit === "function"
+  );
+};
 
-  const applicationMenu = new ApplicationMenu({
-    sidebarOpen: true,
-    devToolsEnabled: true,
-    mainWindowFocused: false,
-    fullscreen: false,
-  });
+/**
+ * Wires up all services depending on each other.
+ */
+export class ApplicationContext implements OnAfterInit {
+  database: Database;
+  applicationMenu: ApplicationMenu;
+  mainWindow: MainWindow | null = null;
 
-  const context: ApplicationContext = {
-    database,
-    applicationMenu,
-    mainWindow: null,
-  };
+  constructor() {
+    const dbFilename =
+      process.env.DB_FILENAME ||
+      path.join(app.getPath("userData"), "aoboshi.db");
+    this.database = getDatabase(dbFilename, true);
 
-  const migrationService = new MigrationService(context);
-  migrationService.run();
+    this.applicationMenu = new ApplicationMenu({
+      sidebarOpen: true,
+      devToolsEnabled: true,
+      mainWindowFocused: false,
+      fullscreen: false,
+    });
+  }
 
-  return context;
+  onAfterInit(): void {
+    console.log("Application initialized");
+
+    Object.values(this).forEach((service) => {
+      if (hasOnAfterInit(service)) {
+        service.onAfterInit();
+      }
+    });
+  }
+}
+
+let applicationContext: ApplicationContext | null = null;
+
+export const getApplicationContext = (): ApplicationContext => {
+  if (!applicationContext) {
+    console.log("Create new application context");
+    applicationContext = new ApplicationContext();
+  }
+
+  return applicationContext;
 };

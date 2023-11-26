@@ -10,9 +10,11 @@ declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
 declare const MAIN_WINDOW_VITE_NAME: string;
 
 export class MainWindow {
-  private window: BrowserWindow;
+  private window: BrowserWindow | null = null;
 
-  constructor(context: ApplicationContext) {
+  constructor(private context: ApplicationContext) {}
+
+  async open(): Promise<void> {
     this.window = new BrowserWindow({
       width: 1000,
       height: 600,
@@ -27,26 +29,27 @@ export class MainWindow {
     });
 
     this.window.on("enter-full-screen", () => {
-      context.applicationMenu.fullscreen = true;
+      this.context.applicationMenu.fullscreen = true;
     });
 
     this.window.on("leave-full-screen", () => {
-      context.applicationMenu.fullscreen = false;
+      this.context.applicationMenu.fullscreen = false;
     });
 
     this.window.on("focus", () => {
-      context.applicationMenu.mainWindowFocused = true;
+      this.context.applicationMenu.mainWindowFocused = true;
     });
 
     this.window.on("closed", () => {
-      context.applicationMenu.mainWindowFocused = false;
+      this.context.applicationMenu.mainWindowFocused = false;
+      this.window = null;
     });
 
     // and load the index.html of the app.
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-      this.window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+      await this.window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     } else {
-      this.window.loadFile(
+      await this.window.loadFile(
         path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
       );
     }

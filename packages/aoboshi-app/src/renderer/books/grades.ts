@@ -1,8 +1,7 @@
-import { Book } from "./Book";
+import { Book } from "@vvornanen/aoboshi-core/books/Book";
 
 export const grades: Book = {
   id: "AtLesfR65Adc7q2XHVK7A8",
-  version: 1,
   title: "常用漢字一覧",
   titleShort: "常用漢字",
   volumes: [

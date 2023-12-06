@@ -4,6 +4,7 @@
   "private": true,
   "exports": {
     ".": "./dist/index.js",
+    "./*": "./dist/*.js",
     "./books/*": "./dist/books/*.js"
   }
 }

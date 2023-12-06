@@ -1,9 +1,11 @@
 import path from "path";
 import { app } from "electron";
 import { Database } from "better-sqlite3";
+import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
 import { ApplicationMenu } from "./ApplicationMenu";
 import { getDatabase } from "./database";
 import { MainWindow } from "./MainWindow";
+import { BookSqliteRepository } from "./books/BookSqliteRepository";
 
 /**
  * Services may implement this interface if they need to call other services
@@ -31,6 +33,7 @@ export class ApplicationContext implements OnAfterInit {
   database: Database;
   applicationMenu: ApplicationMenu;
   mainWindow: MainWindow | null = null;
+  bookRepository: BookRepository;
 
   constructor() {
     const dbFilename =
@@ -44,6 +47,8 @@ export class ApplicationContext implements OnAfterInit {
       mainWindowFocused: false,
       fullscreen: false,
     });
+
+    this.bookRepository = new BookSqliteRepository(this.database);
   }
 
   onAfterInit(): void {

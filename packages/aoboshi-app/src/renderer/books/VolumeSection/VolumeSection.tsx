@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FunctionComponent, useId } from "react";
-import { Volume } from "../Book";
+import { Volume } from "@vvornanen/aoboshi-core/books/Book";
 import { ChapterSection } from "../ChapterSection/ChapterSection";
 import { Typography } from "../../common/Typography/Typography";
 import { volumeHeading } from "./VolumeSection.css";

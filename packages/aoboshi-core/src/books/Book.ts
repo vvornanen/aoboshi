@@ -3,9 +3,6 @@ export type Book = {
   /** A randomly generated unique identifier of this book */
   id: string;
 
-  /** Schema version. Used for migrations when the data is persisted. */
-  version: number;
-
   /** Long book title displayed in headings */
   title: string;
 

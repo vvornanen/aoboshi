@@ -5,8 +5,12 @@ import {
   lightThemeClass,
 } from "../src/renderer/theme/theme.css";
 import "../src/renderer/styles.css";
-import "../src/i18n.renderer";
 import { IPC_API_KEY, IpcApi } from "../src/main/IpcApi";
+import { use } from "i18next";
+import { initReactI18next } from "react-i18next";
+import { options } from "../src/i18n";
+
+use(initReactI18next).init(options);
 
 window[IPC_API_KEY] = {
   onToggleSidebar: () => {},

@@ -12,7 +12,6 @@ import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
 import { options } from "../i18n";
 import { App } from "./app/App";
-import "../i18n.renderer";
 import "./styles.css";
 
 use(initReactI18next).init(options);

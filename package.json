@@ -11,6 +11,7 @@
     "test:integration": "vitest integration",
     "build": "tsc --build",
     "dev": "concurrently 'yarn build --watch' 'yarn storybook'",
+    "package": "yarn workspace @vvornanen/aoboshi-app package && open packages/aoboshi-app/out",
     "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
     "start": "yarn workspace @vvornanen/aoboshi-app start",
     "storybook": "yarn workspace @vvornanen/aoboshi-app storybook",

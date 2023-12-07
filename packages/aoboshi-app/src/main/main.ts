@@ -1,38 +1,30 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow } from "electron";
 import { init } from "i18next";
 import { options } from "../i18n";
-import { ApplicationMenu } from "./ApplicationMenu";
-import { MainWindow } from "./MainWindow";
-import { IpcEventType } from "./IpcApi";
+import { MigrationService } from "./migration/MigrationService";
+import { MainApplicationContext } from "./MainApplicationContext";
 
-init(options);
+const applicationContext = new MainApplicationContext();
 
-const applicationMenu = new ApplicationMenu({
-  sidebarOpen: true,
-  devToolsEnabled: true,
-  mainWindowFocused: false,
-  fullscreen: false,
-});
+const initApplication = async () => {
+  await init(options);
 
-// Keep a reference to prevent garbage collection
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-let mainWindow: MainWindow;
+  const migrationService = new MigrationService(applicationContext);
+  await migrationService.run();
+
+  applicationContext.onAfterInit();
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", () => {
-  applicationMenu.update();
-  mainWindow = new MainWindow(applicationMenu);
-
-  ipcMain.on(IpcEventType.ToggleSidebar, (_, value) => {
-    applicationMenu.sidebarOpen = value;
-  });
+app.on("ready", async () => {
+  await Promise.all([initApplication(), applicationContext.mainWindow.open()]);
 });
 
-app.on("activate", () => {
+app.on("activate", async () => {
   // Re-create the window when the dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
-    mainWindow = new MainWindow(applicationMenu);
+    await applicationContext.mainWindow.open();
   }
 });

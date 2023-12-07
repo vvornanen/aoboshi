@@ -22,6 +22,10 @@ app.on("ready", async () => {
   await Promise.all([initApplication(), applicationContext.mainWindow.open()]);
 });
 
+app.on("window-all-closed", () => {
+  // Keep the app running
+});
+
 app.on("activate", async () => {
   // Re-create the window when the dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {

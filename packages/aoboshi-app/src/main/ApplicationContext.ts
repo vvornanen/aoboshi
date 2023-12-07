@@ -2,9 +2,7 @@ import path from "path";
 import { app } from "electron";
 import { Database } from "better-sqlite3";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { ApplicationMenu } from "./ApplicationMenu";
 import { getDatabase } from "./database";
-import { MainWindow } from "./MainWindow";
 import { BookSqliteRepository } from "./books/BookSqliteRepository";
 
 /**
@@ -31,8 +29,6 @@ const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
  */
 export class ApplicationContext implements OnAfterInit {
   database: Database;
-  applicationMenu: ApplicationMenu;
-  mainWindow: MainWindow | null = null;
   bookRepository: BookRepository;
 
   constructor() {
@@ -40,13 +36,6 @@ export class ApplicationContext implements OnAfterInit {
       process.env.DB_FILENAME ||
       path.join(app.getPath("userData"), "aoboshi.db");
     this.database = getDatabase(dbFilename, true);
-
-    this.applicationMenu = new ApplicationMenu({
-      sidebarOpen: true,
-      devToolsEnabled: true,
-      mainWindowFocused: false,
-      fullscreen: false,
-    });
 
     this.bookRepository = new BookSqliteRepository(this.database);
   }

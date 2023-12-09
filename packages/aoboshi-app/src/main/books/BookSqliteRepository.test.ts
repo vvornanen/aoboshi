@@ -6,7 +6,7 @@ import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
 import { BookSqliteRepository } from "./BookSqliteRepository";
 
-const fixture: Book[] = [
+const fixtures: Book[] = [
   {
     id: "9PHkaan3kC5Ug72f2uTaO8",
     title: "Test book title",
@@ -43,11 +43,11 @@ beforeAll(async () => {
 });
 
 beforeEach(() => {
-  bookRepository.save(fixture[0]);
+  bookRepository.saveAll(fixtures);
 });
 
 afterEach(() => {
-  database.exec("delete from Book where true");
+  bookRepository.deleteAll();
 });
 
 test("save inserts new row", () => {
@@ -67,11 +67,11 @@ test("save inserts new row", () => {
 
 test("save updates existing row", () => {
   const expected: Book = {
-    ...fixture[0],
+    ...fixtures[0],
     title: "Updated title",
     titleShort: "Updated short",
     volumes: [
-      ...fixture[0].volumes,
+      ...fixtures[0].volumes,
       { id: "7RmCwuT87nXExrcszo3Z2G", title: "Volume 2", chapters: [] },
     ],
   };
@@ -83,5 +83,5 @@ test("save updates existing row", () => {
 });
 
 test("find all", () => {
-  expect(bookRepository.findAll()).toEqual(fixture);
+  expect(bookRepository.findAll()).toEqual(fixtures);
 });

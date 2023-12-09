@@ -1,6 +1,7 @@
 import { Database } from "better-sqlite3";
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
+import { AbstractSqliteRepository } from "../AbstractSqliteRepository";
 
 type BookRow = {
   id: string;
@@ -9,8 +10,13 @@ type BookRow = {
   volumes: string;
 };
 
-export class BookSqliteRepository implements BookRepository {
-  constructor(private db: Database) {}
+export class BookSqliteRepository
+  extends AbstractSqliteRepository<Book, BookRow, string>
+  implements BookRepository
+{
+  constructor(db: Database) {
+    super(db, "Book");
+  }
 
   save(book: Book): void {
     this.db
@@ -31,35 +37,11 @@ export class BookSqliteRepository implements BookRepository {
       });
   }
 
-  findById(id: string): Book | null {
-    const row = this.db.prepare("select * from Book where id = ?").get(id) as
-      | BookRow
-      | undefined;
-    return row ? this.toEntity(row) : null;
+  protected getId(entity: Book): string {
+    return entity.id;
   }
 
-  findAll(): Book[] {
-    return (this.db.prepare("select * from Book").all() as BookRow[]).map(
-      (row) => this.toEntity(row),
-    );
-  }
-
-  count(): number {
-    const result = this.db
-      .prepare("select count(*) as count from Book")
-      .get() as { count: number };
-    return result.count;
-  }
-
-  deleteById(id: string): void {
-    this.db.prepare("delete from Book where id = ? ").run(id);
-  }
-
-  delete(book: Book): void {
-    this.deleteById(book.id);
-  }
-
-  private toEntity(row: BookRow): Book {
+  protected toEntity(row: BookRow): Book {
     return { ...row, volumes: JSON.parse(row.volumes) };
   }
 }

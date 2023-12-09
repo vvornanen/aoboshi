@@ -4,6 +4,7 @@ import {
   Character,
   getCodePoint,
 } from "@vvornanen/aoboshi-core/characters/Character";
+import { AbstractSqliteRepository } from "../AbstractSqliteRepository";
 
 type CharacterRow = {
   id: number;
@@ -16,8 +17,13 @@ type CharacterRow = {
   strokes: string | null;
 };
 
-export class CharacterSqliteRepository implements CharacterRepository {
-  constructor(private db: Database) {}
+export class CharacterSqliteRepository
+  extends AbstractSqliteRepository<Character, CharacterRow, number>
+  implements CharacterRepository
+{
+  constructor(db: Database) {
+    super(db, "Character");
+  }
 
   save(character: Character): void {
     this.db
@@ -35,7 +41,7 @@ export class CharacterSqliteRepository implements CharacterRepository {
         `,
       )
       .run({
-        id: getCodePoint(character.literal),
+        id: this.getId(character),
         literal: character.literal,
         radical: character.radical,
         grade: character.grade,
@@ -46,53 +52,23 @@ export class CharacterSqliteRepository implements CharacterRepository {
       });
   }
 
-  saveAll(characters: Character[]): void {
-    characters.forEach((character) => this.save(character));
-  }
-
   findByLiteral(literal: string): Character | null {
-    const row = this.db
-      .prepare("select * from Character where id = ?")
-      .get(getCodePoint(literal)) as CharacterRow | undefined;
-    return row ? this.toEntity(row) : null;
-  }
-
-  findAll(): Character[] {
-    return (
-      this.db.prepare("select * from Character").all() as CharacterRow[]
-    ).map((row) => this.toEntity(row));
-  }
-
-  count(): number {
-    return this.db
-      .prepare("select count(*) from Character")
-      .pluck()
-      .get() as number;
+    return this.findById(getCodePoint(literal));
   }
 
   existsByLiteral(literal: string): boolean {
-    const count = this.db
-      .prepare("select count(*) from Character where id = @id")
-      .pluck()
-      .get({ id: getCodePoint(literal) }) as number;
-    return count > 0;
+    return this.existsById(getCodePoint(literal));
   }
 
   deleteByLiteral(literal: string): void {
-    this.db
-      .prepare("delete from Character where id = ? ")
-      .run(getCodePoint(literal));
+    this.deleteById(getCodePoint(literal));
   }
 
-  delete(character: Character): void {
-    this.deleteByLiteral(character.literal);
+  protected getId(entity: Character): number {
+    return getCodePoint(entity.literal);
   }
 
-  deleteAll(): void {
-    this.db.exec("delete from Character where true");
-  }
-
-  private toEntity(row: CharacterRow): Character {
+  protected toEntity(row: CharacterRow): Character {
     return {
       literal: row.literal,
       radical: row.radical,

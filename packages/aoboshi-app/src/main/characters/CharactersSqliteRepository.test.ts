@@ -2,7 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
 import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
-import { Character, Grade } from "@vvornanen/aoboshi-core/characters/Character";
+import {
+  Character,
+  getCodePoint,
+  Grade,
+} from "@vvornanen/aoboshi-core/characters/Character";
 import { beforeAll, test, expect, afterEach, beforeEach } from "vitest";
 import { CharacterSqliteRepository } from "./CharacterSqliteRepository";
 
@@ -104,6 +108,14 @@ test("count", () => {
 });
 
 test.each([
+  { id: getCodePoint("あ"), expected: true },
+  { id: getCodePoint("学"), expected: false },
+])("existsById %s", ({ id, expected }) => {
+  const actual = characterRepository.existsById(id);
+  expect(actual).toEqual(expected);
+});
+
+test.each([
   { literal: "あ", expected: true },
   { literal: "学", expected: false },
 ])("existsByLiteral %s", ({ literal, expected }) => {
@@ -112,6 +124,12 @@ test.each([
 });
 
 test("deleteById", () => {
+  const id = getCodePoint("あ");
+  characterRepository.deleteById(id);
+  expect(characterRepository.findById(id)).toBeNull();
+});
+
+test("deleteByLiteral", () => {
   const literal = "あ";
   characterRepository.deleteByLiteral(literal);
   expect(characterRepository.findByLiteral(literal)).toBeNull();

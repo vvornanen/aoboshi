@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { CharacterInfo } from "../CharacterInfo";
+import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { infoBox } from "../CharacterInfoCard.css";
 import { StrokeBackground } from "./StrokeBackground";
 import { Stroke } from "./Stroke";
 import { useStrokePaths } from "./useStrokePaths";
 
 type CharacterStrokesProps = {
-  character: CharacterInfo;
+  character: Character;
 
   /** Number of columns in the parent grid. */
   columns: number;

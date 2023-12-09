@@ -1,12 +1,11 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { CharacterInfo } from "../CharacterInfo";
-import { JlptLevelFigure } from "./JlptLevelFigure";
+import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { GradeFigure } from "./GradeFigure";
-import { figures, figure } from "./figures.css";
+import { figures, figure, references } from "./figures.css";
 
 type CharacterFiguresProps = {
-  character: CharacterInfo;
+  character: Character;
 };
 
 /**
@@ -30,9 +29,8 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
           justifySelf: "start",
           alignSelf: "start",
         }}
-        aria-label={t("CharacterInfoCard.referenceLabel")}
       >
-        {Object.values(character.references)[0]}
+        <GradeFigure character={character} />
       </div>
       <div
         className={figure}
@@ -50,26 +48,18 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
           })}
       </div>
       <div
-        className={figure}
+        className={references}
         style={{
           gridColumn: 1,
           gridRow: 1,
           justifySelf: "start",
           alignSelf: "end",
         }}
+        aria-label={t("CharacterInfoCard.referenceLabel")}
       >
-        <JlptLevelFigure character={character} />
-      </div>
-      <div
-        className={figure}
-        style={{
-          gridColumn: 1,
-          gridRow: 1,
-          justifySelf: "end",
-          alignSelf: "end",
-        }}
-      >
-        <GradeFigure character={character} />
+        {character.references.map((reference) => (
+          <span key={reference.chapterId}>{reference.chapterCode}</span>
+        ))}
       </div>
     </div>
   );

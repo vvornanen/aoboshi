@@ -1,11 +1,15 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { CharacterInfo, Grade, KANA_REGEXP } from "../CharacterInfo";
+import {
+  Character,
+  Grade,
+  KANA_REGEXP,
+} from "@vvornanen/aoboshi-core/characters/Character";
 import { Tooltip } from "../../../common/Tooltip/Tooltip";
 import { circledFigure } from "./figures.css";
 
 type GradeFigureProps = {
-  character: CharacterInfo;
+  character: Character;
 };
 
 /**

@@ -24,7 +24,7 @@ describe("getCodeForLiteral", () => {
 
   test("throws error on invalid literal", () => {
     expect(() => KanjiVG.getCodeForLiteral("")).toThrowError(
-      "Invalid literal []",
+      "Literal must not be empty",
     );
   });
 });

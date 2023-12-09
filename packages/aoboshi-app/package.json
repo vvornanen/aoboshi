@@ -4,10 +4,11 @@
   "private": true,
   "main": ".vite/build/main.js",
   "scripts": {
-    "make": "electron-rebuild && electron-forge make",
-    "package": "electron-rebuild && electron-forge package",
-    "publish": "electron-rebuild && electron-forge publish",
-    "start": "electron-rebuild && DB_FILENAME=dev.db electron-forge start",
+    "rebuild:sqlite": "electron-rebuild -f -w better-sqlite3",
+    "make": "yarn rebuild:sqlite && electron-forge make",
+    "package": "yarn rebuild:sqlite && electron-forge package",
+    "publish": "yarn rebuild:sqlite && electron-forge publish",
+    "start": "yarn rebuild:sqlite && DB_FILENAME=dev.db electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },

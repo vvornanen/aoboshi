@@ -2,8 +2,10 @@ import path from "path";
 import { app } from "electron";
 import { Database } from "better-sqlite3";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
+import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
 import { getDatabase } from "./database";
 import { BookSqliteRepository } from "./books/BookSqliteRepository";
+import { CharacterSqliteRepository } from "./characters/CharacterSqliteRepository";
 
 /**
  * Services may implement this interface if they need to call other services
@@ -30,6 +32,7 @@ const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
 export class ApplicationContext implements OnAfterInit {
   database: Database;
   bookRepository: BookRepository;
+  characterRepository: CharacterRepository;
 
   constructor() {
     const dbFilename =
@@ -38,6 +41,7 @@ export class ApplicationContext implements OnAfterInit {
     this.database = getDatabase(dbFilename, true);
 
     this.bookRepository = new BookSqliteRepository(this.database);
+    this.characterRepository = new CharacterSqliteRepository(this.database);
   }
 
   onAfterInit(): void {

@@ -1,7 +1,7 @@
-import { CharacterInfo, Grade } from "./CharacterInfo";
+import { Character, Grade } from "@vvornanen/aoboshi-core/characters/Character";
 
 type CharacterInfoReturnValue = {
-  data: CharacterInfo | null;
+  data: Character | null;
 };
 
 /**
@@ -16,14 +16,12 @@ export const useCharacterInfo = (
     return { data: null };
   }
 
-  const data: CharacterInfo = {
+  const data: Character = {
     literal: literal,
     radical: null,
     grade: Grade.Kyoiku1,
-    jlpt: null,
     strokeCount: 8,
-    frequency: null,
-    references: {},
+    references: [],
     onyomi: [],
     kunyomi: [],
   };

@@ -5,6 +5,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
-    "./books/*": "./dist/books/*.js"
+    "./books/*": "./dist/books/*.js",
+    "./characters/*": "./dist/characters/*.js"
   }
 }

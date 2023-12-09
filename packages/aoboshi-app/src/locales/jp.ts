@@ -1,13 +1,11 @@
 export const jp = {
   CharacterInfoCard: {
-    caption: "活字体　筆字体　課／画数／級／種別　音読み／訓読み　書き順",
+    caption: "活字体　筆字体　種別／画数／参照　音読み／訓読み　書き順",
     strokeCount: "{{strokeCount}}画",
-    noJLPT: "級外",
     printTypeLabel: "活字体",
     textbookTypeLabel: "筆字体",
-    referenceLabel: "課",
+    referenceLabel: "参照",
     strokeCountLabel: "画数",
-    jlptLabel: "級",
     gradeLabel: "種別",
     onyomiLabel: "音読み",
     kunyomiLabel: "訓読み",

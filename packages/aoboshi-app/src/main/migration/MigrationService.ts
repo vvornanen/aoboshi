@@ -4,18 +4,16 @@ import { createHash } from "node:crypto";
 import { Temporal } from "@js-temporal/polyfill";
 import { ApplicationContext } from "../ApplicationContext";
 import { Migration } from "./Migration";
+import {
+  ExecutedMigration,
+  MigrationRepository,
+  MigrationSqliteRepository,
+} from "./MigrationSqliteRepository";
 
 type MigrationFile = {
   id: string;
   path: string;
   hash: string;
-};
-
-type ExecutedMigration = {
-  id: string;
-  description: string;
-  hash: string;
-  timestamp: string;
 };
 
 const isMigration = (module: unknown): module is Migration => {
@@ -76,7 +74,11 @@ const loadMigrationFile = async (
  * Manages and applies changes to the database and other resources
  */
 export class MigrationService {
-  constructor(private context: ApplicationContext) {}
+  private migrationRepository: MigrationRepository;
+
+  constructor(private context: ApplicationContext) {
+    this.migrationRepository = new MigrationSqliteRepository(context.database);
+  }
 
   /**
    * Reads migration files from the migrations directory and runs new migrations
@@ -95,7 +97,9 @@ export class MigrationService {
   private async runMigration(migrationFile: MigrationFile): Promise<void> {
     const migration = await loadMigrationFile(migrationFile);
 
-    const executedMigration = this.getMigration(migrationFile.id);
+    const executedMigration = this.migrationRepository.findById(
+      migrationFile.id,
+    );
 
     if (!executedMigration) {
       console.info(
@@ -144,36 +148,14 @@ export class MigrationService {
     `);
   }
 
-  private getMigration(id: string): ExecutedMigration | null {
-    const result = this.context.database
-      .prepare(
-        `
-              select id, description, hash, timestamp
-              from Migration
-              where id = ?`,
-      )
-      .get(id) as ExecutedMigration | undefined;
-
-    return result || null;
-  }
-
   private saveExecutedMigration(
     migration: Omit<ExecutedMigration, "timestamp">,
   ): void {
-    this.context.database
-      .prepare(
-        `
-            insert into Migration (id, description, hash, timestamp)
-            values (@id, @description, @hash, @timestamp)
-            on conflict do update set description = @description,
-                                      hash = @hash,
-                                      timestamp = @timestamp`,
-      )
-      .run({
-        id: migration.id,
-        description: migration.description,
-        hash: migration.hash,
-        timestamp: Temporal.Now.zonedDateTimeISO().toString(),
-      });
+    this.migrationRepository.save({
+      id: migration.id,
+      description: migration.description,
+      hash: migration.hash,
+      timestamp: Temporal.Now.zonedDateTimeISO().toString(),
+    });
   }
 }

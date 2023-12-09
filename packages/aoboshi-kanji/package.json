@@ -1,0 +1,12 @@
+{
+  "name": "@vvornanen/aoboshi-kanji",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@vvornanen/aoboshi-core": "workspace:^"
+  },
+  "exports": {
+    "./*": "./dist/*.js",
+    "./kanjidic/*": "./dist/kanjidic/*.js"
+  }
+}

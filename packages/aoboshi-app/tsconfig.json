@@ -17,6 +17,9 @@
   "references": [
     {
       "path": "../aoboshi-core/tsconfig.json"
+    },
+    {
+      "path": "../aoboshi-kanji/tsconfig.json"
     }
   ]
 }

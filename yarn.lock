@@ -6447,6 +6447,7 @@ __metadata:
     "@vanilla-extract/vite-plugin": "npm:^3.9.2"
     "@vitejs/plugin-react-swc": "npm:^3.5.0"
     "@vvornanen/aoboshi-core": "workspace:^"
+    "@vvornanen/aoboshi-kanji": "workspace:^"
     better-sqlite3: "npm:^9.2.2"
     chroma-js: "npm:^2.4.2"
     chromatic: "npm:^10.0.0"
@@ -6474,6 +6475,14 @@ __metadata:
 "@vvornanen/aoboshi-core@workspace:^, @vvornanen/aoboshi-core@workspace:packages/aoboshi-core":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi-core@workspace:packages/aoboshi-core"
+  languageName: unknown
+  linkType: soft
+
+"@vvornanen/aoboshi-kanji@workspace:^, @vvornanen/aoboshi-kanji@workspace:packages/aoboshi-kanji":
+  version: 0.0.0-use.local
+  resolution: "@vvornanen/aoboshi-kanji@workspace:packages/aoboshi-kanji"
+  dependencies:
+    "@vvornanen/aoboshi-core": "workspace:^"
   languageName: unknown
   linkType: soft
 

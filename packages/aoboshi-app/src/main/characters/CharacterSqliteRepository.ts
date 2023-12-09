@@ -1,6 +1,9 @@
 import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
 import { Database } from "better-sqlite3";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import {
+  Character,
+  getCodePoint,
+} from "@vvornanen/aoboshi-core/characters/Character";
 
 type CharacterRow = {
   id: number;
@@ -32,7 +35,7 @@ export class CharacterSqliteRepository implements CharacterRepository {
         `,
       )
       .run({
-        id: character.literal.codePointAt(0),
+        id: getCodePoint(character.literal),
         literal: character.literal,
         radical: character.radical,
         grade: character.grade,
@@ -50,7 +53,7 @@ export class CharacterSqliteRepository implements CharacterRepository {
   findByLiteral(literal: string): Character | null {
     const row = this.db
       .prepare("select * from Character where id = ?")
-      .get(literal.codePointAt(0)) as CharacterRow | undefined;
+      .get(getCodePoint(literal)) as CharacterRow | undefined;
     return row ? this.toEntity(row) : null;
   }
 
@@ -71,14 +74,14 @@ export class CharacterSqliteRepository implements CharacterRepository {
     const count = this.db
       .prepare("select count(*) from Character where id = @id")
       .pluck()
-      .get({ id: literal.codePointAt(0) }) as number;
+      .get({ id: getCodePoint(literal) }) as number;
     return count > 0;
   }
 
-  deleteByLiteral(id: string): void {
+  deleteByLiteral(literal: string): void {
     this.db
       .prepare("delete from Character where id = ? ")
-      .run(id.codePointAt(0));
+      .run(getCodePoint(literal));
   }
 
   delete(character: Character): void {

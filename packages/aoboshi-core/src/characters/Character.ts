@@ -19,6 +19,23 @@ export enum Grade {
 }
 
 /**
+ * Returns the unicode code point value of the given character
+ *
+ * @param literal a single character
+ */
+export const getCodePoint = (literal: string): number => {
+  const codePoint = literal.codePointAt(0);
+
+  if (!codePoint) {
+    throw new Error(`Literal must not be empty`);
+  } else if ([...literal].length !== 1) {
+    throw new Error(`Expected single character but got [${literal}]`);
+  }
+
+  return codePoint;
+};
+
+/**
  * Detailed information about a single character.
  *
  * Typically, a kanji but supports other kinds of characters as well.

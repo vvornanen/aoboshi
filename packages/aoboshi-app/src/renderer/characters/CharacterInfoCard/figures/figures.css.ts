@@ -28,3 +28,12 @@ export const figure = style([
     whiteSpace: "nowrap",
   },
 ]);
+
+export const references = style([
+  figure,
+  {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+  },
+]);

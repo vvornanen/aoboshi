@@ -1,3 +1,4 @@
+import { getCodePoint } from "@vvornanen/aoboshi-core/characters/Character";
 import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
 
 /**
@@ -15,13 +16,7 @@ export class KanjiVG {
    * @param literal
    */
   static getCodeForLiteral(literal: string): string {
-    const codePoint = literal.codePointAt(0);
-
-    if (!codePoint) {
-      throw new Error(`Invalid literal [${literal}]`);
-    }
-
-    return codePoint.toString(16).padStart(5, "0");
+    return getCodePoint(literal).toString(16).padStart(5, "0");
   }
 
   /**

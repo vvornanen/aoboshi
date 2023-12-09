@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { labelSmall } from "../../common/Typography/Typography.css";
-import { CharacterInfo } from "./CharacterInfo";
 import { CharacterType } from "./CharacterType";
 import { CharacterFigures } from "./figures/CharacterFigures";
 import { CharacterReadings } from "./readings/CharacterReadings";
@@ -9,7 +9,7 @@ import { CharacterStrokes } from "./strokes/CharacterStrokes";
 import { infoBox, infoBoxContainer } from "./CharacterInfoCard.css";
 
 type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
-  character: CharacterInfo;
+  character: Character;
   size?: number;
 };
 

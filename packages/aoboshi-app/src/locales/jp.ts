@@ -54,6 +54,7 @@ export const jp = {
     pasteAndMatchStyle: "ペーストしてスタイルを合わせる",
     quit: "アオボシを終了",
     redo: "やり直す",
+    reimportKanjiData: "漢字データを再読み込み",
     reload: "ページを再読み込み",
     reportIssue: "問題の報告…",
     resetZoom: "実際のサイズ",

@@ -2,9 +2,9 @@ import { app, BrowserWindow } from "electron";
 import { init } from "i18next";
 import { options } from "../i18n";
 import { MigrationService } from "./migration/MigrationService";
-import { MainApplicationContext } from "./MainApplicationContext";
+import { getMainApplicationContext } from "./MainApplicationContext";
 
-const applicationContext = new MainApplicationContext();
+const applicationContext = getMainApplicationContext();
 
 const initApplication = async () => {
   await init(options);
@@ -12,7 +12,8 @@ const initApplication = async () => {
   const migrationService = new MigrationService(applicationContext);
   await migrationService.run();
 
-  applicationContext.onAfterInit();
+  await applicationContext.onAfterInit();
+  await migrationService.onAfterInit();
 };
 
 // This method will be called when Electron has finished

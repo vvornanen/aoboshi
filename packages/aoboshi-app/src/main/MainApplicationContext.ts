@@ -1,14 +1,24 @@
-import { ApplicationContext } from "./ApplicationContext";
+import path from "path";
+import { app } from "electron";
+import { ApplicationContext } from "../worker/ApplicationContext";
+import {
+  ApplicationProperties,
+  getEnvironmentVariable,
+} from "../worker/ApplicationProperties";
 import { ApplicationMenu } from "./ApplicationMenu";
 import { MainWindow } from "./MainWindow";
+import { Scheduler } from "./Scheduler";
 
 /** Extends the common application context with services available only in the main thread */
 export class MainApplicationContext extends ApplicationContext {
   applicationMenu: ApplicationMenu;
   mainWindow: MainWindow;
+  scheduler: Scheduler;
 
-  constructor() {
-    super();
+  constructor(properties: ApplicationProperties) {
+    super(properties);
+
+    this.scheduler = new Scheduler(this);
 
     this.applicationMenu = new ApplicationMenu(
       {
@@ -18,8 +28,37 @@ export class MainApplicationContext extends ApplicationContext {
         fullscreen: false,
       },
       this.bookRepository,
+      this.scheduler,
     );
 
     this.mainWindow = new MainWindow(this);
   }
 }
+
+let applicationContext: MainApplicationContext | null = null;
+
+export const getMainApplicationContext = (): MainApplicationContext => {
+  if (!applicationContext) {
+    console.log("Creating main application context");
+
+    // Main application context is used only in the main process,
+    // so it is safe to default to values provided by the Electron API
+    const properties: ApplicationProperties = {
+      dbFilename: path.resolve(
+        getEnvironmentVariable(
+          "DB_FILENAME",
+          path.join(app.getPath("userData"), "aoboshi.db"),
+        ),
+      ),
+      logLevel: getEnvironmentVariable("LOGLEVEL", "info"),
+      resourcesPath:
+        process.env.NODE_ENV === "development"
+          ? path.join(__dirname, "../../src/resources")
+          : process.resourcesPath,
+    };
+
+    applicationContext = new MainApplicationContext(properties);
+  }
+
+  return applicationContext;
+};

@@ -10,6 +10,9 @@
     },
     {
       "path": "packages/aoboshi-core"
+    },
+    {
+      "path": "packages/aoboshi-kanji"
     }
   ]
 }

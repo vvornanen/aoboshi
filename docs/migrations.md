@@ -10,6 +10,11 @@ It runs each migration only once and keeps a changelog in the database.
 
 Migration files are located in directory `packages/aoboshi-app/src/migrations`.
 
+Migration files starting with a number are run before services are initialized.
+This ensures that all changes to the database schema are applied before calling any services.
+Migration files starting with `A` are run after the application has been initialized.
+These after-init migrations should be used when the migration depends on any service.
+
 ## Basic example
 
 A migration file must provide at least a `description` and `run` function in the default export:
@@ -63,6 +68,25 @@ export default {
   repeatable: true,
   async run(): Promise<void> {
     // Insert some maintenance task here
+  },
+} satisfies Migration;
+```
+
+## Background jobs
+
+Calling the scheduler from a migration can be used to run a slow one-time job in a worker thread.
+Scheduler should be used only in after-init migrations.
+
+If the migration is repeatable, update a version number in the description to trigger it again.
+
+```ts
+import { Migration } from "../main/migration/Migration";
+
+export default {
+  description: "Background job example (v1)",
+  repeatable: true,
+  async run({ scheduler }): Promise<void> {
+    await scheduler.run("example-job");
   },
 } satisfies Migration;
 ```

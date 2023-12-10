@@ -2,9 +2,12 @@
   "name": "@vvornanen/aoboshi-anki",
   "version": "1.0.0",
   "private": true,
-  "main": "./dist/index.js",
-  "types": "./dist/index.t.ts",
+  "type": "module",
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4"
+  },
+  "exports": {
+    "./*": "./dist/src/*.js",
+    "./package.json": "./package.json"
   }
 }

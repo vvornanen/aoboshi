@@ -2,10 +2,12 @@
   "name": "@vvornanen/aoboshi-core",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "exports": {
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
     "./books/*": "./dist/books/*.js",
-    "./characters/*": "./dist/characters/*.js"
+    "./characters/*": "./dist/characters/*.js",
+    "./package.json": "./package.json"
   }
 }

@@ -14,7 +14,7 @@ module.exports = {
     appBundleId: "com.github.vvornanen.aoboshi",
     appCopyright: "© 2023 Ville Vornanen",
     icon: "src/resources/aoboshi",
-    extraResource: ["src/resources/ja.lproj"],
+    extraResource: ["src/resources/ja.lproj", "src/resources/kanjidic2.xml.gz"],
   },
   rebuildConfig: {},
   makers: [

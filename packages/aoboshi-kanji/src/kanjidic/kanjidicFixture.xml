@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Excerpts from the Kanjidic data for testing purposes -->
+<kanjidic2>
+  <header>
+    <file_version>4</file_version>
+    <database_version>2023-343</database_version>
+    <date_of_creation>2023-12-09</date_of_creation>
+  </header>
+  <character>
+    <literal>字</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">5b57</cp_value>
+      <cp_value cp_type="jis208">1-27-90</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">39</rad_value>
+      <rad_value rad_type="nelson_c">40</rad_value>
+    </radical>
+    <misc>
+      <grade>1</grade>
+      <stroke_count>6</stroke_count>
+      <freq>485</freq>
+      <jlpt>3</jlpt>
+    </misc>
+    <dic_number>
+      <dic_ref dr_type="nelson_c">1281</dic_ref>
+      <dic_ref dr_type="nelson_n">1285</dic_ref>
+      <dic_ref dr_type="halpern_njecd">2172</dic_ref>
+      <dic_ref dr_type="halpern_kkd">2696</dic_ref>
+      <dic_ref dr_type="halpern_kkld">1374</dic_ref>
+      <dic_ref dr_type="halpern_kkld_2ed">1860</dic_ref>
+      <dic_ref dr_type="heisig">185</dic_ref>
+      <dic_ref dr_type="heisig6">197</dic_ref>
+      <dic_ref dr_type="gakken">612</dic_ref>
+      <dic_ref dr_type="oneill_kk">121</dic_ref>
+      <dic_ref dr_type="moro" m_vol="3" m_page="0816">6942</dic_ref>
+      <dic_ref dr_type="henshall">28</dic_ref>
+      <dic_ref dr_type="sh_kk">110</dic_ref>
+      <dic_ref dr_type="sh_kk2">110</dic_ref>
+      <dic_ref dr_type="sakade">86</dic_ref>
+      <dic_ref dr_type="jf_cards">156</dic_ref>
+      <dic_ref dr_type="henshall3">78</dic_ref>
+      <dic_ref dr_type="tutt_cards">57</dic_ref>
+      <dic_ref dr_type="kanji_in_context">528</dic_ref>
+      <dic_ref dr_type="busy_people">2.17</dic_ref>
+      <dic_ref dr_type="kodansha_compact">457</dic_ref>
+      <dic_ref dr_type="maniette">188</dic_ref>
+    </dic_number>
+    <query_code>
+      <q_code qc_type="skip">2-3-3</q_code>
+      <q_code qc_type="sh_desc">3m2.1</q_code>
+      <q_code qc_type="four_corner">3040.7</q_code>
+      <q_code qc_type="deroo">747</q_code>
+      <q_code qc_type="skip" skip_misclass="stroke_count">2-3-2</q_code>
+    </query_code>
+    <reading_meaning>
+      <rmgroup>
+        <reading r_type="pinyin">zi4</reading>
+        <reading r_type="korean_r">ja</reading>
+        <reading r_type="korean_h">자</reading>
+        <reading r_type="vietnam">Tự</reading>
+        <reading r_type="ja_on">ジ</reading>
+        <reading r_type="ja_kun">あざ</reading>
+        <reading r_type="ja_kun">あざな</reading>
+        <reading r_type="ja_kun">-な</reading>
+        <meaning>character</meaning>
+        <meaning>letter</meaning>
+        <meaning>word</meaning>
+        <meaning>section of village</meaning>
+        <meaning m_lang="fr">caractère</meaning>
+        <meaning m_lang="fr">lettre</meaning>
+        <meaning m_lang="fr">mot</meaning>
+        <meaning m_lang="fr">hameau</meaning>
+        <meaning m_lang="es">carácter</meaning>
+        <meaning m_lang="es">letra</meaning>
+        <meaning m_lang="es">palabra</meaning>
+        <meaning m_lang="pt">caracter</meaning>
+        <meaning m_lang="pt">letra</meaning>
+        <meaning m_lang="pt">palavra</meaning>
+        <meaning m_lang="pt">seção de aldeia</meaning>
+      </rmgroup>
+    </reading_meaning>
+  </character>
+  <character>
+    <literal>学</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">5b66</cp_value>
+      <cp_value cp_type="jis208">1-19-56</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">39</rad_value>
+    </radical>
+    <misc>
+      <grade>1</grade>
+      <stroke_count>8</stroke_count>
+      <variant var_type="jis208">1-53-60</variant>
+      <variant var_type="jis208">1-53-61</variant>
+      <variant var_type="jis212">1-33-55</variant>
+      <freq>63</freq>
+      <jlpt>4</jlpt>
+    </misc>
+    <dic_number>
+      <dic_ref dr_type="nelson_c">1271</dic_ref>
+      <dic_ref dr_type="nelson_n">1294</dic_ref>
+      <dic_ref dr_type="halpern_njecd">2555</dic_ref>
+      <dic_ref dr_type="halpern_kkd">3162</dic_ref>
+      <dic_ref dr_type="halpern_kkld">1625</dic_ref>
+      <dic_ref dr_type="halpern_kkld_2ed">2211</dic_ref>
+      <dic_ref dr_type="heisig">324</dic_ref>
+      <dic_ref dr_type="heisig6">346</dic_ref>
+      <dic_ref dr_type="gakken">33</dic_ref>
+      <dic_ref dr_type="oneill_names">719</dic_ref>
+      <dic_ref dr_type="oneill_kk">66</dic_ref>
+      <dic_ref dr_type="moro" m_vol="3" m_page="0858">6974</dic_ref>
+      <dic_ref dr_type="henshall">10</dic_ref>
+      <dic_ref dr_type="sh_kk">109</dic_ref>
+      <dic_ref dr_type="sh_kk2">109</dic_ref>
+      <dic_ref dr_type="sakade">57</dic_ref>
+      <dic_ref dr_type="jf_cards">44</dic_ref>
+      <dic_ref dr_type="henshall3">45</dic_ref>
+      <dic_ref dr_type="tutt_cards">71</dic_ref>
+      <dic_ref dr_type="crowley">15</dic_ref>
+      <dic_ref dr_type="kanji_in_context">50</dic_ref>
+      <dic_ref dr_type="busy_people">2.9</dic_ref>
+      <dic_ref dr_type="kodansha_compact">460</dic_ref>
+      <dic_ref dr_type="maniette">330</dic_ref>
+    </dic_number>
+    <query_code>
+      <q_code qc_type="skip">2-5-3</q_code>
+      <q_code qc_type="sh_desc">3n4.2</q_code>
+      <q_code qc_type="four_corner">3240.7</q_code>
+      <q_code qc_type="four_corner">9040.7</q_code>
+      <q_code qc_type="deroo">947</q_code>
+      <q_code qc_type="skip" skip_misclass="posn">2-3-5</q_code>
+      <q_code qc_type="skip" skip_misclass="stroke_count">2-5-2</q_code>
+      <q_code qc_type="skip" skip_misclass="stroke_and_posn">2-3-4</q_code>
+    </query_code>
+    <reading_meaning>
+      <rmgroup>
+        <reading r_type="pinyin">xue2</reading>
+        <reading r_type="korean_r">hag</reading>
+        <reading r_type="korean_h">학</reading>
+        <reading r_type="vietnam">Học</reading>
+        <reading r_type="ja_on">ガク</reading>
+        <reading r_type="ja_kun">まな.ぶ</reading>
+        <meaning>study</meaning>
+        <meaning>learning</meaning>
+        <meaning>science</meaning>
+        <meaning m_lang="fr">étudier</meaning>
+        <meaning m_lang="fr">apprendre</meaning>
+        <meaning m_lang="fr">science</meaning>
+        <meaning m_lang="es">estudio</meaning>
+        <meaning m_lang="es">aprendizaje</meaning>
+        <meaning m_lang="es">ciencia</meaning>
+        <meaning m_lang="es">estudiar</meaning>
+        <meaning m_lang="pt">estudo</meaning>
+        <meaning m_lang="pt">aprendizagem</meaning>
+        <meaning m_lang="pt">ciência</meaning>
+      </rmgroup>
+      <nanori>たか</nanori>
+      <nanori>のり</nanori>
+    </reading_meaning>
+  </character>
+</kanjidic2>

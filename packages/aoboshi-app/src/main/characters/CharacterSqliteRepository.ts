@@ -26,9 +26,10 @@ export class CharacterSqliteRepository
   }
 
   save(character: Character): void {
-    this.db
-      .prepare(
-        `
+    try {
+      this.db
+        .prepare(
+          `
             insert into Character (id, literal, radical, grade, strokeCount, onyomi, kunyomi,
                                    strokes)
             values (@id, @literal, @radical, @grade, @strokeCount, @onyomi, @kunyomi, @strokes)
@@ -39,17 +40,21 @@ export class CharacterSqliteRepository
                                       kunyomi     = @kunyomi,
                                       strokes     = @strokes
         `,
-      )
-      .run({
-        id: this.getId(character),
-        literal: character.literal,
-        radical: character.radical,
-        grade: character.grade,
-        strokeCount: character.strokeCount,
-        onyomi: JSON.stringify(character.onyomi),
-        kunyomi: JSON.stringify(character.kunyomi),
-        strokes: character.strokes || null,
-      });
+        )
+        .run({
+          id: this.getId(character),
+          literal: character.literal,
+          radical: character.radical,
+          grade: character.grade,
+          strokeCount: character.strokeCount,
+          onyomi: JSON.stringify(character.onyomi),
+          kunyomi: JSON.stringify(character.kunyomi),
+          strokes: character.strokes || null,
+        });
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Could not save character [${character.literal}]`);
+    }
   }
 
   findByLiteral(literal: string): Character | null {

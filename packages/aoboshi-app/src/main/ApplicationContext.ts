@@ -17,7 +17,7 @@ export interface OnAfterInit {
   /**
    * Called when all services in the application context are ready for use
    */
-  onAfterInit: () => void;
+  onAfterInit: () => void | Promise<void>;
 }
 
 const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
@@ -46,14 +46,16 @@ export class ApplicationContext implements OnAfterInit {
     this.characterRepository = new CharacterSqliteRepository(this.database);
   }
 
-  onAfterInit(): void {
+  async onAfterInit(): Promise<void> {
     console.log("Application initialized");
 
-    Object.values(this).forEach((service) => {
-      if (hasOnAfterInit(service)) {
-        service.onAfterInit();
-      }
-    });
+    await Promise.all(
+      Object.values(this).map((service) => {
+        if (hasOnAfterInit(service)) {
+          return service.onAfterInit();
+        }
+      }),
+    );
   }
 }
 

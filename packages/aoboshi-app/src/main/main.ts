@@ -12,7 +12,7 @@ const initApplication = async () => {
   const migrationService = new MigrationService(applicationContext);
   await migrationService.run();
 
-  applicationContext.onAfterInit();
+  await applicationContext.onAfterInit();
   await migrationService.onAfterInit();
 };
 

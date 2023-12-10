@@ -1,6 +1,7 @@
 {
   "name": "@vvornanen/aoboshi",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],

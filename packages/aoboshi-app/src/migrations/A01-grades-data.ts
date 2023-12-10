@@ -1,8 +1,9 @@
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
 import { Migration } from "../main/migration/Migration";
+import { gradesBookId } from "../worker/books/books";
 
 const grades: Book = {
-  id: "AtLesfR65Adc7q2XHVK7A8",
+  id: gradesBookId,
   title: "常用漢字一覧",
   titleShort: "常用漢字",
   volumes: [
@@ -92,6 +93,7 @@ const grades: Book = {
 
 export default {
   description: "Add grades book data",
+  repeatable: true,
   async run({ bookRepository }): Promise<void> {
     bookRepository.save(grades);
   },

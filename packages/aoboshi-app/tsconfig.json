@@ -4,9 +4,7 @@
     "rootDirs": ["./src", ".storybook"],
     "emitDeclarationOnly": false,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "moduleResolution": "bundler"
+    "jsx": "react-jsx"
   },
   "include": [
     "src/**/*.ts",
@@ -17,6 +15,9 @@
   "references": [
     {
       "path": "../aoboshi-core/tsconfig.json"
+    },
+    {
+      "path": "../aoboshi-kanji/tsconfig.json"
     }
   ]
 }

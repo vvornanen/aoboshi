@@ -2,7 +2,8 @@ import { join, parse, ParsedPath } from "node:path";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { Temporal } from "@js-temporal/polyfill";
-import { ApplicationContext } from "../ApplicationContext";
+import { MainApplicationContext } from "../MainApplicationContext";
+import { OnAfterInit } from "../../worker/ApplicationContext";
 import { Migration } from "./Migration";
 import {
   ExecutedMigration,
@@ -44,10 +45,7 @@ const getMigrationFiles = (): MigrationFile[] => {
   return fs
     .readdirSync(migrationsDir)
     .map((path) => [path, parse(path)] as [string, ParsedPath])
-    .filter(
-      ([, parsedPath]) =>
-        parsedPath.ext === ".js" && parsedPath.name.match(/^\d{2}-/),
-    )
+    .filter(([, parsedPath]) => parsedPath.ext === ".js")
     .map(([path, parsedPath]) => {
       const absolutePath = join(migrationsDir, path);
       return {
@@ -70,13 +68,19 @@ const loadMigrationFile = async (
   }
 };
 
+/** Predicate for migrations run only after application has been initialized */
+const isAfterInit = (migration: MigrationFile) => migration.id.startsWith("A");
+
+/** Predicate for migrations run during application initialization */
+const notAfterInit = (migration: MigrationFile) => !isAfterInit(migration);
+
 /**
  * Manages and applies changes to the database and other resources
  */
-export class MigrationService {
+export class MigrationService implements OnAfterInit {
   private migrationRepository: MigrationRepository;
 
-  constructor(private context: ApplicationContext) {
+  constructor(private context: MainApplicationContext) {
     this.migrationRepository = new MigrationSqliteRepository(context.database);
   }
 
@@ -87,7 +91,15 @@ export class MigrationService {
   async run(): Promise<void> {
     this.initMigrationsTable();
 
-    const migrationFiles = getMigrationFiles();
+    const migrationFiles = getMigrationFiles().filter(notAfterInit);
+
+    for (const migrationFile of migrationFiles) {
+      await this.runMigration(migrationFile);
+    }
+  }
+
+  async onAfterInit(): Promise<void> {
+    const migrationFiles = getMigrationFiles().filter(isAfterInit);
 
     for (const migrationFile of migrationFiles) {
       await this.runMigration(migrationFile);

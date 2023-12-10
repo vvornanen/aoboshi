@@ -2,8 +2,9 @@ import { BrowserWindow, ipcMain, Menu, MenuItem, shell } from "electron";
 import { t } from "i18next";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { IpcEventType } from "./IpcApi";
-import { OnAfterInit } from "./ApplicationContext";
+import { IpcEventType } from "../preload/IpcApi";
+import { OnAfterInit } from "../worker/ApplicationContext";
+import { Scheduler } from "./Scheduler";
 
 type ApplicationMenuState = {
   sidebarOpen: boolean;
@@ -32,6 +33,7 @@ export class ApplicationMenu implements OnAfterInit {
   constructor(
     initialState: ApplicationMenuState,
     private bookRepository: BookRepository,
+    private scheduler: Scheduler,
   ) {
     this.state = { ...initialState };
   }
@@ -332,6 +334,15 @@ export class ApplicationMenu implements OnAfterInit {
         {
           label: t("applicationMenu.toggleDevTools"),
           role: "toggleDevTools",
+        },
+        {
+          type: "separator",
+        },
+        {
+          label: t("applicationMenu.reimportKanjiData"),
+          click: () => {
+            this.scheduler.run("import-kanji");
+          },
         },
       ],
     };

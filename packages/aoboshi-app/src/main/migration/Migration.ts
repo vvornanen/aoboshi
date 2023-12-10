@@ -1,4 +1,4 @@
-import { ApplicationContext } from "../ApplicationContext";
+import { MainApplicationContext } from "../MainApplicationContext";
 
 export interface Migration {
   /** A short description about the changes contained in this migration */
@@ -8,5 +8,5 @@ export interface Migration {
   repeatable?: boolean;
 
   /** Apply the changes in this migration to the given application context */
-  run(context: ApplicationContext): void | Promise<void>;
+  run(context: MainApplicationContext): void | Promise<void>;
 }

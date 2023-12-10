@@ -1,5 +1,6 @@
 import { JobOptions } from "bree";
 
+// For job options, see https://github.com/breejs/bree
 const jobs = [
   {
     name: "import-kanji",

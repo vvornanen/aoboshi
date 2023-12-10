@@ -5,15 +5,13 @@ import { defineConfig } from "vite";
 const jobsDir = "src/jobs";
 const migrationsDir = "src/migrations";
 
-const jobs = fs.readdirSync(jobsDir).filter((file) => {
+const isTypescript = (file) => {
   const parsedPath = path.parse(file);
   return parsedPath.ext === ".ts";
-});
+};
 
-const migrations = fs.readdirSync(migrationsDir).filter((file) => {
-  const parsedPath = path.parse(file);
-  return parsedPath.ext === ".ts" && parsedPath.name.match(/^\d{2}-/);
-});
+const jobs = fs.readdirSync(jobsDir).filter(isTypescript);
+const migrations = fs.readdirSync(migrationsDir).filter(isTypescript);
 
 // https://vitejs.dev/config
 export default defineConfig({

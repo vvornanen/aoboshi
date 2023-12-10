@@ -2,7 +2,7 @@ import { BrowserWindow, ipcMain, Menu, MenuItem, shell } from "electron";
 import { t } from "i18next";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { IpcEventType } from "./IpcApi";
+import { IpcEventType } from "../preload/IpcApi";
 import { OnAfterInit } from "./ApplicationContext";
 import { Scheduler } from "./Scheduler";
 

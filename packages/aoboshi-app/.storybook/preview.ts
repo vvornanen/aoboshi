@@ -5,7 +5,7 @@ import {
   lightThemeClass,
 } from "../src/renderer/theme/theme.css";
 import "../src/renderer/styles.css";
-import { IPC_API_KEY, IpcApi } from "../src/main/IpcApi";
+import { IPC_API_KEY, IpcApi } from "../src/preload/IpcApi";
 import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
 import { options } from "../src/i18n";

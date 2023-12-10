@@ -1,6 +1,6 @@
 import path from "path";
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { KanjidicReader } from "../../../aoboshi-kanji/src/kanjidic/KanjidicReader";
+import { KanjidicReader } from "@vvornanen/aoboshi-kanji/kanjidic/KanjidicReader";
 import { readGzip } from "../worker/readGzip";
 import { getApplicationContext } from "../worker/ApplicationContext";
 

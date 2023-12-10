@@ -1,7 +1,10 @@
 import path from "path";
 // eslint-disable-next-line import/default
 import Bree from "bree";
+import { JobName } from "../jobs";
 import { OnAfterInit } from "./ApplicationContext";
+import { MainApplicationContext } from "./MainApplicationContext";
+import { propertiesAsEnv } from "./ApplicationProperties";
 
 /**
  * Runs scheduled background tasks in worker threads.
@@ -9,14 +12,21 @@ import { OnAfterInit } from "./ApplicationContext";
 export class Scheduler implements OnAfterInit {
   private bree: Bree;
 
-  constructor() {
+  constructor({ properties }: MainApplicationContext) {
     this.bree = new Bree({
       root: path.join(__dirname, "jobs"),
-      jobs: [],
+      worker: {
+        // Pass application properties to worker threads
+        env: propertiesAsEnv(properties),
+      },
     });
   }
 
   async onAfterInit() {
     await this.bree.start();
+  }
+
+  async run(job: JobName) {
+    await this.bree.run(job);
   }
 }

@@ -2,9 +2,9 @@ import path from "path";
 // eslint-disable-next-line import/default
 import Bree from "bree";
 import { JobName } from "../jobs";
-import { OnAfterInit } from "./ApplicationContext";
+import { OnAfterInit } from "../worker/ApplicationContext";
+import { propertiesAsEnv } from "../worker/ApplicationProperties";
 import { MainApplicationContext } from "./MainApplicationContext";
-import { propertiesAsEnv } from "./ApplicationProperties";
 
 /**
  * Runs scheduled background tasks in worker threads.

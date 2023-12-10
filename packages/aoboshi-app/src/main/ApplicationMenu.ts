@@ -3,7 +3,7 @@ import { t } from "i18next";
 import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
 import { IpcEventType } from "../preload/IpcApi";
-import { OnAfterInit } from "./ApplicationContext";
+import { OnAfterInit } from "../worker/ApplicationContext";
 import { Scheduler } from "./Scheduler";
 
 type ApplicationMenuState = {

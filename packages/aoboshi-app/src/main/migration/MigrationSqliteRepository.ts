@@ -1,6 +1,6 @@
 import { Repository } from "@vvornanen/aoboshi-core/Repository";
 import { Database } from "better-sqlite3";
-import { AbstractSqliteRepository } from "../AbstractSqliteRepository";
+import { AbstractSqliteRepository } from "../../worker/AbstractSqliteRepository";
 
 export type ExecutedMigration = {
   id: string;

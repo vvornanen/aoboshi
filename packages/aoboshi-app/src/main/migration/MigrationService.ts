@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { Temporal } from "@js-temporal/polyfill";
 import { MainApplicationContext } from "../MainApplicationContext";
-import { OnAfterInit } from "../ApplicationContext";
+import { OnAfterInit } from "../../worker/ApplicationContext";
 import { Migration } from "./Migration";
 import {
   ExecutedMigration,

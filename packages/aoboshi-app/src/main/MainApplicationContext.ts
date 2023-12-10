@@ -1,13 +1,13 @@
 import path from "path";
 import { app } from "electron";
-import { ApplicationContext } from "./ApplicationContext";
-import { ApplicationMenu } from "./ApplicationMenu";
-import { MainWindow } from "./MainWindow";
-import { Scheduler } from "./Scheduler";
+import { ApplicationContext } from "../worker/ApplicationContext";
 import {
   ApplicationProperties,
   getEnvironmentVariable,
-} from "./ApplicationProperties";
+} from "../worker/ApplicationProperties";
+import { ApplicationMenu } from "./ApplicationMenu";
+import { MainWindow } from "./MainWindow";
+import { Scheduler } from "./Scheduler";
 
 /** Extends the common application context with services available only in the main thread */
 export class MainApplicationContext extends ApplicationContext {

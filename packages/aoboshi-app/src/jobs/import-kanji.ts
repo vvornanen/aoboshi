@@ -1,8 +1,8 @@
 import path from "path";
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { KanjidicReader } from "../../../aoboshi-kanji/src/kanjidic/KanjidicReader";
-import { readGzip } from "../main/readGzip";
-import { getApplicationContext } from "../main/ApplicationContext";
+import { readGzip } from "../worker/readGzip";
+import { getApplicationContext } from "../worker/ApplicationContext";
 
 const applicationContext = getApplicationContext();
 

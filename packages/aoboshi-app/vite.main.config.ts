@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 const jobsDir = "src/jobs";
 const migrationsDir = "src/migrations";
 
-const isTypescript = (file) => {
+const isTypescript = (file: string) => {
   const parsedPath = path.parse(file);
   return parsedPath.ext === ".ts";
 };

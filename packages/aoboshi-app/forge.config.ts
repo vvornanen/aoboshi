@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { exec: execCb } = require("node:child_process");
-const { promisify } = require("node:util");
-const fs = require("node:fs");
-const path = require("node:path");
+import { exec as execCb } from "node:child_process";
+import { promisify } from "node:util";
+import fs from "node:fs";
+import path from "node:path";
 
 const exec = promisify(execCb);
 
-const getAbsolutePath = (value) =>
+const getAbsolutePath = (value: string) =>
   path.dirname(require.resolve(path.join(value, "package.json")));
 
-module.exports = {
+export default {
   packagerConfig: {
     appBundleId: "com.github.vvornanen.aoboshi",
     appCopyright: "© 2023 Ville Vornanen",
@@ -24,18 +23,18 @@ module.exports = {
     },
   ],
   hooks: {
-    packageAfterCopy: async (_, buildPath) => {
+    packageAfterCopy: async (_: unknown, buildPath: string) => {
       const files = fs.readdirSync(buildPath);
       const include = [".vite", "node_modules", "package.json"];
 
       // Clean up all unnecessary source files from the package
-      for (let file of files) {
+      for (const file of files) {
         if (!include.includes(file)) {
           await exec(`rm -rf ${buildPath}/${file}`);
         }
       }
     },
-    packageAfterPrune: async (_, buildPath) => {
+    packageAfterPrune: async (_: unknown, buildPath: string) => {
       const nodeModulesDir = path.join(buildPath, "node_modules");
 
       await exec(`mkdir -p ${nodeModulesDir}`);
@@ -62,17 +61,17 @@ module.exports = {
           {
             // `entry` is just an alias for `build.lib.entry` in the corresponding file of `config`.
             entry: "src/main/main.ts",
-            config: "vite.main.config.mjs",
+            config: "vite.main.config.ts",
           },
           {
             entry: "src/preload/preload.ts",
-            config: "vite.preload.config.mjs",
+            config: "vite.preload.config.ts",
           },
         ],
         renderer: [
           {
             name: "main_window",
-            config: "vite.renderer.config.mjs",
+            config: "vite.renderer.config.ts",
           },
         ],
       },

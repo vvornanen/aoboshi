@@ -44,10 +44,10 @@ aoboshi-app/
 │  │  └─ characters/      # Feature
 │  └─ i18n.ts             # Common i18next options for both main and renderer processes
 ├─ dev.db                 # SQLite database created when running yarn start
-├─ forge.config.js        # Electron Forge configuration
+├─ forge.config.ts        # Electron Forge configuration
 ├─ package.json
-├─ vite.main.config.mjs
-├─ vite.preload.config.mjs
-├─ vite.renderer.config.mjs
+├─ vite.main.config.ts
+├─ vite.preload.config.ts
+├─ vite.renderer.config.ts
 └─ vitest.config.ts
 ```

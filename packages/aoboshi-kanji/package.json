@@ -2,6 +2,7 @@
   "name": "@vvornanen/aoboshi-kanji",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@vvornanen/aoboshi-core": "workspace:^",
     "fast-xml-parser": "^4.3.2"

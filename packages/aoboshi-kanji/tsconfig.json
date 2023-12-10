@@ -2,12 +2,14 @@
   "extends": "../../tsconfig.options.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
   },
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../aoboshi-core/tsconfig.json"
+      "path": "../aoboshi-core"
     }
   ]
 }

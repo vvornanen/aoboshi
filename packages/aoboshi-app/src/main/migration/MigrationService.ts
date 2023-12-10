@@ -2,7 +2,7 @@ import { join, parse, ParsedPath } from "node:path";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { Temporal } from "@js-temporal/polyfill";
-import { ApplicationContext } from "../ApplicationContext";
+import { MainApplicationContext } from "../MainApplicationContext";
 import { Migration } from "./Migration";
 import {
   ExecutedMigration,
@@ -76,7 +76,7 @@ const loadMigrationFile = async (
 export class MigrationService {
   private migrationRepository: MigrationRepository;
 
-  constructor(private context: ApplicationContext) {
+  constructor(private context: MainApplicationContext) {
     this.migrationRepository = new MigrationSqliteRepository(context.database);
   }
 

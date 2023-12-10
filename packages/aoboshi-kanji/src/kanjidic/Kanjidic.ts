@@ -49,22 +49,22 @@ export type KanjidicCharacter = {
   };
   misc: {
     grade?: 1 | 2 | 3 | 4 | 5 | 6 | 8 | 9 | 10;
-    stroke_count?: number;
+    stroke_count?: number | number[];
     freq?: number;
     jlpt?: 1 | 2 | 3 | 4;
   };
   dic_number: {
-    dic_ref: KanjidicDictionaryReference[];
+    dic_ref: KanjidicDictionaryReference | KanjidicDictionaryReference[];
   };
   query_code: {
-    q_code: KanjidicQueryCode[];
+    q_code: KanjidicQueryCode | KanjidicQueryCode[];
   };
-  reading_meaning: {
-    rmgroup: {
-      reading: KanjidicReading[];
-      meaning: KanjidicMeaning[];
+  reading_meaning?: {
+    rmgroup?: {
+      reading?: KanjidicReading | KanjidicReading[];
+      meaning?: KanjidicMeaning | KanjidicMeaning[];
     };
-    nanori?: string[];
+    nanori?: string | string[];
   };
 };
 

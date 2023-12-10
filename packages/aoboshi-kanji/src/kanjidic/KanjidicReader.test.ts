@@ -30,6 +30,42 @@ test("get characters", () => {
       onyomi: ["ガク"],
       kunyomi: ["まな.ぶ"],
     },
+    {
+      literal: "碵",
+      radical: null,
+      grade: null,
+      references: [],
+      strokeCount: 14,
+      onyomi: [],
+      kunyomi: [],
+    },
+    {
+      literal: "穃",
+      radical: null,
+      grade: null,
+      references: [],
+      strokeCount: 15,
+      onyomi: ["ヨウ"],
+      kunyomi: [],
+    },
+    {
+      literal: "𠂉",
+      radical: null,
+      grade: null,
+      references: [],
+      strokeCount: 2,
+      onyomi: [],
+      kunyomi: [],
+    },
+    {
+      literal: "逢",
+      radical: null,
+      grade: 9,
+      references: [],
+      strokeCount: 10,
+      onyomi: ["ホウ"],
+      kunyomi: ["あ.う", "むか.える"],
+    },
   ];
 
   expect(actual).toEqual(expected);

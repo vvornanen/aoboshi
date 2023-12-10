@@ -161,4 +161,140 @@
       <nanori>のり</nanori>
     </reading_meaning>
   </character>
+  <character>
+    <literal>碵</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">78b5</cp_value>
+      <cp_value cp_type="jis208">1-66-83</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">112</rad_value>
+    </radical>
+    <misc>
+      <stroke_count>14</stroke_count>
+      <variant var_type="jis208">1-32-57</variant>
+    </misc>
+    <dic_number>
+      <dic_ref dr_type="nelson_n">4023</dic_ref>
+    </dic_number>
+    <query_code>
+      <q_code qc_type="skip">1-5-9</q_code>
+      <q_code qc_type="sh_desc">5a9.5</q_code>
+      <q_code qc_type="four_corner">1168.6</q_code>
+    </query_code>
+    <reading_meaning>
+      <rmgroup>
+        <meaning>cornerstone</meaning>
+        <meaning>large</meaning>
+        <meaning>great</meaning>
+        <meaning>eminent</meaning>
+      </rmgroup>
+      <nanori>せき</nanori>
+      <nanori>ひろ</nanori>
+      <nanori>いしずえ</nanori>
+      <nanori>みつる</nanori>
+      <nanori>みち</nanori>
+    </reading_meaning>
+  </character>
+  <character>
+    <literal>穃</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">7a43</cp_value>
+      <cp_value cp_type="jis208">1-67-46</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">115</rad_value>
+    </radical>
+    <misc>
+      <stroke_count>15</stroke_count>
+    </misc>
+    <dic_number>
+      <dic_ref dr_type="nelson_n">4164</dic_ref>
+    </dic_number>
+    <query_code>
+      <q_code qc_type="skip">1-5-10</q_code>
+      <q_code qc_type="sh_desc">5d10.4</q_code>
+      <q_code qc_type="four_corner">2396.8</q_code>
+    </query_code>
+    <reading_meaning>
+      <rmgroup>
+        <reading r_type="ja_on">ヨウ</reading>
+        <meaning>(phantom kanji)</meaning>
+      </rmgroup>
+    </reading_meaning>
+  </character>
+  <character>
+    <literal>𠂉</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">20089</cp_value>
+      <cp_value cp_type="jis213">2-01-01</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">4</rad_value>
+    </radical>
+    <misc>
+      <stroke_count>2</stroke_count>
+    </misc>
+    <query_code>
+      <q_code qc_type="skip">4-2-4</q_code>
+    </query_code>
+  </character>
+  <character>
+    <literal>逢</literal>
+    <codepoint>
+      <cp_value cp_type="ucs">9022</cp_value>
+      <cp_value cp_type="jis208">1-16-09</cp_value>
+    </codepoint>
+    <radical>
+      <rad_value rad_type="classical">162</rad_value>
+    </radical>
+    <misc>
+      <grade>9</grade>
+      <stroke_count>10</stroke_count>
+      <stroke_count>9</stroke_count>
+      <stroke_count>11</stroke_count>
+      <freq>2116</freq>
+    </misc>
+    <dic_number>
+      <dic_ref dr_type="nelson_c">4694</dic_ref>
+      <dic_ref dr_type="nelson_n">6054</dic_ref>
+      <dic_ref dr_type="halpern_kkd">4002</dic_ref>
+      <dic_ref dr_type="halpern_kkld_2ed">2774</dic_ref>
+      <dic_ref dr_type="heisig">2417</dic_ref>
+      <dic_ref dr_type="heisig6">2497</dic_ref>
+      <dic_ref dr_type="oneill_names">1516</dic_ref>
+      <dic_ref dr_type="moro" m_vol="11" m_page="0075">38901X</dic_ref>
+    </dic_number>
+    <query_code>
+      <q_code qc_type="skip">3-3-7</q_code>
+      <q_code qc_type="sh_desc">2q7.15</q_code>
+      <q_code qc_type="four_corner">3730.4</q_code>
+      <q_code qc_type="deroo">2555</q_code>
+      <q_code qc_type="skip" skip_misclass="stroke_diff">3-4-7</q_code>
+    </query_code>
+    <reading_meaning>
+      <rmgroup>
+        <reading r_type="pinyin">feng2</reading>
+        <reading r_type="korean_r">bong</reading>
+        <reading r_type="korean_h">봉</reading>
+        <reading r_type="vietnam">Phùng</reading>
+        <reading r_type="ja_on">ホウ</reading>
+        <reading r_type="ja_kun">あ.う</reading>
+        <reading r_type="ja_kun">むか.える</reading>
+        <meaning>meeting</meaning>
+        <meaning>tryst</meaning>
+        <meaning>date</meaning>
+        <meaning>rendezvous</meaning>
+        <meaning m_lang="es">encuentro</meaning>
+        <meaning m_lang="es">cita</meaning>
+        <meaning m_lang="es">encuentro casual</meaning>
+        <meaning m_lang="es">encontrarse</meaning>
+        <meaning m_lang="es">reunirse</meaning>
+        <meaning m_lang="es">citarse</meaning>
+        <meaning m_lang="es">verse por casualidad</meaning>
+      </rmgroup>
+      <nanori>あい</nanori>
+      <nanori>おう</nanori>
+    </reading_meaning>
+  </character>
 </kanjidic2>

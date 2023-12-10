@@ -13,6 +13,7 @@ const initApplication = async () => {
   await migrationService.run();
 
   applicationContext.onAfterInit();
+  await migrationService.onAfterInit();
 };
 
 // This method will be called when Electron has finished

@@ -6,6 +6,7 @@
     ".": "./dist/index.js",
     "./*": "./dist/*.js",
     "./books/*": "./dist/books/*.js",
-    "./characters/*": "./dist/characters/*.js"
+    "./characters/*": "./dist/characters/*.js",
+    "./package.json": "./package.json"
   }
 }

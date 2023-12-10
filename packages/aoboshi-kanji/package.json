@@ -8,6 +8,7 @@
   },
   "exports": {
     "./*": "./dist/*.js",
-    "./kanjidic/*": "./dist/kanjidic/*.js"
+    "./kanjidic/*": "./dist/kanjidic/*.js",
+    "./package.json": "./package.json"
   }
 }

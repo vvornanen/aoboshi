@@ -36,7 +36,7 @@ aoboshi-app/
 │  │  ├─ renderer.tsx     # The renderer entry point
 │  │  ├─ index.html
 │  │  └─ styles.css.ts    # Global styles
-│  ├─ resources/          # Additional resources packaged with the application (see forge.config.js)
+│  ├─ resources/          # Additional resources packaged with the application (see forge.config.ts)
 │  │  ├─ kanjidic2.xml.gz
 │  │  └─ kanjivg.xml.gz
 │  ├─ worker/             # Services and utils for both the main process and worker threads

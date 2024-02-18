@@ -1,7 +1,8 @@
 import { Migration } from "../main/migration/Migration";
 
 export default {
-  description: "Import kanji data (KANJIDIC 2 ver. 2023-343)",
+  description:
+    "Import kanji data (KANJIDIC 2 v. 2023-343, KanjiVG v. 20230110)",
   repeatable: true,
   async run({ scheduler }): Promise<void> {
     await scheduler.run("import-kanji");

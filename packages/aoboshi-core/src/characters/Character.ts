@@ -74,3 +74,6 @@ export type Reference = {
   chapterId: string;
   chapterCode: string;
 };
+
+export type CharacterUpdateValue = Partial<Character> &
+  Pick<Character, "literal">;

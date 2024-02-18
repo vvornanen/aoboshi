@@ -1,5 +1,11 @@
 # aoboshi
 
+A personal Japanese language learning tool.
+Please consider it very much experimental without any kind of support.
+
+Uses character readings from [the KANJIDIC Project](http://www.edrdg.org/wiki/index.php/KANJIDIC_Project)
+and character radical and stroke information from [KanjiVG](https://kanjivg.tagaini.net/index.html).
+
 ## First time setup
 
 ```
@@ -46,3 +52,9 @@ Then all other dependencies with
 ```bash
 yarn upgrade-interactive
 ```
+
+## Notice
+
+The KANJIDIC2 file are released under a [Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) licence.
+
+KanjiVG is work by Ulrich Apel and released under the [Creative Commons Attribution-ShareAlike 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.

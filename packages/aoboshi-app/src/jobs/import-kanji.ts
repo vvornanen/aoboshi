@@ -1,7 +1,11 @@
 import path from "path";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import {
+  Character,
+  CharacterUpdateValue,
+} from "@vvornanen/aoboshi-core/characters/Character";
 import { KanjidicReader } from "@vvornanen/aoboshi-kanji/kanjidic/KanjidicReader";
 import { Chapter } from "@vvornanen/aoboshi-core/books/Book";
+import { KanjivgReader } from "@vvornanen/aoboshi-kanji/kanjivg/KanjivgReader";
 import { readGzip } from "../worker/readGzip";
 import { getApplicationContext } from "../worker/ApplicationContext";
 import { gradesBookId } from "../worker/books/books";
@@ -14,6 +18,16 @@ const readCharactersFromFile = async (path: string): Promise<Character[]> => {
 
   console.log("Reading characters");
   return new KanjidicReader().getCharacters(data);
+};
+
+const readStrokesFromFile = async (
+  path: string,
+): Promise<CharacterUpdateValue[]> => {
+  console.log(`Extracting file ${path}`);
+  const data = await readGzip(path);
+
+  console.log("Reading stroke information");
+  return new KanjivgReader().getStrokes(data);
 };
 
 /**
@@ -74,9 +88,41 @@ const saveAll = applicationContext.database.transaction(
   },
 );
 
+const updateAll = applicationContext.database.transaction(
+  (characters: CharacterUpdateValue[]) => {
+    characters.forEach((character) => {
+      const existing = applicationContext.characterRepository.findByLiteral(
+        character.literal,
+      );
+
+      if (existing) {
+        applicationContext.characterRepository.save({
+          ...existing,
+          ...character,
+        });
+      } else {
+        applicationContext.characterRepository.save({
+          radical: null,
+          grade: null,
+          strokeCount: 0,
+          references: [],
+          onyomi: [],
+          kunyomi: [],
+          ...character,
+        });
+      }
+    });
+  },
+);
+
 (async () => {
   const characters = await readCharactersFromFile(
     path.join(applicationContext.properties.resourcesPath, "kanjidic2.xml.gz"),
   );
   saveAll(withRevisedGrades(characters));
+
+  const strokes = await readStrokesFromFile(
+    path.join(applicationContext.properties.resourcesPath, "kanjivg.xml.gz"),
+  );
+  updateAll(strokes);
 })();

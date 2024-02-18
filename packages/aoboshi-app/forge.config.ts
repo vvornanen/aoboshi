@@ -13,7 +13,11 @@ export default {
     appBundleId: "com.github.vvornanen.aoboshi",
     appCopyright: "© 2023 Ville Vornanen",
     icon: "src/resources/aoboshi",
-    extraResource: ["src/resources/ja.lproj", "src/resources/kanjidic2.xml.gz"],
+    extraResource: [
+      "src/resources/ja.lproj",
+      "src/resources/kanjidic2.xml.gz",
+      "src/resources/kanjivg.xml.gz",
+    ],
   },
   rebuildConfig: {},
   makers: [

@@ -4916,7 +4916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/channels@npm:7.6.16":
+"@storybook/channels@npm:7.6.16, @storybook/channels@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/channels@npm:7.6.16"
   dependencies:
@@ -5012,7 +5012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:7.6.16":
+"@storybook/components@npm:7.6.16, @storybook/components@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/components@npm:7.6.16"
   dependencies:
@@ -5074,7 +5074,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:7.6.16":
+"@storybook/core-events@npm:7.6.16, @storybook/core-events@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/core-events@npm:7.6.16"
   dependencies:
@@ -5227,7 +5227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:7.6.16":
+"@storybook/manager-api@npm:7.6.16, @storybook/manager-api@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/manager-api@npm:7.6.16"
   dependencies:
@@ -5277,7 +5277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:7.6.16":
+"@storybook/preview-api@npm:7.6.16, @storybook/preview-api@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/preview-api@npm:7.6.16"
   dependencies:
@@ -5409,7 +5409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.6.16":
+"@storybook/theming@npm:7.6.16, @storybook/theming@npm:^7.6.16":
   version: 7.6.16
   resolution: "@storybook/theming@npm:7.6.16"
   dependencies:
@@ -6620,10 +6620,16 @@ __metadata:
     "@storybook/addon-links": "npm:^7.6.16"
     "@storybook/addon-themes": "npm:^7.6.16"
     "@storybook/blocks": "npm:^7.6.16"
+    "@storybook/channels": "npm:^7.6.16"
+    "@storybook/components": "npm:^7.6.16"
+    "@storybook/core-events": "npm:^7.6.16"
     "@storybook/jest": "npm:^0.2.3"
+    "@storybook/manager-api": "npm:^7.6.16"
+    "@storybook/preview-api": "npm:^7.6.16"
     "@storybook/react": "npm:^7.6.16"
     "@storybook/react-vite": "npm:^7.6.16"
     "@storybook/testing-library": "npm:^0.2.2"
+    "@storybook/theming": "npm:^7.6.16"
     "@types/better-sqlite3": "npm:^7.6.9"
     "@types/chroma-js": "npm:^2.4.4"
     "@types/react": "npm:18.2.56"

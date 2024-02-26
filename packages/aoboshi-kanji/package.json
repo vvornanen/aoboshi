@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "@vvornanen/aoboshi-core": "workspace:^",
-    "fast-xml-parser": "^4.3.4"
+    "fast-xml-parser": "^4.3.5"
   },
   "exports": {
     "./*": "./dist/*.js",

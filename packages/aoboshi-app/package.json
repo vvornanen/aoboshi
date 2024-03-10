@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4",
-    "@mui/base": "^5.0.0-beta.37",
+    "@mui/base": "^5.0.0-beta.38",
     "@vanilla-extract/css": "^1.14.1",
     "@vvornanen/aoboshi-core": "workspace:^",
     "@vvornanen/aoboshi-kanji": "workspace:^",
@@ -22,11 +22,11 @@
     "bree": "^9.2.2",
     "chroma-js": "^2.4.2",
     "clsx": "^2.1.0",
-    "i18next": "^23.10.0",
+    "i18next": "^23.10.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^14.0.5",
-    "react-router-dom": "^6.22.1"
+    "react-i18next": "^14.1.0",
+    "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.2.0",
@@ -50,17 +50,17 @@
     "@storybook/theming": "^7.6.17",
     "@types/better-sqlite3": "^7.6.9",
     "@types/chroma-js": "^2.4.4",
-    "@types/react": "18.2.58",
-    "@types/react-dom": "^18.2.19",
-    "@vanilla-extract/vite-plugin": "^4.0.4",
+    "@types/react": "18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@vanilla-extract/vite-plugin": "^4.0.6",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "chromatic": "^11.0.0",
-    "electron": "28.2.4",
+    "chromatic": "^11.0.7",
+    "electron": "28.2.6",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.17",
-    "storybook-addon-react-router-v6": "^2.0.10",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.4"
+    "storybook-addon-react-router-v6": "^2.0.11",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5"
   },
   "productName": "Aoboshi"
 }

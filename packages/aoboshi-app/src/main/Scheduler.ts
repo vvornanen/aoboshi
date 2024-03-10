@@ -1,6 +1,5 @@
 import path from "path";
-// eslint-disable-next-line import/default
-import Bree from "bree";
+import Bree from "bree"; // eslint-disable-line import/default, import/no-named-as-default, import/no-named-as-default-member
 import { JobName } from "../jobs";
 import { OnAfterInit } from "../worker/ApplicationContext";
 import { propertiesAsEnv } from "../worker/ApplicationProperties";

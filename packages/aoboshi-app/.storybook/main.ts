@@ -1,5 +1,6 @@
 import { dirname, join } from "path";
 import type { StorybookConfig } from "@storybook/react-vite";
+
 const config: StorybookConfig = {
   stories: [
     "../src/renderer/**/*.mdx",
@@ -13,7 +14,7 @@ const config: StorybookConfig = {
     getAbsolutePath("storybook-addon-react-router-v6"),
   ],
   framework: {
-    name: getAbsolutePath("@storybook/react-vite"),
+    name: "@storybook/react-vite",
     options: {
       builder: {
         viteConfigPath: "vite.renderer.config.ts",
@@ -26,6 +27,6 @@ const config: StorybookConfig = {
 };
 export default config;
 
-function getAbsolutePath(value: string): any {
+function getAbsolutePath(value: string): string {
   return dirname(require.resolve(join(value, "package.json")));
 }

@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4",
-    "@mui/base": "^5.0.0-beta.38",
+    "@mui/base": "^5.0.0-beta.39",
     "@vanilla-extract/css": "^1.14.1",
     "@vvornanen/aoboshi-core": "workspace:^",
     "@vvornanen/aoboshi-kanji": "workspace:^",
@@ -50,17 +50,17 @@
     "@storybook/theming": "^8.0.0",
     "@types/better-sqlite3": "^7.6.9",
     "@types/chroma-js": "^2.4.4",
-    "@types/react": "18.2.64",
-    "@types/react-dom": "^18.2.21",
+    "@types/react": "18.2.66",
+    "@types/react-dom": "^18.2.22",
     "@vanilla-extract/vite-plugin": "^4.0.6",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "chromatic": "^11.0.7",
-    "electron": "28.2.6",
+    "chromatic": "^11.0.8",
+    "electron": "28.2.7",
     "prop-types": "^15.8.1",
     "storybook": "^8.0.0",
     "storybook-addon-remix-react-router": "^3.0.0",
     "typescript": "^5.4.2",
-    "vite": "^5.1.5"
+    "vite": "^5.1.6"
   },
   "productName": "Aoboshi"
 }

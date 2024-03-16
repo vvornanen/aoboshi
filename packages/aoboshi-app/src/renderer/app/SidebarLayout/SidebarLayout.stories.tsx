@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   reactRouterParameters,
   withRouter,
-} from "storybook-addon-react-router-v6";
+} from "storybook-addon-remix-react-router";
 import { SidebarLayout as SidebarLayoutComponent } from "./SidebarLayout";
 
 const meta = {

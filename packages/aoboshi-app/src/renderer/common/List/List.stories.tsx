@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import {
   reactRouterParameters,
   withRouter,
-} from "storybook-addon-react-router-v6";
+} from "storybook-addon-remix-react-router";
 import { ListItem } from "../ListItem/ListItem";
 import { ListSubheader } from "../ListSubheader/ListSubheader";
 import { List } from "./List";

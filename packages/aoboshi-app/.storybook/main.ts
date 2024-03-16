@@ -11,10 +11,11 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-themes"),
-    getAbsolutePath("storybook-addon-react-router-v6"),
+    getAbsolutePath("@chromatic-com/storybook"),
+    getAbsolutePath("storybook-addon-remix-react-router"),
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: getAbsolutePath("@storybook/react-vite") as "@storybook/react-vite",
     options: {
       builder: {
         viteConfigPath: "vite.renderer.config.ts",

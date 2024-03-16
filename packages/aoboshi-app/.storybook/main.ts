@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-essentials"),
     getAbsolutePath("@storybook/addon-interactions"),
     getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("storybook-addon-remix-react-router"),
   ],
   framework: {

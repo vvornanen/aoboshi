@@ -57,7 +57,7 @@
     "electron": "28.2.6",
     "prop-types": "^15.8.1",
     "storybook": "^8.0.0",
-    "storybook-addon-react-router-v6": "^2.0.12",
+    "storybook-addon-remix-react-router": "^3.0.0",
     "typescript": "^5.4.2",
     "vite": "^5.1.5"
   },

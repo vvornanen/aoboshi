@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     getAbsolutePath("storybook-addon-react-router-v6"),
   ],
   framework: {
-    name: "@storybook/react-vite",
+    name: getAbsolutePath("@storybook/react-vite") as "@storybook/react-vite",
     options: {
       builder: {
         viteConfigPath: "vite.renderer.config.ts",

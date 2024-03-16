@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { within , expect } from "@storybook/test";
 import { Grade } from "@vvornanen/aoboshi-core/characters/Character";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 

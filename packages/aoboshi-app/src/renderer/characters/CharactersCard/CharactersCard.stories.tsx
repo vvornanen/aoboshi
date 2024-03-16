@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/test";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,

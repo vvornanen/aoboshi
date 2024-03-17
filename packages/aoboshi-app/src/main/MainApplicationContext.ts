@@ -8,12 +8,14 @@ import {
 import { ApplicationMenu } from "./ApplicationMenu";
 import { MainWindow } from "./MainWindow";
 import { Scheduler } from "./Scheduler";
+import { BookController } from "./books/BookController";
 
 /** Extends the common application context with services available only in the main thread */
 export class MainApplicationContext extends ApplicationContext {
   applicationMenu: ApplicationMenu;
   mainWindow: MainWindow;
   scheduler: Scheduler;
+  bookController: BookController;
 
   constructor(properties: ApplicationProperties) {
     super(properties);
@@ -32,6 +34,7 @@ export class MainApplicationContext extends ApplicationContext {
     );
 
     this.mainWindow = new MainWindow(this);
+    this.bookController = new BookController(this.bookRepository);
   }
 }
 

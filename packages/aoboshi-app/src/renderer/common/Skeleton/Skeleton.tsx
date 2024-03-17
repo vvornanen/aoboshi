@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
+import { maru } from "../maru";
 import {
   skeletonContent,
   skeletonLight,
@@ -9,12 +10,18 @@ import {
 type SkeletonProps = ComponentPropsWithoutRef<"div"> & {
   variant?: keyof typeof skeletonVariants;
   color?: "default" | "light";
-  lineHeight?: number;
+
+  /**
+   * Number of characters to use as a placeholder text.
+   * Skeleton uses this text content to infer its size based on the typography.
+   */
+  length?: number;
 };
 
 export const Skeleton: FunctionComponent<SkeletonProps> = ({
   variant = "text",
   color = "default",
+  length,
   className,
   children,
   ...props
@@ -27,6 +34,9 @@ export const Skeleton: FunctionComponent<SkeletonProps> = ({
       })}
       {...props}
     >
+      {variant === "text" && length && (
+        <div className={skeletonContent}>{maru(length)}</div>
+      )}
       {children && <div className={skeletonContent}>{children}</div>}
     </div>
   );

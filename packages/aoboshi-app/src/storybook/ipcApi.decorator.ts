@@ -1,6 +1,6 @@
 import { makeDecorator } from "@storybook/preview-api";
 import { IPC_API_KEY, IpcApi } from "../preload/IpcApi";
-import { mockCharacter } from "../fixtures/mockCharacter";
+import { createCharacter } from "../fixtures/createCharacter";
 
 /**
  * Default mock implementation for IpcApi.
@@ -12,7 +12,8 @@ const mockApi: IpcApi = {
   onNavigate: () => {},
   findBookById: async () => null,
   findAllBooks: async () => [],
-  findCharacterByLiteral: async (literal: string) => mockCharacter({ literal }),
+  findCharacterByLiteral: async (literal: string) =>
+    createCharacter({ literal }),
 };
 
 /**

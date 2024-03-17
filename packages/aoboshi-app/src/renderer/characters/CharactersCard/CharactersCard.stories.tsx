@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent } from "@storybook/test";
+import { userEvent, within } from "@storybook/test";
+import { Grade } from "@vvornanen/aoboshi-core/characters/Character";
 import { IpcApi } from "../../../preload/IpcApi";
 import { characterFixtures } from "../../../fixtures/characterFixtures";
-import { mockCharacter } from "../../../fixtures/mockCharacter";
+import { createCharacter } from "../../../fixtures/createCharacter";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,
@@ -53,7 +54,12 @@ export const PopoverHighlight: Story = {
   ...UnseenAndHighlight,
   parameters: {
     ipcApi: {
-      findCharacterByLiteral: async () => mockCharacter({ literal: "足" }),
+      findCharacterByLiteral: async () =>
+        createCharacter({
+          literal: "足",
+          grade: Grade.Kyoiku1,
+          strokeCount: 7,
+        }),
     } satisfies Partial<IpcApi>,
   },
   play: async ({ canvasElement }) => {
@@ -67,7 +73,12 @@ export const PopoverUnseen: Story = {
   ...UnseenAndHighlight,
   parameters: {
     ipcApi: {
-      findCharacterByLiteral: async () => mockCharacter({ literal: "赤" }),
+      findCharacterByLiteral: async () =>
+        createCharacter({
+          literal: "赤",
+          grade: Grade.Kyoiku1,
+          strokeCount: 7,
+        }),
     } satisfies Partial<IpcApi>,
   },
   play: async ({ canvasElement }) => {

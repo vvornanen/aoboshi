@@ -62,10 +62,16 @@ export default tseslint.config(
           basePath: "packages/aoboshi-app/src",
           zones: [
             {
-              target: ["jobs", "preload", "renderer", "worker"],
+              target: ["!(main|migrations)/**"],
               from: "main",
               message:
                 "Main process code cannot be imported outside the main process",
+            },
+            {
+              target: ["**"],
+              from: "storybook",
+              message:
+                "Storybook utils can only be used in storybook config files",
             },
           ],
         },

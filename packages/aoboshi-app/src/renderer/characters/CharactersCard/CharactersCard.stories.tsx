@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/test";
+import { IpcApi } from "../../../preload/IpcApi";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,
@@ -52,6 +53,22 @@ export const PopoverHighlight: Story = {
 
 export const PopoverUnseen: Story = {
   ...UnseenAndHighlight,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText("赤"));
+  },
+};
+
+export const PopoverError: Story = {
+  ...UnseenAndHighlight,
+  parameters: {
+    ipcApi: {
+      findCharacterByLiteral: () => {
+        throw new Error("Mock error");
+      },
+    } satisfies Partial<IpcApi>,
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

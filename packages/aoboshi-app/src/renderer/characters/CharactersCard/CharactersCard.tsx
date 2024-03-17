@@ -3,8 +3,9 @@ import { ClickAwayListener } from "@mui/base";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
 import { CharacterButton } from "../CharacterButton/CharacterButton";
 import { Card } from "../../common/Card/Card";
-import { useCharacterInfo } from "../CharacterInfoCard/useCharacterInfo";
 import { CharacterInfoCard } from "../CharacterInfoCard/CharacterInfoCard";
+import { useFindCharacterByLiteralQuery } from "../charactersApi";
+import { Typography } from "../../common/Typography/Typography";
 import { CharacterStatus } from "./CharacterStatus";
 import { charactersCard } from "./CharactersCard.css";
 
@@ -19,7 +20,12 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
     null,
   );
   const popoverAnchorRef = useRef<HTMLButtonElement | null>(null);
-  const { data } = useCharacterInfo(selectedCharacter);
+  const { data, error } = useFindCharacterByLiteralQuery(
+    selectedCharacter || "",
+    {
+      skip: !selectedCharacter,
+    },
+  );
   const popoverOpen = selectedCharacter !== null;
 
   const handleClick = (
@@ -59,6 +65,8 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
               {data && (
                 <CharacterInfoCard key={selectedCharacter} character={data} />
               )}
+              {/* TODO: Error component */}
+              {error && <Typography>{String(error)}</Typography>}
             </Card>
           </Popup>
         </ClickAwayListener>

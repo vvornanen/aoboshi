@@ -1,13 +1,36 @@
 import { FunctionComponent } from "react";
+import { useParams } from "react-router-dom";
 import { Typography } from "../../common/Typography/Typography";
 import { PageMeta } from "../../common/PageMeta/PageMeta";
-import { grades } from "../grades";
 import { VolumeSection } from "../VolumeSection/VolumeSection";
 import { Container } from "../../common/Container/Container";
+import { useFindBookByIdQuery } from "../booksApi";
 
 export const BookPage: FunctionComponent = () => {
-  // TODO: Get data from storage
-  const book = grades;
+  const { bookId } = useParams();
+  const { data: book, error } = useFindBookByIdQuery(bookId || "", {
+    skip: !bookId,
+  });
+
+  if (error) {
+    // TODO: Error page component
+    return (
+      <main>
+        <Container style={{ paddingTop: 16, paddingBottom: 48 }}>
+          <Typography>{String(error)}</Typography>
+        </Container>
+      </main>
+    );
+  } else if (!book) {
+    // TODO: Not found page component
+    return (
+      <main>
+        <Container style={{ paddingTop: 16, paddingBottom: 48 }}>
+          <Typography>Book {String(bookId)} not found</Typography>
+        </Container>
+      </main>
+    );
+  }
 
   return (
     <main>

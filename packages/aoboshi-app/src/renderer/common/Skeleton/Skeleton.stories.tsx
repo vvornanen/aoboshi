@@ -12,7 +12,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Text: Story = {
-  render: () => {
+  args: {
+    color: "default",
+  },
+  render: (args) => {
     const heading = "目出し";
     const label = "ダミーテキストです。";
     const bodyLines = [
@@ -30,18 +33,20 @@ export const Text: Story = {
             variant="headlineLarge"
             style={{ marginBottom: 16 }}
           >
-            <Skeleton>${heading}</Skeleton>
+            <Skeleton {...args}>${heading}</Skeleton>
           </Typography>
           <Typography
             component="div"
             variant="labelSmall"
             style={{ marginBottom: 16 }}
           >
-            <Skeleton>${label}</Skeleton>
+            <Skeleton {...args}>${label}</Skeleton>
           </Typography>
           <Typography component="div">
             {bodyLines.map((line) => (
-              <Skeleton key={line}>{line}</Skeleton>
+              <Skeleton key={line} {...args}>
+                {line}
+              </Skeleton>
             ))}
           </Typography>
         </div>
@@ -75,25 +80,56 @@ export const Text: Story = {
 };
 
 export const Circular: Story = {
-  render: () => (
-    <Skeleton variant="circular" style={{ width: 48, height: 48 }} />
+  ...Text,
+  render: (args) => (
+    <Skeleton {...args} variant="circular" style={{ width: 48, height: 48 }} />
   ),
 };
 
 export const Rectangular: Story = {
-  render: () => (
-    <Skeleton variant="rectangular" style={{ width: 618, height: 112 }} />
+  ...Text,
+  render: (args) => (
+    <Skeleton
+      {...args}
+      variant="rectangular"
+      style={{ width: 618, height: 112 }}
+    />
   ),
 };
 
 export const Rounded: Story = {
-  render: () => (
-    <Skeleton variant={"rounded"} style={{ width: 618, height: 112 }} />
+  ...Text,
+  render: (args) => (
+    <Skeleton
+      {...args}
+      variant={"rounded"}
+      style={{ width: 618, height: 112 }}
+    />
   ),
 };
 
 export const RoundedSmall: Story = {
-  render: () => (
-    <Skeleton variant={"roundedSmall"} style={{ width: 618, height: 112 }} />
+  ...Text,
+  render: (args) => (
+    <Skeleton
+      {...args}
+      variant={"roundedSmall"}
+      style={{ width: 618, height: 112 }}
+    />
+  ),
+};
+
+export const Light: Story = {
+  ...Text,
+  args: {
+    ...Text.args,
+    color: "light",
+  },
+  render: (args) => (
+    <Skeleton
+      {...args}
+      variant="rectangular"
+      style={{ width: 618, height: 112 }}
+    />
   ),
 };

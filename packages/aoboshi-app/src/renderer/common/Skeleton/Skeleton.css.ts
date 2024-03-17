@@ -4,12 +4,12 @@ import { typographyLineHeight } from "../Typography/Typography.css";
 
 const pulse = keyframes({
   "0%": { opacity: 1 },
-  "50%": { opacity: 0.5 },
+  "50%": { opacity: 0.4 },
   "100%": { opacity: 1 },
 });
 
 const skeletonBase = style({
-  backgroundColor: vars.color.activated,
+  backgroundColor: vars.color.disabled,
   animationName: pulse,
   animationDelay: "0.5s",
   animationTimingFunction: "ease-in-out",
@@ -44,6 +44,10 @@ export const skeletonVariants = styleVariants({
       borderRadius: vars.shape.borderRadiusSm,
     },
   ],
+});
+
+export const skeletonLight = style({
+  backgroundColor: vars.color.hover,
 });
 
 export const skeletonContent = style({

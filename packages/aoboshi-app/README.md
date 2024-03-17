@@ -22,6 +22,7 @@ aoboshi-app/
 │  ├─ main/               # Electron main process
 │  │  └─ main.ts          # The main process entry point
 │  ├─ migrations/         # Migration files (see migrations docs)
+│  ├─ mocks/              # Mock data utils for testing
 │  ├─ preload/            # Electron preload script
 │  │  ├─ IpcApi.ts        # API for communication between the main and the renderer processes
 │  │  └─ preload.ts       # The preload entry point

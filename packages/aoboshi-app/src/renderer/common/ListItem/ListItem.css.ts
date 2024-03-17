@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { buttonClasses } from "@mui/base/Button";
 import { bodyMedium } from "../Typography/Typography.css";
 import { vars } from "../../theme/theme.css";
+import { listItemClasses } from "./listItemClasses";
 
 export const listItem = style([
   bodyMedium,
@@ -29,14 +30,17 @@ export const listItem = style([
       "&:hover": {
         backgroundColor: vars.color.hover,
       },
-      [`&.${buttonClasses.active}`]: {
+      [`&.${listItemClasses.active}`]: {
         backgroundColor: vars.color.activated,
       },
-      [`&.${buttonClasses.focusVisible}`]: {
+      [`&.${listItemClasses.focusVisible}`]: {
         backgroundColor: vars.color.focus,
       },
-      [`&.${buttonClasses.disabled}`]: {
+      [`&.${listItemClasses.disabled}`]: {
         opacity: vars.color.disabledOpacity,
+        pointerEvents: "none",
+      },
+      [`&.${listItemClasses.loading}`]: {
         pointerEvents: "none",
       },
     },

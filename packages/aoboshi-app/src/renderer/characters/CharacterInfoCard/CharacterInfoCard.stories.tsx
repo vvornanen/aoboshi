@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   args: {
     character: characterFixtures["学"],
+    loading: false,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -93,5 +94,12 @@ export const Empty: Story = {
   args: {
     ...Basic.args,
     character: characterFixtures.empty,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    ...Basic.args,
+    loading: true,
   },
 };

@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const UnseenAndHighlight: Story = {
   args: {
     characters: someSeenAndHighlighted,
+    loading: false,
   },
   parameters: {
     ipcApi: {
@@ -32,17 +33,37 @@ export const UnseenAndHighlight: Story = {
 export const AllSeen: Story = {
   args: {
     characters: allSeen,
+    loading: false,
   },
 };
 
 export const AllUnseen: Story = {
+  ...AllSeen,
   args: {
+    ...AllSeen.args,
     characters: allUnseen,
   },
 };
 
 export const PopoverOpen: Story = {
   ...UnseenAndHighlight,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText("学"));
+  },
+};
+
+export const PopoverLoading: Story = {
+  ...UnseenAndHighlight,
+  parameters: {
+    ipcApi: {
+      findCharacterByLiteral: async () =>
+        new Promise((resolve) => {
+          setTimeout(() => resolve({ ...characterFixtures["学"] }), 2000);
+        }),
+    } satisfies Partial<IpcApi>,
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -107,5 +128,13 @@ export const PopoverError: Story = {
 export const Empty: Story = {
   args: {
     characters: [],
+  },
+};
+
+export const Loading: Story = {
+  ...AllSeen,
+  args: {
+    ...AllSeen.args,
+    loading: true,
   },
 };

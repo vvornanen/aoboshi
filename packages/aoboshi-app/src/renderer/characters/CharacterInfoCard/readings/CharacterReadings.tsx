@@ -1,12 +1,18 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { Skeleton } from "../../../common/Skeleton/Skeleton";
 import { formatReading } from "./formatReading";
-import { characterReadings, readingsContainer } from "./CharacterReadings.css";
+import {
+  characterReadings,
+  readingsContainer,
+  reading,
+} from "./CharacterReadings.css";
 
 type CharacterReadingsProps = {
   onyomi: string[];
   kunyomi: string[];
   max?: number;
+  loading?: boolean;
 };
 
 /**
@@ -18,6 +24,7 @@ export const CharacterReadings: FunctionComponent<CharacterReadingsProps> = ({
   onyomi,
   kunyomi,
   max,
+  loading = false,
 }) => {
   const { t } = useTranslation();
 
@@ -27,21 +34,33 @@ export const CharacterReadings: FunctionComponent<CharacterReadingsProps> = ({
         className={readingsContainer}
         aria-label={t("CharacterInfoCard.onyomiLabel")}
       >
-        {onyomi.slice(0, max).map((reading) => (
-          <span className={reading} key={reading}>
-            {formatReading(reading)}
+        {!loading &&
+          onyomi.slice(0, max).map((value) => (
+            <span className={reading} key={value}>
+              {formatReading(value)}
+            </span>
+          ))}
+        {loading && (
+          <span className={reading}>
+            <Skeleton length={8} />
           </span>
-        ))}
+        )}
       </div>
       <div
         className={readingsContainer}
         aria-label={t("CharacterInfoCard.kunyomiLabel")}
       >
-        {kunyomi.slice(0, max).map((reading) => (
-          <span className={reading} key={reading}>
-            {formatReading(reading)}
+        {!loading &&
+          kunyomi.slice(0, max).map((value) => (
+            <span className={reading} key={value}>
+              {formatReading(value)}
+            </span>
+          ))}
+        {loading && (
+          <span className={reading}>
+            <Skeleton length={12} />
           </span>
-        ))}
+        )}
       </div>
     </div>
   );

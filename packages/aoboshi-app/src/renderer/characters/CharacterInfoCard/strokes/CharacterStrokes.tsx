@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { infoBox } from "../CharacterInfoCard.css";
+import { Skeleton } from "../../../common/Skeleton/Skeleton";
 import { StrokeBackground } from "./StrokeBackground";
 import { Stroke } from "./Stroke";
 
@@ -10,6 +11,8 @@ type CharacterStrokesProps = {
 
   /** Number of columns in the parent grid. */
   columns: number;
+
+  loading?: boolean;
 };
 
 /**
@@ -23,16 +26,20 @@ type CharacterStrokesProps = {
 export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
   character,
   columns,
+  loading = false,
 }) => {
   const { t } = useTranslation();
 
   const span = 2;
   const numberOfStrokesPerRow = columns / span;
+  const numberOfLoadingCells = character.strokeCount || 7;
 
   // Render only full rows
   const numberOfCells =
-    Math.ceil(character.strokeCount / numberOfStrokesPerRow) *
-    numberOfStrokesPerRow;
+    Math.ceil(
+      (loading ? numberOfLoadingCells : character.strokeCount) /
+        numberOfStrokesPerRow,
+    ) * numberOfStrokesPerRow;
 
   return (
     <>
@@ -51,15 +58,23 @@ export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
             gridRow: `span ${span}`,
           }}
         >
-          <StrokeBackground>
-            {n <= character.strokeCount && (
-              <Stroke
-                literal={character.literal}
-                svg={character.strokes || ""}
-                n={n}
-              />
-            )}
-          </StrokeBackground>
+          {loading && n <= numberOfLoadingCells && (
+            <Skeleton
+              variant="rectangular"
+              style={{ height: "calc(100% - 8px)", margin: 4 }}
+            />
+          )}
+          {!(loading && n <= numberOfLoadingCells) && (
+            <StrokeBackground>
+              {n <= character.strokeCount && (
+                <Stroke
+                  literal={character.literal}
+                  svg={character.strokes || ""}
+                  n={n}
+                />
+              )}
+            </StrokeBackground>
+          )}
         </div>
       ))}
     </>

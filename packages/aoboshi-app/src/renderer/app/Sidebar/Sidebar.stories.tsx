@@ -53,3 +53,15 @@ export const LibraryError = {
     },
   },
 };
+
+export const Loading = {
+  ...Default,
+  parameters: {
+    ipcApi: {
+      findAllBooks: async () =>
+        new Promise((resolve) => {
+          setTimeout(() => resolve([grades]), 2000);
+        }),
+    },
+  },
+};

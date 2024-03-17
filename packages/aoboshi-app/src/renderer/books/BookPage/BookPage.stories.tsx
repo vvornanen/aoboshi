@@ -51,3 +51,14 @@ export const BookError: Story = {
     } satisfies Partial<IpcApi>,
   },
 };
+
+export const Loading: Story = {
+  parameters: {
+    ipcApi: {
+      findBookById: async () =>
+        new Promise((resolve) => {
+          setTimeout(() => resolve(grades), 2000);
+        }),
+    } satisfies Partial<IpcApi>,
+  },
+};

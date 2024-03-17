@@ -3,7 +3,7 @@ import {
   reactRouterParameters,
   withRouter,
 } from "storybook-addon-remix-react-router";
-import { grades } from "../../books/grades";
+import { grades } from "../../../mocks/bookFixtures";
 import { IpcApi } from "../../../preload/IpcApi";
 import { SidebarLayout as SidebarLayoutComponent } from "./SidebarLayout";
 

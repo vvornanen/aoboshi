@@ -4,7 +4,7 @@ import {
   withRouter,
 } from "storybook-addon-remix-react-router";
 import { IpcApi } from "../../../preload/IpcApi";
-import { grades } from "../grades";
+import { grades } from "../../../mocks/bookFixtures";
 import { BookPage } from "./BookPage";
 
 const meta = {

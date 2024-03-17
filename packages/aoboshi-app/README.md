@@ -14,6 +14,7 @@ Further, the application code is organized by features both in the main and the 
 
 ```
 aoboshi-app/
+├─ .storybook/            # Storybook configuration files
 ├─ src/
 │  ├─ jobs/               # Background jobs run in worker threads (see scheduler docs)
 │  │  └─ index.ts         # Scheduler configuration for all jobs
@@ -39,6 +40,7 @@ aoboshi-app/
 │  ├─ resources/          # Additional resources packaged with the application (see forge.config.ts)
 │  │  ├─ kanjidic2.xml.gz
 │  │  └─ kanjivg.xml.gz
+│  ├─ storybook/          # Storybook utils, e.g. decorators (see also .storybook/preview.ts)
 │  ├─ worker/             # Services and utils for both the main process and worker threads
 │  │  ├─ books/           # Feature
 │  │  └─ characters/      # Feature

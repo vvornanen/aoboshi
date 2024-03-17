@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
-import { mockCharacters } from "../../../mocks/mockCharacters";
+import { mockCharacters } from "../../../fixtures/mockCharacters";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {

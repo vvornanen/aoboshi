@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/test";
 import { IpcApi } from "../../../preload/IpcApi";
-import { mockCharacters } from "../../../mocks/mockCharacters";
-import { mockCharacter } from "../../../mocks/mockCharacter";
+import { mockCharacters } from "../../../fixtures/mockCharacters";
+import { mockCharacter } from "../../../fixtures/mockCharacter";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,

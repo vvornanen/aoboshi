@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { grades } from "../../../mocks/bookFixtures";
+import { grades } from "../../../fixtures/bookFixtures";
 import { ChapterSection } from "./ChapterSection";
 
 const meta = {

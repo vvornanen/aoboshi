@@ -1,6 +1,6 @@
 import { makeDecorator } from "@storybook/preview-api";
 import { IPC_API_KEY, IpcApi } from "../preload/IpcApi";
-import { mockCharacter } from "../mocks/mockCharacter";
+import { mockCharacter } from "../fixtures/mockCharacter";
 
 /**
  * Default mock implementation for IpcApi.

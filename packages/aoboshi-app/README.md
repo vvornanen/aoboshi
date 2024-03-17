@@ -16,13 +16,13 @@ Further, the application code is organized by features both in the main and the 
 aoboshi-app/
 ├─ .storybook/            # Storybook configuration files
 ├─ src/
+│  ├─ fixtures/           # Test data for tests and stories
 │  ├─ jobs/               # Background jobs run in worker threads (see scheduler docs)
 │  │  └─ index.ts         # Scheduler configuration for all jobs
 │  ├─ locales/            # Translation files
 │  ├─ main/               # Electron main process
 │  │  └─ main.ts          # The main process entry point
 │  ├─ migrations/         # Migration files (see migrations docs)
-│  ├─ mocks/              # Mock data utils for testing
 │  ├─ preload/            # Electron preload script
 │  │  ├─ IpcApi.ts        # API for communication between the main and the renderer processes
 │  │  └─ preload.ts       # The preload entry point

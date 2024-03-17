@@ -1,8 +1,14 @@
+import { Book } from "@vvornanen/aoboshi-core/books/Book";
+import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+
 export const IPC_API_KEY = "ipcApi";
 
 export enum IpcEventType {
-  ToggleSidebar = "toggleSidebar",
+  ToggleSidebar = "sidebar:toggle",
   Navigate = "navigate",
+  FindBookById = "books:findById",
+  FindAllBooks = "books:findAll",
+  FindCharacterByLiteral = "characters:findByLiteral",
 }
 
 /**
@@ -37,4 +43,8 @@ export interface IpcApi {
 
   /** Called when navigation is triggered from the main process (e.g. application menu) */
   onNavigate: (callback: OnNavigateHandler) => void;
+
+  findBookById: (id: string) => Promise<Book | null>;
+  findAllBooks: () => Promise<Book[]>;
+  findCharacterByLiteral: (literal: string) => Promise<Character | null>;
 }

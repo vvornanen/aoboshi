@@ -16,6 +16,9 @@ export const strokeContainer = style({});
 export const stroke = style({
   strokeWidth: 4,
   stroke: vars.color.strokeDim,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  fill: "none",
 });
 
 export const hiddenStroke = style({

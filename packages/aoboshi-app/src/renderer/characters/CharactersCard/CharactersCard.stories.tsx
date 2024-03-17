@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/test";
 import { IpcApi } from "../../../preload/IpcApi";
+import { mockCharacters } from "../../../mocks/mockCharacters";
+import { mockCharacter } from "../../../mocks/mockCharacter";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,
@@ -18,6 +20,11 @@ type Story = StoryObj<typeof meta>;
 export const UnseenAndHighlight: Story = {
   args: {
     characters: someSeenAndHighlighted,
+  },
+  parameters: {
+    ipcApi: {
+      findCharacterByLiteral: async () => mockCharacters["学"],
+    } satisfies Partial<IpcApi>,
   },
 };
 
@@ -44,6 +51,11 @@ export const PopoverOpen: Story = {
 
 export const PopoverHighlight: Story = {
   ...UnseenAndHighlight,
+  parameters: {
+    ipcApi: {
+      findCharacterByLiteral: async () => mockCharacter({ literal: "足" }),
+    } satisfies Partial<IpcApi>,
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -53,6 +65,11 @@ export const PopoverHighlight: Story = {
 
 export const PopoverUnseen: Story = {
   ...UnseenAndHighlight,
+  parameters: {
+    ipcApi: {
+      findCharacterByLiteral: async () => mockCharacter({ literal: "赤" }),
+    } satisfies Partial<IpcApi>,
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

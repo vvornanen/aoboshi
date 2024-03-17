@@ -37,24 +37,6 @@ export class KanjiVG {
     return new KanjiVG(literal, element);
   }
 
-  /**
-   * Fetches KanjiVG data for the given character.
-   *
-   * @param literal
-   * @return svg string or null if data was not found
-   */
-  static async fetch(literal: string): Promise<KanjiVG | null> {
-    const code = KanjiVG.getCodeForLiteral(literal);
-    const response = await fetch(`/kanjivg/${code}.svg`);
-
-    if (response.status !== 200) {
-      return null;
-    }
-
-    const data = await response.text();
-    return KanjiVG.fromString(literal, data);
-  }
-
   getCode(): string {
     return KanjiVG.getCodeForLiteral(this.literal);
   }

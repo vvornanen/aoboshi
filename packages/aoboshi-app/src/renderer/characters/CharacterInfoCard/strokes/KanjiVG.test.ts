@@ -1,21 +1,6 @@
-import { afterEach, describe, test, expect, vi, Mock } from "vitest";
+import { describe, test, expect } from "vitest";
 import { KanjiVG } from "./KanjiVG";
 import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
-
-const mockFetch = vi.fn();
-
-global.fetch = mockFetch as Mock;
-
-afterEach(() => {
-  mockFetch.mockReset();
-});
-
-const mockResponse = (status: number, data: string) => {
-  mockFetch.mockImplementationOnce(async () => ({
-    status,
-    text: async () => data,
-  }));
-};
 
 describe("getCodeForLiteral", () => {
   test("returns zero-padded hex string", () => {
@@ -40,28 +25,6 @@ describe("fromString", () => {
   test("svg element not found", () => {
     const data = "<div></div>";
     const result = KanjiVG.fromString("学", data);
-    expect(result).toBeNull();
-  });
-});
-
-describe("fetch", () => {
-  test("returns data", async () => {
-    const data = "<svg><g/></svg>";
-    mockResponse(200, data);
-
-    const result = await KanjiVG.fetch("学");
-
-    expect(mockFetch).toHaveBeenCalledWith("/kanjivg/05b66.svg");
-    expect(result).not.toBeNull();
-    expect(result?.toString()).toEqual(data);
-  });
-
-  test("not found returns null", async () => {
-    mockResponse(404, "");
-
-    const result = await KanjiVG.fetch("学");
-
-    expect(mockFetch).toHaveBeenCalledWith("/kanjivg/05b66.svg");
     expect(result).toBeNull();
   });
 });

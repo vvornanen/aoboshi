@@ -4,7 +4,6 @@ import { Character } from "@vvornanen/aoboshi-core/characters/Character";
 import { infoBox } from "../CharacterInfoCard.css";
 import { StrokeBackground } from "./StrokeBackground";
 import { Stroke } from "./Stroke";
-import { useStrokePaths } from "./useStrokePaths";
 
 type CharacterStrokesProps = {
   character: Character;
@@ -26,7 +25,6 @@ export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
   columns,
 }) => {
   const { t } = useTranslation();
-  const [strokePaths] = useStrokePaths(character.literal);
 
   const span = 2;
   const numberOfStrokesPerRow = columns / span;
@@ -57,7 +55,7 @@ export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
             {n <= character.strokeCount && (
               <Stroke
                 literal={character.literal}
-                svg={strokePaths || ""}
+                svg={character.strokes || ""}
                 n={n}
               />
             )}

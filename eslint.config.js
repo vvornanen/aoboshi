@@ -73,6 +73,12 @@ export default tseslint.config(
               message:
                 "Storybook utils can only be used in storybook config files",
             },
+            {
+              target: ["!(storybook|fixtures)/**/!(*.stories|*.test).{ts,tsx}"],
+              from: "fixtures",
+              message:
+                "Test fixtures should be used only in tests and Storybook",
+            },
           ],
         },
       ],

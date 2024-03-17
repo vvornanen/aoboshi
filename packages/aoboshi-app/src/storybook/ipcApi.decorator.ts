@@ -1,6 +1,6 @@
 import { makeDecorator } from "@storybook/preview-api";
+import { createCharacter } from "@vvornanen/aoboshi-core/fixtures/createCharacter";
 import { IPC_API_KEY, IpcApi } from "../preload/IpcApi";
-import { createCharacter } from "../fixtures/createCharacter";
 
 /**
  * Default mock implementation for IpcApi.

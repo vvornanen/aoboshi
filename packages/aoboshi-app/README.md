@@ -16,7 +16,6 @@ Further, the application code is organized by features both in the main and the 
 aoboshi-app/
 ├─ .storybook/            # Storybook configuration files
 ├─ src/
-│  ├─ fixtures/           # Test data for tests and stories
 │  ├─ jobs/               # Background jobs run in worker threads (see scheduler docs)
 │  │  └─ index.ts         # Scheduler configuration for all jobs
 │  ├─ locales/            # Translation files

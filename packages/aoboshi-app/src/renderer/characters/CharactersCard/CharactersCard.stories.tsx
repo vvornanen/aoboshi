@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/test";
 import { Grade } from "@vvornanen/aoboshi-core/characters/Character";
+import { characterFixtures } from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
+import { createCharacter } from "@vvornanen/aoboshi-core/fixtures/createCharacter";
 import { IpcApi } from "../../../preload/IpcApi";
-import { characterFixtures } from "../../../fixtures/characterFixtures";
-import { createCharacter } from "../../../fixtures/createCharacter";
 import { CharactersCard } from "./CharactersCard";
 import {
   allSeen,

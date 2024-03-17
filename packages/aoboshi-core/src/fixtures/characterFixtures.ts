@@ -1,4 +1,4 @@
-import { Character, Grade } from "@vvornanen/aoboshi-core/characters/Character";
+import { Character, Grade } from "../characters/Character";
 import { createCharacter } from "./createCharacter";
 
 export const characterFixtures = {

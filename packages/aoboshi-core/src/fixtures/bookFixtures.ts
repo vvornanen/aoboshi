@@ -1,4 +1,4 @@
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
+import { Book } from "../books/Book";
 
 export const grades: Book = {
   id: "AtLesfR65Adc7q2XHVK7A8",

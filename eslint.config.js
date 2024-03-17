@@ -73,12 +73,6 @@ export default tseslint.config(
               message:
                 "Storybook utils can only be used in storybook config files",
             },
-            {
-              target: ["!(storybook|fixtures)/**/!(*.stories|*.test).{ts,tsx}"],
-              from: "fixtures",
-              message:
-                "Test fixtures should be used only in tests and Storybook",
-            },
           ],
         },
       ],
@@ -100,6 +94,46 @@ export default tseslint.config(
               name: "electron",
               message:
                 "Electron API is available only in the preload and the main process",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["packages/aoboshi-core/**/*.{ts,tsx}"],
+    rules: {
+      "import/no-restricted-paths": [
+        "error",
+        {
+          basePath: "packages/aoboshi-core/src",
+          zones: [
+            {
+              target: ["!(fixtures)/**/!(*.test.ts)"],
+              from: "fixtures",
+              message: "Test fixtures should be used only in tests",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["packages/**/*.{ts,tsx}"],
+    ignores: [
+      "packages/**/*.test.{ts,tsx}",
+      "packages/**/*.stories.{ts,tsx}",
+      "packages/aoboshi-app/src/storybook/*",
+    ],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@vvornanen/aoboshi-core/fixtures/*"],
+              message:
+                "Test fixtures should be used only in tests and Storybook",
             },
           ],
         },

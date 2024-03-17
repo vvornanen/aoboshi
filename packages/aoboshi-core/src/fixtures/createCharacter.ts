@@ -1,4 +1,4 @@
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import { Character } from "../characters/Character";
 
 /**
  * Creates a {@link Character} object for testing purposes.

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
-import { characterFixtures } from "../../../fixtures/characterFixtures";
+import { characterFixtures } from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {

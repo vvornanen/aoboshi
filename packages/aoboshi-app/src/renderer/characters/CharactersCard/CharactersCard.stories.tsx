@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/test";
 import { IpcApi } from "../../../preload/IpcApi";
-import { mockCharacters } from "../../../fixtures/mockCharacters";
+import { characterFixtures } from "../../../fixtures/characterFixtures";
 import { mockCharacter } from "../../../fixtures/mockCharacter";
 import { CharactersCard } from "./CharactersCard";
 import {
@@ -23,7 +23,7 @@ export const UnseenAndHighlight: Story = {
   },
   parameters: {
     ipcApi: {
-      findCharacterByLiteral: async () => mockCharacters["学"],
+      findCharacterByLiteral: async () => characterFixtures["学"],
     } satisfies Partial<IpcApi>,
   },
 };

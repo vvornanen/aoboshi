@@ -1,6 +1,6 @@
 import { Character, Grade } from "@vvornanen/aoboshi-core/characters/Character";
 
-export const mockCharacters = {
+export const characterFixtures = {
   ["学"]: {
     literal: "学",
     radical: "子",

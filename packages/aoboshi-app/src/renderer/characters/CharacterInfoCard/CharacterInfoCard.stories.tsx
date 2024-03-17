@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
-import { mockCharacters } from "../../../fixtures/mockCharacters";
+import { characterFixtures } from "../../../fixtures/characterFixtures";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    character: mockCharacters["学"],
+    character: characterFixtures["学"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -33,7 +33,7 @@ export const Basic: Story = {
 export const Readings: Story = {
   args: {
     ...Basic.args,
-    character: mockCharacters["代"],
+    character: characterFixtures["代"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -48,7 +48,7 @@ export const Readings: Story = {
 export const ManyStrokes: Story = {
   args: {
     ...Basic.args,
-    character: mockCharacters["鶴"],
+    character: characterFixtures["鶴"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -63,7 +63,7 @@ export const ManyStrokes: Story = {
 export const Jinmeiyo: Story = {
   args: {
     ...Basic.args,
-    character: mockCharacters["伊"],
+    character: characterFixtures["伊"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -78,7 +78,7 @@ export const Jinmeiyo: Story = {
 export const Kana: Story = {
   args: {
     ...Basic.args,
-    character: mockCharacters["あ"],
+    character: characterFixtures["あ"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -92,6 +92,6 @@ export const Kana: Story = {
 export const Empty: Story = {
   args: {
     ...Basic.args,
-    character: mockCharacters.empty,
+    character: characterFixtures.empty,
   },
 };

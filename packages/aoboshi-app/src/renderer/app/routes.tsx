@@ -19,3 +19,5 @@ export const router = createHashRouter([
     ],
   },
 ]);
+
+window.ipcApi.onNavigate((to) => router.navigate(to));

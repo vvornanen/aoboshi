@@ -342,6 +342,7 @@ export class ApplicationMenu implements OnAfterInit {
           label: t("applicationMenu.reimportKanjiData"),
           click: () => {
             this.scheduler.run("import-kanji");
+            // TODO: Invalidate tags
           },
         },
       ],

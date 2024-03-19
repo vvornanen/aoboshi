@@ -4,6 +4,7 @@ import { ipcApi } from "./ipcApi";
 
 export const store = configureStore({
   reducer: {
+    [settingsSlice.reducerPath]: settingsSlice.reducer,
     [ipcApi.reducerPath]: ipcApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

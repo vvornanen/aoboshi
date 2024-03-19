@@ -44,7 +44,7 @@ export const SidebarLayout: FunctionComponent = () => {
         className={content}
         style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
       >
-        <Toolbar sidebarOpen={sidebarOpen}>{/* Toolbar content */}</Toolbar>
+        <Toolbar>{/* Toolbar content */}</Toolbar>
         <div
           style={{
             maxHeight: `calc(100vh - ${windowControlsHeight})`,

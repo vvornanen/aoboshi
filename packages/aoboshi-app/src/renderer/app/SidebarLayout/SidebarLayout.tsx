@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useId, useState } from "react";
+import { FunctionComponent, useId } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
@@ -7,32 +7,32 @@ import { noDrag, windowControlsHeight } from "../../styles.css";
 import { SidebarIcon } from "../../icons/SidebarIcon";
 import { IconButton } from "../../common/IconButton/IconButton";
 import { Toolbar } from "../Toolbar/Toolbar";
+import { useSelector } from "../useSelector";
+import { useDispatch } from "../useDispatch";
+import {
+  selectSidebarOpen,
+  selectSidebarWidth,
+  toggleSidebar,
+} from "../settingsSlice";
 import { content, dragRegion, layout, toggleButton } from "./SidebarLayout.css";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const dispatch = useDispatch();
+  const sidebarOpen = useSelector(selectSidebarOpen);
+  const sidebarWidth = useSelector(selectSidebarWidth);
   const sidebarId = useId();
-  const sidebarWidth = 200;
 
-  const toggleSidebar = () => {
-    setSidebarOpen((prevState) => {
-      const open = !prevState;
-      window.ipcApi.toggleSidebar(open);
-      return open;
-    });
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
   };
-
-  useEffect(() => {
-    window.ipcApi.onToggleSidebar((open: boolean) => setSidebarOpen(open));
-  }, []);
 
   return (
     <div className={layout}>
       <div className={dragRegion} />
       <IconButton
         className={clsx(toggleButton, noDrag)}
-        onClick={toggleSidebar}
+        onClick={handleToggleSidebar}
         title={t("Layout.toggleSidebar")}
         aria-controls={sidebarId}
         aria-expanded={sidebarOpen}

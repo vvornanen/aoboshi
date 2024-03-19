@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { ipcApi } from "./ipcApi";
+import { settingsSlice } from "./settingsSlice";
+import { listenerMiddleware } from "./listenerMiddleware";
 
 export const store = configureStore({
   reducer: {
@@ -8,7 +10,9 @@ export const store = configureStore({
     [ipcApi.reducerPath]: ipcApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(ipcApi.middleware),
+    getDefaultMiddleware()
+      .prepend(listenerMiddleware.middleware)
+      .concat(ipcApi.middleware),
 });
 
 setupListeners(store.dispatch);

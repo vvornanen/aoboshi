@@ -9,6 +9,7 @@ import { KanjivgReader } from "@vvornanen/aoboshi-kanji/kanjivg/KanjivgReader";
 import { readGzip } from "../worker/readGzip";
 import { getApplicationContext } from "../worker/ApplicationContext";
 import { gradesBookId } from "../worker/books/books";
+import { postMessage } from "../worker/postMessage";
 
 const applicationContext = getApplicationContext();
 
@@ -125,4 +126,6 @@ const updateAll = applicationContext.database.transaction(
     path.join(applicationContext.properties.resourcesPath, "kanjivg.xml.gz"),
   );
   updateAll(strokes);
+
+  postMessage({ type: "invalidateTags", tags: ["Character"] });
 })();

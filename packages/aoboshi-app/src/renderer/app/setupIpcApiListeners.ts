@@ -6,6 +6,7 @@ import {
   toggleSidebar,
 } from "./settingsSlice";
 import { AppDispatch } from "./store";
+import { ipcApi } from "./ipcApi";
 
 /** Connects Electron IPC events to Redux store */
 export const setupIpcApiListeners = (dispatch: AppDispatch) => {
@@ -26,6 +27,7 @@ export const setupIpcApiListeners = (dispatch: AppDispatch) => {
     dispatch(setSidebarOpen(open)),
   );
 
-  // TODO: Invalidate tags after rebuilding data
-  // window.ipcApi.onInvalidateTags(tags => dispatch(ipcApi.util.invalidateTags([])));
+  window.ipcApi.onInvalidateTags((tags) =>
+    dispatch(ipcApi.util.invalidateTags(tags)),
+  );
 };

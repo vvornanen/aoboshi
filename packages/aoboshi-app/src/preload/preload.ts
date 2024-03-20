@@ -13,6 +13,8 @@ const api: IpcApi = {
   toggleSidebar: (open) => ipcRenderer.send(IpcEventType.ToggleSidebar, open),
   onNavigate: (callback) =>
     ipcRenderer.on(IpcEventType.Navigate, (_, to) => callback(to)),
+  onInvalidateTags: (callback) =>
+    ipcRenderer.on(IpcEventType.InvalidateTags, (_, tags) => callback(tags)),
   findBookById: (id: string): Promise<Book | null> =>
     ipcRenderer.invoke(IpcEventType.FindBookById, id),
   findAllBooks: (): Promise<Book[]> =>

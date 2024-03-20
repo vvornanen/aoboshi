@@ -1,4 +1,5 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
+import { tagTypes } from "../../preload/IpcApi";
 
 /**
  * Redux Toolkit Query base API for fetching data from Electron IPC API.
@@ -14,6 +15,6 @@ import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
  */
 export const ipcApi = createApi({
   baseQuery: fakeBaseQuery<string>(),
-  tagTypes: ["Book", "Character"],
+  tagTypes,
   endpoints: () => ({}),
 });

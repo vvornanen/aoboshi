@@ -10,6 +10,7 @@ const mockApi: IpcApi = {
   onToggleSidebar: () => {},
   toggleSidebar: () => {},
   onNavigate: () => {},
+  onInvalidateTags: () => {},
   findBookById: async () => null,
   findAllBooks: async () => [],
   findCharacterByLiteral: async (literal: string) =>

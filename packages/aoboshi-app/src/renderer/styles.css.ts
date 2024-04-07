@@ -35,6 +35,10 @@ globalStyle("#root", {
   isolation: "isolate",
 });
 
+globalStyle(":focus-visible", {
+  outline: "none", // All focusable components define their own focus styles
+});
+
 export const windowControlsHeight = createVar();
 export const windowControlsWidth = createVar();
 

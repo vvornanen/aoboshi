@@ -1,11 +1,7 @@
 on: push
 
 permissions:
-  pull-requests: write
-  contents: write
-
-env:
-  CI: true
+  contents: read
 
 concurrency:
   group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
@@ -17,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: yarn
@@ -42,9 +38,8 @@ jobs:
         run: yarn test
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v1
+        uses: chromaui/action@v11
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/aoboshi-app
-          zip: true
           exitOnceUploaded: true

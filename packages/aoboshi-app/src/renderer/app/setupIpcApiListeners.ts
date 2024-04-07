@@ -11,7 +11,6 @@ import { ipcApi } from "./ipcApi";
 /** Connects Electron IPC events to Redux store */
 export const setupIpcApiListeners = (dispatch: AppDispatch) => {
   if (!window.ipcApi) {
-    // TODO: Storybook storeProvider decorator should load the store only after mock IpcApi has been initialized
     console.warn("IpcApi not found, skipping setupIpcApiListeners");
     return;
   }

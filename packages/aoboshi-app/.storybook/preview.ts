@@ -2,7 +2,10 @@ import type { Preview, ReactRenderer } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
-import { withStoreProvider } from "../src/storybook/storeProvider.decorator";
+import {
+  storeLoader,
+  withStoreProvider,
+} from "../src/storybook/storeProvider.decorator";
 import { withIpcApi } from "../src/storybook/ipcApi.decorator";
 import {
   darkThemeClass,
@@ -22,6 +25,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [storeLoader],
   decorators: [
     withThemeByClassName<ReactRenderer>({
       themes: {

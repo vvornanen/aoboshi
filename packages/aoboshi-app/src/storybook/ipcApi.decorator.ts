@@ -1,21 +1,5 @@
 import { makeDecorator } from "@storybook/preview-api";
-import { createCharacter } from "@vvornanen/aoboshi-core/fixtures/createCharacter";
-import { IPC_API_KEY, IpcApi } from "../preload/IpcApi";
-
-/**
- * Default mock implementation for IpcApi.
- * Individual functions can be overridden in component or story parameters.
- */
-const mockApi: IpcApi = {
-  onToggleSidebar: () => {},
-  toggleSidebar: () => {},
-  onNavigate: () => {},
-  onInvalidateTags: () => {},
-  findBookById: async () => null,
-  findAllBooks: async () => [],
-  findCharacterByLiteral: async (literal: string) =>
-    createCharacter({ literal }),
-};
+import { mockIpcApi } from "./mockIpcApi";
 
 /**
  * Storybook decorator for mocking {@link IpcApi}.
@@ -39,11 +23,7 @@ export const withIpcApi = makeDecorator({
   name: "withIpcApi",
   parameterName: "ipcApi",
   wrapper: (getStory, context, { parameters }) => {
-    window[IPC_API_KEY] = {
-      ...mockApi,
-      ...parameters,
-    } satisfies IpcApi;
-
+    mockIpcApi(parameters);
     return getStory(context);
   },
 });

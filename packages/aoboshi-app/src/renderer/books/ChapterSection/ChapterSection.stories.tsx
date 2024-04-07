@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { grades } from "../grades";
+import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
 import { ChapterSection } from "./ChapterSection";
 
 const meta = {
@@ -13,5 +13,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     chapter: grades.volumes[0].chapters[0],
+    loading: false,
+  },
+};
+
+export const Loading: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    loading: true,
   },
 };

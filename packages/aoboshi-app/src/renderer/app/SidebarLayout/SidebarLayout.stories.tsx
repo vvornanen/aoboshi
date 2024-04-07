@@ -3,6 +3,8 @@ import {
   reactRouterParameters,
   withRouter,
 } from "storybook-addon-remix-react-router";
+import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
+import { IpcApi } from "../../../preload/IpcApi";
 import { SidebarLayout as SidebarLayoutComponent } from "./SidebarLayout";
 
 const meta = {
@@ -14,6 +16,9 @@ const meta = {
       location: {},
       routing: "/*",
     }),
+    ipcApi: {
+      findAllBooks: async () => [grades],
+    } satisfies Partial<IpcApi>,
   },
 } satisfies Meta<typeof SidebarLayoutComponent>;
 

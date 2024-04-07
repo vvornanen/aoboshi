@@ -21,6 +21,7 @@ export const Default: Story = {
       totalNumberOfCharacters: 80,
       reviewedRatio: 0.5875,
     },
+    loading: false,
   },
 };
 
@@ -66,5 +67,13 @@ export const Completed: Story = {
       totalNumberOfCharacters: 80,
       reviewedRatio: 1,
     },
+  },
+};
+
+export const Loading = {
+  ...Default,
+  args: {
+    ...Default.args,
+    loading: true,
   },
 };

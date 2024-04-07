@@ -1,11 +1,14 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import { Skeleton } from "../../../common/Skeleton/Skeleton";
+import { maru } from "../../../common/maru";
 import { GradeFigure } from "./GradeFigure";
 import { figures, figure, references } from "./figures.css";
 
 type CharacterFiguresProps = {
   character: Character;
+  loading?: boolean;
 };
 
 /**
@@ -16,6 +19,7 @@ type CharacterFiguresProps = {
  */
 export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
   character,
+  loading = false,
 }) => {
   const { t } = useTranslation();
 
@@ -30,7 +34,8 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
           alignSelf: "start",
         }}
       >
-        <GradeFigure character={character} />
+        {!loading && <GradeFigure character={character} />}
+        {loading && <Skeleton length={2} />}
       </div>
       <div
         className={figure}
@@ -42,10 +47,12 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
         }}
         aria-label={t("CharacterInfoCard.strokeCountLabel")}
       >
-        {character.strokeCount > 0 &&
+        {!loading &&
+          character.strokeCount > 0 &&
           t("CharacterInfoCard.strokeCount", {
             strokeCount: character.strokeCount,
           })}
+        {loading && <Skeleton>0{maru()}</Skeleton>}
       </div>
       <div
         className={references}
@@ -57,9 +64,15 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
         }}
         aria-label={t("CharacterInfoCard.referenceLabel")}
       >
-        {character.references.map((reference) => (
-          <span key={reference.chapterId}>{reference.chapterCode}</span>
-        ))}
+        {!loading &&
+          character.references.map((reference) => (
+            <span key={reference.chapterId}>{reference.chapterCode}</span>
+          ))}
+        {loading && (
+          <>
+            <Skeleton length={3} />
+          </>
+        )}
       </div>
     </div>
   );

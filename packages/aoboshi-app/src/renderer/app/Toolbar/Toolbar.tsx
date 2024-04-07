@@ -1,18 +1,19 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { windowControlsWidth } from "../../styles.css";
 import { Container } from "../../common/Container/Container";
+import { useSelector } from "../useSelector";
+import { selectSidebarOpen } from "../settingsSlice";
 import { toolbar } from "./Toolbar.css";
 
-type ToolbarProps = ComponentPropsWithoutRef<"div"> & {
-  sidebarOpen: boolean; // TODO: Read from store
-};
+type ToolbarProps = ComponentPropsWithoutRef<"div">;
 
 export const Toolbar: FunctionComponent<ToolbarProps> = ({
-  sidebarOpen,
   children,
   style,
   ...props
 }) => {
+  const sidebarOpen = useSelector(selectSidebarOpen);
+
   return (
     <div
       className={toolbar}

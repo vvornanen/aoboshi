@@ -19,7 +19,7 @@ const initApplication = async () => {
 };
 
 const installDevTools = async (): Promise<void> => {
-  if (process.env.NODE_ENV === "production") {
+  if (app.isPackaged) {
     return;
   }
 

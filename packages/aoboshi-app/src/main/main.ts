@@ -3,6 +3,8 @@ import { init } from "i18next";
 import { options } from "../i18n";
 import { MigrationService } from "./migration/MigrationService";
 import { getMainApplicationContext } from "./MainApplicationContext";
+import { chromeExtensions } from "./chrome-extensions/chromeExtensions";
+import { ChromeExtensionService } from "./chrome-extensions/ChromeExtensionService";
 
 const applicationContext = getMainApplicationContext();
 
@@ -16,11 +18,26 @@ const initApplication = async () => {
   await migrationService.onAfterInit();
 };
 
+const installDevTools = async (): Promise<void> => {
+  if (process.env.NODE_ENV === "production") {
+    return;
+  }
+
+  const chromeExtensionService = new ChromeExtensionService(applicationContext);
+  await Promise.all([
+    chromeExtensionService.loadExtension(chromeExtensions.reactDevTools),
+  ]);
+};
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
-  await Promise.all([initApplication(), applicationContext.mainWindow.open()]);
+  await Promise.all([
+    initApplication(),
+    installDevTools(),
+    applicationContext.mainWindow.open(),
+  ]);
 });
 
 app.on("window-all-closed", () => {

@@ -43,3 +43,24 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/aoboshi-app
           exitOnceUploaded: true
+
+  package:
+    name: Package
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+
+      - name: Install
+        run: yarn --immutable
+
+      - name: Build
+        run: yarn build
+
+      - name: Package
+        run: yarn package:ci

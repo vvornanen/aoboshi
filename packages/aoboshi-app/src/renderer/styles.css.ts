@@ -59,14 +59,9 @@ export const visuallyHidden = style({
 });
 
 export const drag = style({
-  // Ignore ts error because vanilla-extract does not understand electron-specific style
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  "-webkit-app-region": "drag",
+  WebkitAppRegion: "drag",
 });
 
 export const noDrag = style({
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  "-webkit-app-region": "no-drag",
+  WebkitAppRegion: "no-drag",
 });

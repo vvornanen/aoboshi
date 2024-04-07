@@ -3,7 +3,15 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.husky/_" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/.yarn" />
+      <excludeFolder url="file://$MODULE_DIR$/coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/aoboshi-anki/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/aoboshi-app/.vite" />
       <excludeFolder url="file://$MODULE_DIR$/packages/aoboshi-app/out" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/aoboshi-core/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/aoboshi-kanji/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

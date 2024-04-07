@@ -33,7 +33,6 @@ export const characterButton = style([
       },
       [`&.${buttonClasses.focusVisible}`]: {
         backgroundColor: vars.color.focus,
-        outline: "none",
       },
       [`&.${characterButtonClasses.highlight}.${buttonClasses.focusVisible}`]: {
         backgroundColor: vars.color.focusPrimary,

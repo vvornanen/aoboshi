@@ -12,7 +12,6 @@ export const listItem = style([
     backgroundColor: "unset",
     borderStyle: "none",
     textDecoration: "none",
-    outline: "none",
     cursor: "default",
     paddingTop: 4,
     paddingBottom: 4,

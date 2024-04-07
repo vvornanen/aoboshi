@@ -23,7 +23,6 @@ export const iconButton = style({
     },
     [`&.${buttonClasses.focusVisible}`]: {
       backgroundColor: vars.color.focus,
-      outline: "none",
     },
   },
 });

@@ -68,7 +68,7 @@ export default tseslint.config(
                 "Main process code cannot be imported outside the main process",
             },
             {
-              target: ["**"],
+              target: ["!(storybook)/**"],
               from: "storybook",
               message:
                 "Storybook utils can only be used in storybook config files",

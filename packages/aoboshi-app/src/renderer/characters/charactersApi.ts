@@ -1,5 +1,5 @@
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { ipcApi } from "../app/ipcApi";
+import { ipcApi, IpcApiErrorCode } from "../app/ipcApi";
 
 /**
  * Redux Toolkit Query API for fetching character information from the database
@@ -7,18 +7,31 @@ import { ipcApi } from "../app/ipcApi";
  */
 const charactersApi = ipcApi.injectEndpoints({
   endpoints: (build) => ({
-    findCharacterByLiteral: build.query<Character | null, string>({
-      providesTags: (character) =>
-        character ? [{ type: "Character", id: character.literal }] : [],
+    findCharacterByLiteral: build.query<Character, string>({
+      providesTags: (_result, _error, literal) => [
+        { type: "Character", id: literal },
+      ],
       queryFn: async (literal) => {
         try {
-          return {
-            data: await window.ipcApi.findCharacterByLiteral(literal),
-          };
+          const data = await window.ipcApi.findCharacterByLiteral(literal);
+
+          if (!data) {
+            return {
+              error: {
+                code: IpcApiErrorCode.NotFound,
+                message: `Character '${literal}' not found`,
+              },
+            };
+          }
+
+          return { data };
         } catch (error) {
           console.error(error);
           return {
-            error: `Fetching character '${literal}' failed: ${error}`,
+            error: {
+              code: IpcApiErrorCode.InternalServerError,
+              message: `Fetching character '${literal}' failed: ${error}`,
+            },
           };
         }
       },

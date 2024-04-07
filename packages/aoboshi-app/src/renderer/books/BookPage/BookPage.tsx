@@ -21,16 +21,7 @@ export const BookPage: FunctionComponent = () => {
     return (
       <main>
         <Container style={{ paddingTop: 16, paddingBottom: 48 }}>
-          <Typography>{String(error)}</Typography>
-        </Container>
-      </main>
-    );
-  } else if (!book && !isLoading) {
-    // TODO: Not found page component
-    return (
-      <main>
-        <Container style={{ paddingTop: 16, paddingBottom: 48 }}>
-          <Typography>Book {String(bookId)} not found</Typography>
+          <Typography>{error.message}</Typography>
         </Container>
       </main>
     );

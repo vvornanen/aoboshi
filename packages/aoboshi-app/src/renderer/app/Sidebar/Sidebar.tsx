@@ -53,7 +53,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
           )}
         </List>
         {/* TODO: Error component */}
-        {booksError && <Typography>{String(booksError)}</Typography>}
+        {booksError && <Typography>{booksError.message}</Typography>}
       </nav>
     </aside>
   );

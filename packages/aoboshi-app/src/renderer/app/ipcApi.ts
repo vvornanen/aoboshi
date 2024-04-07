@@ -1,6 +1,16 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
 import { tagTypes } from "../../preload/IpcApi";
 
+export enum IpcApiErrorCode {
+  NotFound = 404,
+  InternalServerError = 500,
+}
+
+export type IpcApiError = {
+  code: IpcApiErrorCode;
+  message: string;
+};
+
 /**
  * Redux Toolkit Query base API for fetching data from Electron IPC API.
  *
@@ -14,7 +24,7 @@ import { tagTypes } from "../../preload/IpcApi";
  * @see https://redux-toolkit.js.org/rtk-query/usage/code-splitting
  */
 export const ipcApi = createApi({
-  baseQuery: fakeBaseQuery<string>(),
+  baseQuery: fakeBaseQuery<IpcApiError>(),
   tagTypes,
   endpoints: () => ({}),
 });

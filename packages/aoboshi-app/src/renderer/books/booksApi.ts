@@ -1,5 +1,5 @@
 import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { ipcApi } from "../app/ipcApi";
+import { ipcApi, IpcApiErrorCode } from "../app/ipcApi";
 
 /**
  * Redux Toolkit Query API for fetching books from the database through
@@ -23,22 +23,37 @@ const booksApi = ipcApi.injectEndpoints({
         } catch (error) {
           console.error(error);
           return {
-            error: `Fetching all books failed: ${error}`,
+            error: {
+              code: IpcApiErrorCode.InternalServerError,
+              message: `Fetching all books failed: ${error}`,
+            },
           };
         }
       },
     }),
-    findBookById: build.query<Book | null, string>({
+    findBookById: build.query<Book, string>({
       providesTags: (book) => (book ? [{ type: "Book", id: book.id }] : []),
       queryFn: async (id) => {
         try {
-          return {
-            data: await window.ipcApi.findBookById(id),
-          };
+          const data = await window.ipcApi.findBookById(id);
+
+          if (!data) {
+            return {
+              error: {
+                code: IpcApiErrorCode.NotFound,
+                message: `Book '${id}' not found`,
+              },
+            };
+          }
+
+          return { data };
         } catch (error) {
           console.error(error);
           return {
-            error: `Fetching book ${id} failed: ${error}`,
+            error: {
+              code: IpcApiErrorCode.InternalServerError,
+              message: `Fetching book '${id}' failed: ${error}`,
+            },
           };
         }
       },

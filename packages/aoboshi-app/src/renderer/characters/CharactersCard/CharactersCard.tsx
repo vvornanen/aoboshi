@@ -97,7 +97,7 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
                 />
               )}
               {/* TODO: Error component */}
-              {error && <Typography>{String(error)}</Typography>}
+              {error && <Typography>{error.message}</Typography>}
             </Card>
           </Popup>
         </ClickAwayListener>

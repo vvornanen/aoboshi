@@ -17,7 +17,8 @@ type ChapterSectionProps = Omit<
   ComponentPropsWithoutRef<"section">,
   "children"
 > & {
-  chapter: Chapter;
+  chapter?: Chapter;
+  loading?: boolean;
 };
 
 const getLiterals = (chapter: Chapter): string[] => {
@@ -30,13 +31,14 @@ const getLiterals = (chapter: Chapter): string[] => {
 
 export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
   chapter,
+  loading = false,
   className,
   ...props
 }) => {
   const headingId = useId();
-  const literals = getLiterals(chapter);
+  const literals = chapter ? getLiterals(chapter) : [];
 
-  const statisticsByChapter = useStatisticsByChapter(chapter.id);
+  const statisticsByChapter = useStatisticsByChapter(chapter?.id || "");
   const statisticsByCharacters = useStatisticsByCharacters(literals);
 
   const characters = useMemo(
@@ -54,21 +56,32 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
 
   return (
     <section
-      key={chapter.code}
       className={clsx(chapterSection, className)}
       {...props}
       aria-labelledby={headingId}
+      aria-busy={loading}
     >
       <ChapterSectionHeader
         id={headingId}
-        title={chapter.title}
+        title={chapter?.title || ""}
         completed={completed}
         className={sectionHeader}
+        loading={loading}
       />
-      {characters.length > 0 && (
+      {!loading && characters.length > 0 && (
         <>
           <ChapterProgress data={statisticsByChapter} className={progress} />
           <CharactersCard characters={characters} />
+        </>
+      )}
+      {loading && (
+        <>
+          <ChapterProgress
+            loading
+            data={statisticsByChapter}
+            className={progress}
+          />
+          <CharactersCard loading />
         </>
       )}
     </section>

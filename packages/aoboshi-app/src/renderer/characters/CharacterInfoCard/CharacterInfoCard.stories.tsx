@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
-import { Grade } from "@vvornanen/aoboshi-core/characters/Character";
+import { characterFixtures } from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {
@@ -15,31 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    character: {
-      literal: "学",
-      radical: "子",
-      grade: Grade.Kyoiku1,
-      strokeCount: 8,
-      references: [
-        {
-          bookId: "1",
-          chapterId: "1",
-          chapterCode: "N5",
-        },
-        {
-          bookId: "2",
-          chapterId: "2",
-          chapterCode: "BKB-2",
-        },
-        {
-          bookId: "3",
-          chapterId: "3",
-          chapterCode: "REF",
-        },
-      ],
-      onyomi: ["ガク"],
-      kunyomi: ["まな.ぶ"],
-    },
+    character: characterFixtures["学"],
+    loading: false,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -57,36 +34,7 @@ export const Basic: Story = {
 export const Readings: Story = {
   args: {
     ...Basic.args,
-    character: {
-      literal: "代",
-      radical: "亻",
-      grade: Grade.Kyoiku3,
-      strokeCount: 5,
-      references: [
-        {
-          bookId: "1",
-          chapterId: "1",
-          chapterCode: "N4",
-        },
-        {
-          bookId: "2",
-          chapterId: "2",
-          chapterCode: "BKB-37",
-        },
-      ],
-      onyomi: ["ダイ", "タイ"],
-      kunyomi: [
-        "か.わる",
-        "かわ.る",
-        "かわ.り",
-        "か.わり",
-        "-がわ.り",
-        "-が.わり",
-        "か.える",
-        "よ",
-        "しろ",
-      ],
-    },
+    character: characterFixtures["代"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -101,21 +49,7 @@ export const Readings: Story = {
 export const ManyStrokes: Story = {
   args: {
     ...Basic.args,
-    character: {
-      literal: "鶴",
-      radical: "鳥",
-      grade: Grade.Joyo,
-      strokeCount: 21,
-      references: [
-        {
-          bookId: "1",
-          chapterId: "1",
-          chapterCode: "N1",
-        },
-      ],
-      onyomi: ["カク"],
-      kunyomi: ["つる"],
-    },
+    character: characterFixtures["鶴"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -130,26 +64,7 @@ export const ManyStrokes: Story = {
 export const Jinmeiyo: Story = {
   args: {
     ...Basic.args,
-    character: {
-      literal: "伊",
-      radical: "亻",
-      grade: Grade.Jinmeiyo,
-      strokeCount: 6,
-      references: [
-        {
-          bookId: "1",
-          chapterId: "1",
-          chapterCode: "N1",
-        },
-        {
-          bookId: "2",
-          chapterId: "2",
-          chapterCode: "IKB2-コ5",
-        },
-      ],
-      onyomi: ["イ"],
-      kunyomi: ["かれ"],
-    },
+    character: characterFixtures["伊"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -164,15 +79,7 @@ export const Jinmeiyo: Story = {
 export const Kana: Story = {
   args: {
     ...Basic.args,
-    character: {
-      literal: "あ",
-      radical: null,
-      grade: null,
-      strokeCount: 3,
-      references: [],
-      onyomi: [],
-      kunyomi: [],
-    },
+    character: characterFixtures["あ"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -186,14 +93,13 @@ export const Kana: Story = {
 export const Empty: Story = {
   args: {
     ...Basic.args,
-    character: {
-      literal: "",
-      radical: null,
-      grade: null,
-      strokeCount: 0,
-      references: [],
-      onyomi: [],
-      kunyomi: [],
-    },
+    character: characterFixtures.empty,
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    ...Basic.args,
+    loading: true,
   },
 };

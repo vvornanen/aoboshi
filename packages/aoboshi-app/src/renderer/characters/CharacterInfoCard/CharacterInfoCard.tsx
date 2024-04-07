@@ -11,6 +11,7 @@ import { infoBox, infoBoxContainer } from "./CharacterInfoCard.css";
 type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
   character: Character;
   size?: number;
+  loading?: boolean;
 };
 
 /**
@@ -19,13 +20,19 @@ type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
 export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
   character,
   size = 22,
+  loading = false,
   ...props
 }) => {
   const { t } = useTranslation();
   const columns = 28;
 
   return (
-    <div role="region" aria-label={character.literal} {...props}>
+    <div
+      role="region"
+      aria-label={character.literal}
+      aria-busy={loading}
+      {...props}
+    >
       <div className={labelSmall}>{t("CharacterInfoCard.caption")}</div>
       <div
         className={infoBoxContainer}
@@ -68,7 +75,7 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
             padding: "8px 16px",
           }}
         >
-          <CharacterFigures character={character} />
+          <CharacterFigures character={character} loading={loading} />
         </div>
         <div
           className={infoBox}
@@ -83,9 +90,14 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
             onyomi={character.onyomi}
             kunyomi={character.kunyomi}
             max={10}
+            loading={loading}
           />
         </div>
-        <CharacterStrokes character={character} columns={columns} />
+        <CharacterStrokes
+          character={character}
+          columns={columns}
+          loading={loading}
+        />
       </div>
     </div>
   );

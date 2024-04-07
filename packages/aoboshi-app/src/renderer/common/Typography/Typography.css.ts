@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 import { vars } from "../../theme/theme.css";
 
 type VariantParameters = {
@@ -8,17 +8,22 @@ type VariantParameters = {
   lineHeight?: number;
 };
 
+export const typographyLineHeight = createVar();
+
 const createVariant = ({
   fontFamily,
   fontSize,
-  fontWeight,
-  lineHeight,
+  fontWeight = 400,
+  lineHeight = 1.5,
 }: VariantParameters = {}) => {
   return {
     fontFamily: fontFamily || vars.typography.fontFamily,
     fontSize: fontSize ? `${fontSize}px` : vars.typography.fontSize,
-    fontWeight: fontWeight || 400,
-    lineHeight: lineHeight || 1.5,
+    fontWeight: fontWeight,
+    lineHeight: lineHeight,
+    vars: {
+      [typographyLineHeight]: String(lineHeight),
+    },
   };
 };
 

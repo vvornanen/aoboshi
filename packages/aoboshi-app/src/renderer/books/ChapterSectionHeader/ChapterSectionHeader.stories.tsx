@@ -13,6 +13,7 @@ export const Default: Story = {
   args: {
     title: "タイトル",
     completed: false,
+    loading: false,
   },
 };
 
@@ -21,5 +22,13 @@ export const Completed: Story = {
   args: {
     ...Default.args,
     completed: true,
+  },
+};
+
+export const Loading: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    loading: true,
   },
 };

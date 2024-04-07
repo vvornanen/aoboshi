@@ -10,15 +10,20 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
+import { Provider } from "react-redux";
 import { options } from "../i18n";
 import { App } from "./app/App";
+import { store } from "./app/store";
 import "./styles.css";
 
 use(initReactI18next).init(options);
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
+
 root.render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
 );

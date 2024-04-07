@@ -1,4 +1,10 @@
-import { FunctionComponent, MouseEvent, useRef, useState } from "react";
+import {
+  FunctionComponent,
+  KeyboardEventHandler,
+  MouseEvent,
+  useRef,
+  useState,
+} from "react";
 import { ClickAwayListener } from "@mui/base";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
 import { Character } from "@vvornanen/aoboshi-core/characters/Character";
@@ -55,6 +61,12 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
     popoverAnchorRef.current = null;
   };
 
+  const handleKeyDown: KeyboardEventHandler = (event) => {
+    if (event.key === "Escape" || event.key === "Tab") {
+      handleClose();
+    }
+  };
+
   return (
     <Card className={charactersCard}>
       {!loading &&
@@ -65,6 +77,7 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
             highlight={character.highlight}
             selected={character.literal === selectedCharacter}
             onClick={(event) => handleClick(character.literal, event)}
+            onKeyDown={handleKeyDown}
           >
             {character.literal}
           </CharacterButton>
@@ -80,7 +93,11 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
         />
       )}
       {popoverOpen && (
-        <ClickAwayListener onClickAway={handleClose}>
+        <ClickAwayListener
+          mouseEvent="onMouseDown"
+          touchEvent="onTouchStart"
+          onClickAway={handleClose}
+        >
           <Popup
             anchor={popoverAnchorRef.current}
             open={popoverOpen}

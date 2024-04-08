@@ -51,5 +51,6 @@ aoboshi-app/
 ├─ vite.main.config.ts
 ├─ vite.preload.config.ts
 ├─ vite.renderer.config.ts
+├─ vite.storybook.config.ts
 └─ vitest.config.ts
 ```

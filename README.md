@@ -20,11 +20,40 @@ yarn start
 
 ## Tests
 
+Testing strategies include:
+
+- Unit tests run by Vitest
+- Manual tests in Storybook
+- Visual snapshot tests run by Chromatic
+- Integration tests with Anki run by Vitest
+- End-to-end tests with Electron run by Playwright
+
+All automatated tests are run also in GitHub Actions,
+except integration tests which require Anki running with Anki Connect addon.
+
+### Unit tests
+
+Unit tests have been written mostly for other code than UI components.
+The tests are run with vitest.
+
 ```
 yarn test
 ```
 
-## Integration tests
+### Manual testing
+
+Individual UI components can be tested manually in Storybook.
+
+```
+yarn storybook
+```
+
+### Visual snapshot tests
+
+Visual snapshot tests are run on CI by Chromatic,
+and can also be triggered manually in Storybook ([docs](https://storybook.js.org/docs/writing-tests/visual-testing)).
+
+### Integration tests
 
 Works only locally and requires Anki running with [AnkiConnect](https://ankiweb.net/shared/info/2055492159).
 
@@ -37,6 +66,16 @@ ANKI_API_KEY=secret
 
 ```
 yarn test:integration
+```
+
+### Playwright tests
+
+Playwright runs end-to-end tests inside Electron.
+
+```
+yarn build
+yarn package:ci
+yarn playwright test
 ```
 
 ## Upgrading dependencies

@@ -18,3 +18,7 @@ coverage
 .DS_Store
 packages/*/dist
 packages/*/*.tsbuildinfo
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

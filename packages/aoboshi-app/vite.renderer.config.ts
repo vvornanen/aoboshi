@@ -1,6 +1,7 @@
-import { defineConfig, Plugin } from "vite";
+import { ConfigEnv, defineConfig, Plugin, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import { exposeRendererPlugin } from "./vite.base.config";
 
 type ContentSecurityPolicyOptions = {
   /**
@@ -52,19 +53,35 @@ const contentSecurityPolicyPlugin = ({
 });
 
 // https://vitejs.dev/config
-export default defineConfig({
-  plugins: [
-    react(),
-    vanillaExtractPlugin(),
-    contentSecurityPolicyPlugin({
-      apply: "serve",
-      content:
-        "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self';",
-    }),
-    contentSecurityPolicyPlugin({
-      apply: "build",
-      content: "default-src 'none'; script-src 'self'; style-src 'self';",
-    }),
-  ],
-  root: "src/renderer",
+export default defineConfig((env) => {
+  const forgeEnv = env as ConfigEnv<"renderer">;
+  const { mode, forgeConfigSelf } = forgeEnv;
+  const name = forgeConfigSelf.name ?? "";
+
+  return {
+    root: "src/renderer",
+    mode,
+    base: "./",
+    build: {
+      outDir: `../../.vite/renderer/${name}`,
+    },
+    plugins: [
+      react(),
+      vanillaExtractPlugin(),
+      exposeRendererPlugin(name),
+      contentSecurityPolicyPlugin({
+        apply: "serve",
+        content:
+          "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self';",
+      }),
+      contentSecurityPolicyPlugin({
+        apply: "build",
+        content: "default-src 'none'; script-src 'self'; style-src 'self';",
+      }),
+    ],
+    resolve: {
+      preserveSymlinks: true,
+    },
+    clearScreen: false,
+  } satisfies UserConfig;
 });

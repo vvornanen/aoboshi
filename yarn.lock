@@ -5230,10 +5230,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.18":
-  version: 18.16.10
-  resolution: "@types/node@npm:18.16.10"
-  checksum: 10/746729163982d9fb4ec62ec04e166d44589da6cadf2a43ec4e67c4b3307fdf69e9af56a0a75fce244700ded11bc29981a10c8142f4c75588d83a70ae81bd73bb
+"@types/node@npm:^20.9.0":
+  version: 20.12.7
+  resolution: "@types/node@npm:20.12.7"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10/b4a28a3b593a9bdca5650880b6a9acef46911d58cf7cfa57268f048e9a7157a7c3196421b96cea576850ddb732e3b54bc982c8eb5e1e5ef0635d4424c2fce801
   languageName: node
   linkType: hard
 
@@ -5812,7 +5814,7 @@ __metadata:
     chroma-js: "npm:^2.4.2"
     chromatic: "npm:^11.3.0"
     clsx: "npm:^2.1.0"
-    electron: "npm:28.2.7"
+    electron: "npm:29.3.0"
     i18next: "npm:^23.11.1"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.2.0"
@@ -8063,16 +8065,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:28.2.7":
-  version: 28.2.7
-  resolution: "electron@npm:28.2.7"
+"electron@npm:29.3.0":
+  version: 29.3.0
+  resolution: "electron@npm:29.3.0"
   dependencies:
     "@electron/get": "npm:^2.0.0"
-    "@types/node": "npm:^18.11.18"
+    "@types/node": "npm:^20.9.0"
     extract-zip: "npm:^2.0.1"
   bin:
     electron: cli.js
-  checksum: 10/8a2a2d23d2a2de3971bd61a6a58b71093bfc3620adc7785dad820efb6731994f8548bf63f35205eb443e035630e6be3253d7504ce7d66bc07f859a3780ed8e96
+  checksum: 10/d7c16603b2d0db500b2d23f412e232e8ac54b1a3dc8ca10ec337afbb4520e790780efc5e0020ff4eae49a61bc9746b5eebd6e2db4e4608b44816c86d9655b539
   languageName: node
   linkType: hard
 
@@ -12444,21 +12446,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-abi@npm:^3.0.0":
-  version: 3.40.0
-  resolution: "node-abi@npm:3.40.0"
+"node-abi@npm:3.57.0":
+  version: 3.57.0
+  resolution: "node-abi@npm:3.57.0"
   dependencies:
     semver: "npm:^7.3.5"
-  checksum: 10/e9f137f9e2eefb4d508514fd00f292d01cb77f695f1511e6f51f272a91c161ad15676ae9590ba53da09845b852b6c14a829e2f033c5488e03127ea502213be93
-  languageName: node
-  linkType: hard
-
-"node-abi@npm:^3.3.0, node-abi@npm:^3.45.0":
-  version: 3.51.0
-  resolution: "node-abi@npm:3.51.0"
-  dependencies:
-    semver: "npm:^7.3.5"
-  checksum: 10/7ab89e7ecfee46cfa33b5687e57d55d25472af46f0df79876fa6b0a00ba4d72cd66519462ca269d42d19a789f177f5d0b17c1d0f201572704e63bcc7de9a75c4
+  checksum: 10/d0634a5f4de326e7cbf8b23e5f91d809ea3996ac42b639263b5ff69a11eab286eab94736c07a6f931e173c75cc9ab6c6e7ec4b70ebb7049648a1d499b665dd08
   languageName: node
   linkType: hard
 

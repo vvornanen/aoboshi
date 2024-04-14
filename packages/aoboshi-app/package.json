@@ -57,7 +57,7 @@
     "@vanilla-extract/vite-plugin": "^4.0.7",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "chromatic": "^11.3.0",
-    "electron": "28.2.7",
+    "electron": "29.3.0",
     "prop-types": "^15.8.1",
     "storybook": "^8.0.8",
     "storybook-addon-remix-react-router": "^3.0.0",

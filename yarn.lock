@@ -5605,6 +5605,8 @@ __metadata:
 "@vvornanen/aoboshi-core@workspace:^, @vvornanen/aoboshi-core@workspace:packages/aoboshi-core":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi-core@workspace:packages/aoboshi-core"
+  dependencies:
+    "@js-temporal/polyfill": "npm:^0.4.4"
   languageName: unknown
   linkType: soft
 

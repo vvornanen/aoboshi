@@ -5,7 +5,7 @@ export type StatisticsByDay = {
   id: string;
 
   /** ISO 8601 date string */
-  date: Date;
+  date: string;
 
   /** String containing new characters added to the deck on this day */
   addedCharacters: string;

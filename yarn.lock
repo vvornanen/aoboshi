@@ -5539,7 +5539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki":
+"@vvornanen/aoboshi-anki@workspace:^, @vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki"
   dependencies:
@@ -5580,6 +5580,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.14.2"
     "@vanilla-extract/vite-plugin": "npm:^4.0.7"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
+    "@vvornanen/aoboshi-anki": "workspace:^"
     "@vvornanen/aoboshi-core": "workspace:^"
     "@vvornanen/aoboshi-kanji": "workspace:^"
     better-sqlite3: "npm:^9.5.0"

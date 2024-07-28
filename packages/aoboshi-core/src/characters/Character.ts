@@ -1,7 +1,7 @@
 /** Matches all kanji characters in Unicode 15.1 */
 export const KANJI_REGEXP =
-  /[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{37FFF}々]/u;
-export const KANA_REGEXP = /[ぁ-んァ-ン]/;
+  /^[\u3400-\u9FFF\uF900-\uFAFF\u{20000}-\u{37FFF}々]$/u;
+export const KANA_REGEXP = /^[ぁ-んァ-ン]$/;
 
 /**
  * Grade classification codes used in Kanjidic.

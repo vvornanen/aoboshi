@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4"
+  },
+  "devDependencies": {
+    "vitest-mock-extended": "^2.0.0"
   }
 }

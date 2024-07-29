@@ -1,6 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { randomId } from "../randomId";
 import { maxDate, minDate } from "../dateUtils";
+import { BookRepository } from "../books/BookRepository";
+import { Chapter } from "../books/Book";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
 import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
@@ -15,6 +17,7 @@ import {
 import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByDay } from "./StatisticsByDay";
+import { StatisticsByChapter } from "./StatisticsByChapter";
 
 /**
  * Adapter for fetching card statistics from an external source such as Anki
@@ -29,6 +32,7 @@ export type GetCardStatisticsByCharacter = (
 /** Generates statistics from card reviews */
 export class StatisticsService {
   constructor(
+    private bookRepository: BookRepository,
     private statisticsByChapterRepository: StatisticsByChapterRepository,
     private statisticsByCharacterRepository: StatisticsByCharacterRepository,
     private statisticsByDayRepository: StatisticsByDayRepository,
@@ -75,6 +79,7 @@ export class StatisticsService {
     return newIncrement;
   }
 
+  // TODO: Process new cards
   async getStatisticsByCharacters(reviews: CardReview[]) {
     const timeZoneConfig = this.getTimeZoneConfig();
 
@@ -198,5 +203,75 @@ export class StatisticsService {
       numberOfReviewedCharacters: reviewedCharacters.size,
       numberOfReviews,
     } satisfies StatisticsByDay;
+  }
+
+  getStatisticsByChapters(
+    statisticsByCharacters: Map<string, StatisticsByCharacter>,
+  ) {
+    const books = this.bookRepository.findAll();
+    const statisticsByChapters: StatisticsByChapter[] = [];
+
+    for (const book of books) {
+      for (const volume of book.volumes) {
+        for (const chapter of volume.chapters) {
+          statisticsByChapters.push(
+            this.getStatisticsByChapter(
+              book.id,
+              chapter,
+              statisticsByCharacters,
+            ),
+          );
+        }
+      }
+    }
+
+    return statisticsByChapters;
+  }
+
+  getStatisticsByChapter(
+    bookId: string,
+    chapter: Chapter,
+    statisticsByCharacters: Map<string, StatisticsByCharacter>,
+  ): StatisticsByChapter {
+    const seenCharacters = new Set<string>();
+    const newCharacters = new Set<string>();
+    const unseenCharacters = new Set<string>();
+
+    for (const character of chapter.characters) {
+      const literal =
+        typeof character === "string" ? character : character.literal;
+      const statisticsByCharacter = statisticsByCharacters.get(literal);
+
+      if (!statisticsByCharacter) {
+        unseenCharacters.add(literal);
+        continue;
+      }
+
+      if (statisticsByCharacter.numberOfReviews > 0) {
+        seenCharacters.add(literal);
+      } else {
+        unseenCharacters.add(literal);
+      }
+
+      if (
+        statisticsByCharacter.numberOfReviews === 0 &&
+        statisticsByCharacter.numberOfCards > 0
+      ) {
+        newCharacters.add(literal);
+      }
+    }
+
+    return {
+      id: randomId(),
+      bookId,
+      chapterId: chapter.id,
+      seenCharacters: Array.from(seenCharacters).join(""),
+      newCharacters: Array.from(newCharacters).join(""),
+      unseenCharacters: Array.from(unseenCharacters).join(""),
+      numberOfSeenCharacters: seenCharacters.size,
+      numberOfNewCharacters: newCharacters.size,
+      numberOfUnseenCharacters: unseenCharacters.size,
+      totalNumberOfCharacters: chapter.characters.length,
+    };
   }
 }

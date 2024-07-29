@@ -1,6 +1,8 @@
 import { describe, expect, test, vi, afterEach } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { randomId } from "../randomId";
+import { BookRepository } from "../books/BookRepository";
+import { Chapter } from "../books/Book";
 import { StatisticsService } from "./StatisticsService";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
@@ -9,6 +11,8 @@ import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
 import { CardReview } from "./CardReview";
 import * as fixtures from "./statisticsFixtures";
 import { StatisticsByDay } from "./StatisticsByDay";
+import { StatisticsByCharacter } from "./StatisticsByCharacter";
+import { StatisticsByChapter } from "./StatisticsByChapter";
 
 vi.mock("../randomId", () => {
   return {
@@ -22,6 +26,7 @@ const mockRandomIdOnce = (value: string) => {
   }
 };
 
+const bookRepository = mock<BookRepository>();
 const statisticsByChapterRepository = mock<StatisticsByChapterRepository>();
 const statisticsByCharacterRepository = mock<StatisticsByCharacterRepository>();
 const statisticsByDayRepository = mock<StatisticsByDayRepository>();
@@ -29,6 +34,7 @@ const statisticsIncrementRepository = mock<StatisticsIncrementRepository>();
 const getCardStatisticsByCharacter = vi.fn();
 
 const statisticsService = new StatisticsService(
+  bookRepository,
   statisticsByChapterRepository,
   statisticsByCharacterRepository,
   statisticsByDayRepository,
@@ -269,3 +275,244 @@ describe("getStatisticsByDays", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("getStatisticsByChapter", () => {
+  test("empty chapter", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "",
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      toMap(fixtures.multipleReviews.statisticsByCharacters),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "",
+      newCharacters: "",
+      unseenCharacters: "",
+      numberOfSeenCharacters: 0,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 0,
+      totalNumberOfCharacters: 0,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("no character statistics", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "学",
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      new Map(),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "",
+      newCharacters: "",
+      unseenCharacters: "学",
+      numberOfSeenCharacters: 0,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 1,
+      totalNumberOfCharacters: 1,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("one character in string", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "学",
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      toMap(fixtures.oneCardOneReview.statisticsByCharacters),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "学",
+      newCharacters: "",
+      unseenCharacters: "",
+      numberOfSeenCharacters: 1,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 0,
+      totalNumberOfCharacters: 1,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("one character in array", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: [{ literal: "学", n: 1 }],
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      toMap(fixtures.oneCardOneReview.statisticsByCharacters),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "学",
+      newCharacters: "",
+      unseenCharacters: "",
+      numberOfSeenCharacters: 1,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 0,
+      totalNumberOfCharacters: 1,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("all unseen", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "学大日",
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      new Map(),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "",
+      newCharacters: "",
+      unseenCharacters: "学大日",
+      numberOfSeenCharacters: 0,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 3,
+      totalNumberOfCharacters: 3,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("some seen, no new", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "学大日",
+    };
+
+    mockRandomIdOnce("1");
+
+    const seen = "学大";
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      toMap(
+        fixtures.multipleReviews.statisticsByCharacters.filter(({ literal }) =>
+          seen.includes(literal),
+        ),
+      ),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "学大",
+      newCharacters: "",
+      unseenCharacters: "日",
+      numberOfSeenCharacters: 2,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 1,
+      totalNumberOfCharacters: 3,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  // TODO: Needs statistics with number of cards but without reviews
+  test.todo("some seen, some new");
+
+  test("all seen", () => {
+    const chapter: Chapter = {
+      id: "chap1",
+      code: "2",
+      title: "test",
+      characters: "学大日",
+    };
+
+    mockRandomIdOnce("1");
+
+    const actual = statisticsService.getStatisticsByChapter(
+      "book1",
+      chapter,
+      toMap(fixtures.multipleReviews.statisticsByCharacters),
+    );
+
+    const expected: StatisticsByChapter = {
+      id: "1",
+      bookId: "book1",
+      chapterId: "chap1",
+      seenCharacters: "学大日",
+      newCharacters: "",
+      unseenCharacters: "",
+      numberOfSeenCharacters: 3,
+      numberOfNewCharacters: 0,
+      numberOfUnseenCharacters: 0,
+      totalNumberOfCharacters: 3,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+const toMap = (stats: StatisticsByCharacter[]) => {
+  const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
+  stats.forEach((stats) => statisticsByCharacters.set(stats.literal, stats));
+  return statisticsByCharacters;
+};

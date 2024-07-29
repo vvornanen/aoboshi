@@ -3,6 +3,7 @@ import { mock } from "vitest-mock-extended";
 import { randomId } from "../randomId";
 import { BookRepository } from "../books/BookRepository";
 import { Chapter } from "../books/Book";
+import { grades } from "../fixtures/bookFixtures";
 import { StatisticsService } from "./StatisticsService";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
@@ -506,6 +507,54 @@ describe("getStatisticsByChapter", () => {
       numberOfUnseenCharacters: 0,
       totalNumberOfCharacters: 3,
     };
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("getStatisticsByChapter", () => {
+  test("grades book", () => {
+    mockRandomIdOnce("1");
+
+    bookRepository.findAll.mockReturnValueOnce([grades]);
+
+    const seenCharacters = [
+      ..."一右雨王下火花貝学九金月見五口左三山子四字七手十出女小上森人水川大中田土二日木目六",
+    ];
+
+    const actual = statisticsService.getStatisticsByChapters(
+      toMap(
+        seenCharacters.map((literal, index) => ({
+          id: String(index + 1),
+          literal,
+          firstAdded: "2016-01-12",
+          firstReviewed: "2016-01-13",
+          lastReviewed: "2016-01-13",
+          numberOfReviews: 1,
+          numberOfCards: 1,
+        })),
+      ),
+    );
+
+    const expected: StatisticsByChapter[] = [
+      {
+        id: "1",
+        bookId: "AtLesfR65Adc7q2XHVK7A8",
+        chapterId: "4phqJluvSvwNLgogGM5bZw",
+        seenCharacters: seenCharacters.join(""),
+        newCharacters: "",
+        unseenCharacters: [...grades.volumes[0].chapters[0].characters]
+          .filter(
+            (literal) =>
+              typeof literal === "string" && !seenCharacters.includes(literal),
+          )
+          .join(""),
+        numberOfSeenCharacters: seenCharacters.length,
+        numberOfNewCharacters: 0,
+        numberOfUnseenCharacters: 80 - seenCharacters.length,
+        totalNumberOfCharacters: 80,
+      },
+    ];
 
     expect(actual).toEqual(expected);
   });

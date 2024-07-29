@@ -6,5 +6,5 @@ export type CardReview = {
   expression: string;
 
   /** ISO 8601 datetime string */
-  reviewTime: string;
+  reviewTime: string; // TODO: Allow null to represent a new card
 };

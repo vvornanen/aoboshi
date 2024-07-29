@@ -11,19 +11,19 @@ export type StatisticsByCharacter = {
    * ISO 8601 date string when the first card containing this character was
    * added to the deck.
    */
-  firstAdded: string;
+  firstAdded: string; // TODO: Allow null to represent unseen characters
 
   /**
    * ISO 8601 date string when a card containing this character was reviewed
    * the first time.
    */
-  firstReviewed: string;
+  firstReviewed: string; // TODO: Allow null to represent new characters
 
   /**
    * ISO 8601 date string when a card containing this character was reviewed
    * the last time.
    */
-  lastReviewed: string;
+  lastReviewed: string; // TODO: Allow null to represent new characters
 
   /**
    * Total number of reviews of cards containing this character.

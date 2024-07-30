@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { CardReview } from "./CardReview";
 import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
@@ -117,4 +118,52 @@ export const multipleReviews = {
   ] satisfies StatisticsByCharacter[],
   reviewDays: ["2016-01-13", "2016-01-14"],
   latestReviewTime: "2016-01-14T20:15:02.33Z",
+};
+
+export const seenCharacter = (
+  value:
+    | string
+    | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
+) => {
+  return {
+    id: randomUUID(),
+    firstAdded: "2015-12-01",
+    firstReviewed: "2016-01-13",
+    lastReviewed: "2016-01-13",
+    numberOfReviews: 1,
+    numberOfCards: 1,
+    ...(typeof value === "string" ? { literal: value } : value),
+  } satisfies StatisticsByCharacter;
+};
+
+export const unseenCharacter = (
+  value:
+    | string
+    | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
+) => {
+  return {
+    id: randomUUID(),
+    firstAdded: null,
+    firstReviewed: null,
+    lastReviewed: null,
+    numberOfReviews: 0,
+    numberOfCards: 0,
+    ...(typeof value === "string" ? { literal: value } : value),
+  } satisfies StatisticsByCharacter;
+};
+
+export const newCharacter = (
+  value:
+    | string
+    | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
+) => {
+  return {
+    id: randomUUID(),
+    firstAdded: "2015-12-01",
+    firstReviewed: null,
+    lastReviewed: null,
+    numberOfReviews: 0,
+    numberOfCards: 1,
+    ...(typeof value === "string" ? { literal: value } : value),
+  } satisfies StatisticsByCharacter;
 };

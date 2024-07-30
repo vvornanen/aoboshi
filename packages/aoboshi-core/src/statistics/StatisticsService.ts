@@ -124,14 +124,20 @@ export class StatisticsService {
           };
           statisticsByCharacters.set(literal, statisticsByCharacter);
         } else {
-          statisticsByCharacter.firstReviewed = minDate(
-            statisticsByCharacter.firstReviewed,
-            reviewDate,
-          ).toString();
-          statisticsByCharacter.lastReviewed = maxDate(
-            statisticsByCharacter.lastReviewed,
-            reviewDate,
-          ).toString();
+          statisticsByCharacter.firstReviewed =
+            statisticsByCharacter.firstReviewed === null
+              ? reviewDate.toString()
+              : minDate(
+                  statisticsByCharacter.firstReviewed,
+                  reviewDate,
+                ).toString();
+          statisticsByCharacter.lastReviewed =
+            statisticsByCharacter.lastReviewed === null
+              ? reviewDate.toString()
+              : maxDate(
+                  statisticsByCharacter.lastReviewed,
+                  reviewDate,
+                ).toString();
           statisticsByCharacter.numberOfReviews++;
         }
       }

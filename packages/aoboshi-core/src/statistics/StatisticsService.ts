@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { randomId } from "../randomId";
-import { maxDate, minDate } from "../dateUtils";
+import { nullableMaxDate, nullableMinDate } from "../dateUtils";
 import { BookRepository } from "../books/BookRepository";
 import { Chapter } from "../books/Book";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
@@ -141,23 +141,17 @@ export class StatisticsService {
           };
           statisticsByCharacters.set(literal, statisticsByCharacter);
         } else {
-          if (statisticsByCharacter.firstReviewed && reviewDate) {
-            statisticsByCharacter.firstReviewed = minDate(
+          statisticsByCharacter.firstReviewed =
+            nullableMinDate(
               statisticsByCharacter.firstReviewed,
               reviewDate,
-            ).toString();
-          } else if (!statisticsByCharacter.firstReviewed && reviewDate) {
-            statisticsByCharacter.firstReviewed = reviewDate.toString();
-          }
+            )?.toString() || null;
 
-          if (statisticsByCharacter.lastReviewed && reviewDate) {
-            statisticsByCharacter.lastReviewed = maxDate(
+          statisticsByCharacter.lastReviewed =
+            nullableMaxDate(
               statisticsByCharacter.lastReviewed,
               reviewDate,
-            ).toString();
-          } else if (!statisticsByCharacter.lastReviewed && reviewDate) {
-            statisticsByCharacter.lastReviewed = reviewDate.toString();
-          }
+            )?.toString() || null;
 
           if (reviewDate) {
             statisticsByCharacter.numberOfReviews++;

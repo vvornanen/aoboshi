@@ -84,8 +84,8 @@ export const getCharactersFromExpression = (expression: string): string[] => {
  * Preserves first review and last review dates.
  * Sums number of reviews.
  *
- * @param first
- * @param second
+ * @param first existing data
+ * @param second incremental data
  */
 export const mergeStatisticsByCharacter = (
   first: StatisticsByCharacter | undefined,
@@ -119,6 +119,14 @@ export const mergeStatisticsByCharacter = (
   };
 };
 
+/**
+ * Merges incremental statistics with existing data.
+ *
+ * Sums number of reviews.
+ *
+ * @param first existing data
+ * @param second incremental data
+ */
 export const mergeStatisticsByDay = (
   first: StatisticsByDay | undefined,
   second: Omit<StatisticsByDay, "id">,
@@ -158,6 +166,15 @@ export const mergeStatisticsByDay = (
   };
 };
 
+/**
+ * Merges incremental statistics with existing data.
+ *
+ * Updates statuses so that each character appears only in one set using
+ * precedence seen > new > unseen.
+ *
+ * @param first existing data
+ * @param second incremental data
+ */
 export const mergeStatisticsByChapter = (
   first: StatisticsByChapter | undefined,
   second: Omit<StatisticsByChapter, "id">,

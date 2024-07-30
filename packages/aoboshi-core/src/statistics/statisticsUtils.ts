@@ -4,6 +4,7 @@ import { randomId } from "../randomId";
 import { nullableMaxDate, nullableMinDate } from "../dateUtils";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByDay } from "./StatisticsByDay";
+import { StatisticsByChapter } from "./StatisticsByChapter";
 
 /** Specifies a time zone valid in the given period */
 export type TimeZoneConfig = {
@@ -154,5 +155,62 @@ export const mergeStatisticsByDay = (
     numberOfFirstSeenCharacters: firstSeenCharacters.length,
     numberOfReviewedCharacters: reviewedCharacters.length,
     numberOfReviews: first.numberOfReviews + second.numberOfReviews,
+  };
+};
+
+export const mergeStatisticsByChapter = (
+  first: StatisticsByChapter | undefined,
+  second: Omit<StatisticsByChapter, "id">,
+): StatisticsByChapter => {
+  if (!first) {
+    return {
+      id: randomId(),
+      ...second,
+    };
+  }
+
+  if (first.bookId !== second.bookId) {
+    throw new Error(
+      `Expected book ids to equal but got ${first.bookId} and ${second.bookId}`,
+    );
+  }
+
+  if (first.chapterId !== second.chapterId) {
+    throw new Error(
+      `Expected chapter ids to equal but got ${first.chapterId} and ${second.chapterId}`,
+    );
+  }
+
+  const seenCharacters = new Set([
+    ...first.seenCharacters,
+    ...second.seenCharacters,
+  ]);
+  const newCharacters = new Set([
+    ...first.newCharacters,
+    ...second.newCharacters,
+  ]);
+  const unseenCharacters = new Set([
+    ...first.unseenCharacters,
+    ...second.unseenCharacters,
+  ]);
+
+  // TODO: Refactor to use Set difference() after Electron upgrades to Node v22
+  for (const literal of seenCharacters) {
+    newCharacters.delete(literal);
+    unseenCharacters.delete(literal);
+  }
+
+  for (const literal of newCharacters) {
+    unseenCharacters.delete(literal);
+  }
+
+  return {
+    ...first,
+    seenCharacters: Array.from(seenCharacters).join(""),
+    newCharacters: Array.from(newCharacters).join(""),
+    unseenCharacters: Array.from(unseenCharacters).join(""),
+    numberOfSeenCharacters: seenCharacters.size,
+    numberOfNewCharacters: newCharacters.size,
+    numberOfUnseenCharacters: unseenCharacters.size,
   };
 };

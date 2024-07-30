@@ -3,6 +3,7 @@ import { CardReview, NewCard } from "./CardReview";
 import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByDay } from "./StatisticsByDay";
+import { StatisticsByChapter } from "./StatisticsByChapter";
 
 export const oneCardOneReview = {
   reviews: [
@@ -220,4 +221,21 @@ export const statisticsByDay = (
     numberOfReviewedCharacters: valueAsObject.reviewedCharacters?.length || 0,
     numberOfReviews: valueAsObject.numberOfReviews || 0,
   } satisfies StatisticsByDay;
+};
+
+export const statisticsByChapter = (
+  value: Pick<StatisticsByChapter, "bookId" | "chapterId"> &
+    Partial<StatisticsByChapter>,
+) => {
+  return {
+    id: randomUUID(),
+    seenCharacters: "",
+    newCharacters: "",
+    unseenCharacters: "",
+    numberOfSeenCharacters: 0,
+    numberOfNewCharacters: 0,
+    numberOfUnseenCharacters: 0,
+    totalNumberOfCharacters: 0,
+    ...value,
+  } satisfies StatisticsByChapter;
 };

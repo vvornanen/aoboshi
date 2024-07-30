@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { CardReview, NewCard } from "./CardReview";
 import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
+import { StatisticsByDay } from "./StatisticsByDay";
 
 export const oneCardOneReview = {
   reviews: [
@@ -201,4 +202,22 @@ export const newCharacter = (
     numberOfCards: 1,
     ...(typeof value === "string" ? { literal: value } : value),
   } satisfies StatisticsByCharacter;
+};
+
+export const statisticsByDay = (
+  value: string | (Pick<StatisticsByDay, "date"> & Partial<StatisticsByDay>),
+) => {
+  const valueAsObject = typeof value === "string" ? { date: value } : value;
+
+  return {
+    id: randomUUID(),
+    addedCharacters: "",
+    firstSeenCharacters: "",
+    reviewedCharacters: "",
+    ...valueAsObject,
+    numberOfAddedCharacters: valueAsObject.addedCharacters?.length || 0,
+    numberOfFirstSeenCharacters: valueAsObject.firstSeenCharacters?.length || 0,
+    numberOfReviewedCharacters: valueAsObject.reviewedCharacters?.length || 0,
+    numberOfReviews: valueAsObject.numberOfReviews || 0,
+  } satisfies StatisticsByDay;
 };

@@ -3,6 +3,7 @@ import { KANJI_REGEXP } from "../characters/Character";
 import { randomId } from "../randomId";
 import { nullableMaxDate, nullableMinDate } from "../dateUtils";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
+import { StatisticsByDay } from "./StatisticsByDay";
 
 /** Specifies a time zone valid in the given period */
 export type TimeZoneConfig = {
@@ -88,7 +89,7 @@ export const getCharactersFromExpression = (expression: string): string[] => {
 export const mergeStatisticsByCharacter = (
   first: StatisticsByCharacter | undefined,
   second: Omit<StatisticsByCharacter, "id">,
-) => {
+): StatisticsByCharacter => {
   if (!first) {
     return {
       id: randomId(),
@@ -114,5 +115,44 @@ export const mergeStatisticsByCharacter = (
       null,
     numberOfReviews: first.numberOfReviews + second.numberOfReviews,
     numberOfCards: second.numberOfCards,
+  };
+};
+
+export const mergeStatisticsByDay = (
+  first: StatisticsByDay | undefined,
+  second: Omit<StatisticsByDay, "id">,
+): StatisticsByDay => {
+  if (!first) {
+    return {
+      id: randomId(),
+      ...second,
+    };
+  }
+
+  if (first.date !== second.date) {
+    throw new Error(
+      `Expected dates to equal but got ${first.date} and ${second.date}`,
+    );
+  }
+
+  const addedCharacters = getCharactersFromExpression(
+    first.addedCharacters + second.addedCharacters,
+  );
+  const firstSeenCharacters = getCharactersFromExpression(
+    first.firstSeenCharacters + second.firstSeenCharacters,
+  );
+  const reviewedCharacters = getCharactersFromExpression(
+    first.reviewedCharacters + second.reviewedCharacters,
+  );
+
+  return {
+    ...first,
+    addedCharacters: addedCharacters.join(""),
+    firstSeenCharacters: firstSeenCharacters.join(""),
+    reviewedCharacters: reviewedCharacters.join(""),
+    numberOfAddedCharacters: addedCharacters.length,
+    numberOfFirstSeenCharacters: firstSeenCharacters.length,
+    numberOfReviewedCharacters: reviewedCharacters.length,
+    numberOfReviews: first.numberOfReviews + second.numberOfReviews,
   };
 };

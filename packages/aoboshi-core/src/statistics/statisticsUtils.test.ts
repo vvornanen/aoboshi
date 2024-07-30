@@ -5,6 +5,7 @@ import {
   getCharactersFromExpression,
   getTimeZone,
   mergeStatisticsByCharacter,
+  mergeStatisticsByDay,
   timestampToDate,
   TimeZoneConfig,
 } from "./statisticsUtils";
@@ -326,5 +327,173 @@ describe("mergeStatisticsByCharacter", () => {
     );
 
     expect(actual.numberOfCards).toEqual(expected);
+  });
+});
+
+describe("mergeStatisticsByDay", () => {
+  test("throws error if dates are not equal", () => {
+    expect(() => {
+      mergeStatisticsByDay(
+        fixtures.statisticsByDay("2016-01-12"),
+        fixtures.statisticsByDay("2016-01-13"),
+      );
+    }).toThrowError(
+      "Expected dates to equal but got 2016-01-12 and 2016-01-13",
+    );
+  });
+
+  test("generates new id if no existing data", () => {
+    mockRandomIdOnce("random id");
+
+    const actual = mergeStatisticsByDay(undefined, {
+      date: "2016-01-13",
+      addedCharacters: "",
+      firstSeenCharacters: "",
+      reviewedCharacters: "",
+      numberOfAddedCharacters: 0,
+      numberOfFirstSeenCharacters: 0,
+      numberOfReviewedCharacters: 0,
+      numberOfReviews: 0,
+    });
+
+    expect(actual.id).toEqual("random id");
+  });
+
+  test("preserves existing id", () => {
+    const actual = mergeStatisticsByDay(
+      fixtures.statisticsByDay({ id: "existing id", date: "2016-01-13" }),
+      fixtures.statisticsByDay("2016-01-13"),
+    );
+
+    expect(actual.id).toEqual("existing id");
+  });
+
+  test.each([
+    { first: "", second: "", expected: "" },
+    { first: "学", second: "", expected: "学" },
+    { first: "", second: "学", expected: "学" },
+    { first: "学", second: "学", expected: "学" },
+    { first: "学大", second: "学", expected: "学大" },
+    { first: "学大", second: "日", expected: "学大日" },
+    { first: "𠮟", second: "𠮟", expected: "𠮟" },
+  ])("merges added characters %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), addedCharacters: first },
+      { ...fixtures.statisticsByDay("2016-01-12"), addedCharacters: second },
+    );
+
+    expect(actual.addedCharacters).toEqual(expected);
+  });
+
+  test.each([
+    { first: "", second: "", expected: "" },
+    { first: "学", second: "", expected: "学" },
+    { first: "", second: "学", expected: "学" },
+    { first: "学", second: "学", expected: "学" },
+    { first: "学大", second: "学", expected: "学大" },
+    { first: "学大", second: "日", expected: "学大日" },
+    { first: "𠮟", second: "𠮟", expected: "𠮟" },
+  ])("merges first seen characters %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), firstSeenCharacters: first },
+      {
+        ...fixtures.statisticsByDay("2016-01-12"),
+        firstSeenCharacters: second,
+      },
+    );
+
+    expect(actual.firstSeenCharacters).toEqual(expected);
+  });
+
+  test.each([
+    { first: "", second: "", expected: "" },
+    { first: "学", second: "", expected: "学" },
+    { first: "", second: "学", expected: "学" },
+    { first: "学", second: "学", expected: "学" },
+    { first: "学大", second: "学", expected: "学大" },
+    { first: "学大", second: "日", expected: "学大日" },
+    { first: "𠮟", second: "𠮟", expected: "𠮟" },
+  ])("merges reviewed characters %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), reviewedCharacters: first },
+      { ...fixtures.statisticsByDay("2016-01-12"), reviewedCharacters: second },
+    );
+
+    expect(actual.reviewedCharacters).toEqual(expected);
+  });
+
+  test.each([
+    { first: "", second: "", expected: 0 },
+    { first: "学", second: "", expected: 1 },
+    { first: "", second: "学", expected: 1 },
+    { first: "学", second: "学", expected: 1 },
+    { first: "学大", second: "学", expected: 2 },
+    { first: "学大", second: "日", expected: 3 },
+    { first: "𠮟", second: "𠮟", expected: 1 },
+  ])("sums number of added characters %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), addedCharacters: first },
+      { ...fixtures.statisticsByDay("2016-01-12"), addedCharacters: second },
+    );
+
+    expect(actual.numberOfAddedCharacters).toEqual(expected);
+  });
+
+  test.each([
+    { first: "", second: "", expected: 0 },
+    { first: "学", second: "", expected: 1 },
+    { first: "", second: "学", expected: 1 },
+    { first: "学", second: "学", expected: 1 },
+    { first: "学大", second: "学", expected: 2 },
+    { first: "学大", second: "日", expected: 3 },
+    { first: "𠮟", second: "𠮟", expected: 1 },
+  ])(
+    "sums number of first seen characters %s",
+    ({ first, second, expected }) => {
+      const actual = mergeStatisticsByDay(
+        {
+          ...fixtures.statisticsByDay("2016-01-12"),
+          firstSeenCharacters: first,
+        },
+        {
+          ...fixtures.statisticsByDay("2016-01-12"),
+          firstSeenCharacters: second,
+        },
+      );
+
+      expect(actual.numberOfFirstSeenCharacters).toEqual(expected);
+    },
+  );
+
+  test.each([
+    { first: "", second: "", expected: 0 },
+    { first: "学", second: "", expected: 1 },
+    { first: "", second: "学", expected: 1 },
+    { first: "学", second: "学", expected: 1 },
+    { first: "学大", second: "学", expected: 2 },
+    { first: "学大", second: "日", expected: 3 },
+    { first: "𠮟", second: "𠮟", expected: 1 },
+  ])("sums number of reviewed characters %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), reviewedCharacters: first },
+      { ...fixtures.statisticsByDay("2016-01-12"), reviewedCharacters: second },
+    );
+
+    expect(actual.numberOfReviewedCharacters).toEqual(expected);
+  });
+
+  test.each([
+    { first: 0, second: 0, expected: 0 },
+    { first: 1, second: 0, expected: 1 },
+    { first: 0, second: 1, expected: 1 },
+    { first: 1, second: 1, expected: 2 },
+    { first: 2, second: 1, expected: 3 },
+  ])("sums number of reviews %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByDay(
+      { ...fixtures.statisticsByDay("2016-01-12"), numberOfReviews: first },
+      { ...fixtures.statisticsByDay("2016-01-12"), numberOfReviews: second },
+    );
+
+    expect(actual.numberOfReviews).toEqual(expected);
   });
 });

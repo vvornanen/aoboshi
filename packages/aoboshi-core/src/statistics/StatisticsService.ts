@@ -1,6 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { randomId } from "../randomId";
-import { nullableMaxDate, nullableMinDate } from "../dateUtils";
 import { BookRepository } from "../books/BookRepository";
 import { Chapter } from "../books/Book";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
@@ -11,6 +10,7 @@ import { CardReview, isReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import {
   getCharactersFromExpression,
+  mergeStatisticsByCharacter,
   timestampToDate,
   TimeZoneConfig,
 } from "./statisticsUtils";
@@ -127,36 +127,18 @@ export class StatisticsService {
           throw new Error(`Card statistics not found for character ${literal}`);
         }
 
-        let statisticsByCharacter = statisticsByCharacters.get(literal);
-
-        if (!statisticsByCharacter) {
-          statisticsByCharacter = {
-            id: randomId(),
+        const merged = mergeStatisticsByCharacter(
+          statisticsByCharacters.get(literal),
+          {
             literal,
             firstAdded: cardStatistics.firstAdded,
             firstReviewed: reviewDate?.toString() || null,
             lastReviewed: reviewDate?.toString() || null,
             numberOfReviews: reviewDate ? 1 : 0,
             numberOfCards: cardStatistics.numberOfCards,
-          };
-          statisticsByCharacters.set(literal, statisticsByCharacter);
-        } else {
-          statisticsByCharacter.firstReviewed =
-            nullableMinDate(
-              statisticsByCharacter.firstReviewed,
-              reviewDate,
-            )?.toString() || null;
-
-          statisticsByCharacter.lastReviewed =
-            nullableMaxDate(
-              statisticsByCharacter.lastReviewed,
-              reviewDate,
-            )?.toString() || null;
-
-          if (reviewDate) {
-            statisticsByCharacter.numberOfReviews++;
-          }
-        }
+          },
+        );
+        statisticsByCharacters.set(literal, merged);
       }
     }
 

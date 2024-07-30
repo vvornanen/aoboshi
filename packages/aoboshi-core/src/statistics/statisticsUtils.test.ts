@@ -1,11 +1,34 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { Temporal } from "@js-temporal/polyfill";
+import { randomId } from "../randomId";
 import {
   getCharactersFromExpression,
   getTimeZone,
+  mergeStatisticsByCharacter,
   timestampToDate,
   TimeZoneConfig,
 } from "./statisticsUtils";
+import * as fixtures from "./statisticsFixtures";
+
+vi.mock("../randomId", () => {
+  return {
+    randomId: vi.fn(),
+  };
+});
+
+const mockRandomId = () => {
+  let autoIncrement = 1;
+
+  if (vi.isMockFunction(randomId)) {
+    randomId.mockImplementation(() => String(autoIncrement++));
+  }
+};
+
+const mockRandomIdOnce = (value: string) => {
+  if (vi.isMockFunction(randomId)) {
+    randomId.mockReturnValueOnce(value);
+  }
+};
 
 const multipleTimeZones: TimeZoneConfig[] = [
   {
@@ -24,6 +47,14 @@ const multipleTimeZones: TimeZoneConfig[] = [
     validTo: "2024-12-31T23:59:59.999Z",
   },
 ];
+
+beforeEach(() => {
+  mockRandomId();
+});
+
+afterEach(() => {
+  vi.resetAllMocks();
+});
 
 describe("getTimeZone", () => {
   test.each([
@@ -138,5 +169,162 @@ describe("getCharactersFromExpression", () => {
   ])("unique characters %s", ({ expression, expected }) => {
     const actual = getCharactersFromExpression(expression);
     expect(actual).toEqual(expected);
+  });
+});
+
+describe("mergeStatisticsByCharacter", () => {
+  test("throws error if literals do not match", () => {
+    expect(() => {
+      mergeStatisticsByCharacter(
+        fixtures.multipleReviews.statisticsByCharacters[0],
+        fixtures.multipleReviews.statisticsByCharacters[1],
+      );
+    }).toThrowError("Expected literals to equal but got 学 and 大");
+  });
+
+  test("generates new id if no existing data", () => {
+    mockRandomIdOnce("random id");
+
+    const actual = mergeStatisticsByCharacter(undefined, {
+      literal: "学",
+      firstAdded: "2016-01-12",
+      firstReviewed: "2016-01-13",
+      lastReviewed: "2016-01-14",
+      numberOfReviews: 3,
+      numberOfCards: 2,
+    });
+
+    expect(actual.id).toEqual("random id");
+  });
+
+  test("preserves existing id", () => {
+    const actual = mergeStatisticsByCharacter(
+      {
+        ...fixtures.multipleReviews.statisticsByCharacters[0],
+        id: "existing id",
+      },
+      {
+        literal: "学",
+        firstAdded: "2016-01-12",
+        firstReviewed: "2016-01-13",
+        lastReviewed: "2016-01-14",
+        numberOfReviews: 3,
+        numberOfCards: 2,
+      },
+    );
+
+    expect(actual.id).toEqual("existing id");
+  });
+
+  test.each([
+    { first: "2016-01-12", second: "2016-01-13", expected: "2016-01-12" },
+    { first: "2016-01-12", second: "2016-01-11", expected: "2016-01-11" },
+    { first: null, second: "2016-01-11", expected: "2016-01-11" },
+    { first: "2016-01-12", second: null, expected: "2016-01-12" },
+    { first: null, second: null, expected: null },
+  ])(
+    "preserves earliest first added date %s",
+    ({ first, second, expected }) => {
+      const actual = mergeStatisticsByCharacter(
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          firstAdded: first,
+        },
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          firstAdded: second,
+        },
+      );
+
+      expect(actual.firstAdded).toEqual(expected);
+    },
+  );
+
+  test.each([
+    { first: "2016-01-12", second: "2016-01-13", expected: "2016-01-12" },
+    { first: "2016-01-12", second: "2016-01-11", expected: "2016-01-11" },
+    { first: null, second: "2016-01-11", expected: "2016-01-11" },
+    { first: "2016-01-12", second: null, expected: "2016-01-12" },
+    { first: null, second: null, expected: null },
+  ])(
+    "preserves earliest first reviewed date %s",
+    ({ first, second, expected }) => {
+      const actual = mergeStatisticsByCharacter(
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          firstReviewed: first,
+        },
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          firstReviewed: second,
+        },
+      );
+
+      expect(actual.firstReviewed).toEqual(expected);
+    },
+  );
+
+  test.each([
+    { first: "2016-01-12", second: "2016-01-13", expected: "2016-01-13" },
+    { first: "2016-01-12", second: "2016-01-11", expected: "2016-01-12" },
+    { first: null, second: "2016-01-11", expected: "2016-01-11" },
+    { first: "2016-01-12", second: null, expected: "2016-01-12" },
+    { first: null, second: null, expected: null },
+  ])(
+    "preserves latest last reviewed date %s",
+    ({ first, second, expected }) => {
+      const actual = mergeStatisticsByCharacter(
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          lastReviewed: first,
+        },
+        {
+          ...fixtures.multipleReviews.statisticsByCharacters[0],
+          lastReviewed: second,
+        },
+      );
+
+      expect(actual.lastReviewed).toEqual(expected);
+    },
+  );
+
+  test.each([
+    { first: 0, second: 0, expected: 0 },
+    { first: 1, second: 0, expected: 1 },
+    { first: 0, second: 2, expected: 2 },
+    { first: 1, second: 2, expected: 3 },
+  ])("sums number of reviews %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByCharacter(
+      {
+        ...fixtures.multipleReviews.statisticsByCharacters[0],
+        numberOfReviews: first,
+      },
+      {
+        ...fixtures.multipleReviews.statisticsByCharacters[0],
+        numberOfReviews: second,
+      },
+    );
+
+    expect(actual.numberOfReviews).toEqual(expected);
+  });
+
+  test.each([
+    { first: 0, second: 0, expected: 0 },
+    { first: 1, second: 0, expected: 0 },
+    { first: 0, second: 2, expected: 2 },
+    { first: 1, second: 2, expected: 2 },
+  ])("always overrides number of cards %s", ({ first, second, expected }) => {
+    const actual = mergeStatisticsByCharacter(
+      {
+        ...fixtures.multipleReviews.statisticsByCharacters[0],
+        numberOfCards: first,
+      },
+      {
+        ...fixtures.multipleReviews.statisticsByCharacters[0],
+        numberOfCards: second,
+      },
+    );
+
+    expect(actual.numberOfCards).toEqual(expected);
   });
 });

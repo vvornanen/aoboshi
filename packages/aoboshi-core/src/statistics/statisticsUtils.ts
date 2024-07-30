@@ -1,5 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { KANJI_REGEXP } from "../characters/Character";
+import { randomId } from "../randomId";
+import { nullableMaxDate, nullableMinDate } from "../dateUtils";
+import { StatisticsByCharacter } from "./StatisticsByCharacter";
 
 /** Specifies a time zone valid in the given period */
 export type TimeZoneConfig = {
@@ -71,4 +74,45 @@ export const getCharactersFromExpression = (expression: string): string[] => {
     .forEach((literal) => uniqueCharacters.add(literal));
 
   return Array.from(uniqueCharacters);
+};
+
+/**
+ * Merges incremental statistics with existing data.
+ *
+ * Preserves first review and last review dates.
+ * Sums number of reviews.
+ *
+ * @param first
+ * @param second
+ */
+export const mergeStatisticsByCharacter = (
+  first: StatisticsByCharacter | undefined,
+  second: Omit<StatisticsByCharacter, "id">,
+) => {
+  if (!first) {
+    return {
+      id: randomId(),
+      ...second,
+    };
+  }
+
+  if (first.literal !== second.literal) {
+    throw new Error(
+      `Expected literals to equal but got ${first.literal} and ${second.literal}`,
+    );
+  }
+
+  return {
+    ...first,
+    firstAdded:
+      nullableMinDate(first.firstAdded, second.firstAdded)?.toString() || null,
+    firstReviewed:
+      nullableMinDate(first.firstReviewed, second.firstReviewed)?.toString() ||
+      null,
+    lastReviewed:
+      nullableMaxDate(first.lastReviewed, second.lastReviewed)?.toString() ||
+      null,
+    numberOfReviews: first.numberOfReviews + second.numberOfReviews,
+    numberOfCards: second.numberOfCards,
+  };
 };

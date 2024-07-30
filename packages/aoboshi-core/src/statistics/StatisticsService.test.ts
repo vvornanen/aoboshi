@@ -1,4 +1,4 @@
-import { describe, expect, test, vi, afterEach } from "vitest";
+import { describe, expect, test, vi, afterEach, beforeEach } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { randomId } from "../randomId";
 import { BookRepository } from "../books/BookRepository";
@@ -21,9 +21,11 @@ vi.mock("../randomId", () => {
   };
 });
 
-const mockRandomIdOnce = (value: string) => {
+const mockRandomId = () => {
+  let autoIncrement = 1;
+
   if (vi.isMockFunction(randomId)) {
-    randomId.mockReturnValueOnce(value);
+    randomId.mockImplementation(() => String(autoIncrement++));
   }
 };
 
@@ -43,6 +45,10 @@ const statisticsService = new StatisticsService(
   getCardStatisticsByCharacter,
 );
 
+beforeEach(() => {
+  mockRandomId();
+});
+
 afterEach(() => {
   vi.resetAllMocks();
 });
@@ -58,35 +64,20 @@ describe("getStatisticsByCharacters", () => {
     expect(actual.latestReviewTime).toBeUndefined();
   });
 
-  test("one card, one review", async () => {
-    const testCase = fixtures.oneCardOneReview;
-
-    mockRandomIdOnce("1");
-
-    getCardStatisticsByCharacter.mockImplementation(
-      testCase.getCardStatisticsByCharacter,
-    );
-
-    const actual = await statisticsService.getStatisticsByCharacters(
-      testCase.reviews,
-    );
-
-    expect(actual.statisticsByCharacters).toEqual(
-      testCase.statisticsByCharacters,
-    );
-    expect(actual.reviewDays).toEqual(testCase.reviewDays);
-    expect(actual.latestReviewTime?.toString()).toEqual(
-      testCase.latestReviewTime,
-    );
-  });
-
-  test("multiple reviews", async () => {
-    const testCase = fixtures.multipleReviews;
-
-    mockRandomIdOnce("1");
-    mockRandomIdOnce("2");
-    mockRandomIdOnce("3");
-
+  test.each([
+    {
+      testCase: fixtures.oneNewCardNoReviews,
+      name: "one new card, no reviews",
+    },
+    {
+      testCase: fixtures.oneCardOneReview,
+      name: "one card, one review",
+    },
+    {
+      testCase: fixtures.multipleReviews,
+      name: "multiple reviews",
+    },
+  ])("$name", async ({ testCase }) => {
     getCardStatisticsByCharacter.mockImplementation(
       testCase.getCardStatisticsByCharacter,
     );
@@ -119,8 +110,6 @@ describe("getStatisticsByDays", () => {
   });
 
   test("no reviews", () => {
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByDays(
       ["2024-01-01"],
       [],
@@ -147,8 +136,6 @@ describe("getStatisticsByDays", () => {
   test("day has no reviews", () => {
     const testCase = fixtures.multipleReviews;
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByDays(
       ["2024-01-01"],
       testCase.reviews,
@@ -174,9 +161,6 @@ describe("getStatisticsByDays", () => {
 
   test("one card, one review", () => {
     const testCase = fixtures.oneCardOneReview;
-
-    mockRandomIdOnce("1");
-    mockRandomIdOnce("2");
 
     const actual = statisticsService.getStatisticsByDays(
       ["2016-01-12", "2016-01-13"],
@@ -214,11 +198,6 @@ describe("getStatisticsByDays", () => {
 
   test("multiple reviews", () => {
     const testCase = fixtures.multipleReviews;
-
-    mockRandomIdOnce("1");
-    mockRandomIdOnce("2");
-    mockRandomIdOnce("3");
-    mockRandomIdOnce("4");
 
     const actual = statisticsService.getStatisticsByDays(
       ["2015-12-01", "2016-01-12", "2016-01-13", "2016-01-14"],
@@ -286,8 +265,6 @@ describe("getStatisticsByChapter", () => {
       characters: "",
     };
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
@@ -317,8 +294,6 @@ describe("getStatisticsByChapter", () => {
       title: "test",
       characters: "学",
     };
-
-    mockRandomIdOnce("1");
 
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
@@ -350,8 +325,6 @@ describe("getStatisticsByChapter", () => {
       characters: "学",
     };
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
@@ -381,8 +354,6 @@ describe("getStatisticsByChapter", () => {
       title: "test",
       characters: [{ literal: "学", n: 1 }],
     };
-
-    mockRandomIdOnce("1");
 
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
@@ -414,8 +385,6 @@ describe("getStatisticsByChapter", () => {
       characters: "学大日",
     };
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
@@ -446,8 +415,6 @@ describe("getStatisticsByChapter", () => {
       characters: "学大日",
     };
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
@@ -477,9 +444,6 @@ describe("getStatisticsByChapter", () => {
       title: "test",
       characters: "学大日",
     };
-
-    mockRandomIdOnce("1");
-    mockRandomIdOnce("1");
 
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
@@ -515,8 +479,6 @@ describe("getStatisticsByChapter", () => {
       characters: "学大日",
     };
 
-    mockRandomIdOnce("1");
-
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
@@ -542,8 +504,6 @@ describe("getStatisticsByChapter", () => {
 
 describe("getStatisticsByChapter", () => {
   test("grades book", () => {
-    mockRandomIdOnce("1");
-
     bookRepository.findAll.mockReturnValueOnce([grades]);
 
     const seenCharacters = [

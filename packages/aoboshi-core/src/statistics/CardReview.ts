@@ -6,5 +6,11 @@ export type CardReview = {
   expression: string;
 
   /** ISO 8601 datetime string */
-  reviewTime: string; // TODO: Allow null to represent a new card
+  reviewTime: string;
 };
+
+/** Represents a new card without reviews */
+export type NewCard = Omit<CardReview, "reviewTime">;
+
+export const isReview = (value: CardReview | NewCard): value is CardReview =>
+  "reviewTime" in value;

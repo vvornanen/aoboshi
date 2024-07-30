@@ -7,7 +7,7 @@ import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
 import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
-import { CardReview } from "./CardReview";
+import { CardReview, isReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import {
   getCharactersFromExpression,
@@ -40,8 +40,16 @@ export class StatisticsService {
     private getCardStatisticsByCharacter: GetCardStatisticsByCharacter,
   ) {}
 
+  /**
+   * Generates statistics by character, by day and by book chapter.
+   *
+   * Incrementally merges the generated statistics with existing data.
+   *
+   * @param reviews new reviews since the last generation and all cards that
+   * currently do not have any reviews
+   */
   async generateStatistics(
-    reviews: CardReview[],
+    reviews: (CardReview | NewCard)[],
   ): Promise<StatisticsIncrement> {
     const started = Temporal.Now.instant();
 
@@ -80,7 +88,7 @@ export class StatisticsService {
   }
 
   // TODO: Process new cards
-  async getStatisticsByCharacters(reviews: CardReview[]) {
+  async getStatisticsByCharacters(reviews: (CardReview | NewCard)[]) {
     const timeZoneConfig = this.getTimeZoneConfig();
 
     let latestReviewTime: Temporal.Instant | undefined;
@@ -88,12 +96,16 @@ export class StatisticsService {
     const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
 
     for (const review of reviews) {
-      const reviewTimestamp = Temporal.Instant.from(review.reviewTime);
-      const reviewDate = timestampToDate(reviewTimestamp, timeZoneConfig);
-      reviewDays.add(reviewDate.toString());
+      const reviewTimestamp = isReview(review)
+        ? Temporal.Instant.from(review.reviewTime)
+        : undefined;
+      const reviewDate =
+        reviewTimestamp && timestampToDate(reviewTimestamp, timeZoneConfig);
+      reviewDate && reviewDays.add(reviewDate.toString());
 
       if (
         !latestReviewTime ||
+        !reviewTimestamp ||
         Temporal.Instant.compare(latestReviewTime, reviewTimestamp) < 0
       ) {
         latestReviewTime = reviewTimestamp;
@@ -117,28 +129,34 @@ export class StatisticsService {
             id: randomId(),
             literal,
             firstAdded: cardStatistics.firstAdded,
-            firstReviewed: reviewDate.toString(),
-            lastReviewed: reviewDate.toString(),
-            numberOfReviews: 1,
+            firstReviewed: reviewDate?.toString() || null,
+            lastReviewed: reviewDate?.toString() || null,
+            numberOfReviews: reviewDate ? 1 : 0,
             numberOfCards: cardStatistics.numberOfCards,
           };
           statisticsByCharacters.set(literal, statisticsByCharacter);
         } else {
-          statisticsByCharacter.firstReviewed =
-            statisticsByCharacter.firstReviewed === null
-              ? reviewDate.toString()
-              : minDate(
-                  statisticsByCharacter.firstReviewed,
-                  reviewDate,
-                ).toString();
-          statisticsByCharacter.lastReviewed =
-            statisticsByCharacter.lastReviewed === null
-              ? reviewDate.toString()
-              : maxDate(
-                  statisticsByCharacter.lastReviewed,
-                  reviewDate,
-                ).toString();
-          statisticsByCharacter.numberOfReviews++;
+          if (statisticsByCharacter.firstReviewed && reviewDate) {
+            statisticsByCharacter.firstReviewed = minDate(
+              statisticsByCharacter.firstReviewed,
+              reviewDate,
+            ).toString();
+          } else if (!statisticsByCharacter.firstReviewed && reviewDate) {
+            statisticsByCharacter.firstReviewed = reviewDate.toString();
+          }
+
+          if (statisticsByCharacter.lastReviewed && reviewDate) {
+            statisticsByCharacter.lastReviewed = maxDate(
+              statisticsByCharacter.lastReviewed,
+              reviewDate,
+            ).toString();
+          } else if (!statisticsByCharacter.lastReviewed && reviewDate) {
+            statisticsByCharacter.lastReviewed = reviewDate.toString();
+          }
+
+          if (reviewDate) {
+            statisticsByCharacter.numberOfReviews++;
+          }
         }
       }
     }
@@ -157,7 +175,7 @@ export class StatisticsService {
 
   getStatisticsByDays(
     reviewDays: string[],
-    reviews: CardReview[],
+    reviews: (CardReview | NewCard)[],
     statisticsByCharacters: Iterable<StatisticsByCharacter>,
   ): StatisticsByDay[] {
     return reviewDays.map((date) =>
@@ -167,7 +185,7 @@ export class StatisticsService {
 
   private getStatisticsByDay(
     date: string,
-    reviews: CardReview[],
+    reviews: (CardReview | NewCard)[],
     statisticsByCharacters: Iterable<StatisticsByCharacter>,
   ): StatisticsByDay {
     const timeZoneConfig = this.getTimeZoneConfig();
@@ -187,12 +205,14 @@ export class StatisticsService {
     }
 
     for (const review of reviews) {
-      const reviewDate = timestampToDate(review.reviewTime, timeZoneConfig);
+      const reviewDate = isReview(review)
+        ? timestampToDate(review.reviewTime, timeZoneConfig)
+        : undefined;
       const characters: string[] = getCharactersFromExpression(
         review.expression,
       );
 
-      if (reviewDate.toString() === date) {
+      if (reviewDate?.toString() === date) {
         characters.forEach((literal) => reviewedCharacters.add(literal));
         numberOfReviews++;
       }

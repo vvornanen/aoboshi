@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { CardReview } from "./CardReview";
+import { CardReview, NewCard } from "./CardReview";
 import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 
@@ -37,6 +37,41 @@ export const oneCardOneReview = {
   ] satisfies StatisticsByCharacter[],
   reviewDays: ["2016-01-13"],
   latestReviewTime: "2016-01-13T19:57:33.016Z",
+};
+
+export const oneNewCardNoReviews = {
+  reviews: [
+    {
+      cardId: 1452603672000,
+      expression: "学ぶ",
+    },
+  ] satisfies [NewCard],
+  getCardStatisticsByCharacter: (
+    literal: string,
+  ): CardStatisticsByCharacter | null => {
+    if (literal === "学") {
+      return {
+        literal: "学",
+        firstAdded: "2016-01-12",
+        numberOfCards: 1,
+      };
+    }
+
+    return null;
+  },
+  statisticsByCharacters: [
+    {
+      id: "1",
+      literal: "学",
+      firstAdded: "2016-01-12",
+      firstReviewed: null,
+      lastReviewed: null,
+      numberOfReviews: 0,
+      numberOfCards: 1,
+    },
+  ] satisfies StatisticsByCharacter[],
+  reviewDays: [],
+  latestReviewTime: undefined,
 };
 
 export const multipleReviews = {

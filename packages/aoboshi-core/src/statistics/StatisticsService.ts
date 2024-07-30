@@ -92,7 +92,6 @@ export class StatisticsService {
     return newIncrement;
   }
 
-  // TODO: Process new cards
   async getStatisticsByCharacters(reviews: (CardReview | NewCard)[]) {
     const timeZoneConfig = this.getTimeZoneConfig();
 

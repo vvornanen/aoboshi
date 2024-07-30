@@ -316,7 +316,7 @@ describe("getStatisticsByChapter", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("one character in string", () => {
+  test("one character (string type)", () => {
     const chapter: Chapter = {
       id: "chap1",
       code: "2",
@@ -346,7 +346,7 @@ describe("getStatisticsByChapter", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("one character in array", () => {
+  test("one character (array type)", () => {
     const chapter: Chapter = {
       id: "chap1",
       code: "2",
@@ -455,10 +455,10 @@ describe("getStatisticsByChapter", () => {
       chapterId: "chap1",
       seenCharacters: "学",
       newCharacters: "大",
-      unseenCharacters: "大日",
+      unseenCharacters: "日",
       numberOfSeenCharacters: 1,
       numberOfNewCharacters: 1,
-      numberOfUnseenCharacters: 2,
+      numberOfUnseenCharacters: 1,
       totalNumberOfCharacters: 3,
     };
 
@@ -496,7 +496,7 @@ describe("getStatisticsByChapter", () => {
   });
 });
 
-describe("getStatisticsByChapter", () => {
+describe("getStatisticsByChapters", () => {
   test("grades book", () => {
     bookRepository.findAll.mockReturnValueOnce([grades]);
 

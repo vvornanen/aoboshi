@@ -257,15 +257,13 @@ export class StatisticsService {
 
       if (statisticsByCharacter.numberOfReviews > 0) {
         seenCharacters.add(literal);
-      } else {
-        unseenCharacters.add(literal);
-      }
-
-      if (
+      } else if (
         statisticsByCharacter.numberOfReviews === 0 &&
         statisticsByCharacter.numberOfCards > 0
       ) {
         newCharacters.add(literal);
+      } else {
+        unseenCharacters.add(literal);
       }
     }
 

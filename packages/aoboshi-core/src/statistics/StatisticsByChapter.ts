@@ -22,7 +22,7 @@ export type StatisticsByChapter = {
   newCharacters: string;
 
   /**
-   * String containing characters in this chapter having zero reviews.
+   * String containing characters in this chapter with no cards and zero reviews.
    */
   unseenCharacters: string;
 
@@ -44,7 +44,7 @@ export type StatisticsByChapter = {
   numberOfNewCharacters: number;
 
   /**
-   * Number of characters in this chapter having zero reviews.
+   * Number of characters in this chapter with no cards and zero reviews.
    *
    * Note that due to multibyte characters, this value may be different
    * from `unseenCharacters` length.

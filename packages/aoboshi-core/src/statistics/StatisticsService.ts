@@ -233,6 +233,7 @@ export class StatisticsService {
     chapter: Chapter,
     statisticsByCharacters: Map<string, StatisticsByCharacter>,
   ): StatisticsByChapter {
+    // TODO: Refactor to use Set difference() after Electron upgrades to Node v22
     const seenCharacters = new Set<string>();
     const newCharacters = new Set<string>();
     const unseenCharacters = new Set<string>();

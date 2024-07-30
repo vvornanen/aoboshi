@@ -12,7 +12,6 @@ import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
 import { CardReview } from "./CardReview";
 import * as fixtures from "./statisticsFixtures";
 import { StatisticsByDay } from "./StatisticsByDay";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByChapter } from "./StatisticsByChapter";
 
 vi.mock("../randomId", () => {
@@ -268,7 +267,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      toMap(fixtures.multipleReviews.statisticsByCharacters),
+      fixtures.multipleReviews.statisticsByCharacters,
     );
 
     const expected: StatisticsByChapter = {
@@ -298,7 +297,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      new Map(),
+      [],
     );
 
     const expected: StatisticsByChapter = {
@@ -328,7 +327,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      toMap(fixtures.oneCardOneReview.statisticsByCharacters),
+      fixtures.oneCardOneReview.statisticsByCharacters,
     );
 
     const expected: StatisticsByChapter = {
@@ -358,7 +357,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      toMap(fixtures.oneCardOneReview.statisticsByCharacters),
+      fixtures.oneCardOneReview.statisticsByCharacters,
     );
 
     const expected: StatisticsByChapter = {
@@ -388,7 +387,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      new Map(),
+      [],
     );
 
     const expected: StatisticsByChapter = {
@@ -415,11 +414,10 @@ describe("getStatisticsByChapter", () => {
       characters: "学大日",
     };
 
-    const actual = statisticsService.getStatisticsByChapter(
-      "book1",
-      chapter,
-      toMap([fixtures.seenCharacter("学"), fixtures.seenCharacter("大")]),
-    );
+    const actual = statisticsService.getStatisticsByChapter("book1", chapter, [
+      fixtures.seenCharacter("学"),
+      fixtures.seenCharacter("大"),
+    ]);
 
     const expected: StatisticsByChapter = {
       id: "1",
@@ -445,15 +443,11 @@ describe("getStatisticsByChapter", () => {
       characters: "学大日",
     };
 
-    const actual = statisticsService.getStatisticsByChapter(
-      "book1",
-      chapter,
-      toMap([
-        fixtures.seenCharacter("学"),
-        fixtures.newCharacter("大"),
-        fixtures.unseenCharacter("日"),
-      ]),
-    );
+    const actual = statisticsService.getStatisticsByChapter("book1", chapter, [
+      fixtures.seenCharacter("学"),
+      fixtures.newCharacter("大"),
+      fixtures.unseenCharacter("日"),
+    ]);
 
     const expected: StatisticsByChapter = {
       id: "1",
@@ -482,7 +476,7 @@ describe("getStatisticsByChapter", () => {
     const actual = statisticsService.getStatisticsByChapter(
       "book1",
       chapter,
-      toMap(fixtures.multipleReviews.statisticsByCharacters),
+      fixtures.multipleReviews.statisticsByCharacters,
     );
 
     const expected: StatisticsByChapter = {
@@ -511,17 +505,15 @@ describe("getStatisticsByChapter", () => {
     ];
 
     const actual = statisticsService.getStatisticsByChapters(
-      toMap(
-        seenCharacters.map((literal, index) => ({
-          id: String(index + 1),
-          literal,
-          firstAdded: "2016-01-12",
-          firstReviewed: "2016-01-13",
-          lastReviewed: "2016-01-13",
-          numberOfReviews: 1,
-          numberOfCards: 1,
-        })),
-      ),
+      seenCharacters.map((literal, index) => ({
+        id: String(index + 1),
+        literal,
+        firstAdded: "2016-01-12",
+        firstReviewed: "2016-01-13",
+        lastReviewed: "2016-01-13",
+        numberOfReviews: 1,
+        numberOfCards: 1,
+      })),
     );
 
     const expected: StatisticsByChapter[] = [
@@ -547,9 +539,3 @@ describe("getStatisticsByChapter", () => {
     expect(actual).toEqual(expected);
   });
 });
-
-const toMap = (stats: StatisticsByCharacter[]) => {
-  const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
-  stats.forEach((stats) => statisticsByCharacters.set(stats.literal, stats));
-  return statisticsByCharacters;
-};

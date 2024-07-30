@@ -68,7 +68,12 @@ export class StatisticsService {
       statisticsByCharacters,
     );
 
-    // TODO: Get statistics by book chapter
+    // TODO: Remove eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const statisticsByChapters = this.getStatisticsByChapters(
+      statisticsByCharacters,
+    );
+
     // TODO: Update and save statistics by book chapter
 
     const completed = Temporal.Now.instant();
@@ -231,9 +236,7 @@ export class StatisticsService {
     } satisfies StatisticsByDay;
   }
 
-  getStatisticsByChapters(
-    statisticsByCharacters: Map<string, StatisticsByCharacter>,
-  ) {
+  getStatisticsByChapters(statisticsByCharacters: StatisticsByCharacter[]) {
     const books = this.bookRepository.findAll();
     const statisticsByChapters: StatisticsByChapter[] = [];
 
@@ -257,8 +260,10 @@ export class StatisticsService {
   getStatisticsByChapter(
     bookId: string,
     chapter: Chapter,
-    statisticsByCharacters: Map<string, StatisticsByCharacter>,
+    statisticsByCharacters: StatisticsByCharacter[],
   ): StatisticsByChapter {
+    const statisticsByCharactersMap = toMap(statisticsByCharacters);
+
     // TODO: Refactor to use Set difference() after Electron upgrades to Node v22
     const seenCharacters = new Set<string>();
     const newCharacters = new Set<string>();
@@ -267,7 +272,7 @@ export class StatisticsService {
     for (const character of chapter.characters) {
       const literal =
         typeof character === "string" ? character : character.literal;
-      const statisticsByCharacter = statisticsByCharacters.get(literal);
+      const statisticsByCharacter = statisticsByCharactersMap.get(literal);
 
       if (!statisticsByCharacter) {
         unseenCharacters.add(literal);
@@ -302,3 +307,9 @@ export class StatisticsService {
     };
   }
 }
+
+const toMap = (stats: StatisticsByCharacter[]) => {
+  const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
+  stats.forEach((stats) => statisticsByCharacters.set(stats.literal, stats));
+  return statisticsByCharacters;
+};

@@ -25,6 +25,26 @@ export const minDate = (
 };
 
 /**
+ * Returns the earliest of the given dates.
+ *
+ * Ignores all falsy values.
+ *
+ * @param values nullable PlainDate objects or ISO 8601 date strings
+ * @return undefined if all given values are null or undefined
+ */
+export const nullableMinDate = (
+  ...values: (string | Temporal.PlainDate | undefined | null)[]
+): Temporal.PlainDate | undefined => {
+  const nonEmptyValues = values.filter(nonEmpty);
+
+  if (nonEmptyValues.length === 0) {
+    return undefined;
+  }
+
+  return minDate(...nonEmptyValues);
+};
+
+/**
  * Returns the latest of the given dates.
  *
  * @param values PlainDate objects or ISO 8601 date strings
@@ -45,3 +65,25 @@ export const maxDate = (...values: (string | Temporal.PlainDate)[]) => {
 
   return max;
 };
+
+/**
+ * Returns the latest of the given dates.
+ *
+ * Ignores all falsy values.
+ *
+ * @param values nullable PlainDate objects or ISO 8601 date strings
+ * @return undefined if all given values are null or undefined
+ */
+export const nullableMaxDate = (
+  ...values: (string | Temporal.PlainDate | undefined | null)[]
+): Temporal.PlainDate | undefined => {
+  const nonEmptyValues = values.filter(nonEmpty);
+
+  if (nonEmptyValues.length === 0) {
+    return undefined;
+  }
+
+  return maxDate(...nonEmptyValues);
+};
+
+const nonEmpty = <T>(value: T | undefined | null): value is T => !!value;

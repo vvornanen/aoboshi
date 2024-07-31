@@ -88,7 +88,7 @@ export const getCharactersFromExpression = (expression: string): string[] => {
  * @param second incremental data
  */
 export const mergeStatisticsByCharacter = (
-  first: StatisticsByCharacter | undefined,
+  first: StatisticsByCharacter | null | undefined,
   second: Omit<StatisticsByCharacter, "id">,
 ): StatisticsByCharacter => {
   if (!first) {
@@ -128,7 +128,7 @@ export const mergeStatisticsByCharacter = (
  * @param second incremental data
  */
 export const mergeStatisticsByDay = (
-  first: StatisticsByDay | undefined,
+  first: StatisticsByDay | null | undefined,
   second: Omit<StatisticsByDay, "id">,
 ): StatisticsByDay => {
   if (!first) {
@@ -176,7 +176,7 @@ export const mergeStatisticsByDay = (
  * @param second incremental data
  */
 export const mergeStatisticsByChapter = (
-  first: StatisticsByChapter | undefined,
+  first: StatisticsByChapter | null | undefined,
   second: Omit<StatisticsByChapter, "id">,
 ): StatisticsByChapter => {
   if (!first) {

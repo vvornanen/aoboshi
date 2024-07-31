@@ -539,3 +539,38 @@ describe("getStatisticsByChapters", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe("generateStatistics", () => {
+  test("merges and saves statistics by character", async () => {
+    const testCase = fixtures.oneCardOneReview;
+
+    bookRepository.findAll.mockReturnValueOnce([]);
+
+    getCardStatisticsByCharacter.mockImplementation(
+      testCase.getCardStatisticsByCharacter,
+    );
+
+    statisticsByCharacterRepository.findByLiteral.mockReturnValueOnce(
+      testCase.statisticsByCharacters[0],
+    );
+
+    await statisticsService.generateStatistics([
+      { cardId: "1", expression: "学", reviewTime: "2016-01-15T18:45:21Z" },
+    ]);
+
+    expect(statisticsByCharacterRepository.save).toHaveBeenCalledWith({
+      ...testCase.statisticsByCharacters[0],
+      lastReviewed: "2016-01-15",
+      numberOfReviews: 2,
+      numberOfCards: 1,
+    });
+  });
+
+  test.todo("merges and saves statistics by day", () => {
+    expect(statisticsByDayRepository.saveAll).toHaveBeenCalledWith([]);
+  });
+
+  test.todo("merges and saves statistics by chapter", () => {
+    expect(statisticsByChapterRepository.saveAll).toHaveBeenCalledWith([]);
+  });
+});

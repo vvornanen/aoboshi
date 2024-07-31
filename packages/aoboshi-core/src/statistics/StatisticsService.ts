@@ -58,7 +58,7 @@ export class StatisticsService {
     const { statisticsByCharacters, latestReviewTime, reviewDays } =
       await this.getStatisticsByCharacters(reviews);
 
-    // TODO: Update and save statistics by character
+    this.mergeAndSaveStatisticsByCharacters(statisticsByCharacters);
 
     // TODO: Remove eslint-disable-next-line
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -278,6 +278,18 @@ export class StatisticsService {
       totalNumberOfCharacters: chapter.characters.length,
     };
   }
+
+  private mergeAndSaveStatisticsByCharacters = (
+    statisticsByCharacters: StatisticsByCharacter[],
+  ) => {
+    for (const stats of statisticsByCharacters) {
+      const merged = mergeStatisticsByCharacter(
+        this.statisticsByCharacterRepository.findByLiteral(stats.literal),
+        stats,
+      );
+      this.statisticsByCharacterRepository.save(merged);
+    }
+  };
 }
 
 const toMap = (stats: StatisticsByCharacter[]) => {

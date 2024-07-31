@@ -4,6 +4,20 @@ import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByDay } from "./StatisticsByDay";
 import { StatisticsByChapter } from "./StatisticsByChapter";
+import { AnalysisContext } from "./Analyzer";
+import { TimeZoneConfig } from "./statisticsUtils";
+
+type TestCase = AnalysisContext & Record<string, unknown>;
+
+const timeZoneConfig: TimeZoneConfig[] = [{ timeZone: "UTC" }];
+
+export const noReviews = {
+  reviews: [],
+  statisticsByCharacters: [],
+  reviewDays: [],
+  latestReviewTime: undefined,
+  timeZoneConfig,
+} satisfies TestCase;
 
 export const oneCardOneReview = {
   reviews: [
@@ -39,7 +53,8 @@ export const oneCardOneReview = {
   ] satisfies StatisticsByCharacter[],
   reviewDays: ["2016-01-13"],
   latestReviewTime: "2016-01-13T19:57:33.016Z",
-};
+  timeZoneConfig,
+} satisfies TestCase;
 
 export const oneNewCardNoReviews = {
   reviews: [
@@ -71,10 +86,11 @@ export const oneNewCardNoReviews = {
       numberOfReviews: 0,
       numberOfCards: 1,
     },
-  ] satisfies StatisticsByCharacter[],
+  ],
   reviewDays: [],
   latestReviewTime: undefined,
-};
+  timeZoneConfig,
+} satisfies TestCase;
 
 export const multipleReviews = {
   reviews: [
@@ -152,10 +168,11 @@ export const multipleReviews = {
       numberOfReviews: 1,
       numberOfCards: 5,
     },
-  ] satisfies StatisticsByCharacter[],
+  ],
   reviewDays: ["2016-01-13", "2016-01-14"],
-  latestReviewTime: "2016-01-14T20:15:02.33Z",
-};
+  latestReviewTime: "2016-01-14T20:15:02.330Z",
+  timeZoneConfig,
+} satisfies TestCase;
 
 export const seenCharacter = (
   value:

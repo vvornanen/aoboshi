@@ -1,45 +1,16 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { randomId } from "../randomId";
-import { BookRepository } from "../books/BookRepository";
-import { Chapter } from "../books/Book";
-import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
-import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
-import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
-import { CardReview, isReview, NewCard } from "./CardReview";
+import { CardReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
-import {
-  getCharactersFromExpression,
-  mergeStatisticsByChapter,
-  mergeStatisticsByCharacter,
-  mergeStatisticsByDay,
-  timestampToDate,
-  TimeZoneConfig,
-} from "./statisticsUtils";
-import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
-import { StatisticsByDay } from "./StatisticsByDay";
-import { StatisticsByChapter } from "./StatisticsByChapter";
-
-/**
- * Adapter for fetching card statistics from an external source such as Anki
- */
-export type GetCardStatisticsByCharacter = (
-  literal: string,
-) =>
-  | CardStatisticsByCharacter
-  | null
-  | Promise<CardStatisticsByCharacter | null>;
+import { TimeZoneConfig } from "./statisticsUtils";
+import { AnalysisContext, Analyzer } from "./Analyzer";
 
 /** Generates statistics from card reviews */
 export class StatisticsService {
   constructor(
-    private bookRepository: BookRepository,
-    private statisticsByChapterRepository: StatisticsByChapterRepository,
-    private statisticsByCharacterRepository: StatisticsByCharacterRepository,
-    private statisticsByDayRepository: StatisticsByDayRepository,
+    private analyzers: Analyzer[],
     private statisticsIncrementRepository: StatisticsIncrementRepository,
-    private getCardStatisticsByCharacter: GetCardStatisticsByCharacter,
   ) {}
 
   /**
@@ -54,28 +25,22 @@ export class StatisticsService {
     reviews: (CardReview | NewCard)[],
   ): Promise<StatisticsIncrement> {
     const started = Temporal.Now.instant();
-
     const latestIncrement = this.statisticsIncrementRepository.findLatest();
 
-    const { statisticsByCharacters, latestReviewTime, reviewDays } =
-      await this.getStatisticsByCharacters(reviews);
-
-    const updatedStatisticsByCharacters =
-      this.mergeAndSaveStatisticsByCharacters(statisticsByCharacters);
-
-    const statisticsByDays = this.getStatisticsByDays(
-      reviewDays,
+    let context: AnalysisContext = {
       reviews,
-      updatedStatisticsByCharacters,
-    );
+      statisticsByCharacters: [],
+      latestReviewTime: undefined,
+      reviewDays: [],
+      timeZoneConfig: this.getTimeZoneConfig(),
+    };
 
-    this.mergeAndSaveStatisticsByDays(statisticsByDays);
-
-    const statisticsByChapters = this.getStatisticsByChapters(
-      updatedStatisticsByCharacters,
-    );
-
-    this.mergeAndSaveStatisticsByChapters(statisticsByChapters);
+    for (const analyzer of this.analyzers) {
+      const nextContext = await analyzer.run(context);
+      if (nextContext) {
+        context = nextContext;
+      }
+    }
 
     const completed = Temporal.Now.instant();
 
@@ -83,9 +48,9 @@ export class StatisticsService {
     const newIncrement: StatisticsIncrement = {
       id: randomId(),
       start: latestIncrement?.end || null,
-      end: latestReviewTime?.toString() || latestIncrement?.end || null,
+      end: context.latestReviewTime || latestIncrement?.end || null,
       numberOfReviews: reviews.length,
-      duration: started.until(completed).total("millisecond"),
+      duration: Math.round(started.until(completed).total("millisecond")),
     };
 
     this.statisticsIncrementRepository.save(newIncrement);
@@ -93,248 +58,8 @@ export class StatisticsService {
     return newIncrement;
   }
 
-  async getStatisticsByCharacters(reviews: (CardReview | NewCard)[]) {
-    const timeZoneConfig = this.getTimeZoneConfig();
-
-    let latestReviewTime: Temporal.Instant | undefined;
-    const reviewDays = new Set<string>();
-    const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
-
-    for (const review of reviews) {
-      const reviewTimestamp = isReview(review)
-        ? Temporal.Instant.from(review.reviewTime)
-        : undefined;
-      const reviewDate =
-        reviewTimestamp && timestampToDate(reviewTimestamp, timeZoneConfig);
-      reviewDate && reviewDays.add(reviewDate.toString());
-
-      if (
-        !latestReviewTime ||
-        !reviewTimestamp ||
-        Temporal.Instant.compare(latestReviewTime, reviewTimestamp) < 0
-      ) {
-        latestReviewTime = reviewTimestamp;
-      }
-
-      const characters: string[] = getCharactersFromExpression(
-        review.expression,
-      );
-
-      for (const literal of characters) {
-        const cardStatistics = await this.getCardStatisticsByCharacter(literal);
-
-        if (!cardStatistics) {
-          throw new Error(`Card statistics not found for character ${literal}`);
-        }
-
-        const merged = mergeStatisticsByCharacter(
-          statisticsByCharacters.get(literal),
-          {
-            literal,
-            firstAdded: cardStatistics.firstAdded,
-            firstReviewed: reviewDate?.toString() || null,
-            lastReviewed: reviewDate?.toString() || null,
-            numberOfReviews: reviewDate ? 1 : 0,
-            numberOfCards: cardStatistics.numberOfCards,
-          },
-        );
-        statisticsByCharacters.set(literal, merged);
-      }
-    }
-
-    return {
-      statisticsByCharacters: Array.from(statisticsByCharacters.values()),
-      latestReviewTime,
-      reviewDays: Array.from(reviewDays),
-    };
-  }
-
   private getTimeZoneConfig() {
     // TODO: Get time zones from settings service
     return [{ timeZone: "UTC" }] satisfies TimeZoneConfig[];
   }
-
-  getStatisticsByDays(
-    reviewDays: string[],
-    reviews: (CardReview | NewCard)[],
-    statisticsByCharacters: Iterable<StatisticsByCharacter>,
-  ): StatisticsByDay[] {
-    return reviewDays.map((date) =>
-      this.getStatisticsByDay(date, reviews, statisticsByCharacters),
-    );
-  }
-
-  private getStatisticsByDay(
-    date: string,
-    reviews: (CardReview | NewCard)[],
-    statisticsByCharacters: Iterable<StatisticsByCharacter>,
-  ): StatisticsByDay {
-    const timeZoneConfig = this.getTimeZoneConfig();
-    const addedCharacters = new Set<string>();
-    const firstSeenCharacters = new Set<string>();
-    const reviewedCharacters = new Set<string>();
-    let numberOfReviews = 0;
-
-    for (const stats of statisticsByCharacters) {
-      if (stats.firstAdded === date) {
-        addedCharacters.add(stats.literal);
-      }
-
-      if (stats.firstReviewed === date) {
-        firstSeenCharacters.add(stats.literal);
-      }
-    }
-
-    for (const review of reviews) {
-      const reviewDate = isReview(review)
-        ? timestampToDate(review.reviewTime, timeZoneConfig)
-        : undefined;
-      const characters: string[] = getCharactersFromExpression(
-        review.expression,
-      );
-
-      if (reviewDate?.toString() === date) {
-        characters.forEach((literal) => reviewedCharacters.add(literal));
-        numberOfReviews++;
-      }
-    }
-
-    return {
-      id: randomId(),
-      date,
-      addedCharacters: Array.from(addedCharacters).join(""),
-      firstSeenCharacters: Array.from(firstSeenCharacters).join(""),
-      reviewedCharacters: Array.from(reviewedCharacters).join(""),
-      numberOfAddedCharacters: addedCharacters.size,
-      numberOfFirstSeenCharacters: firstSeenCharacters.size,
-      numberOfReviewedCharacters: reviewedCharacters.size,
-      numberOfReviews,
-    } satisfies StatisticsByDay;
-  }
-
-  getStatisticsByChapters(statisticsByCharacters: StatisticsByCharacter[]) {
-    const books = this.bookRepository.findAll();
-    const statisticsByChapters: StatisticsByChapter[] = [];
-
-    for (const book of books) {
-      for (const volume of book.volumes) {
-        for (const chapter of volume.chapters) {
-          statisticsByChapters.push(
-            this.getStatisticsByChapter(
-              book.id,
-              chapter,
-              statisticsByCharacters,
-            ),
-          );
-        }
-      }
-    }
-
-    return statisticsByChapters;
-  }
-
-  getStatisticsByChapter(
-    bookId: string,
-    chapter: Chapter,
-    statisticsByCharacters: StatisticsByCharacter[],
-  ): StatisticsByChapter {
-    const statisticsByCharactersMap = toMap(statisticsByCharacters);
-
-    const seenCharacters = new Set<string>();
-    const newCharacters = new Set<string>();
-    const unseenCharacters = new Set<string>();
-
-    for (const character of chapter.characters) {
-      const literal =
-        typeof character === "string" ? character : character.literal;
-      const statisticsByCharacter = statisticsByCharactersMap.get(literal);
-
-      if (!statisticsByCharacter) {
-        unseenCharacters.add(literal);
-        continue;
-      }
-
-      if (statisticsByCharacter.numberOfReviews > 0) {
-        seenCharacters.add(literal);
-      } else if (
-        statisticsByCharacter.numberOfReviews === 0 &&
-        statisticsByCharacter.numberOfCards > 0
-      ) {
-        newCharacters.add(literal);
-      } else {
-        unseenCharacters.add(literal);
-      }
-    }
-
-    return {
-      id: randomId(),
-      bookId,
-      chapterId: chapter.id,
-      seenCharacters: Array.from(seenCharacters).join(""),
-      newCharacters: Array.from(newCharacters).join(""),
-      unseenCharacters: Array.from(unseenCharacters).join(""),
-      numberOfSeenCharacters: seenCharacters.size,
-      numberOfNewCharacters: newCharacters.size,
-      numberOfUnseenCharacters: unseenCharacters.size,
-      totalNumberOfCharacters: chapter.characters.length,
-    };
-  }
-
-  private mergeAndSaveStatisticsByCharacters(
-    statisticsByCharacters: StatisticsByCharacter[],
-  ) {
-    const result: StatisticsByCharacter[] = [];
-
-    for (const stats of statisticsByCharacters) {
-      const merged = mergeStatisticsByCharacter(
-        this.statisticsByCharacterRepository.findByLiteral(stats.literal),
-        stats,
-      );
-      result.push(merged);
-    }
-
-    this.statisticsByCharacterRepository.saveAll(result);
-
-    return result;
-  }
-
-  private mergeAndSaveStatisticsByDays(statisticsByDays: StatisticsByDay[]) {
-    const result: StatisticsByDay[] = [];
-
-    for (const stats of statisticsByDays) {
-      const merged = mergeStatisticsByDay(
-        this.statisticsByDayRepository.findByDate(stats.date),
-        stats,
-      );
-      result.push(merged);
-    }
-
-    this.statisticsByDayRepository.saveAll(result);
-
-    return result;
-  }
-
-  private mergeAndSaveStatisticsByChapters(
-    statisticsByChapters: StatisticsByChapter[],
-  ) {
-    const result: StatisticsByChapter[] = [];
-
-    for (const stats of statisticsByChapters) {
-      const merged = mergeStatisticsByChapter(
-        this.statisticsByChapterRepository.findByChapter(stats.chapterId),
-        stats,
-      );
-      result.push(merged);
-    }
-
-    this.statisticsByChapterRepository.saveAll(result);
-
-    return result;
-  }
 }
-
-const toMap = (stats: StatisticsByCharacter[]) => {
-  const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
-  stats.forEach((stats) => statisticsByCharacters.set(stats.literal, stats));
-  return statisticsByCharacters;
-};

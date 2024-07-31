@@ -4,9 +4,10 @@ import { Temporal } from "@js-temporal/polyfill";
 import { randomId } from "../randomId";
 import { StatisticsService } from "./StatisticsService";
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
-import { AnalysisContext, Analyzer } from "./Analyzer";
+import { Analyzer } from "./Analyzer";
 import * as fixtures from "./statisticsFixtures";
 import { StatisticsIncrement } from "./StatisticsIncrement";
+import { AnalysisContext } from "./AnalysisContext";
 
 vi.mock("../randomId", () => {
   return {

@@ -1,14 +1,12 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
-import { grades } from "../fixtures/bookFixtures";
-import { randomId } from "../randomId";
-import { BookRepository } from "../books/BookRepository";
-import * as fixtures from "./statisticsFixtures";
+import { randomId } from "../../randomId";
+import * as fixtures from "../statisticsFixtures";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
 import { CharacterAnalyzer } from "./CharacterAnalyzer";
 
-vi.mock("../randomId", () => {
+vi.mock("../../randomId", () => {
   return {
     randomId: vi.fn(),
   };
@@ -22,7 +20,6 @@ const mockRandomId = (value?: string) => {
   }
 };
 
-const bookRepository = mock<BookRepository>();
 const statisticsByCharacterRepository = mock<StatisticsByCharacterRepository>();
 const getCardStatisticsByCharacter = vi.fn();
 
@@ -92,8 +89,6 @@ describe("run", () => {
 
   beforeEach(() => {
     mockRandomId("random id");
-
-    bookRepository.findAll.mockReturnValueOnce([grades]);
 
     getCardStatisticsByCharacter.mockImplementation(
       testCase.getCardStatisticsByCharacter,

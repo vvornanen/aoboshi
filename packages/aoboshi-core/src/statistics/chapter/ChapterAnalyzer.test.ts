@@ -1,16 +1,16 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
-import { Chapter } from "../books/Book";
-import { grades } from "../fixtures/bookFixtures";
-import { randomId } from "../randomId";
-import { BookRepository } from "../books/BookRepository";
-import * as fixtures from "./statisticsFixtures";
+import { Chapter } from "../../books/Book";
+import { grades } from "../../fixtures/bookFixtures";
+import { randomId } from "../../randomId";
+import { BookRepository } from "../../books/BookRepository";
+import * as fixtures from "../statisticsFixtures";
+import { StatisticsByCharacterRepository } from "../character/StatisticsByCharacterRepository";
 import { StatisticsByChapter } from "./StatisticsByChapter";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
-import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
 import { ChapterAnalyzer } from "./ChapterAnalyzer";
 
-vi.mock("../randomId", () => {
+vi.mock("../../randomId", () => {
   return {
     randomId: vi.fn(),
   };

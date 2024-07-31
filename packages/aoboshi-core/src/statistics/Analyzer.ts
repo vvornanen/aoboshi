@@ -1,14 +1,4 @@
-import { CardReview, NewCard } from "./CardReview";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
-import { TimeZoneConfig } from "./statisticsUtils";
-
-export type AnalysisContext = {
-  reviews: (CardReview | NewCard)[];
-  statisticsByCharacters: StatisticsByCharacter[];
-  latestReviewTime: string | undefined;
-  reviewDays: string[];
-  timeZoneConfig: TimeZoneConfig[];
-};
+import { AnalysisContext } from "./AnalysisContext";
 
 export interface Analyzer {
   run: (

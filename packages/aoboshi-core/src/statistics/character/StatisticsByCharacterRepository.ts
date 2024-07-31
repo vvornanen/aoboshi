@@ -1,4 +1,4 @@
-import { Repository } from "../Repository";
+import { Repository } from "../../Repository";
 import { StatisticsByCharacter } from "./StatisticsByCharacter";
 
 /**

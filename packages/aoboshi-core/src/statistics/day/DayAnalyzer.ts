@@ -1,13 +1,14 @@
-import { randomId } from "../randomId";
-import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
-import { StatisticsByDay } from "./StatisticsByDay";
-import { isReview } from "./CardReview";
+import { randomId } from "../../randomId";
+import { isReview } from "../CardReview";
 import {
   getCharactersFromExpression,
   mergeStatisticsByDay,
   timestampToDate,
-} from "./statisticsUtils";
-import { AnalysisContext, Analyzer } from "./Analyzer";
+} from "../statisticsUtils";
+import { Analyzer } from "../Analyzer";
+import { AnalysisContext } from "../AnalysisContext";
+import { StatisticsByDay } from "./StatisticsByDay";
+import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
 
 export class DayAnalyzer implements Analyzer {
   constructor(private statisticsByDayRepository: StatisticsByDayRepository) {}

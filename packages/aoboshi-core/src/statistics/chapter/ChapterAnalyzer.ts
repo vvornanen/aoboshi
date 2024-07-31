@@ -1,11 +1,12 @@
-import { BookRepository } from "../books/BookRepository";
-import { Chapter } from "../books/Book";
-import { randomId } from "../randomId";
-import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
+import { BookRepository } from "../../books/BookRepository";
+import { Chapter } from "../../books/Book";
+import { randomId } from "../../randomId";
+import { StatisticsByCharacter } from "../character/StatisticsByCharacter";
+import { mergeStatisticsByChapter } from "../statisticsUtils";
+import { Analyzer } from "../Analyzer";
+import { AnalysisContext } from "../AnalysisContext";
 import { StatisticsByChapter } from "./StatisticsByChapter";
-import { mergeStatisticsByChapter } from "./statisticsUtils";
-import { AnalysisContext, Analyzer } from "./Analyzer";
+import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 
 export class ChapterAnalyzer implements Analyzer {
   constructor(

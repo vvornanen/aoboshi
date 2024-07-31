@@ -4,7 +4,8 @@ import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
 import { CardReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import { TimeZoneConfig } from "./statisticsUtils";
-import { AnalysisContext, Analyzer } from "./Analyzer";
+import { Analyzer } from "./Analyzer";
+import { AnalysisContext } from "./AnalysisContext";
 
 /** Generates statistics from card reviews */
 export class StatisticsService {

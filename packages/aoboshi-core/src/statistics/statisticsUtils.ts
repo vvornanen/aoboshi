@@ -2,9 +2,9 @@ import { Temporal } from "@js-temporal/polyfill";
 import { KANJI_REGEXP } from "../characters/Character";
 import { randomId } from "../randomId";
 import { nullableMaxDate, nullableMinDate } from "../dateUtils";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
-import { StatisticsByDay } from "./StatisticsByDay";
-import { StatisticsByChapter } from "./StatisticsByChapter";
+import { StatisticsByCharacter } from "./character/StatisticsByCharacter";
+import { StatisticsByDay } from "./day/StatisticsByDay";
+import { StatisticsByChapter } from "./chapter/StatisticsByChapter";
 
 /** Specifies a time zone valid in the given period */
 export type TimeZoneConfig = {

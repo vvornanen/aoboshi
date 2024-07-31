@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { CardReview, NewCard } from "./CardReview";
-import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
-import { StatisticsByDay } from "./StatisticsByDay";
-import { StatisticsByChapter } from "./StatisticsByChapter";
-import { AnalysisContext } from "./Analyzer";
+import { CardStatisticsByCharacter } from "./character/CardStatisticsByCharacter";
+import { StatisticsByCharacter } from "./character/StatisticsByCharacter";
+import { StatisticsByDay } from "./day/StatisticsByDay";
+import { StatisticsByChapter } from "./chapter/StatisticsByChapter";
 import { TimeZoneConfig } from "./statisticsUtils";
+import { AnalysisContext } from "./AnalysisContext";
 
 type TestCase = AnalysisContext & Record<string, unknown>;
 

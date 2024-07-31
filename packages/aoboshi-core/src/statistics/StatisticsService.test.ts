@@ -13,6 +13,7 @@ import { CardReview } from "./CardReview";
 import * as fixtures from "./statisticsFixtures";
 import { StatisticsByDay } from "./StatisticsByDay";
 import { StatisticsByChapter } from "./StatisticsByChapter";
+import { StatisticsByCharacter } from "./StatisticsByCharacter";
 
 vi.mock("../randomId", () => {
   return {
@@ -20,11 +21,11 @@ vi.mock("../randomId", () => {
   };
 });
 
-const mockRandomId = () => {
+const mockRandomId = (value?: string) => {
   let autoIncrement = 1;
 
   if (vi.isMockFunction(randomId)) {
-    randomId.mockImplementation(() => String(autoIncrement++));
+    randomId.mockImplementation(() => value || String(autoIncrement++));
   }
 };
 
@@ -541,10 +542,12 @@ describe("getStatisticsByChapters", () => {
 });
 
 describe("generateStatistics", () => {
-  test("merges and saves statistics by character", async () => {
-    const testCase = fixtures.oneCardOneReview;
+  const testCase = fixtures.oneCardOneReview;
 
-    bookRepository.findAll.mockReturnValueOnce([]);
+  beforeEach(() => {
+    mockRandomId("random id");
+
+    bookRepository.findAll.mockReturnValueOnce([grades]);
 
     getCardStatisticsByCharacter.mockImplementation(
       testCase.getCardStatisticsByCharacter,
@@ -553,24 +556,73 @@ describe("generateStatistics", () => {
     statisticsByCharacterRepository.findByLiteral.mockReturnValueOnce(
       testCase.statisticsByCharacters[0],
     );
+  });
 
+  test("merges and saves statistics by character", async () => {
     await statisticsService.generateStatistics([
       { cardId: "1", expression: "学", reviewTime: "2016-01-15T18:45:21Z" },
     ]);
 
-    expect(statisticsByCharacterRepository.save).toHaveBeenCalledWith({
-      ...testCase.statisticsByCharacters[0],
-      lastReviewed: "2016-01-15",
-      numberOfReviews: 2,
-      numberOfCards: 1,
-    });
+    const expected: StatisticsByCharacter[] = [
+      {
+        ...testCase.statisticsByCharacters[0],
+        lastReviewed: "2016-01-15",
+        numberOfReviews: 2,
+        numberOfCards: 1,
+      },
+    ];
+
+    expect(statisticsByCharacterRepository.saveAll).toHaveBeenCalledWith(
+      expected,
+    );
   });
 
-  test.todo("merges and saves statistics by day", () => {
-    expect(statisticsByDayRepository.saveAll).toHaveBeenCalledWith([]);
+  test("merges and saves statistics by day", async () => {
+    await statisticsService.generateStatistics([
+      { cardId: "1", expression: "学", reviewTime: "2016-01-15T18:45:21Z" },
+    ]);
+
+    const expected: StatisticsByDay[] = [
+      {
+        id: "random id",
+        date: "2016-01-15",
+        addedCharacters: "",
+        firstSeenCharacters: "",
+        reviewedCharacters: "学",
+        numberOfAddedCharacters: 0,
+        numberOfFirstSeenCharacters: 0,
+        numberOfReviewedCharacters: 1,
+        numberOfReviews: 1,
+      },
+    ];
+
+    expect(statisticsByDayRepository.saveAll).toHaveBeenCalledWith(expected);
   });
 
-  test.todo("merges and saves statistics by chapter", () => {
-    expect(statisticsByChapterRepository.saveAll).toHaveBeenCalledWith([]);
+  test("merges and saves statistics by chapter", async () => {
+    await statisticsService.generateStatistics([
+      { cardId: "1", expression: "学", reviewTime: "2016-01-15T18:45:21Z" },
+    ]);
+
+    const expected: StatisticsByChapter[] = [
+      {
+        id: "random id",
+        bookId: "AtLesfR65Adc7q2XHVK7A8",
+        chapterId: "4phqJluvSvwNLgogGM5bZw",
+        seenCharacters: "学",
+        newCharacters: "",
+        unseenCharacters: (
+          grades.volumes[0].chapters[0].characters as string
+        ).replace("学", ""),
+        numberOfSeenCharacters: 1,
+        numberOfNewCharacters: 0,
+        numberOfUnseenCharacters: 79,
+        totalNumberOfCharacters: 80,
+      },
+    ];
+
+    expect(statisticsByChapterRepository.saveAll).toHaveBeenCalledWith(
+      expected,
+    );
   });
 });

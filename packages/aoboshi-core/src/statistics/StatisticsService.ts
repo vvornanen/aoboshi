@@ -10,7 +10,9 @@ import { CardReview, isReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import {
   getCharactersFromExpression,
+  mergeStatisticsByChapter,
   mergeStatisticsByCharacter,
+  mergeStatisticsByDay,
   timestampToDate,
   TimeZoneConfig,
 } from "./statisticsUtils";
@@ -58,23 +60,22 @@ export class StatisticsService {
     const { statisticsByCharacters, latestReviewTime, reviewDays } =
       await this.getStatisticsByCharacters(reviews);
 
-    this.mergeAndSaveStatisticsByCharacters(statisticsByCharacters);
+    const updatedStatisticsByCharacters =
+      this.mergeAndSaveStatisticsByCharacters(statisticsByCharacters);
 
-    // TODO: Remove eslint-disable-next-line
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const statisticsByDays = this.getStatisticsByDays(
       reviewDays,
       reviews,
-      statisticsByCharacters,
+      updatedStatisticsByCharacters,
     );
 
-    // TODO: Remove eslint-disable-next-line
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    this.mergeAndSaveStatisticsByDays(statisticsByDays);
+
     const statisticsByChapters = this.getStatisticsByChapters(
-      statisticsByCharacters,
+      updatedStatisticsByCharacters,
     );
 
-    // TODO: Update and save statistics by book chapter
+    this.mergeAndSaveStatisticsByChapters(statisticsByChapters);
 
     const completed = Temporal.Now.instant();
 
@@ -279,17 +280,57 @@ export class StatisticsService {
     };
   }
 
-  private mergeAndSaveStatisticsByCharacters = (
+  private mergeAndSaveStatisticsByCharacters(
     statisticsByCharacters: StatisticsByCharacter[],
-  ) => {
+  ) {
+    const result: StatisticsByCharacter[] = [];
+
     for (const stats of statisticsByCharacters) {
       const merged = mergeStatisticsByCharacter(
         this.statisticsByCharacterRepository.findByLiteral(stats.literal),
         stats,
       );
-      this.statisticsByCharacterRepository.save(merged);
+      result.push(merged);
     }
-  };
+
+    this.statisticsByCharacterRepository.saveAll(result);
+
+    return result;
+  }
+
+  private mergeAndSaveStatisticsByDays(statisticsByDays: StatisticsByDay[]) {
+    const result: StatisticsByDay[] = [];
+
+    for (const stats of statisticsByDays) {
+      const merged = mergeStatisticsByDay(
+        this.statisticsByDayRepository.findByDate(stats.date),
+        stats,
+      );
+      result.push(merged);
+    }
+
+    this.statisticsByDayRepository.saveAll(result);
+
+    return result;
+  }
+
+  private mergeAndSaveStatisticsByChapters(
+    statisticsByChapters: StatisticsByChapter[],
+  ) {
+    const result: StatisticsByChapter[] = [];
+
+    for (const stats of statisticsByChapters) {
+      const merged = mergeStatisticsByChapter(
+        this.statisticsByChapterRepository.findByChapter(stats.chapterId),
+        stats,
+      );
+      result.push(merged);
+    }
+
+    this.statisticsByChapterRepository.saveAll(result);
+
+    return result;
+  }
 }
 
 const toMap = (stats: StatisticsByCharacter[]) => {

@@ -8,6 +8,11 @@ import { AnalysisContext } from "../AnalysisContext";
 import { StatisticsByChapter } from "./StatisticsByChapter";
 import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
 
+/**
+ * Generates card review statistics aggregated by book chapter.
+ *
+ * Incrementally merges the generated statistics with existing data.
+ */
 export class ChapterAnalyzer implements Analyzer {
   constructor(
     private bookRepository: BookRepository,

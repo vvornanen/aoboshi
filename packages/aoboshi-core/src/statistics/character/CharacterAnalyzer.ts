@@ -21,6 +21,11 @@ export type GetCardStatisticsByCharacter = (
   | null
   | Promise<CardStatisticsByCharacter | null>;
 
+/**
+ * Generates card review statistics aggregated by character.
+ *
+ * Incrementally merges the generated statistics with existing data.
+ */
 export class CharacterAnalyzer implements Analyzer {
   constructor(
     private statisticsByCharacterRepository: StatisticsByCharacterRepository,

@@ -10,6 +10,11 @@ import { AnalysisContext } from "../AnalysisContext";
 import { StatisticsByDay } from "./StatisticsByDay";
 import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
 
+/**
+ * Generates daily card review statistics.
+ *
+ * Incrementally merges the generated statistics with existing data.
+ */
 export class DayAnalyzer implements Analyzer {
   constructor(private statisticsByDayRepository: StatisticsByDayRepository) {}
 

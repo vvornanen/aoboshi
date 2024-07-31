@@ -15,9 +15,7 @@ export class StatisticsService {
   ) {}
 
   /**
-   * Generates statistics by character, by day and by book chapter.
-   *
-   * Incrementally merges the generated statistics with existing data.
+   * Generates statistics using the configured analyzers.
    *
    * @param reviews new reviews since the last generation and all cards that
    * currently do not have any reviews

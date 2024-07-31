@@ -5539,7 +5539,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki":
+"@vvornanen/aoboshi-anki@workspace:^, @vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki"
   dependencies:
@@ -5580,6 +5580,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.14.2"
     "@vanilla-extract/vite-plugin": "npm:^4.0.7"
     "@vitejs/plugin-react-swc": "npm:^3.6.0"
+    "@vvornanen/aoboshi-anki": "workspace:^"
     "@vvornanen/aoboshi-core": "workspace:^"
     "@vvornanen/aoboshi-kanji": "workspace:^"
     better-sqlite3: "npm:^9.5.0"
@@ -5605,6 +5606,9 @@ __metadata:
 "@vvornanen/aoboshi-core@workspace:^, @vvornanen/aoboshi-core@workspace:packages/aoboshi-core":
   version: 0.0.0-use.local
   resolution: "@vvornanen/aoboshi-core@workspace:packages/aoboshi-core"
+  dependencies:
+    "@js-temporal/polyfill": "npm:^0.4.4"
+    vitest-mock-extended: "npm:^2.0.0"
   languageName: unknown
   linkType: soft
 
@@ -15310,6 +15314,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-essentials@npm:>=10.0.0":
+  version: 10.0.1
+  resolution: "ts-essentials@npm:10.0.1"
+  peerDependencies:
+    typescript: ">=4.5.0"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/ced6e659a57ad7a74bfdae1c18594e4cb1c8ffb30b0763a4ca1239b471e474cd53b51a8907f49cbedd8961a8cbd63a1f2fbbb266d6e827d1b6b3dbb58fdaac03
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.15.0":
   version: 3.15.0
   resolution: "tsconfig-paths@npm:3.15.0"
@@ -15968,6 +15984,18 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10/caa40343c2c4e6d8e257fccb4c3029f62909c319a86063ce727ed550925c0a834460b0d1ca20c4d6c915f35302aa1052f6ec5193099a47ce21d74b9b817e69e1
+  languageName: node
+  linkType: hard
+
+"vitest-mock-extended@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "vitest-mock-extended@npm:2.0.0"
+  dependencies:
+    ts-essentials: "npm:>=10.0.0"
+  peerDependencies:
+    typescript: 3.x || 4.x || 5.x
+    vitest: ">=2.0.0"
+  checksum: 10/3940253d07e85c52edca9cfd4f662245247a8c4e5d3aeee1998144a9d8983bc6996181e57a7ffed4d928cb3d28d460dceeb92a6c2cc7814600ae40cd39d094ab
   languageName: node
   linkType: hard
 

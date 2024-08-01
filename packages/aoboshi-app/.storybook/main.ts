@@ -22,7 +22,9 @@ const config: StorybookConfig = {
       },
     },
   },
-  docs: {},
+  core: {
+    disableTelemetry: true,
+  },
 };
 export default config;
 

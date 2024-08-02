@@ -5369,7 +5369,7 @@ __metadata:
     chroma-js: "npm:^2.6.0"
     chromatic: "npm:^11.7.0"
     clsx: "npm:^2.1.1"
-    electron: "npm:29.4.5"
+    electron: "npm:31.3.1"
     i18next: "npm:^23.12.2"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.3.1"
@@ -7428,16 +7428,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:29.4.5":
-  version: 29.4.5
-  resolution: "electron@npm:29.4.5"
+"electron@npm:31.3.1":
+  version: 31.3.1
+  resolution: "electron@npm:31.3.1"
   dependencies:
     "@electron/get": "npm:^2.0.0"
     "@types/node": "npm:^20.9.0"
     extract-zip: "npm:^2.0.1"
   bin:
     electron: cli.js
-  checksum: 10/2efc817ba599b32351e7dc3d88c577ff9b3dfb6430156879b0feadaaddd326f1653d90cd91e4f9ad8891afe489626cb73bce07aaed07a394c3033e1818da5446
+  checksum: 10/bc6e582c2a6ad9a95eeff71a24b2f798b88ce33dae1cae9e02fcb81f058463c502210a8eb0b9a061c82223060159ac69c141386f689ce2f52818f96fefc827c9
   languageName: node
   linkType: hard
 
@@ -11618,12 +11618,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-abi@npm:3.57.0":
-  version: 3.57.0
-  resolution: "node-abi@npm:3.57.0"
+"node-abi@npm:^3.0.0, node-abi@npm:^3.3.0, node-abi@npm:^3.45.0":
+  version: 3.65.0
+  resolution: "node-abi@npm:3.65.0"
   dependencies:
     semver: "npm:^7.3.5"
-  checksum: 10/d0634a5f4de326e7cbf8b23e5f91d809ea3996ac42b639263b5ff69a11eab286eab94736c07a6f931e173c75cc9ab6c6e7ec4b70ebb7049648a1d499b665dd08
+  checksum: 10/2b58813cfdd816b9f08e901179270fb6e916bd529ca1de2fc8d088787fea5affbb093fc8e783ccfd09a7464186a7f48079f5f92f14126fb04ceec74e0eab06d2
   languageName: node
   linkType: hard
 

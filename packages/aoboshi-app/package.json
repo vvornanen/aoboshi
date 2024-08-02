@@ -20,7 +20,7 @@
     "@vvornanen/aoboshi-anki": "workspace:^",
     "@vvornanen/aoboshi-core": "workspace:^",
     "@vvornanen/aoboshi-kanji": "workspace:^",
-    "better-sqlite3": "^9.6.0",
+    "better-sqlite3": "^11.1.2",
     "bree": "^9.2.3",
     "chroma-js": "^2.6.0",
     "clsx": "^2.1.1",

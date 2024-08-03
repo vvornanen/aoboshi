@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const CompletedBadge: Story = {
   args: {
     seed: "ほげ",
-    invisible: false,
+    show: true,
   },
   render: (args) => (
     <CompletedBadgeComponent {...args}>

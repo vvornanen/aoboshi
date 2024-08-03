@@ -1,40 +1,56 @@
-import { FunctionComponent, useEffect, useRef } from "react";
+import { ComponentPropsWithoutRef, FunctionComponent, useMemo } from "react";
 import { clsx } from "clsx";
-import { Badge, BadgeProps } from "@mui/base";
 import { hash } from "@vvornanen/aoboshi-core";
-import { completedBadge, completedBadgeRoot } from "./CompletedBadge.css";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import {
+  badgeAngle,
+  completedBadge,
+  completedBadgeRoot,
+} from "./CompletedBadge.css";
 
-type CompletedBadgeProps = Omit<
-  BadgeProps,
-  "badgeContent" | "max" | "showZero"
-> & {
-  /** Used for calculating a random angle */
+type CompletedBadgeProps = ComponentPropsWithoutRef<"div"> & {
+  /**
+   * Used for calculating a random angle.
+   *
+   * Guarantees that the same value always produces the same angle.
+   * This is especially useful for visual snapshot testing.
+   */
   seed?: string;
+
+  /** If false, removes the badge from the DOM */
+  show?: boolean;
 };
 
 export const CompletedBadge: FunctionComponent<CompletedBadgeProps> = ({
   className,
   seed,
+  show = true,
+  children,
   ...props
 }) => {
   const maxAngle = 20;
-  const angle = seed ? Math.round(hash(seed, maxAngle) * 2 - maxAngle) : 0;
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.style.transform = `translateX(56px) translateY(-25%) rotate(${angle}deg)`;
-    }
-  }, [angle]);
+  const angle = useMemo(() => newAngle(maxAngle, seed), [seed]);
 
   return (
-    <Badge
-      slotProps={{
-        root: { className: clsx(completedBadgeRoot, className) },
-        badge: { className: completedBadge, ref },
-      }}
-      badgeContent={"💮"}
-      {...props}
-    />
+    <div className={clsx(completedBadgeRoot, className)} {...props}>
+      {children}
+      {show && (
+        <div
+          className={completedBadge}
+          style={assignInlineVars({ [badgeAngle]: `${angle}deg` })}
+        >
+          💮
+        </div>
+      )}
+    </div>
   );
 };
+
+/**
+ * Returns a value between -max and max.
+ *
+ * @param max
+ * @param seed
+ */
+const newAngle = (max: number, seed?: string) =>
+  Math.round((seed ? hash(seed, max * 2) : Math.random() * max * 2) - max);

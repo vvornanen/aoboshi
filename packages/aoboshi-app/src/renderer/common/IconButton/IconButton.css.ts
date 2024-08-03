@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { buttonClasses } from "@mui/base/Button";
 import { vars } from "../../theme/theme.css";
 
 export const iconButton = style({
@@ -14,14 +13,14 @@ export const iconButton = style({
     "&:hover": {
       backgroundColor: vars.color.hover,
     },
-    [`&.${buttonClasses.active}`]: {
+    "&:active": {
       backgroundColor: vars.color.activated,
     },
-    [`&.${buttonClasses.disabled}`]: {
+    "&.disabled": {
       opacity: vars.color.disabledOpacity,
       backgroundColor: "transparent",
     },
-    [`&.${buttonClasses.focusVisible}`]: {
+    "&:focus-visible": {
       backgroundColor: vars.color.focus,
     },
   },

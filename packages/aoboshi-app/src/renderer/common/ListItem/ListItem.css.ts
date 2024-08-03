@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { buttonClasses } from "@mui/base/Button";
 import { bodyMedium } from "../Typography/Typography.css";
 import { vars } from "../../theme/theme.css";
 import { listItemClasses } from "./listItemClasses";
@@ -20,19 +19,16 @@ export const listItem = style([
     borderRadius: vars.shape.borderRadiusSm,
     userSelect: "none",
     selectors: {
-      "&:active": {
-        color: "unset",
-      },
       "&:visited": {
         color: "unset",
       },
       "&:hover": {
         backgroundColor: vars.color.hover,
       },
-      [`&.${listItemClasses.active}`]: {
+      "&:active": {
         backgroundColor: vars.color.activated,
       },
-      [`&.${listItemClasses.focusVisible}`]: {
+      "&:focus-visible": {
         backgroundColor: vars.color.focus,
       },
       [`&.${listItemClasses.disabled}`]: {
@@ -54,7 +50,7 @@ export const selected = style({
       backgroundColor: vars.color.primaryContainer,
       color: vars.color.onPrimaryContainer,
     },
-    [`&.${buttonClasses.active}`]: {
+    "&.active": {
       backgroundColor: vars.color.primaryContainer,
       color: vars.color.onPrimaryContainer,
     },

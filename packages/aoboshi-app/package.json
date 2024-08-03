@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4",
-    "@mui/base": "5.0.0-dev.20240529-082515-213b5e33ab",
+    "@mui/base": "5.0.0-beta.40",
     "@reduxjs/toolkit": "^2.2.7",
     "@vanilla-extract/css": "^1.15.3",
     "@vvornanen/aoboshi-anki": "workspace:^",

@@ -2042,7 +2042,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.24.6, @babel/runtime@npm:^7.24.8":
+"@babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.24.8":
   version: 7.25.0
   resolution: "@babel/runtime@npm:7.25.0"
   dependencies:
@@ -3496,16 +3496,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/base@npm:5.0.0-dev.20240529-082515-213b5e33ab":
-  version: 5.0.0-dev.20240529-082515-213b5e33ab
-  resolution: "@mui/base@npm:5.0.0-dev.20240529-082515-213b5e33ab"
+"@mui/base@npm:5.0.0-beta.40":
+  version: 5.0.0-beta.40
+  resolution: "@mui/base@npm:5.0.0-beta.40"
   dependencies:
-    "@babel/runtime": "npm:^7.24.6"
+    "@babel/runtime": "npm:^7.23.9"
     "@floating-ui/react-dom": "npm:^2.0.8"
-    "@mui/types": "npm:^7.2.14-dev.20240529-082515-213b5e33ab"
-    "@mui/utils": "npm:^6.0.0-dev.20240529-082515-213b5e33ab"
+    "@mui/types": "npm:^7.2.14"
+    "@mui/utils": "npm:^5.15.14"
     "@popperjs/core": "npm:^2.11.8"
-    clsx: "npm:^2.1.1"
+    clsx: "npm:^2.1.0"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     "@types/react": ^17.0.0 || ^18.0.0
@@ -3514,11 +3514,11 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/5e6a4f8d2583dec3c776a8681753665504b8c72e8b7c0348c6a373c3830bc51243be7740c38a4876f300b6114f2e57247b75f5754df7bee11c625d228d2640c9
+  checksum: 10/ebee3d9e1136710dcb2af5828acc6bd8d54f6b124785d011585c2665a48dc66e35ccb344d5ebc7fd8bfd776cccb8ea434911f151a62bee193677ee9dc67fc7fc
   languageName: node
   linkType: hard
 
-"@mui/types@npm:^7.2.14-dev.20240529-082515-213b5e33ab":
+"@mui/types@npm:^7.2.14, @mui/types@npm:^7.2.15":
   version: 7.2.15
   resolution: "@mui/types@npm:7.2.15"
   peerDependencies:
@@ -3530,21 +3530,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/utils@npm:^6.0.0-dev.20240529-082515-213b5e33ab":
-  version: 6.0.0-dev.20240529-082515-213b5e33ab
-  resolution: "@mui/utils@npm:6.0.0-dev.20240529-082515-213b5e33ab"
+"@mui/utils@npm:^5.15.14":
+  version: 5.16.6
+  resolution: "@mui/utils@npm:5.16.6"
   dependencies:
-    "@babel/runtime": "npm:^7.24.6"
+    "@babel/runtime": "npm:^7.23.9"
+    "@mui/types": "npm:^7.2.15"
     "@types/prop-types": "npm:^15.7.12"
+    clsx: "npm:^2.1.1"
     prop-types: "npm:^15.8.1"
-    react-is: "npm:^18.2.0"
+    react-is: "npm:^18.3.1"
   peerDependencies:
     "@types/react": ^17.0.0 || ^18.0.0
     react: ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 10/fa785f4cdc6c31c20279f955a0442462c8d73ae7e99a5277d6a6a3c34a1e522fc254e775493969308d25476f1854479cb3fe1cf5206ee2937d1eb55fc3bab904
+  checksum: 10/214bc3e9fe49579c5aee264477c802e5f5ced3473cafb1ed0aacd63db223e2668a08fb1f7304e70ea0511f68200dd80c3b49cc58050c7b0962228758a003371d
   languageName: node
   linkType: hard
 
@@ -5338,7 +5340,7 @@ __metadata:
     "@electron-forge/plugin-vite": "npm:^7.4.0"
     "@electron/rebuild": "npm:^3.6.0"
     "@js-temporal/polyfill": "npm:^0.4.4"
-    "@mui/base": "npm:5.0.0-dev.20240529-082515-213b5e33ab"
+    "@mui/base": "npm:5.0.0-beta.40"
     "@reduxjs/toolkit": "npm:^2.2.7"
     "@storybook/addon-essentials": "npm:^8.2.7"
     "@storybook/addon-interactions": "npm:^8.2.7"
@@ -6600,7 +6602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.1":
+"clsx@npm:^2.1.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
@@ -12929,10 +12931,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^18.0.0, react-is@npm:^18.2.0":
+"react-is@npm:^18.0.0":
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: 10/200cd65bf2e0be7ba6055f647091b725a45dd2a6abef03bf2380ce701fd5edccee40b49b9d15edab7ac08a762bf83cb4081e31ec2673a5bfb549a36ba21570df
+  languageName: node
+  linkType: hard
+
+"react-is@npm:^18.3.1":
+  version: 18.3.1
+  resolution: "react-is@npm:18.3.1"
+  checksum: 10/d5f60c87d285af24b1e1e7eaeb123ec256c3c8bdea7061ab3932e3e14685708221bf234ec50b21e10dd07f008f1b966a2730a0ce4ff67905b3872ff2042aec22
   languageName: node
   linkType: hard
 

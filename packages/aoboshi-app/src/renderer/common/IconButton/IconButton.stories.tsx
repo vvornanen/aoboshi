@@ -21,3 +21,11 @@ export const Default: Story = {
     </IconButton>
   ),
 };
+
+export const Disabled: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    disabled: true,
+  },
+};

@@ -22,7 +22,7 @@ export const ChapterSectionHeader: FunctionComponent<
   return (
     <CompletedBadge
       className={className}
-      invisible={!completed}
+      show={completed}
       seed={title}
       {...props}
     >

@@ -1,16 +1,17 @@
-import { FunctionComponent } from "react";
-import { Button, ButtonProps } from "@mui/base/Button";
+import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { defaultColor, iconButton } from "./IconButton.css";
 
-type IconButtonProps = ButtonProps;
+type IconButtonProps = ComponentPropsWithoutRef<"button">;
 
 export const IconButton: FunctionComponent<IconButtonProps> = ({
   className,
+  disabled,
   ...props
 }) => (
-  <Button
-    className={clsx(iconButton, defaultColor, className)}
+  <button
+    className={clsx(iconButton, defaultColor, className, { disabled })}
+    disabled={disabled}
     {...props}
-  ></Button>
+  ></button>
 );

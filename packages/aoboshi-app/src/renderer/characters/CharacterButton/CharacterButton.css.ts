@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import { buttonClasses } from "@mui/base/Button";
 import { textbookLarge } from "../../common/Typography/Typography.css";
 import { vars } from "../../theme/theme.css";
 import { characterButtonClasses } from "./characterButtonClasses";
@@ -25,16 +24,16 @@ export const characterButton = style([
       [`&.${characterButtonClasses.highlight}:hover`]: {
         backgroundColor: vars.color.hoverPrimary,
       },
-      [`&.${characterButtonClasses.highlight}.${buttonClasses.active}`]: {
+      [`&.${characterButtonClasses.highlight}:active`]: {
         backgroundColor: vars.color.activatedPrimary,
       },
-      [`&.${buttonClasses.active}`]: {
+      "&:active": {
         backgroundColor: vars.color.activated,
       },
-      [`&.${buttonClasses.focusVisible}`]: {
+      "&:focus-visible": {
         backgroundColor: vars.color.focus,
       },
-      [`&.${characterButtonClasses.highlight}.${buttonClasses.focusVisible}`]: {
+      [`&.${characterButtonClasses.highlight}:focus-visible`]: {
         backgroundColor: vars.color.focusPrimary,
       },
       [`&.${characterButtonClasses.unseen}`]: {
@@ -55,6 +54,10 @@ export const characterButton = style([
         {
           backgroundColor: vars.color.selectedPrimary,
         },
+      "&.disabled": {
+        opacity: vars.color.disabledOpacity,
+        backgroundColor: "transparent",
+      },
     },
   },
 ]);

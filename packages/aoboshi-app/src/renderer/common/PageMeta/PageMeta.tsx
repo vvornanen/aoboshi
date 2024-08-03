@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Portal } from "@mui/base";
+import { createPortal } from "react-dom";
 import { visuallyHidden } from "../../styles.css";
 
 type PageMetaProps = {
@@ -8,15 +8,33 @@ type PageMetaProps = {
 };
 
 export const PageMeta: FunctionComponent<PageMetaProps> = ({ title }) => {
+  useDocumentLanguage();
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  return <RouteAnnouncer title={title} />;
+};
+
+/** Updates document lang attribute when application language changes. */
+const useDocumentLanguage = () => {
   const { i18n } = useTranslation();
-  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", i18n.language);
   }, [i18n.language]);
+};
+
+type RouteAnnouncerProps = {
+  title: string;
+};
+
+/** Notifies screen readers with a new page title when the route changes. */
+const RouteAnnouncer: FunctionComponent<RouteAnnouncerProps> = ({ title }) => {
+  const [alertVisible, setAlertVisible] = useState(false);
 
   useEffect(() => {
-    document.title = title;
     setAlertVisible(true);
 
     const timeout = setTimeout(() => setAlertVisible(false), 5000);
@@ -25,12 +43,18 @@ export const PageMeta: FunctionComponent<PageMetaProps> = ({ title }) => {
   }, [title]);
 
   return (
-    alertVisible && (
-      <Portal>
-        <div className={visuallyHidden} aria-live="polite">
-          {title}
-        </div>
-      </Portal>
-    )
+    <>
+      {alertVisible &&
+        createPortal(
+          <div
+            data-route-announcer=""
+            className={visuallyHidden}
+            aria-live="polite"
+          >
+            {title}
+          </div>,
+          document.body,
+        )}
+    </>
   );
 };

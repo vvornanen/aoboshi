@@ -1,5 +1,6 @@
-import { style } from "@vanilla-extract/css";
-import { badgeClasses } from "@mui/base";
+import { createVar, style } from "@vanilla-extract/css";
+
+export const badgeAngle = createVar();
 
 export const completedBadgeRoot = style({
   position: "relative",
@@ -13,9 +14,8 @@ export const completedBadge = style({
   fontSize: 48,
   lineHeight: 1,
   userSelect: "none",
-  selectors: {
-    [`&.${badgeClasses.invisible}`]: {
-      display: "none",
-    },
+  transform: `translateX(56px) translateY(-25%) rotate(${badgeAngle})`,
+  vars: {
+    [badgeAngle]: "0deg",
   },
 });

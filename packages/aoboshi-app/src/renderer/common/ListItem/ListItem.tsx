@@ -1,41 +1,34 @@
-import { forwardRef } from "react";
+import { ComponentPropsWithRef, forwardRef } from "react";
 import { clsx } from "clsx";
-import { ButtonProps } from "@mui/base/Button";
-import { useButton } from "@mui/base";
 import { NavLink } from "react-router-dom";
 import { Skeleton } from "../Skeleton/Skeleton";
 import * as styles from "./ListItem.css";
 import { listItemClasses } from "./listItemClasses";
 
-type ListItemProps = ButtonProps & {
+type ListItemProps = ComponentPropsWithRef<"a"> & {
+  to?: string;
   loading?: boolean;
+  disabled?: boolean;
 };
 
-export const ListItem = forwardRef<HTMLLIElement, ListItemProps>(
+export const ListItem = forwardRef<HTMLAnchorElement, ListItemProps>(
   function ListItem(
     { disabled = false, loading = false, className, to, children, ...props },
     ref,
   ) {
-    const { active, focusVisible, getRootProps } = useButton({
-      rootRef: ref,
-      disabled,
-      ...props,
-    });
-
     return (
       <li>
         <NavLink
+          ref={ref}
           className={({ isActive }) =>
             clsx(styles.listItem, className, {
               [styles.selected]: to && isActive,
-              [listItemClasses.active]: active,
-              [listItemClasses.focusVisible]: focusVisible,
               [listItemClasses.disabled]: disabled,
               [listItemClasses.loading]: loading,
             })
           }
-          {...getRootProps()}
           to={to || ""}
+          {...props}
         >
           {!loading && children}
           {loading && <Skeleton>{children}</Skeleton>}

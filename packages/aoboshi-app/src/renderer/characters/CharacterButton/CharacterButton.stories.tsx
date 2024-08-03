@@ -17,17 +17,25 @@ export const Seen: Story = {
 };
 
 export const Unseen: Story = {
+  ...Seen,
   args: {
-    children: "学",
+    ...Seen.args,
     seen: false,
-    highlight: false,
   },
 };
 
 export const Highlight: Story = {
+  ...Seen,
   args: {
-    children: "学",
-    seen: false,
+    ...Seen.args,
     highlight: true,
+  },
+};
+
+export const Disabled: Story = {
+  ...Seen,
+  args: {
+    ...Seen.args,
+    disabled: true,
   },
 };

@@ -6,7 +6,7 @@ import * as styles from "./ListItem.css";
 import { listItemClasses } from "./listItemClasses";
 
 type ListItemProps = ComponentPropsWithRef<"a"> & {
-  to: string;
+  to?: string;
   loading?: boolean;
   disabled?: boolean;
 };

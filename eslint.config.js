@@ -33,6 +33,10 @@ export default tseslint.config(
       "import/namespace": "off",
       "import/newline-after-import": "error",
       "import/no-unresolved": "off",
+      // Disable rules below temporarily because because eslint-plugin-import does not yet support flat config
+      "import/default": "off",
+      "import/no-named-as-default": "off",
+      "import/no-named-as-default-member": "off",
     },
   },
   {

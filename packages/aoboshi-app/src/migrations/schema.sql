@@ -32,10 +32,12 @@ CREATE TABLE StatisticsIncrement
             numberOfNewCards int not null,
             duration         int not null
         );
+CREATE INDEX StatisticsIncrement_end on StatisticsIncrement (end)
+    ;
 CREATE TABLE StatisticsByCharacter
         (
             id              text primary key,
-            literal         text not null,
+            literal         text unique not null,
             firstAdded      text,
             firstReviewed   text,
             lastReviewed    text,
@@ -45,7 +47,7 @@ CREATE TABLE StatisticsByCharacter
 CREATE TABLE StatisticsByDay
         (
             id                          text primary key,
-            date                        text not null,
+            date                        text unique not null,
             addedCharacters             text not null,
             firstSeenCharacters         text not null,
             reviewedCharacters          text not null,
@@ -69,3 +71,6 @@ CREATE TABLE StatisticsByChapter
 
             foreign key (bookId) references Book (id) on delete cascade
         );
+CREATE UNIQUE INDEX StatisticsByChapter_book_chapter
+            on StatisticsByChapter (bookId, chapterId)
+    ;

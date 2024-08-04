@@ -16,10 +16,14 @@ export default {
     `);
 
     database.exec(`
+        create index StatisticsIncrement_end on StatisticsIncrement (end)
+    `);
+
+    database.exec(`
         create table StatisticsByCharacter
         (
             id              text primary key,
-            literal         text not null,
+            literal         text unique not null,
             firstAdded      text,
             firstReviewed   text,
             lastReviewed    text,
@@ -32,7 +36,7 @@ export default {
         create table StatisticsByDay
         (
             id                          text primary key,
-            date                        text not null,
+            date                        text unique not null,
             addedCharacters             text not null,
             firstSeenCharacters         text not null,
             reviewedCharacters          text not null,
@@ -59,6 +63,11 @@ export default {
 
             foreign key (bookId) references Book (id) on delete cascade
         )
+    `);
+
+    database.exec(`
+        create unique index StatisticsByChapter_book_chapter
+            on StatisticsByChapter (bookId, chapterId)
     `);
   },
 } satisfies Migration;

@@ -2,7 +2,7 @@ import { FunctionComponent, useId } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import { content, dragRegion, layout, toggleButton } from "./SidebarLayout.css";
+import * as styles from "./SidebarLayout.css";
 import { Sidebar } from "~app/Sidebar";
 import { noDrag, windowControlsHeight } from "~/renderer/styles.css";
 import { SidebarIcon } from "~icons";
@@ -28,10 +28,10 @@ export const SidebarLayout: FunctionComponent = () => {
   };
 
   return (
-    <div className={layout}>
-      <div className={dragRegion} />
+    <div className={styles.layout}>
+      <div className={styles.dragRegion} />
       <IconButton
-        className={clsx(toggleButton, noDrag)}
+        className={clsx(styles.toggleButton, noDrag)}
         onClick={handleToggleSidebar}
         title={t("Layout.toggleSidebar")}
         aria-controls={sidebarId}
@@ -41,7 +41,7 @@ export const SidebarLayout: FunctionComponent = () => {
       </IconButton>
       <Sidebar id={sidebarId} width={sidebarWidth} open={sidebarOpen} />
       <div
-        className={content}
+        className={styles.content}
         style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
       >
         <Toolbar>{/* Toolbar content */}</Toolbar>

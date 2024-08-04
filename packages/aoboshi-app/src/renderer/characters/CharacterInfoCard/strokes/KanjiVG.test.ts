@@ -1,6 +1,6 @@
 import { describe, test, expect } from "vitest";
 import { KanjiVG } from "./KanjiVG";
-import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
+import * as styles from "./Stroke.css";
 
 describe("getCodeForLiteral", () => {
   test("returns zero-padded hex string", () => {
@@ -74,7 +74,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[0].getAttribute("class"),
-    ).toEqual(stroke);
+    ).toEqual(styles.stroke);
   });
 
   test("adds class to current stroke", () => {
@@ -82,7 +82,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[1].getAttribute("class"),
-    ).toEqual(`${stroke} ${currentStroke}`);
+    ).toEqual(`${styles.stroke} ${styles.currentStroke}`);
   });
 
   test("adds class to following strokes", () => {
@@ -90,7 +90,7 @@ describe("showStroke", () => {
     result.showStroke(2);
     expect(
       result.element.querySelectorAll("path")[2].getAttribute("class"),
-    ).toEqual(hiddenStroke);
+    ).toEqual(styles.hiddenStroke);
   });
 
   test("missing stroke", () => {
@@ -98,12 +98,12 @@ describe("showStroke", () => {
     result.showStroke(4);
     expect(
       result.element.querySelectorAll("path")[0].getAttribute("class"),
-    ).toEqual(stroke);
+    ).toEqual(styles.stroke);
     expect(
       result.element.querySelectorAll("path")[1].getAttribute("class"),
-    ).toEqual(stroke);
+    ).toEqual(styles.stroke);
     expect(
       result.element.querySelectorAll("path")[2].getAttribute("class"),
-    ).toEqual(stroke);
+    ).toEqual(styles.stroke);
   });
 });

@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
-import { toolbar } from "./Toolbar.css";
+import * as styles from "./Toolbar.css";
 import { windowControlsWidth } from "~/renderer/styles.css";
 import { Container } from "~common/Container";
 import { selectSidebarOpen } from "~app/settingsSlice";
@@ -16,7 +16,7 @@ export const Toolbar: FunctionComponent<ToolbarProps> = ({
 
   return (
     <div
-      className={toolbar}
+      className={styles.toolbar}
       style={{
         ...style,
         paddingLeft: sidebarOpen ? 0 : `calc(${windowControlsWidth} + 28px)`,

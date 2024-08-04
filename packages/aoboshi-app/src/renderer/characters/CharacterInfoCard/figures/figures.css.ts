@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "~theme/theme.css";
-import { bodyMedium } from "~common/Typography/Typography.css";
+import * as theme from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
 
 export const circledFigure = style({
   display: "inline-block",
@@ -8,7 +8,7 @@ export const circledFigure = style({
   borderRadius: 11,
   borderWidth: 1,
   borderStyle: "solid",
-  borderColor: vars.color.outline,
+  borderColor: theme.vars.color.outline,
   paddingLeft: 6,
   paddingRight: 6,
   marginLeft: -6,
@@ -23,7 +23,7 @@ export const figures = style({
 });
 
 export const figure = style([
-  bodyMedium,
+  typographyStyles.bodyMedium,
   {
     whiteSpace: "nowrap",
   },

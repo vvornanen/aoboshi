@@ -1,8 +1,8 @@
 import { style } from "@vanilla-extract/css";
-import { bodyMedium } from "~common/Typography/Typography.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
 
 export const characterReadings = style([
-  bodyMedium,
+  typographyStyles.bodyMedium,
   {
     display: "flex",
     flexDirection: "column",

@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { list } from "./List.css";
+import * as styles from "./List.css";
 
 type ListProps = ComponentPropsWithoutRef<"ul">;
 
@@ -10,7 +10,7 @@ export const List: FunctionComponent<ListProps> = ({
   ...props
 }) => {
   return (
-    <ul className={clsx(list, className)} {...props}>
+    <ul className={clsx(styles.list, className)} {...props}>
       {children}
     </ul>
   );

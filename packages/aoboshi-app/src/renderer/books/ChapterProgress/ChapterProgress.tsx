@@ -1,13 +1,7 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
-import {
-  chapterProgress,
-  progressBar,
-  reviewedBar,
-  unreviewedBar,
-  unseenBar,
-} from "./ChapterProgress.css";
+import * as styles from "./ChapterProgress.css";
 import { Skeleton } from "~common/Skeleton";
 import { StatisticsByChapter } from "~statistics";
 
@@ -39,7 +33,7 @@ export const ChapterProgress: FunctionComponent<ChapterProgressProps> = ({
   return (
     <div
       aria-busy={loading}
-      className={clsx(chapterProgress, className)}
+      className={clsx(styles.chapterProgress, className)}
       {...props}
     >
       {!loading && (
@@ -48,7 +42,7 @@ export const ChapterProgress: FunctionComponent<ChapterProgressProps> = ({
             width={barWidth}
             height={barHeight}
             viewBox={`0 0 ${barWidth} ${barHeight}`}
-            className={progressBar}
+            className={styles.progressBar}
           >
             <rect
               x={0}
@@ -56,7 +50,7 @@ export const ChapterProgress: FunctionComponent<ChapterProgressProps> = ({
               height={barHeight}
               width={completedWidth}
               fill="currentColor"
-              className={reviewedBar}
+              className={styles.reviewedBar}
             />
             <rect
               x={completedWidth}
@@ -64,7 +58,7 @@ export const ChapterProgress: FunctionComponent<ChapterProgressProps> = ({
               height={barHeight}
               width={unreviewedWidth}
               fill="currentColor"
-              className={unreviewedBar}
+              className={styles.unreviewedBar}
             />
             <rect
               x={completedWidth + unreviewedWidth}
@@ -72,7 +66,7 @@ export const ChapterProgress: FunctionComponent<ChapterProgressProps> = ({
               height={barHeight}
               width={unseenWidth}
               fill="currentColor"
-              className={unseenBar}
+              className={styles.unseenBar}
             />
           </svg>
           {t("books.progressLabel", {

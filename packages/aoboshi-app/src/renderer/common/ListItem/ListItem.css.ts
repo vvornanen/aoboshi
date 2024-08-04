@@ -1,10 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { listItemClasses } from "./listItemClasses";
-import { bodyMedium } from "~common/Typography/Typography.css";
-import { vars } from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
+import * as theme from "~theme/theme.css";
 
 export const listItem = style([
-  bodyMedium,
+  typographyStyles.bodyMedium,
   {
     display: "block",
     color: "inherit",
@@ -16,23 +16,23 @@ export const listItem = style([
     paddingBottom: 4,
     paddingLeft: 16,
     paddingRight: 16,
-    borderRadius: vars.shape.borderRadiusSm,
+    borderRadius: theme.vars.shape.borderRadiusSm,
     userSelect: "none",
     selectors: {
       "&:visited": {
         color: "unset",
       },
       "&:hover": {
-        backgroundColor: vars.color.hover,
+        backgroundColor: theme.vars.color.hover,
       },
       "&:active": {
-        backgroundColor: vars.color.activated,
+        backgroundColor: theme.vars.color.activated,
       },
       "&:focus-visible": {
-        backgroundColor: vars.color.focus,
+        backgroundColor: theme.vars.color.focus,
       },
       [`&.${listItemClasses.disabled}`]: {
-        opacity: vars.color.disabledOpacity,
+        opacity: theme.vars.color.disabledOpacity,
         pointerEvents: "none",
       },
       [`&.${listItemClasses.loading}`]: {
@@ -43,16 +43,16 @@ export const listItem = style([
 ]);
 
 export const selected = style({
-  backgroundColor: vars.color.primaryContainer,
-  color: vars.color.onPrimaryContainer,
+  backgroundColor: theme.vars.color.primaryContainer,
+  color: theme.vars.color.onPrimaryContainer,
   selectors: {
     "&:hover": {
-      backgroundColor: vars.color.primaryContainer,
-      color: vars.color.onPrimaryContainer,
+      backgroundColor: theme.vars.color.primaryContainer,
+      color: theme.vars.color.onPrimaryContainer,
     },
     "&.active": {
-      backgroundColor: vars.color.primaryContainer,
-      color: vars.color.onPrimaryContainer,
+      backgroundColor: theme.vars.color.primaryContainer,
+      color: theme.vars.color.onPrimaryContainer,
     },
   },
 });

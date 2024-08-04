@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { defaultColor, iconButton } from "./IconButton.css";
+import * as styles from "./IconButton.css";
 
 type IconButtonProps = ComponentPropsWithoutRef<"button">;
 
@@ -10,7 +10,9 @@ export const IconButton: FunctionComponent<IconButtonProps> = ({
   ...props
 }) => (
   <button
-    className={clsx(iconButton, defaultColor, className, { disabled })}
+    className={clsx(styles.iconButton, styles.defaultColor, className, {
+      disabled,
+    })}
     disabled={disabled}
     {...props}
   ></button>

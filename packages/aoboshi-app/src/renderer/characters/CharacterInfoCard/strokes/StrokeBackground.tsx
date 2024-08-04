@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
-import { strokeBackground, strokeContent, strokeGrid } from "./Stroke.css";
+import * as styles from "./Stroke.css";
 
 type StrokeBackgroundProps = ComponentPropsWithoutRef<"div">;
 
@@ -13,7 +13,7 @@ export const StrokeBackground: FunctionComponent<StrokeBackgroundProps> = ({
   children,
 }) => {
   const grid = (
-    <svg viewBox="0 0 100 100" aria-hidden="true" className={strokeGrid}>
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={styles.strokeGrid}>
       <line
         x1="0"
         y1="50"
@@ -36,9 +36,9 @@ export const StrokeBackground: FunctionComponent<StrokeBackgroundProps> = ({
   );
 
   return (
-    <div className={strokeBackground}>
+    <div className={styles.strokeBackground}>
       {grid}
-      <div className={strokeContent}>{children}</div>
+      <div className={styles.strokeContent}>{children}</div>
     </div>
   );
 };

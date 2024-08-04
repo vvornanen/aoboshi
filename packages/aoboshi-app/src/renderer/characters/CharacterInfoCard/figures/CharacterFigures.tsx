@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Character } from "@vvornanen/aoboshi-core/characters";
-import { figures, figure, references } from "./figures.css";
+import * as styles from "./figures.css";
 import { Skeleton } from "~common/Skeleton";
 import { maru } from "~common";
 import { GradeFigure } from "~characters/CharacterInfoCard";
@@ -24,9 +24,9 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={figures}>
+    <div className={styles.figures}>
       <div
-        className={figure}
+        className={styles.figure}
         style={{
           gridColumn: 1,
           gridRow: 1,
@@ -38,7 +38,7 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
         {loading && <Skeleton length={2} />}
       </div>
       <div
-        className={figure}
+        className={styles.figure}
         style={{
           gridColumn: 1,
           gridRow: 1,
@@ -55,7 +55,7 @@ export const CharacterFigures: FunctionComponent<CharacterFiguresProps> = ({
         {loading && <Skeleton>0{maru()}</Skeleton>}
       </div>
       <div
-        className={references}
+        className={styles.references}
         style={{
           gridColumn: 1,
           gridRow: 1,

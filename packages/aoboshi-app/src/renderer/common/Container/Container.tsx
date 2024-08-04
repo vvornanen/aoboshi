@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { container } from "./Container.css";
+import * as styles from "./Container.css";
 
 type ContainerProps = ComponentPropsWithoutRef<"div">;
 
@@ -8,4 +8,4 @@ type ContainerProps = ComponentPropsWithoutRef<"div">;
 export const Container: FunctionComponent<ContainerProps> = ({
   className,
   ...props
-}) => <div className={clsx(container, className)} {...props}></div>;
+}) => <div className={clsx(styles.container, className)} {...props}></div>;

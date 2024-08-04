@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
-import { bodyMedium } from "~common/Typography/Typography.css";
-import { vars } from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
+import * as theme from "~theme/theme.css";
 
 export const chapterProgress = style([
-  bodyMedium,
+  typographyStyles.bodyMedium,
   {
     display: "flex",
     alignItems: "center",
@@ -12,18 +12,18 @@ export const chapterProgress = style([
 ]);
 
 export const progressBar = style({
-  borderRadius: vars.shape.borderRadiusSm,
+  borderRadius: theme.vars.shape.borderRadiusSm,
 });
 
 export const reviewedBar = style({
-  color: vars.color.primary,
+  color: theme.vars.color.primary,
 });
 
 export const unreviewedBar = style({
-  color: vars.color.primary,
+  color: theme.vars.color.primary,
   opacity: 0.4,
 });
 
 export const unseenBar = style({
-  color: vars.color.unseen,
+  color: theme.vars.color.unseen,
 });

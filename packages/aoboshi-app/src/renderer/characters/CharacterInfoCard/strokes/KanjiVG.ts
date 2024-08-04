@@ -1,5 +1,5 @@
 import { getCodePoint } from "@vvornanen/aoboshi-core/characters";
-import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
+import * as styles from "./Stroke.css";
 
 /**
  * A tool for handling KanjiVG svg data.
@@ -73,8 +73,8 @@ export class KanjiVG {
    */
   showStroke(n: number): void {
     this.element.querySelectorAll("path").forEach((path) => {
-      path.classList.remove(stroke, currentStroke);
-      path.classList.add(hiddenStroke);
+      path.classList.remove(styles.stroke, styles.currentStroke);
+      path.classList.add(styles.hiddenStroke);
     });
 
     Array.from({ length: n }, (x, i) => i + 1).forEach((i) => {
@@ -84,11 +84,11 @@ export class KanjiVG {
         return;
       }
 
-      path.classList.remove(hiddenStroke);
-      path.classList.add(stroke);
+      path.classList.remove(styles.hiddenStroke);
+      path.classList.add(styles.stroke);
 
       if (i === n) {
-        path.classList.add(stroke, currentStroke);
+        path.classList.add(styles.stroke, styles.currentStroke);
       }
     });
   }

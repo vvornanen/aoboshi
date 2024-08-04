@@ -8,7 +8,7 @@ import {
 import { ClickAwayListener } from "@mui/base";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
 import { Character } from "@vvornanen/aoboshi-core/characters";
-import { charactersCard } from "./CharactersCard.css";
+import * as styles from "./CharactersCard.css";
 import { CharacterButton } from "~characters/CharacterButton";
 import { Card } from "~common/Card";
 import { CharacterInfoCard } from "~characters/CharacterInfoCard";
@@ -68,7 +68,7 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
   };
 
   return (
-    <Card className={charactersCard}>
+    <Card className={styles.charactersCard}>
       {!loading &&
         characters.map((character) => (
           <CharacterButton

@@ -1,61 +1,61 @@
 import { style } from "@vanilla-extract/css";
 import { characterButtonClasses } from "./characterButtonClasses";
-import { textbookLarge } from "~common/Typography/Typography.css";
-import { vars } from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
+import * as theme from "~theme/theme.css";
 
 export const characterButton = style([
-  textbookLarge,
+  typographyStyles.textbookLarge,
   {
     width: 36,
     height: 36,
     backgroundColor: "transparent",
-    color: vars.color.onSurface,
+    color: theme.vars.color.onSurface,
     borderStyle: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: vars.shape.borderRadius,
+    borderRadius: theme.vars.shape.borderRadius,
     overflow: "hidden",
     whiteSpace: "nowrap",
     selectors: {
       "&:hover": {
-        backgroundColor: vars.color.hover,
+        backgroundColor: theme.vars.color.hover,
       },
       [`&.${characterButtonClasses.highlight}:hover`]: {
-        backgroundColor: vars.color.hoverPrimary,
+        backgroundColor: theme.vars.color.hoverPrimary,
       },
       [`&.${characterButtonClasses.highlight}:active`]: {
-        backgroundColor: vars.color.activatedPrimary,
+        backgroundColor: theme.vars.color.activatedPrimary,
       },
       "&:active": {
-        backgroundColor: vars.color.activated,
+        backgroundColor: theme.vars.color.activated,
       },
       "&:focus-visible": {
-        backgroundColor: vars.color.focus,
+        backgroundColor: theme.vars.color.focus,
       },
       [`&.${characterButtonClasses.highlight}:focus-visible`]: {
-        backgroundColor: vars.color.focusPrimary,
+        backgroundColor: theme.vars.color.focusPrimary,
       },
       [`&.${characterButtonClasses.unseen}`]: {
-        color: vars.color.unseen,
+        color: theme.vars.color.unseen,
       },
       [`&.${characterButtonClasses.highlight}`]: {
         opacity: 1,
-        color: vars.color.primary,
-        outlineColor: vars.color.primary,
+        color: theme.vars.color.primary,
+        outlineColor: theme.vars.color.primary,
         outlineWidth: 2,
         outlineStyle: "dashed",
         outlineOffset: -2,
       },
       [`&.${characterButtonClasses.selected}`]: {
-        backgroundColor: vars.color.selected,
+        backgroundColor: theme.vars.color.selected,
       },
       [`&.${characterButtonClasses.selected}.${characterButtonClasses.highlight}`]:
         {
-          backgroundColor: vars.color.selectedPrimary,
+          backgroundColor: theme.vars.color.selectedPrimary,
         },
       "&.disabled": {
-        opacity: vars.color.disabledOpacity,
+        opacity: theme.vars.color.disabledOpacity,
         backgroundColor: "transparent",
       },
     },

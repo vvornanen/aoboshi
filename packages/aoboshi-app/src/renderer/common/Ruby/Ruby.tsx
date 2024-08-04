@@ -1,5 +1,5 @@
 import { parseRuby } from "@vvornanen/aoboshi-core";
-import { rubyText as rubyTextClass } from "./Ruby.css";
+import * as styles from "./Ruby.css";
 
 export type RubyProps = {
   /** Text in the bracket syntax used by Anki Japanese Support addon */
@@ -14,7 +14,7 @@ export const Ruby = ({ text }: RubyProps) => {
       {ruby.map(({ text, rubyText }) => (
         <ruby key={text + rubyText}>
           {text}
-          {rubyText && <rt className={rubyTextClass}>{rubyText}</rt>}
+          {rubyText && <rt className={styles.rubyText}>{rubyText}</rt>}
         </ruby>
       ))}
     </>

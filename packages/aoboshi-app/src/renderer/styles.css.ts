@@ -1,5 +1,5 @@
 import { createVar, globalStyle, style } from "@vanilla-extract/css";
-import { vars } from "./theme/theme.css";
+import * as theme from "~theme/theme.css";
 
 // CSS reset based on https://www.joshwcomeau.com/css/custom-css-reset/
 globalStyle("*, *::before, *::after", {
@@ -12,10 +12,10 @@ globalStyle("*", {
 
 globalStyle("body", {
   lineHeight: 1.5,
-  backgroundColor: vars.color.surface,
-  color: vars.color.onSurface,
-  fontFamily: vars.typography.fontFamily,
-  fontSize: vars.typography.fontSize,
+  backgroundColor: theme.vars.color.surface,
+  color: theme.vars.color.onSurface,
+  fontFamily: theme.vars.typography.fontFamily,
+  fontSize: theme.vars.typography.fontSize,
 });
 
 globalStyle("img, picture, video, canvas, svg", {

@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Character } from "@vvornanen/aoboshi-core/characters";
 import { Stroke, StrokeBackground } from "~characters/CharacterInfoCard";
-import { infoBox } from "~characters/CharacterInfoCard/CharacterInfoCard.css";
+import * as styles from "~characters/CharacterInfoCard/CharacterInfoCard.css";
 import { Skeleton } from "~common/Skeleton";
 
 type CharacterStrokesProps = {
@@ -44,7 +44,7 @@ export const CharacterStrokes: FunctionComponent<CharacterStrokesProps> = ({
     <>
       {Array.from({ length: numberOfCells }, (x, i) => i + 1).map((n) => (
         <div
-          className={infoBox}
+          className={styles.infoBox}
           key={n}
           role={n <= character.strokeCount ? "figure" : "presentation"}
           aria-label={

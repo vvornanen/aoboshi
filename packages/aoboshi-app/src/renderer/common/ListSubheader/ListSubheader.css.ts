@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
-import { labelSmall } from "~common/Typography/Typography.css";
-import { vars } from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
+import * as theme from "~theme/theme.css";
 
 export const listSubheader = style([
-  labelSmall,
+  typographyStyles.labelSmall,
   {
-    color: vars.color.onSurfaceVariant,
+    color: theme.vars.color.onSurfaceVariant,
     marginTop: 16,
     marginLeft: 8,
     marginBottom: 8,

@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "~theme/theme.css";
+import * as theme from "~theme/theme.css";
 import { windowControlsHeight } from "~/renderer/styles.css";
 
 export const sidebar = style({
-  backgroundColor: vars.color.surfaceContainerHigh,
+  backgroundColor: theme.vars.color.surfaceContainerHigh,
   height: "100vh",
   flexShrink: 0,
   transform: "translateX(-100%)",
@@ -13,7 +13,7 @@ export const sidebar = style({
   paddingTop: `calc(${windowControlsHeight} + 8px)`,
   borderRightStyle: "solid",
   borderRightWidth: 1,
-  borderRightColor: vars.color.outlineVariant,
+  borderRightColor: theme.vars.color.outlineVariant,
   paddingLeft: 8,
   paddingRight: 8,
   selectors: {

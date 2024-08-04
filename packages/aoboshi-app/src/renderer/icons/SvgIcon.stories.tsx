@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { SvgIcon } from "./SvgIcon";
 import { SidebarIcon } from "./SidebarIcon";
-import { vars } from "~theme/theme.css";
+import * as theme from "~theme/theme.css";
 
 const meta = {
   component: SvgIcon,
@@ -16,7 +16,7 @@ export const Color: Story = {
   render: () => (
     <div style={{ display: "flex", gap: 16 }}>
       <SidebarIcon />
-      <SidebarIcon style={{ color: vars.color.icon }} />
+      <SidebarIcon style={{ color: theme.vars.color.icon }} />
       <SidebarIcon color="primary" />
     </div>
   ),

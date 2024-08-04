@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { AnkiCard } from "./AnkiCard";
+import { AnkiCard, AnkiInternalCard, fromInternalCard } from "./AnkiCard";
 import { AnkiNote } from "./AnkiNote";
 import {
   AnkiCardReview,
@@ -80,9 +80,11 @@ export class AnkiClient {
    * @param cardIds cards to fetch
    */
   async getCards(cardIds: number[]): Promise<AnkiCard[]> {
-    return this.doFetch<AnkiCard[]>("cardsInfo", {
+    const result = await this.doFetch<AnkiInternalCard[]>("cardsInfo", {
       cards: cardIds,
     });
+
+    return result.map(fromInternalCard);
   }
 
   /**

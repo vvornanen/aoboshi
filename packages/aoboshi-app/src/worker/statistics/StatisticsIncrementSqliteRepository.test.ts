@@ -6,7 +6,7 @@ import {
   StatisticsIncrement,
   StatisticsIncrementRepository,
 } from "@vvornanen/aoboshi-core/statistics";
-import { StatisticsIncrementSqliteRepository } from "~/worker/statistics/StatisticsIncrementSqliteRepository";
+import { StatisticsIncrementSqliteRepository } from "~/worker/statistics";
 
 const fixture: StatisticsIncrement[] = [
   {

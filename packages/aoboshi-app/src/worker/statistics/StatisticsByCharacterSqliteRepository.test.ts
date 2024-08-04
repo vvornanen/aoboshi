@@ -7,7 +7,7 @@ import {
   StatisticsByCharacterRepository,
 } from "@vvornanen/aoboshi-core/statistics/character";
 import * as fixtures from "@vvornanen/aoboshi-core/statisticsFixtures";
-import { StatisticsByCharacterSqliteRepository } from "~/worker/statistics/StatisticsByCharacterSqliteRepository";
+import { StatisticsByCharacterSqliteRepository } from "~/worker/statistics";
 
 const fixture: StatisticsByCharacter[] =
   fixtures.multipleReviews.statisticsByCharacters;

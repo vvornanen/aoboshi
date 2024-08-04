@@ -7,7 +7,7 @@ import {
   StatisticsByChapterRepository,
 } from "@vvornanen/aoboshi-core/statistics/chapter";
 import { BookRepository } from "@vvornanen/aoboshi-core/books";
-import { StatisticsByChapterSqliteRepository } from "~/worker/statistics/StatisticsByChapterSqliteRepository";
+import { StatisticsByChapterSqliteRepository } from "~/worker/statistics";
 import { BookSqliteRepository } from "~/worker/books";
 
 const fixture: StatisticsByChapter[] = [

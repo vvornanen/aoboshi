@@ -6,7 +6,7 @@ import {
   StatisticsByDay,
   StatisticsByDayRepository,
 } from "@vvornanen/aoboshi-core/statistics/day";
-import { StatisticsByDaySqliteRepository } from "~/worker/statistics/StatisticsByDaySqliteRepository";
+import { StatisticsByDaySqliteRepository } from "~/worker/statistics";
 
 const fixture: StatisticsByDay[] = [
   {

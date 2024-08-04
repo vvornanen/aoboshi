@@ -22,6 +22,9 @@
   },
   "devDependencies": {
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^2.0.5",
+    "vitest-mock-extended": "^2.0.0"
   }
 }

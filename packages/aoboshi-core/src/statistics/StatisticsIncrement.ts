@@ -18,6 +18,14 @@ export type StatisticsIncrement = {
   /** Number of card reviews processed. */
   numberOfReviews: number;
 
+  /**
+   * Number of new cards processed.
+   *
+   * This it not an incremental value after the last run, but the total
+   * number of new cards currently present.
+   */
+  numberOfNewCards: number;
+
   /** Time in milliseconds elapsed while generating this increment. */
   duration: number;
 };

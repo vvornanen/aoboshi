@@ -1,6 +1,6 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
-import { CardReview, NewCard } from "./CardReview";
+import { CardReview, NewCard, isReview } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import { TimeZoneConfig } from "./statisticsUtils";
 import { Analyzer } from "./Analyzer";
@@ -42,13 +42,15 @@ export class StatisticsService {
     }
 
     const completed = Temporal.Now.instant();
+    const numberOfReviews = reviews.filter(isReview).length;
 
     // Create new increment
     const newIncrement: StatisticsIncrement = {
       id: randomId(),
       start: latestIncrement?.end || null,
       end: context.latestReviewTime || latestIncrement?.end || null,
-      numberOfReviews: reviews.length,
+      numberOfReviews,
+      numberOfNewCards: reviews.length - numberOfReviews,
       duration: Math.round(started.until(completed).total("millisecond")),
     };
 

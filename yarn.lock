@@ -5637,8 +5637,10 @@ __metadata:
   resolution: "@vvornanen/aoboshi-anki@workspace:packages/aoboshi-anki"
   dependencies:
     "@js-temporal/polyfill": "npm:^0.4.4"
+    dotenv: "npm:^16.4.5"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.5.4"
+    vitest: "npm:^2.0.5"
   languageName: unknown
   linkType: soft
 
@@ -5696,6 +5698,8 @@ __metadata:
     storybook-addon-remix-react-router: "npm:^3.0.0"
     typescript: "npm:^5.5.4"
     vite: "npm:^5.3.5"
+    vite-tsconfig-paths: "npm:^4.3.2"
+    vitest: "npm:^2.0.5"
   languageName: unknown
   linkType: soft
 
@@ -5706,6 +5710,9 @@ __metadata:
     "@js-temporal/polyfill": "npm:^0.4.4"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.5.4"
+    vite-tsconfig-paths: "npm:^4.3.2"
+    vitest: "npm:^2.0.5"
+    vitest-mock-extended: "npm:^2.0.0"
   languageName: unknown
   linkType: soft
 
@@ -5717,6 +5724,7 @@ __metadata:
     fast-xml-parser: "npm:^4.4.1"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.5.4"
+    vitest: "npm:^2.0.5"
   languageName: unknown
   linkType: soft
 

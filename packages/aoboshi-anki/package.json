@@ -14,7 +14,9 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   }
 }

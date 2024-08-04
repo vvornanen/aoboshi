@@ -8,7 +8,7 @@ const themeDefaults = {
   },
   typography: {
     fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont",
-    fontSize: "13px",
+    fontSize: `${13 / 16}rem`,
     textbook: {
       fontFamily: "YuKyokasho Yoko",
     },

@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
 import * as theme from "~theme/theme.css";
-import * as typographyStyles from "~common/Typography/Typography.css";
+import { typographyVariant } from "~common/Typography/Typography.css";
 
 export const tooltip = style([
-  typographyStyles.bodyMedium,
+  typographyVariant({ variant: "bodyMedium" }),
   {
     backgroundColor: theme.vars.color.tooltip,
     color: "white",

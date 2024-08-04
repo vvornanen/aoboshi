@@ -18,12 +18,15 @@ export const CharacterButton: FunctionComponent<CharacterButtonProps> = ({
 }) => {
   return (
     <button
-      className={clsx(styles.characterButton, className, {
-        unseen: !seen,
-        highlight,
-        selected,
-        disabled,
-      })}
+      className={clsx(
+        className,
+        styles.characterButton({
+          seen,
+          highlight,
+          selected,
+          disabled,
+        }),
+      )}
       disabled={disabled}
       {...props}
     />

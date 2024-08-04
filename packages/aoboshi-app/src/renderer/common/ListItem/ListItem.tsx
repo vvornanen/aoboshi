@@ -2,7 +2,6 @@ import { ComponentPropsWithRef, forwardRef } from "react";
 import { clsx } from "clsx";
 import { NavLink } from "react-router-dom";
 import * as styles from "./ListItem.css";
-import { listItemClasses } from "./listItemClasses";
 import { Skeleton } from "~common/Skeleton";
 
 type ListItemProps = ComponentPropsWithRef<"a"> & {
@@ -21,11 +20,14 @@ export const ListItem = forwardRef<HTMLAnchorElement, ListItemProps>(
         <NavLink
           ref={ref}
           className={({ isActive }) =>
-            clsx(styles.listItem, className, {
-              [styles.selected]: to && isActive,
-              [listItemClasses.disabled]: disabled,
-              [listItemClasses.loading]: loading,
-            })
+            clsx(
+              className,
+              styles.listItem({
+                selected: Boolean(to) && isActive,
+                disabled,
+                loading,
+              }),
+            )
           }
           to={to || ""}
           {...props}

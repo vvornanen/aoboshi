@@ -10,12 +10,4 @@ export const Card: FunctionComponent<CardProps> = ({
   variant = "outlined",
   className,
   ...props
-}) => (
-  <div
-    className={clsx(styles.card, className, {
-      [styles.outlined]: variant === "outlined",
-      [styles.raised]: variant === "raised",
-    })}
-    {...props}
-  />
-);
+}) => <div className={clsx(className, styles.card({ variant }))} {...props} />;

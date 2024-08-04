@@ -1,13 +1,14 @@
 import { ElementType, FunctionComponent, HTMLAttributes } from "react";
 import { clsx } from "clsx";
+import { RecipeVariants } from "@vanilla-extract/recipes";
 import * as typographyStyles from "./Typography.css";
 
-export type TypographyVariant = keyof typeof typographyStyles;
+export type TypographyProps = HTMLAttributes<"div"> &
+  RecipeVariants<typeof typographyStyles.typographyVariant> & {
+    component?: ElementType;
+  };
 
-type TypographyProps = HTMLAttributes<"div"> & {
-  variant?: TypographyVariant;
-  component?: ElementType;
-};
+export type TypographyVariant = TypographyProps["variant"];
 
 export const Typography: FunctionComponent<TypographyProps> = ({
   variant = "bodyMedium",
@@ -19,7 +20,10 @@ export const Typography: FunctionComponent<TypographyProps> = ({
 
   return (
     <Component
-      className={clsx(className, typographyStyles[variant])}
+      className={clsx(
+        className,
+        typographyStyles.typographyVariant({ variant }),
+      )}
       {...props}
     ></Component>
   );

@@ -1,11 +1,12 @@
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 import { typographyVariant } from "~common/Typography/Typography.css";
+import { commonLayer } from "~/renderer/layers.css";
 
 export const listItem = recipe({
   base: [
     typographyVariant({ variant: "bodyMedium" }),
-    {
+    commonLayer({
       display: "block",
       color: "inherit",
       backgroundColor: "unset",
@@ -32,11 +33,11 @@ export const listItem = recipe({
           backgroundColor: theme.vars.color.focus,
         },
       },
-    },
+    }),
   ],
   variants: {
     selected: {
-      true: {
+      true: commonLayer({
         backgroundColor: theme.vars.color.primaryContainer,
         color: theme.vars.color.onPrimaryContainer,
         selectors: {
@@ -45,18 +46,18 @@ export const listItem = recipe({
             color: theme.vars.color.onPrimaryContainer,
           },
         },
-      },
+      }),
     },
     loading: {
-      true: {
+      true: commonLayer({
         pointerEvents: "none",
-      },
+      }),
     },
     disabled: {
-      true: {
+      true: commonLayer({
         opacity: theme.vars.color.disabledOpacity,
         pointerEvents: "none",
-      },
+      }),
     },
   },
   defaultVariants: {

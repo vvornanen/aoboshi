@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4"
   },

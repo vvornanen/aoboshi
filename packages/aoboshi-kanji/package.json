@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
   "dependencies": {
     "@vvornanen/aoboshi-core": "workspace:^",
     "fast-xml-parser": "^4.4.1"

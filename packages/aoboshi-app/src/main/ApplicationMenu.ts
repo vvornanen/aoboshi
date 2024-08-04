@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain, Menu, MenuItem, shell } from "electron";
+import { BrowserWindow, Menu, MenuItem, ipcMain, shell } from "electron";
 import { t } from "i18next";
 import { Book, BookRepository } from "@vvornanen/aoboshi-core/books";
 import { Scheduler } from "~/main";

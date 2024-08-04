@@ -1,12 +1,12 @@
 import path from "path";
 import { app } from "electron";
-import { MainWindow, Scheduler, ApplicationMenu } from "~/main";
+import { ApplicationMenu, MainWindow, Scheduler } from "~/main";
 import { BookController } from "~/main/books";
 import { CharacterController } from "~/main/characters";
 import {
+  ApplicationContext,
   ApplicationProperties,
   getEnvironmentVariable,
-  ApplicationContext,
 } from "~/worker";
 
 /** Extends the common application context with services available only in the main thread */

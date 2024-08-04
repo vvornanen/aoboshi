@@ -1,7 +1,7 @@
 import {
-  cloneElement,
   ComponentPropsWithoutRef,
   FunctionComponent,
+  cloneElement,
   isValidElement,
 } from "react";
 import { clsx } from "clsx";

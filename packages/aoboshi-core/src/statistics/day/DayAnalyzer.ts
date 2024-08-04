@@ -1,11 +1,11 @@
 import { StatisticsByDay, StatisticsByDayRepository } from "~/statistics/day";
 import {
-  isReview,
-  getCharactersFromExpression,
-  mergeStatisticsByDay,
-  timestampToDate,
   AnalysisContext,
   Analyzer,
+  getCharactersFromExpression,
+  isReview,
+  mergeStatisticsByDay,
+  timestampToDate,
 } from "~/statistics";
 import { randomId } from "~";
 

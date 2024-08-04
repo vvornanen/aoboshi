@@ -3,9 +3,9 @@ import path from "node:path";
 import { ConfigEnv, defineConfig, mergeConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import {
+  external,
   getBuildConfig,
   getBuildDefine,
-  external,
   hotRestartPlugin,
 } from "./vite.base.config";
 

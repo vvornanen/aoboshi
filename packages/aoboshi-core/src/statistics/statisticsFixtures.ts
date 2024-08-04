@@ -5,10 +5,10 @@ import {
 import { StatisticsByDay } from "~/statistics/day";
 import { StatisticsByChapter } from "~/statistics/chapter";
 import {
-  TimeZoneConfig,
   AnalysisContext,
   CardReview,
   NewCard,
+  TimeZoneConfig,
 } from "~/statistics";
 
 type TestCase = AnalysisContext & Record<string, unknown>;

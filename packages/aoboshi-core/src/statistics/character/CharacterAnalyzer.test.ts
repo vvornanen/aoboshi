@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
 import {
-  StatisticsByCharacter,
   CharacterAnalyzer,
+  StatisticsByCharacter,
   StatisticsByCharacterRepository,
 } from "~/statistics/character";
 import * as fixtures from "~/statistics/statisticsFixtures";

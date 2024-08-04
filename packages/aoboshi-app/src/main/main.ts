@@ -1,9 +1,9 @@
-import { app, BrowserWindow } from "electron";
+import { BrowserWindow, app } from "electron";
 import { init } from "i18next";
 import { getMainApplicationContext } from "~/main";
 import {
-  chromeExtensions,
   ChromeExtensionService,
+  chromeExtensions,
 } from "~/main/chrome-extensions";
 import { MigrationService } from "~/main/migration";
 import { options } from "~/i18n";

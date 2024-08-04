@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { Book } from "@vvornanen/aoboshi-core/books";
 import { Character } from "@vvornanen/aoboshi-core/characters";
-import { IpcApi, IpcEventType, IPC_API_KEY } from "~/preload";
+import { IPC_API_KEY, IpcApi, IpcEventType } from "~/preload";
 
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts

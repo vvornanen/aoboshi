@@ -3,11 +3,11 @@ import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
 import {
   Character,
-  getCodePoint,
-  Grade,
   CharacterRepository,
+  Grade,
+  getCodePoint,
 } from "@vvornanen/aoboshi-core/characters";
-import { beforeAll, test, expect, afterEach, beforeEach } from "vitest";
+import { afterEach, beforeAll, beforeEach, expect, test } from "vitest";
 import { CharacterSqliteRepository } from "./CharacterSqliteRepository";
 
 const fixture: Character[] = [

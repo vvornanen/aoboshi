@@ -1,10 +1,10 @@
-import { test, expect } from "vitest";
+import { expect, test } from "vitest";
 import {
-  BASE_2,
-  BASE_8,
   BASE_16,
+  BASE_2,
   BASE_58,
   BASE_62,
+  BASE_8,
   baseEncode,
 } from "./baseEncode";
 

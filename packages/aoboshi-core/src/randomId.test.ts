@@ -1,4 +1,4 @@
-import { vi, test, expect, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { randomId } from "~/randomId";
 
 const mockGetRandomValues = (randomValues: bigint[]) => {

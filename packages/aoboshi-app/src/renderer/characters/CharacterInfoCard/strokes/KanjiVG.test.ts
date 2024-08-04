@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 import { KanjiVG } from "./KanjiVG";
 import * as styles from "./Stroke.css";
 

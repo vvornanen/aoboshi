@@ -1,4 +1,4 @@
-import { ConfigEnv, defineConfig, Plugin, UserConfig } from "vite";
+import { ConfigEnv, Plugin, UserConfig, defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import tsconfigPaths from "vite-tsconfig-paths";

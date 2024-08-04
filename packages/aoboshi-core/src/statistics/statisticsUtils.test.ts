@@ -1,14 +1,14 @@
-import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { Temporal } from "@js-temporal/polyfill";
 import * as fixtures from "./statisticsFixtures";
 import {
+  TimeZoneConfig,
   getCharactersFromExpression,
   getTimeZone,
   mergeStatisticsByChapter,
   mergeStatisticsByCharacter,
   mergeStatisticsByDay,
   timestampToDate,
-  TimeZoneConfig,
 } from "~/statistics";
 import { randomId } from "~/randomId";
 

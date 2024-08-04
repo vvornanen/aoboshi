@@ -1,4 +1,4 @@
-import { parentPort, isMainThread } from "worker_threads";
+import { isMainThread, parentPort } from "worker_threads";
 import { Tag } from "~/preload";
 
 export type InvalidateTagsMessage = { type: "invalidateTags"; tags: Tag[] };

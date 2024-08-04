@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
-import { afterEach, beforeAll, beforeEach, test, expect } from "vitest";
+import { afterEach, beforeAll, beforeEach, expect, test } from "vitest";
 import { Book, BookRepository } from "@vvornanen/aoboshi-core/books";
 import { BookSqliteRepository } from "./BookSqliteRepository";
 

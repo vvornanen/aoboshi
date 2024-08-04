@@ -8,7 +8,7 @@ import { clsx } from "clsx";
 import { Chapter } from "@vvornanen/aoboshi-core/books";
 import * as styles from "./ChapterSection.css";
 import { CharactersCard } from "~characters/CharactersCard";
-import { useStatisticsByCharacters, useStatisticsByChapter } from "~statistics";
+import { useStatisticsByChapter, useStatisticsByCharacters } from "~statistics";
 import { ChapterSectionHeader } from "~books/ChapterSectionHeader";
 import { ChapterProgress } from "~books/ChapterProgress";
 

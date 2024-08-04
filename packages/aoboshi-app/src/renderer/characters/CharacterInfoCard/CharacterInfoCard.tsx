@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Character } from "@vvornanen/aoboshi-core/characters";
 import * as styles from "./CharacterInfoCard.css";
 import {
-  CharacterType,
   CharacterFigures,
   CharacterReadings,
   CharacterStrokes,
+  CharacterType,
 } from ".";
 import * as typographyStyles from "~common/Typography/Typography.css";
 

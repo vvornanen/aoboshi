@@ -1,5 +1,5 @@
 import { Book } from "@vvornanen/aoboshi-core/books";
-import { ipcApi, IpcApiErrorCode } from "~app/ipcApi";
+import { IpcApiErrorCode, ipcApi } from "~app/ipcApi";
 
 /**
  * Redux Toolkit Query API for fetching books from the database through

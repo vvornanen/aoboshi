@@ -1,13 +1,13 @@
-import { describe, expect, test, vi, afterEach, beforeEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { Temporal } from "@js-temporal/polyfill";
 import * as fixtures from "./statisticsFixtures";
 import {
-  Analyzer,
-  StatisticsService,
-  StatisticsIncrementRepository,
-  StatisticsIncrement,
   AnalysisContext,
+  Analyzer,
+  StatisticsIncrement,
+  StatisticsIncrementRepository,
+  StatisticsService,
 } from "~/statistics";
 import { randomId } from "~/randomId";
 

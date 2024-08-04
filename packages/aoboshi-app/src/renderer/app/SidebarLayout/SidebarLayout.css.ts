@@ -1,8 +1,8 @@
 import { style } from "@vanilla-extract/css";
 import {
+  drag,
   windowControlsHeight,
   windowControlsWidth,
-  drag,
 } from "~/renderer/styles.css";
 import { zIndex } from "~theme";
 

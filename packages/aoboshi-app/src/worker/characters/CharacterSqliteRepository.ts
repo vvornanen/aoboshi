@@ -1,8 +1,8 @@
 import { Database } from "better-sqlite3";
 import {
   Character,
-  getCodePoint,
   CharacterRepository,
+  getCodePoint,
 } from "@vvornanen/aoboshi-core/characters";
 import { AbstractSqliteRepository } from "~/worker";
 

@@ -1,10 +1,10 @@
-import { StatisticsByChapterRepository, StatisticsByChapter } from ".";
+import { StatisticsByChapter, StatisticsByChapterRepository } from ".";
 import { BookRepository, Chapter } from "~/books";
 import { randomId } from "~";
 import { StatisticsByCharacter } from "~/statistics/character";
 import {
-  Analyzer,
   AnalysisContext,
+  Analyzer,
   mergeStatisticsByChapter,
 } from "~/statistics";
 

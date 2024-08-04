@@ -1,16 +1,16 @@
 import { Temporal } from "@js-temporal/polyfill";
 import {
-  StatisticsByCharacterRepository,
-  StatisticsByCharacter,
   CardStatisticsByCharacter,
+  StatisticsByCharacter,
+  StatisticsByCharacterRepository,
 } from "~/statistics/character";
 import {
+  AnalysisContext,
+  Analyzer,
   getCharactersFromExpression,
+  isReview,
   mergeStatisticsByCharacter,
   timestampToDate,
-  Analyzer,
-  AnalysisContext,
-  isReview,
 } from "~/statistics";
 
 /**

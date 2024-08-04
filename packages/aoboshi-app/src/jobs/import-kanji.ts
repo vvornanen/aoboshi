@@ -6,7 +6,7 @@ import {
 import { KanjidicReader } from "@vvornanen/aoboshi-kanji/kanjidic";
 import { Chapter } from "@vvornanen/aoboshi-core/books";
 import { KanjivgReader } from "@vvornanen/aoboshi-kanji/kanjivg";
-import { readGzip, getApplicationContext, postMessage } from "~/worker";
+import { getApplicationContext, postMessage, readGzip } from "~/worker";
 import { gradesBookId } from "~/worker/books";
 
 const applicationContext = getApplicationContext();

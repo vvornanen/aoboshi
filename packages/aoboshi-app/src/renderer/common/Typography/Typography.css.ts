@@ -1,13 +1,14 @@
 import { createVar } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
+import { typographyLayer } from "~/renderer/layers.css";
 
 const pxToRem = (value: number) => `${value / 16}rem`;
 
 export const lineHeight = createVar();
 
 export const typographyVariant = recipe({
-  base: {
+  base: typographyLayer({
     fontFamily: theme.vars.typography.fontFamily,
     fontSize: theme.vars.typography.fontSize,
     fontWeight: 400,
@@ -15,38 +16,38 @@ export const typographyVariant = recipe({
     vars: {
       [lineHeight]: "1.5",
     },
-  },
+  }),
   variants: {
     variant: {
-      headlineLarge: {
+      headlineLarge: typographyLayer({
         fontSize: pxToRem(22),
         fontWeight: 700,
         vars: {
           [lineHeight]: "1.1",
         },
-      },
-      headlineMedium: {
+      }),
+      headlineMedium: typographyLayer({
         fontSize: pxToRem(16),
         fontWeight: 700,
         vars: {
           [lineHeight]: "1.2",
         },
-      },
-      textbookDisplay: {
+      }),
+      textbookDisplay: typographyLayer({
         fontFamily: theme.vars.typography.textbook.fontFamily,
         fontSize: pxToRem(64),
-      },
-      textbookLarge: {
+      }),
+      textbookLarge: typographyLayer({
         fontFamily: theme.vars.typography.textbook.fontFamily,
         fontSize: pxToRem(24),
-      },
-      printDisplay: {
+      }),
+      printDisplay: typographyLayer({
         fontFamily: theme.vars.typography.print.fontFamily,
         fontSize: pxToRem(64),
-      },
-      bodyLarge: { fontSize: pxToRem(15) },
-      bodyMedium: { fontSize: pxToRem(13) },
-      labelSmall: { fontSize: pxToRem(11) },
+      }),
+      bodyLarge: typographyLayer({ fontSize: pxToRem(15) }),
+      bodyMedium: typographyLayer({ fontSize: pxToRem(13) }),
+      labelSmall: typographyLayer({ fontSize: pxToRem(11) }),
     },
   },
 });

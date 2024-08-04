@@ -1,6 +1,5 @@
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
-import { windowControlsHeight } from "~/renderer/styles.css";
 
 export const sidebar = recipe({
   base: {
@@ -11,7 +10,7 @@ export const sidebar = recipe({
     transitionProperty: "transform",
     transitionDuration: "600ms",
     transitionTimingFunction: "cubic-bezier(.2,0,0,1)",
-    paddingTop: `calc(${windowControlsHeight} + 8px)`,
+    paddingTop: `calc(${theme.vars.windowControls.height} + 8px)`,
     borderRightStyle: "solid",
     borderRightWidth: 1,
     borderRightColor: theme.vars.color.outlineVariant,

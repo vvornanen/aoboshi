@@ -1,20 +1,21 @@
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
+import { iconsLayer } from "~/renderer/layers.css";
 
 export const svgIcon = recipe({
   variants: {
     color: {
-      inherit: {
+      inherit: iconsLayer({
         color: "inherit",
-      },
-      primary: {
+      }),
+      primary: iconsLayer({
         color: theme.vars.color.primary,
-      },
+      }),
     },
     size: {
-      medium: {
+      medium: iconsLayer({
         height: 20,
-      },
+      }),
     },
   },
   defaultVariants: {

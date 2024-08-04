@@ -2,6 +2,7 @@ import { keyframes, style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 import * as typographyStyles from "~common/Typography/Typography.css";
+import { commonLayer } from "~/renderer/layers.css";
 
 const pulse = keyframes({
   "0%": { opacity: 1 },
@@ -10,36 +11,36 @@ const pulse = keyframes({
 });
 
 export const skeleton = recipe({
-  base: {
+  base: commonLayer({
     backgroundColor: theme.vars.color.disabled,
     animationName: pulse,
     animationDelay: "0.5s",
     animationTimingFunction: "ease-in-out",
     animationDuration: "2s",
     animationIterationCount: "infinite",
-  },
+  }),
   variants: {
     variant: {
-      text: {
+      text: commonLayer({
         width: "fit-content",
         transform: `scaleY(calc(1 / ${typographyStyles.lineHeight}))`,
-      },
-      circular: {
+      }),
+      circular: commonLayer({
         borderRadius: "50%",
-      },
-      rectangular: {},
-      rounded: {
+      }),
+      rectangular: commonLayer({}),
+      rounded: commonLayer({
         borderRadius: theme.vars.shape.borderRadius,
-      },
-      roundedSmall: {
+      }),
+      roundedSmall: commonLayer({
         borderRadius: theme.vars.shape.borderRadiusSm,
-      },
+      }),
     },
     color: {
-      default: {},
-      light: {
+      default: commonLayer({}),
+      light: commonLayer({
         backgroundColor: theme.vars.color.hover,
-      },
+      }),
     },
   },
   defaultVariants: {
@@ -48,7 +49,9 @@ export const skeleton = recipe({
   },
 });
 
-export const skeletonContent = style({
-  width: "fit-content",
-  visibility: "hidden",
-});
+export const skeletonContent = style(
+  commonLayer({
+    width: "fit-content",
+    visibility: "hidden",
+  }),
+);

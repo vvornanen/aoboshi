@@ -1,10 +1,7 @@
 import { style } from "@vanilla-extract/css";
-import {
-  drag,
-  windowControlsHeight,
-  windowControlsWidth,
-} from "~/renderer/styles.css";
 import { zIndex } from "~theme";
+import { drag } from "~common/window.css";
+import * as theme from "~theme/theme.css";
 
 export const layout = style({
   position: "relative",
@@ -17,7 +14,7 @@ export const dragRegion = style([
   drag,
   {
     position: "absolute",
-    height: windowControlsHeight,
+    height: theme.vars.windowControls.height,
     width: "100%",
     zIndex: -1,
   },
@@ -25,8 +22,8 @@ export const dragRegion = style([
 
 export const toggleButton = style({
   position: "absolute",
-  left: windowControlsWidth,
-  top: `calc(${windowControlsHeight} / 2 - 14px)`,
+  left: theme.vars.windowControls.width,
+  top: `calc(${theme.vars.windowControls.height} / 2 - 14px)`,
   zIndex: zIndex.drawer + 1,
 });
 

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
 import * as styles from "./SidebarLayout.css";
 import { Sidebar } from "~app/Sidebar";
-import { noDrag, windowControlsHeight } from "~/renderer/styles.css";
 import { SidebarIcon } from "~icons";
 import { IconButton } from "~common/IconButton";
 import { Toolbar } from "~app/Toolbar";
@@ -15,6 +14,8 @@ import {
 } from "~app/settingsSlice";
 import { useDispatch } from "~app/useDispatch";
 import { useSelector } from "~app/useSelector";
+import { noDrag } from "~common/window.css";
+import * as theme from "~theme/theme.css";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -47,7 +48,7 @@ export const SidebarLayout: FunctionComponent = () => {
         <Toolbar>{/* Toolbar content */}</Toolbar>
         <div
           style={{
-            maxHeight: `calc(100vh - ${windowControlsHeight})`,
+            maxHeight: `calc(100vh - ${theme.vars.windowControls.height})`,
             overflowY: "auto",
           }}
         >

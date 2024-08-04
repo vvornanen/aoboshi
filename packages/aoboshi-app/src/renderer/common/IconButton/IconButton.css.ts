@@ -1,8 +1,9 @@
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
+import { commonLayer } from "~/renderer/layers.css";
 
 export const iconButton = recipe({
-  base: {
+  base: commonLayer({
     backgroundColor: "transparent",
     border: "none",
     borderRadius: theme.vars.shape.borderRadius,
@@ -21,18 +22,18 @@ export const iconButton = recipe({
         backgroundColor: theme.vars.color.focus,
       },
     },
-  },
+  }),
   variants: {
     color: {
-      default: {
+      default: commonLayer({
         color: theme.vars.color.icon,
-      },
+      }),
     },
     disabled: {
-      true: {
+      true: commonLayer({
         opacity: theme.vars.color.disabledOpacity,
         backgroundColor: "transparent",
-      },
+      }),
     },
   },
   defaultVariants: {

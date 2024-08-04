@@ -16,6 +16,10 @@ const themeDefaults = {
       fontFamily: "serif",
     },
   },
+  windowControls: {
+    height: "52px",
+    width: "90px",
+  },
 };
 
 export const [lightThemeClass, vars] = createTheme({

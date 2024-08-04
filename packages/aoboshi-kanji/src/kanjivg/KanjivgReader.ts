@@ -1,5 +1,5 @@
 import { XMLParser, XMLBuilder, XmlBuilderOptions } from "fast-xml-parser";
-import { CharacterUpdateValue } from "@vvornanen/aoboshi-core/characters/Character";
+import { CharacterUpdateValue } from "@vvornanen/aoboshi-core/characters";
 import { isGroup, isStroke, KvgGroup, KvgKanjivgFile } from "./KvgKanjivg";
 
 type Radicals = {

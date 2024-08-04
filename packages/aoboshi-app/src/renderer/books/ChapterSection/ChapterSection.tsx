@@ -5,13 +5,12 @@ import {
   useMemo,
 } from "react";
 import { clsx } from "clsx";
-import { Chapter } from "@vvornanen/aoboshi-core/books/Book";
-import { CharactersCard } from "../../characters/CharactersCard/CharactersCard";
-import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
-import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
-import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";
-import { ChapterProgress } from "../ChapterProgress/ChapterProgress";
+import { Chapter } from "@vvornanen/aoboshi-core/books";
 import { chapterSection, progress, sectionHeader } from "./ChapterSection.css";
+import { CharactersCard } from "~characters/CharactersCard";
+import { useStatisticsByCharacters, useStatisticsByChapter } from "~statistics";
+import { ChapterSectionHeader } from "~books/ChapterSectionHeader";
+import { ChapterProgress } from "~books/ChapterProgress";
 
 type ChapterSectionProps = Omit<
   ComponentPropsWithoutRef<"section">,

@@ -5,14 +5,11 @@ import { initReactI18next } from "react-i18next";
 import {
   storeLoader,
   withStoreProvider,
-} from "../src/storybook/storeProvider.decorator";
-import { withIpcApi } from "../src/storybook/ipcApi.decorator";
-import {
-  darkThemeClass,
-  lightThemeClass,
-} from "../src/renderer/theme/theme.css";
-import "../src/renderer/styles.css";
-import { options } from "../src/i18n";
+} from "~/storybook/storeProvider.decorator";
+import { withIpcApi } from "~/storybook/ipcApi.decorator";
+import { darkThemeClass, lightThemeClass } from "~/renderer/theme/theme.css";
+import "~/renderer/styles.css";
+import { options } from "~/i18n";
 
 use(initReactI18next).init(options);
 

@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { labelSmall } from "../Typography/Typography.css";
-import { vars } from "../../theme/theme.css";
+import { labelSmall } from "~common/Typography/Typography.css";
+import { vars } from "~theme/theme.css";
 
 export const listSubheader = style([
   labelSmall,

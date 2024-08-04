@@ -1,15 +1,17 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { isReview } from "../CardReview";
+import {
+  StatisticsByCharacterRepository,
+  StatisticsByCharacter,
+  CardStatisticsByCharacter,
+} from "~/statistics/character";
 import {
   getCharactersFromExpression,
   mergeStatisticsByCharacter,
   timestampToDate,
-} from "../statisticsUtils";
-import { Analyzer } from "../Analyzer";
-import { AnalysisContext } from "../AnalysisContext";
-import { CardStatisticsByCharacter } from "./CardStatisticsByCharacter";
-import { StatisticsByCharacter } from "./StatisticsByCharacter";
-import { StatisticsByCharacterRepository } from "./StatisticsByCharacterRepository";
+  Analyzer,
+  AnalysisContext,
+  isReview,
+} from "~/statistics";
 
 /**
  * Adapter for fetching card statistics from an external source such as Anki

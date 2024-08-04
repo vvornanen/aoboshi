@@ -2,8 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
 import { afterEach, beforeAll, beforeEach, test, expect } from "vitest";
-import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
+import { Book, BookRepository } from "@vvornanen/aoboshi-core/books";
 import { BookSqliteRepository } from "./BookSqliteRepository";
 
 const fixtures: Book[] = [

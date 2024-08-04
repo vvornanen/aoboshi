@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { vars } from "../theme/theme.css";
 import { SvgIcon } from "./SvgIcon";
 import { SidebarIcon } from "./SidebarIcon";
+import { vars } from "~theme/theme.css";
 
 const meta = {
   component: SvgIcon,

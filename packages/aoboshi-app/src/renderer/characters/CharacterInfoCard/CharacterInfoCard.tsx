@@ -1,12 +1,14 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { labelSmall } from "../../common/Typography/Typography.css";
-import { CharacterType } from "./CharacterType";
-import { CharacterFigures } from "./figures/CharacterFigures";
-import { CharacterReadings } from "./readings/CharacterReadings";
-import { CharacterStrokes } from "./strokes/CharacterStrokes";
+import { Character } from "@vvornanen/aoboshi-core/characters";
 import { infoBox, infoBoxContainer } from "./CharacterInfoCard.css";
+import {
+  CharacterType,
+  CharacterFigures,
+  CharacterReadings,
+  CharacterStrokes,
+} from ".";
+import { labelSmall } from "~common/Typography/Typography.css";
 
 type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
   character: Character;

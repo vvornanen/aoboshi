@@ -1,5 +1,5 @@
 import { parentPort, isMainThread } from "worker_threads";
-import { Tag } from "../preload/IpcApi";
+import { Tag } from "~/preload";
 
 export type InvalidateTagsMessage = { type: "invalidateTags"; tags: Tag[] };
 

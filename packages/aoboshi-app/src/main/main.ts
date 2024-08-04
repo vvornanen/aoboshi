@@ -1,10 +1,12 @@
 import { app, BrowserWindow } from "electron";
 import { init } from "i18next";
-import { options } from "../i18n";
-import { MigrationService } from "./migration/MigrationService";
-import { getMainApplicationContext } from "./MainApplicationContext";
-import { chromeExtensions } from "./chrome-extensions/chromeExtensions";
-import { ChromeExtensionService } from "./chrome-extensions/ChromeExtensionService";
+import { getMainApplicationContext } from "~/main";
+import {
+  chromeExtensions,
+  ChromeExtensionService,
+} from "~/main/chrome-extensions";
+import { MigrationService } from "~/main/migration";
+import { options } from "~/i18n";
 
 const applicationContext = getMainApplicationContext();
 

@@ -1,8 +1,8 @@
 import { BrowserWindow, nativeTheme } from "electron";
 import path from "path";
-import { darkPalette, lightPalette } from "../renderer/theme/color";
-import { IpcEventType } from "../preload/IpcApi";
 import { MainApplicationContext } from "./MainApplicationContext";
+import { IpcEventType } from "~/preload/IpcApi";
+import { darkPalette, lightPalette } from "~/renderer/theme/color";
 
 export class MainWindow {
   private window: BrowserWindow | null = null;

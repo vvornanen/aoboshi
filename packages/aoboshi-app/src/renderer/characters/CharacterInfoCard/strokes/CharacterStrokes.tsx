@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { infoBox } from "../CharacterInfoCard.css";
-import { Skeleton } from "../../../common/Skeleton/Skeleton";
-import { StrokeBackground } from "./StrokeBackground";
-import { Stroke } from "./Stroke";
+import { Character } from "@vvornanen/aoboshi-core/characters";
+import { Stroke, StrokeBackground } from "~characters/CharacterInfoCard";
+import { infoBox } from "~characters/CharacterInfoCard/CharacterInfoCard.css";
+import { Skeleton } from "~common/Skeleton";
 
 type CharacterStrokesProps = {
   character: Character;

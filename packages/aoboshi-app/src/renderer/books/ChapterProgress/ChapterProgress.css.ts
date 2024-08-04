@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { bodyMedium } from "../../common/Typography/Typography.css";
-import { vars } from "../../theme/theme.css";
+import { bodyMedium } from "~common/Typography/Typography.css";
+import { vars } from "~theme/theme.css";
 
 export const chapterProgress = style([
   bodyMedium,

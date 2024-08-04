@@ -1,6 +1,6 @@
 import { keyframes, style, styleVariants } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
-import { typographyLineHeight } from "../Typography/Typography.css";
+import { vars } from "~theme/theme.css";
+import { typographyLineHeight } from "~common/Typography/Typography.css";
 
 const pulse = keyframes({
   "0%": { opacity: 1 },

@@ -1,4 +1,4 @@
-import { Repository } from "@vvornanen/aoboshi-core/Repository";
+import { Repository } from "@vvornanen/aoboshi-core";
 import { Database } from "better-sqlite3";
 
 /**

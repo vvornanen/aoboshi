@@ -11,8 +11,8 @@
     "fast-xml-parser": "^4.4.1"
   },
   "exports": {
-    "./*": "./dist/*.js",
-    "./kanjidic/*": "./dist/kanjidic/*.js",
+    "./kanjidic": "./dist/kanjidic/index.js",
+    "./kanjivg": "./dist/kanjivg/index.js",
     "./package.json": "./package.json"
   },
   "devDependencies": {

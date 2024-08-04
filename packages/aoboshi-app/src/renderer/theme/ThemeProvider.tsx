@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, useEffect } from "react";
-import { useMediaQuery } from "../common/useMediaQuery";
-import { darkThemeClass, lightThemeClass } from "./theme.css";
+import { darkThemeClass, lightThemeClass } from "~theme/theme.css";
+import { useMediaQuery } from "~common";
 
 export type ThemeProviderProps = {
   children?: ReactNode;

@@ -1,5 +1,5 @@
-import { Repository } from "../../Repository";
-import { StatisticsByDay } from "./StatisticsByDay";
+import { Repository } from "~";
+import { StatisticsByDay } from "~/statistics/day";
 
 /**
  * Persists statistics in a repository (e.g. SQLite database)

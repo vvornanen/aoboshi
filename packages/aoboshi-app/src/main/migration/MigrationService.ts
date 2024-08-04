@@ -2,14 +2,14 @@ import { join, parse, ParsedPath } from "node:path";
 import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { Temporal } from "@js-temporal/polyfill";
-import { MainApplicationContext } from "../MainApplicationContext";
-import { OnAfterInit } from "../../worker/ApplicationContext";
-import { Migration } from "./Migration";
+import { MainApplicationContext } from "~/main";
+import { OnAfterInit } from "~/worker";
 import {
+  Migration,
   ExecutedMigration,
   MigrationRepository,
   MigrationSqliteRepository,
-} from "./MigrationSqliteRepository";
+} from "~/main/migration";
 
 type MigrationFile = {
   id: string;

@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { skipToken } from "@reduxjs/toolkit/query";
-import { Typography } from "../../common/Typography/Typography";
-import { PageMeta } from "../../common/PageMeta/PageMeta";
-import { VolumeSection } from "../VolumeSection/VolumeSection";
-import { Container } from "../../common/Container/Container";
-import { useFindBookByIdQuery } from "../booksApi";
-import { Skeleton } from "../../common/Skeleton/Skeleton";
+import { Typography } from "~common/Typography";
+import { PageMeta } from "~common/PageMeta";
+import { VolumeSection } from "~books/VolumeSection";
+import { Container } from "~common/Container";
+import { useFindBookByIdQuery } from "~books";
+import { Skeleton } from "~common/Skeleton";
 
 export const BookPage: FunctionComponent = () => {
   const { bookId } = useParams();

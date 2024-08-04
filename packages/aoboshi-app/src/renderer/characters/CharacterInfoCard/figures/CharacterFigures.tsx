@@ -1,10 +1,10 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { Skeleton } from "../../../common/Skeleton/Skeleton";
-import { maru } from "../../../common/maru";
-import { GradeFigure } from "./GradeFigure";
+import { Character } from "@vvornanen/aoboshi-core/characters";
 import { figures, figure, references } from "./figures.css";
+import { Skeleton } from "~common/Skeleton";
+import { maru } from "~common";
+import { GradeFigure } from "~characters/CharacterInfoCard";
 
 type CharacterFiguresProps = {
   character: Character;

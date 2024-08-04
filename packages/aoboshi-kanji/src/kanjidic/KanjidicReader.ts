@@ -1,5 +1,5 @@
 import { XMLParser } from "fast-xml-parser";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import { Character } from "@vvornanen/aoboshi-core/characters";
 import { Kanjidic, KanjidicCharacter, KanjidicReading } from "./Kanjidic";
 
 /**

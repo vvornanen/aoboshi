@@ -2,7 +2,7 @@ import { join } from "path";
 import { existsSync } from "fs";
 import { execSync } from "child_process";
 import { session, app } from "electron";
-import { ApplicationContext } from "../../worker/ApplicationContext";
+import { ApplicationContext } from "~/worker";
 
 export type ChromeExtension = {
   name: string;

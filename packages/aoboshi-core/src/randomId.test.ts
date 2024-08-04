@@ -1,14 +1,8 @@
-import { getRandomValues } from "crypto";
-import { vi, test, expect } from "vitest";
-import { randomId } from "./randomId";
-
-vi.mock("crypto", () => {
-  return {
-    getRandomValues: vi.fn(),
-  };
-});
+import { vi, test, expect, beforeEach, afterEach } from "vitest";
+import { randomId } from "~/randomId";
 
 const mockGetRandomValues = (randomValues: bigint[]) => {
+  const { getRandomValues } = crypto;
   if (vi.isMockFunction(getRandomValues)) {
     getRandomValues.mockImplementationOnce((buffer: bigint[]) => {
       randomValues.forEach(
@@ -17,6 +11,14 @@ const mockGetRandomValues = (randomValues: bigint[]) => {
     });
   }
 };
+
+beforeEach(() => {
+  globalThis.crypto.getRandomValues = vi.fn();
+});
+
+afterEach(() => {
+  vi.resetAllMocks();
+});
 
 test.each([
   {

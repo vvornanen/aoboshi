@@ -2,14 +2,12 @@ import path from "path";
 import {
   Character,
   CharacterUpdateValue,
-} from "@vvornanen/aoboshi-core/characters/Character";
-import { KanjidicReader } from "@vvornanen/aoboshi-kanji/kanjidic/KanjidicReader";
-import { Chapter } from "@vvornanen/aoboshi-core/books/Book";
-import { KanjivgReader } from "@vvornanen/aoboshi-kanji/kanjivg/KanjivgReader";
-import { readGzip } from "../worker/readGzip";
-import { getApplicationContext } from "../worker/ApplicationContext";
-import { gradesBookId } from "../worker/books/books";
-import { postMessage } from "../worker/postMessage";
+} from "@vvornanen/aoboshi-core/characters";
+import { KanjidicReader } from "@vvornanen/aoboshi-kanji/kanjidic";
+import { Chapter } from "@vvornanen/aoboshi-core/books";
+import { KanjivgReader } from "@vvornanen/aoboshi-kanji/kanjivg";
+import { readGzip, getApplicationContext, postMessage } from "~/worker";
+import { gradesBookId } from "~/worker/books";
 
 const applicationContext = getApplicationContext();
 

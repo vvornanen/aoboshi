@@ -1,6 +1,6 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { Temporal } from "@js-temporal/polyfill";
-import { randomId } from "../randomId";
+import * as fixtures from "./statisticsFixtures";
 import {
   getCharactersFromExpression,
   getTimeZone,
@@ -9,10 +9,10 @@ import {
   mergeStatisticsByDay,
   timestampToDate,
   TimeZoneConfig,
-} from "./statisticsUtils";
-import * as fixtures from "./statisticsFixtures";
+} from "~/statistics";
+import { randomId } from "~/randomId";
 
-vi.mock("../randomId", () => {
+vi.mock("~/randomId", () => {
   return {
     randomId: vi.fn(),
   };

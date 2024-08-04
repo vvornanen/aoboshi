@@ -1,5 +1,5 @@
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { ipcApi, IpcApiErrorCode } from "../app/ipcApi";
+import { Character } from "@vvornanen/aoboshi-core/characters";
+import { ipcApi, IpcApiErrorCode } from "~app/ipcApi";
 
 /**
  * Redux Toolkit Query API for fetching character information from the database

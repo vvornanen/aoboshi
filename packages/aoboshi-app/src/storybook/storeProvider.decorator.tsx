@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { makeDecorator } from "@storybook/preview-api";
 import { Provider } from "react-redux";
-import { ipcApi } from "../renderer/app/ipcApi";
 import { mockIpcApi } from "./mockIpcApi";
+import { ipcApi } from "~app/ipcApi";
 
 /**
  * Loads the Redux store depending on IpcApi provided by the Electron preload.
@@ -11,7 +11,7 @@ import { mockIpcApi } from "./mockIpcApi";
  */
 export const storeLoader = async () => {
   mockIpcApi();
-  return { store: (await import("../renderer/app/store")).store };
+  return { store: (await import("~app/store")).store };
 };
 
 /** Storybook decorator for wrapping stories with Redux store provider */

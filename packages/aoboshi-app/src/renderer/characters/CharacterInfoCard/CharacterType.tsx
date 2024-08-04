@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 import {
   printDisplay,
   textbookDisplay,
-} from "../../common/Typography/Typography.css";
+} from "~common/Typography/Typography.css";
 
 type CharacterTypeProps = {
   /**

@@ -1,13 +1,10 @@
 import { Database } from "better-sqlite3";
-import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
+import { BookRepository } from "@vvornanen/aoboshi-core/books";
+import { CharacterRepository } from "@vvornanen/aoboshi-core/characters";
 import { getDatabase } from "./database";
-import { BookSqliteRepository } from "./books/BookSqliteRepository";
-import { CharacterSqliteRepository } from "./characters/CharacterSqliteRepository";
-import {
-  ApplicationProperties,
-  getEnvironmentVariable,
-} from "./ApplicationProperties";
+import { BookSqliteRepository } from "./books";
+import { CharacterSqliteRepository } from "./characters";
+import { ApplicationProperties, getEnvironmentVariable } from "~/worker";
 
 /**
  * Services may implement this interface if they need to call other services

@@ -1,7 +1,7 @@
 import { ipcMain } from "electron";
-import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { OnAfterInit } from "../../worker/ApplicationContext";
-import { IpcEventType } from "../../preload/IpcApi";
+import { BookRepository } from "@vvornanen/aoboshi-core/books";
+import { OnAfterInit } from "~/worker";
+import { IpcEventType } from "~/preload";
 
 /**
  * Handles inter-process events from the renderer process.

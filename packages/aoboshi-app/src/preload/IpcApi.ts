@@ -1,5 +1,5 @@
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
+import { Book } from "@vvornanen/aoboshi-core/books";
+import { Character } from "@vvornanen/aoboshi-core/characters";
 
 export const IPC_API_KEY = "ipcApi";
 

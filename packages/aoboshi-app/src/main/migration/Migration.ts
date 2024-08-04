@@ -1,4 +1,4 @@
-import { MainApplicationContext } from "../MainApplicationContext";
+import { MainApplicationContext } from "~/main";
 
 export interface Migration {
   /** A short description about the changes contained in this migration */

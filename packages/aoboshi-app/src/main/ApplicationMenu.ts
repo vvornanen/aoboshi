@@ -1,10 +1,9 @@
 import { BrowserWindow, ipcMain, Menu, MenuItem, shell } from "electron";
 import { t } from "i18next";
-import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { IpcEventType } from "../preload/IpcApi";
-import { OnAfterInit } from "../worker/ApplicationContext";
-import { Scheduler } from "./Scheduler";
+import { Book, BookRepository } from "@vvornanen/aoboshi-core/books";
+import { Scheduler } from "~/main";
+import { IpcEventType } from "~/preload";
+import { OnAfterInit } from "~/worker";
 
 type ApplicationMenuState = {
   sidebarOpen: boolean;

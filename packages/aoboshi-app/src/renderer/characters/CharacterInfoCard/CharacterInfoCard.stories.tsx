@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, expect } from "@storybook/test";
-import { characterFixtures } from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
+import * as fixtures from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
 import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    character: characterFixtures["学"],
+    character: fixtures.characterFixtures["学"],
     loading: false,
   },
   play: async ({ canvasElement }) => {
@@ -34,7 +34,7 @@ export const Basic: Story = {
 export const Readings: Story = {
   args: {
     ...Basic.args,
-    character: characterFixtures["代"],
+    character: fixtures.characterFixtures["代"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -49,7 +49,7 @@ export const Readings: Story = {
 export const ManyStrokes: Story = {
   args: {
     ...Basic.args,
-    character: characterFixtures["鶴"],
+    character: fixtures.characterFixtures["鶴"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -64,7 +64,7 @@ export const ManyStrokes: Story = {
 export const Jinmeiyo: Story = {
   args: {
     ...Basic.args,
-    character: characterFixtures["伊"],
+    character: fixtures.characterFixtures["伊"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -79,7 +79,7 @@ export const Jinmeiyo: Story = {
 export const Kana: Story = {
   args: {
     ...Basic.args,
-    character: characterFixtures["あ"],
+    character: fixtures.characterFixtures["あ"],
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -93,7 +93,7 @@ export const Kana: Story = {
 export const Empty: Story = {
   args: {
     ...Basic.args,
-    character: characterFixtures.empty,
+    character: fixtures.characterFixtures.empty,
   },
 };
 

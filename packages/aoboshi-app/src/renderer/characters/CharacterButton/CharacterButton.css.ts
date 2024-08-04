@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
-import { textbookLarge } from "../../common/Typography/Typography.css";
-import { vars } from "../../theme/theme.css";
 import { characterButtonClasses } from "./characterButtonClasses";
+import { textbookLarge } from "~common/Typography/Typography.css";
+import { vars } from "~theme/theme.css";
 
 export const characterButton = style([
   textbookLarge,

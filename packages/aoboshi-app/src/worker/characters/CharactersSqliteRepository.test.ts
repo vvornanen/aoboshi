@@ -1,12 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
-import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
 import {
   Character,
   getCodePoint,
   Grade,
-} from "@vvornanen/aoboshi-core/characters/Character";
+  CharacterRepository,
+} from "@vvornanen/aoboshi-core/characters";
 import { beforeAll, test, expect, afterEach, beforeEach } from "vitest";
 import { CharacterSqliteRepository } from "./CharacterSqliteRepository";
 

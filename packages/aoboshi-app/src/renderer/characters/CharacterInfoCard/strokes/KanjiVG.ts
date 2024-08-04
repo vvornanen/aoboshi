@@ -1,4 +1,4 @@
-import { getCodePoint } from "@vvornanen/aoboshi-core/characters/Character";
+import { getCodePoint } from "@vvornanen/aoboshi-core/characters";
 import { currentStroke, hiddenStroke, stroke } from "./Stroke.css";
 
 /**

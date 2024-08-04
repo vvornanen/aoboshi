@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
-import { windowControlsWidth } from "../../styles.css";
-import { Container } from "../../common/Container/Container";
-import { useSelector } from "../useSelector";
-import { selectSidebarOpen } from "../settingsSlice";
 import { toolbar } from "./Toolbar.css";
+import { windowControlsWidth } from "~/renderer/styles.css";
+import { Container } from "~common/Container";
+import { selectSidebarOpen } from "~app/settingsSlice";
+import { useSelector } from "~app/useSelector";
 
 type ToolbarProps = ComponentPropsWithoutRef<"div">;
 

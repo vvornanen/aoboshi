@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { vars } from "../../theme/theme.css";
 import { CompletedBadge as CompletedBadgeComponent } from "./CompletedBadge";
+import { vars } from "~theme/theme.css";
 
 const meta = {
   component: CompletedBadgeComponent,

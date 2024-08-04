@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
-import { windowControlsHeight } from "../../styles.css";
+import { vars } from "~theme/theme.css";
+import { windowControlsHeight } from "~/renderer/styles.css";
 
 export const sidebar = style({
   backgroundColor: vars.color.surfaceContainerHigh,

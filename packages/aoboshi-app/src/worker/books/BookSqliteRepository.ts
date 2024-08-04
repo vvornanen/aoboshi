@@ -1,7 +1,6 @@
 import { Database } from "better-sqlite3";
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { BookRepository } from "@vvornanen/aoboshi-core/books/BookRepository";
-import { AbstractSqliteRepository } from "../AbstractSqliteRepository";
+import { Book, BookRepository } from "@vvornanen/aoboshi-core/books";
+import { AbstractSqliteRepository } from "~/worker/";
 
 type BookRow = {
   id: string;

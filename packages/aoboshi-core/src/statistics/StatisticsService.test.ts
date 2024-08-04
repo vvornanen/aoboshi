@@ -1,15 +1,17 @@
 import { describe, expect, test, vi, afterEach, beforeEach } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { Temporal } from "@js-temporal/polyfill";
-import { randomId } from "../randomId";
-import { StatisticsService } from "./StatisticsService";
-import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
-import { Analyzer } from "./Analyzer";
 import * as fixtures from "./statisticsFixtures";
-import { StatisticsIncrement } from "./StatisticsIncrement";
-import { AnalysisContext } from "./AnalysisContext";
+import {
+  Analyzer,
+  StatisticsService,
+  StatisticsIncrementRepository,
+  StatisticsIncrement,
+  AnalysisContext,
+} from "~/statistics";
+import { randomId } from "~/randomId";
 
-vi.mock("../randomId", () => {
+vi.mock("~/randomId", () => {
   return {
     randomId: vi.fn(),
   };

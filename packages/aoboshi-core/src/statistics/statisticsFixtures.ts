@@ -1,11 +1,15 @@
-import { randomUUID } from "node:crypto";
-import { CardReview, NewCard } from "./CardReview";
-import { CardStatisticsByCharacter } from "./character/CardStatisticsByCharacter";
-import { StatisticsByCharacter } from "./character/StatisticsByCharacter";
-import { StatisticsByDay } from "./day/StatisticsByDay";
-import { StatisticsByChapter } from "./chapter/StatisticsByChapter";
-import { TimeZoneConfig } from "./statisticsUtils";
-import { AnalysisContext } from "./AnalysisContext";
+import {
+  CardStatisticsByCharacter,
+  StatisticsByCharacter,
+} from "~/statistics/character";
+import { StatisticsByDay } from "~/statistics/day";
+import { StatisticsByChapter } from "~/statistics/chapter";
+import {
+  TimeZoneConfig,
+  AnalysisContext,
+  CardReview,
+  NewCard,
+} from "~/statistics";
 
 type TestCase = AnalysisContext & Record<string, unknown>;
 
@@ -180,7 +184,7 @@ export const seenCharacter = (
     | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
 ) => {
   return {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     firstAdded: "2015-12-01",
     firstReviewed: "2016-01-13",
     lastReviewed: "2016-01-13",
@@ -196,7 +200,7 @@ export const unseenCharacter = (
     | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
 ) => {
   return {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     firstAdded: null,
     firstReviewed: null,
     lastReviewed: null,
@@ -212,7 +216,7 @@ export const newCharacter = (
     | (Pick<StatisticsByCharacter, "literal"> & Partial<StatisticsByCharacter>),
 ) => {
   return {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     firstAdded: "2015-12-01",
     firstReviewed: null,
     lastReviewed: null,
@@ -228,7 +232,7 @@ export const statisticsByDay = (
   const valueAsObject = typeof value === "string" ? { date: value } : value;
 
   return {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     addedCharacters: "",
     firstSeenCharacters: "",
     reviewedCharacters: "",
@@ -245,7 +249,7 @@ export const statisticsByChapter = (
     Partial<StatisticsByChapter>,
 ) => {
   return {
-    id: randomUUID(),
+    id: crypto.randomUUID(),
     seenCharacters: "",
     newCharacters: "",
     unseenCharacters: "",

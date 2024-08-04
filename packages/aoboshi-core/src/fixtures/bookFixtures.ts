@@ -1,4 +1,4 @@
-import { Book } from "../books/Book";
+import { Book } from "~/books";
 
 export const grades: Book = {
   id: "AtLesfR65Adc7q2XHVK7A8",

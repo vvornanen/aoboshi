@@ -1,8 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
-import { StatisticsByChapter } from "../../statistics/useStatisticsByChapter";
-import { Skeleton } from "../../common/Skeleton/Skeleton";
 import {
   chapterProgress,
   progressBar,
@@ -10,6 +8,8 @@ import {
   unreviewedBar,
   unseenBar,
 } from "./ChapterProgress.css";
+import { Skeleton } from "~common/Skeleton";
+import { StatisticsByChapter } from "~statistics";
 
 type ChapterProgressProps = ComponentPropsWithoutRef<"div"> & {
   data: StatisticsByChapter;

@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
+import { vars } from "~theme/theme.css";
 
 /**
  * Bordered box for all grid elements within {@link CharacterInfoCard}.

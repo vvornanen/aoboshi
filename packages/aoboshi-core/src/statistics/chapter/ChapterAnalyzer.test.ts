@@ -1,16 +1,17 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
-import { Chapter } from "../../books/Book";
-import { grades } from "../../fixtures/bookFixtures";
-import { randomId } from "../../randomId";
-import { BookRepository } from "../../books/BookRepository";
-import * as fixtures from "../statisticsFixtures";
-import { StatisticsByCharacterRepository } from "../character/StatisticsByCharacterRepository";
-import { StatisticsByChapter } from "./StatisticsByChapter";
-import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
-import { ChapterAnalyzer } from "./ChapterAnalyzer";
+import {
+  ChapterAnalyzer,
+  StatisticsByChapter,
+  StatisticsByChapterRepository,
+} from "~/statistics/chapter";
+import { StatisticsByCharacterRepository } from "~/statistics/character";
+import * as fixtures from "~/statistics/statisticsFixtures";
+import { randomId } from "~/randomId";
+import * as bookFixtures from "~/fixtures/bookFixtures";
+import { BookRepository, Chapter } from "~/books";
 
-vi.mock("../../randomId", () => {
+vi.mock("~/randomId", () => {
   return {
     randomId: vi.fn(),
   };
@@ -277,7 +278,7 @@ describe("getStatisticsByChapter", () => {
 
 describe("getStatisticsByChapters", () => {
   test("grades book", () => {
-    bookRepository.findAll.mockReturnValueOnce([grades]);
+    bookRepository.findAll.mockReturnValueOnce([bookFixtures.grades]);
 
     const seenCharacters = [
       ..."一右雨王下火花貝学九金月見五口左三山子四字七手十出女小上森人水川大中田土二日木目六",
@@ -302,7 +303,9 @@ describe("getStatisticsByChapters", () => {
         chapterId: "4phqJluvSvwNLgogGM5bZw",
         seenCharacters: seenCharacters.join(""),
         newCharacters: "",
-        unseenCharacters: [...grades.volumes[0].chapters[0].characters]
+        unseenCharacters: [
+          ...bookFixtures.grades.volumes[0].chapters[0].characters,
+        ]
           .filter(
             (literal) =>
               typeof literal === "string" && !seenCharacters.includes(literal),
@@ -334,7 +337,7 @@ describe("run", () => {
   beforeEach(() => {
     mockRandomId("random id");
 
-    bookRepository.findAll.mockReturnValueOnce([grades]);
+    bookRepository.findAll.mockReturnValueOnce([bookFixtures.grades]);
 
     getCardStatisticsByCharacter.mockImplementation(
       testCase.getCardStatisticsByCharacter,
@@ -356,7 +359,7 @@ describe("run", () => {
         seenCharacters: "学",
         newCharacters: "",
         unseenCharacters: (
-          grades.volumes[0].chapters[0].characters as string
+          bookFixtures.grades.volumes[0].chapters[0].characters as string
         ).replace("学", ""),
         numberOfSeenCharacters: 1,
         numberOfNewCharacters: 0,

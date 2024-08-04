@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { maru } from "../maru";
 import {
   skeletonContent,
   skeletonLight,
   skeletonVariants,
 } from "./Skeleton.css";
+import { maru } from "~common";
 
 type SkeletonProps = ComponentPropsWithoutRef<"div"> & {
   variant?: keyof typeof skeletonVariants;

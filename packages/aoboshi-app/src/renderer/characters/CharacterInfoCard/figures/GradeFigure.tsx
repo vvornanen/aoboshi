@@ -4,9 +4,9 @@ import {
   Character,
   Grade,
   KANA_REGEXP,
-} from "@vvornanen/aoboshi-core/characters/Character";
-import { Tooltip } from "../../../common/Tooltip/Tooltip";
+} from "@vvornanen/aoboshi-core/characters";
 import { circledFigure } from "./figures.css";
+import { Tooltip } from "~common/Tooltip";
 
 type GradeFigureProps = {
   character: Character;

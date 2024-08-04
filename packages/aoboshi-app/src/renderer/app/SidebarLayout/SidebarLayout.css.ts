@@ -3,8 +3,8 @@ import {
   windowControlsHeight,
   windowControlsWidth,
   drag,
-} from "../../styles.css";
-import { zIndex } from "../../theme/zIndex";
+} from "~/renderer/styles.css";
+import { zIndex } from "~theme";
 
 export const layout = style({
   position: "relative",

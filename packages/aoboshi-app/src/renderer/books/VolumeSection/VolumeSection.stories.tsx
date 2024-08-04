@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
+import * as fixtures from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
 import { VolumeSection } from "./VolumeSection";
 
 const meta = {
@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    volume: grades.volumes[0],
+    volume: fixtures.grades.volumes[0],
     loading: false,
   },
 };

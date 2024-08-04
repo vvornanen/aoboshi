@@ -4,4 +4,3 @@ coverage
 packages/*/.vite
 packages/*/out
 packages/*/dist
-packages/aoboshi-app/public/kanjivg

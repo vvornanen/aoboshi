@@ -24,6 +24,7 @@ export default tseslint.config(
     plugins: { import: importPlugin },
     rules: {
       eqeqeq: ["error", "always"],
+      "import/no-relative-parent-imports": "error",
       // Copy rules from the recommended config because eslint-plugin-import does not yet support flat config
       // See: https://github.com/import-js/eslint-plugin-import/issues/2948
       ...importPlugin.configs.recommended.rules,

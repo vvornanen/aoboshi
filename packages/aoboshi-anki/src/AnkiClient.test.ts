@@ -1,6 +1,13 @@
 import { Mock, afterEach, describe, expect, test, vi } from "vitest";
 import { AnkiClient } from "./AnkiClient";
-import { card1, card2, note1, note2 } from "./fixtures";
+import {
+  card1,
+  card2,
+  internalCard1,
+  internalCard2,
+  note1,
+  note2,
+} from "./fixtures";
 import { AnkiCardReview, ReviewType } from "./AnkiCardReview";
 
 const mockFetch = vi.fn();
@@ -184,11 +191,11 @@ describe("getAllCards", () => {
 
   test("returns cards", async () => {
     mockResponse(200, {
-      result: [card1.cardId, card2.cardId],
+      result: [card1.id, card2.id],
       error: null,
     });
     mockResponse(200, {
-      result: [card1, card2],
+      result: [internalCard1, internalCard2],
       error: null,
     });
 
@@ -230,11 +237,11 @@ describe("findCards", () => {
 
   test("returns cards", async () => {
     mockResponse(200, {
-      result: [card1.cardId, card2.cardId],
+      result: [card1.id, card2.id],
       error: null,
     });
     mockResponse(200, {
-      result: [card1, card2],
+      result: [internalCard1, internalCard2],
       error: null,
     });
 
@@ -255,7 +262,7 @@ describe("findCards", () => {
         action: "cardsInfo",
         version: 6,
         key: apiKey,
-        params: { cards: [card1.cardId, card2.cardId] },
+        params: { cards: [card1.id, card2.id] },
       }),
     });
     expect(actual).toEqual([card1, card2]);

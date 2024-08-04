@@ -5649,6 +5649,7 @@ __metadata:
     dotenv: "npm:^16.4.5"
     tsup: "npm:^8.2.4"
     typescript: "npm:^5.5.4"
+    vite-tsconfig-paths: "npm:^4.3.2"
     vitest: "npm:^2.0.5"
   languageName: unknown
   linkType: soft

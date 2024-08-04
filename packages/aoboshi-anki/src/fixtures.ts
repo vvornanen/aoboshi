@@ -1,7 +1,39 @@
-import { AnkiCard } from "./AnkiCard";
+import { AnkiCard, AnkiInternalCard } from "./AnkiCard";
 import { AnkiNote } from "./AnkiNote";
 
 export const card1: AnkiCard = {
+  id: 1684434203213,
+  created: "2023-05-18T18:23:23.213Z",
+  modified: "2022-03-01T17:47:44Z",
+  fields: {
+    Expression: {
+      value: "expression 1",
+      order: 0,
+    },
+    Meaning: {
+      value: "meaning 1",
+      order: 1,
+    },
+    Reading: {
+      value: "reading 1",
+      order: 2,
+    },
+  },
+  modelName: "Japanese",
+  deckName: "test",
+  easeFactor: 1750,
+  interval: "P935D",
+  noteId: 1684434396302,
+  status: "review",
+  numberOfReviews: 13,
+  numberOfLapses: 0,
+  numberOfRemainingReviews: {
+    today: 0,
+    untilGraduation: 0,
+  },
+};
+
+export const internalCard1: AnkiInternalCard = {
   cardId: 1684434203213,
   fields: {
     Expression: {
@@ -37,6 +69,38 @@ export const card1: AnkiCard = {
 };
 
 export const card2: AnkiCard = {
+  id: 1684434214608,
+  created: "2023-05-18T18:23:34.608Z",
+  modified: "2022-03-01T17:47:44Z",
+  fields: {
+    Expression: {
+      value: "expression 2",
+      order: 0,
+    },
+    Meaning: {
+      value: "meaning 2",
+      order: 1,
+    },
+    Reading: {
+      value: "reading 2",
+      order: 2,
+    },
+  },
+  modelName: "Japanese",
+  deckName: "test",
+  easeFactor: 1750,
+  interval: "P935D",
+  noteId: 1684435554147,
+  status: "review",
+  numberOfReviews: 13,
+  numberOfLapses: 0,
+  numberOfRemainingReviews: {
+    today: 0,
+    untilGraduation: 0,
+  },
+};
+
+export const internalCard2: AnkiInternalCard = {
   cardId: 1684434214608,
   fields: {
     Expression: {
@@ -72,17 +136,17 @@ export const card2: AnkiCard = {
 };
 
 export const note1: AnkiNote = {
-  noteId: card1.note,
+  noteId: card1.noteId,
   tags: [],
   fields: card1.fields,
-  modelName: "Japanese",
-  cards: [card1.cardId],
+  modelName: card1.modelName,
+  cards: [card1.id],
 };
 
 export const note2: AnkiNote = {
-  noteId: card2.note,
+  noteId: card2.noteId,
   tags: [],
   fields: card2.fields,
-  modelName: "Japanese",
-  cards: [card2.cardId],
+  modelName: card2.modelName,
+  cards: [card2.id],
 };

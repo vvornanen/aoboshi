@@ -32,6 +32,10 @@ describe("intervalToDuration", () => {
   test("days", () => {
     expect(intervalToDuration(3).toString()).toEqual("P3D");
   });
+
+  test("zero", () => {
+    expect(intervalToDuration(0).toString()).toEqual("PT0S");
+  });
 });
 
 describe("fromTuple", () => {

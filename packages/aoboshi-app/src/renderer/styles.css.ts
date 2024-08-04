@@ -1,6 +1,6 @@
-import { createVar, globalStyle, style } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
 import * as theme from "~theme/theme.css";
-import { commonLayer, resetLayer } from "~/renderer/layers.css";
+import { resetLayer } from "~/renderer/layers.css";
 
 // CSS reset based on https://www.joshwcomeau.com/css/custom-css-reset/
 globalStyle(
@@ -61,32 +61,5 @@ globalStyle(
   ":focus-visible",
   resetLayer({
     outline: "none", // All focusable components define their own focus styles
-  }),
-);
-
-// TODO: Move to common/window.css.ts
-export const windowControlsHeight = createVar();
-export const windowControlsWidth = createVar();
-
-globalStyle(
-  "html",
-  commonLayer({
-    vars: {
-      [windowControlsHeight]: "52px",
-      [windowControlsWidth]: "90px",
-    },
-  }),
-);
-
-// TODO: Move to common/window.css.ts
-export const drag = style(
-  commonLayer({
-    WebkitAppRegion: "drag",
-  }),
-);
-
-export const noDrag = style(
-  commonLayer({
-    WebkitAppRegion: "no-drag",
   }),
 );

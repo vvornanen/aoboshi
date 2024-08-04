@@ -78,22 +78,6 @@ globalStyle(
   }),
 );
 
-// TODO: Move to common/visuallyHidden.css.ts
-/** Visually hidden content for screen reader */
-export const visuallyHidden = style(
-  commonLayer({
-    border: 0,
-    clipPath: "inset(100%)",
-    height: 1,
-    margin: -1,
-    overflow: "hidden",
-    padding: 0,
-    position: "absolute",
-    whiteSpace: "nowrap",
-    width: 1,
-  }),
-);
-
 // TODO: Move to common/window.css.ts
 export const drag = style(
   commonLayer({

@@ -4,9 +4,9 @@ import {
   Character,
   Grade,
   KANA_REGEXP,
-} from "@vvornanen/aoboshi-core/characters/Character";
-import { Tooltip } from "../../../common/Tooltip/Tooltip";
-import { circledFigure } from "./figures.css";
+} from "@vvornanen/aoboshi-core/characters";
+import * as styles from "./figures.css";
+import { Tooltip } from "~common/Tooltip";
 
 type GradeFigureProps = {
   character: Character;
@@ -39,7 +39,7 @@ export const GradeFigure: FunctionComponent<GradeFigureProps> = ({
           grade: character.grade,
         })}
       >
-        <span className={circledFigure}>
+        <span className={styles.circledFigure}>
           {t("CharacterInfoCard.grade.kyoiku")}
         </span>
       </Tooltip>

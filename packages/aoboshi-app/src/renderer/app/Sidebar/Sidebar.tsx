@@ -1,13 +1,13 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
-import { List } from "../../common/List/List";
-import { ListItem } from "../../common/ListItem/ListItem";
-import { ListSubheader } from "../../common/ListSubheader/ListSubheader";
-import { useFindAllBooksQuery } from "../../books/booksApi";
-import { Typography } from "../../common/Typography/Typography";
-import { maru } from "../../common/maru";
-import { sidebar } from "./Sidebar.css";
+import * as styles from "./Sidebar.css";
+import { useFindAllBooksQuery } from "~books";
+import { Typography } from "~common/Typography";
+import { maru } from "~common";
+import { ListSubheader } from "~common/ListSubheader";
+import { ListItem } from "~common/ListItem";
+import { List } from "~common/List";
 
 type SidebarProps = ComponentPropsWithoutRef<"aside"> & {
   width: number;
@@ -31,7 +31,11 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
   } = useFindAllBooksQuery();
 
   return (
-    <aside className={clsx(sidebar, { open })} style={{ width }} {...props}>
+    <aside
+      className={clsx(styles.sidebar, { open })}
+      style={{ width }}
+      {...props}
+    >
       <nav>
         <List>
           <ListItem to="/">{t("Sidebar.recentlyStudied")}</ListItem>

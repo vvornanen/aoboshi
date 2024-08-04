@@ -1,7 +1,7 @@
 // Adapted from https://github.com/electron/forge/blob/main/packages/template/vite/tmpl/vite.base.config.mjs
 
 import { builtinModules } from "node:module";
-import { ConfigEnv, UserConfig, Plugin } from "vite";
+import { ConfigEnv, Plugin, UserConfig } from "vite";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

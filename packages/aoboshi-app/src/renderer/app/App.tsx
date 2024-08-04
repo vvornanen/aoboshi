@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "../theme/ThemeProvider";
+import { store } from "./store"; // Store must be loaded before routes
 import { router } from "./routes";
-import { store } from "./store";
+import { ThemeProvider } from "~theme";
 
 export const App: FunctionComponent = () => (
   <Provider store={store}>

@@ -7,15 +7,15 @@ import {
 } from "react";
 import { ClickAwayListener } from "@mui/base";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { CharacterButton } from "../CharacterButton/CharacterButton";
-import { Card } from "../../common/Card/Card";
-import { CharacterInfoCard } from "../CharacterInfoCard/CharacterInfoCard";
-import { useFindCharacterByLiteralQuery } from "../charactersApi";
-import { Typography } from "../../common/Typography/Typography";
-import { Skeleton } from "../../common/Skeleton/Skeleton";
-import { CharacterStatus } from "./CharacterStatus";
-import { charactersCard } from "./CharactersCard.css";
+import { Character } from "@vvornanen/aoboshi-core/characters";
+import * as styles from "./CharactersCard.css";
+import { CharacterButton } from "~characters/CharacterButton";
+import { Card } from "~common/Card";
+import { CharacterInfoCard } from "~characters/CharacterInfoCard";
+import { useFindCharacterByLiteralQuery } from "~characters";
+import { Typography } from "~common/Typography";
+import { Skeleton } from "~common/Skeleton";
+import { CharacterStatus } from "~characters/CharactersCard";
 
 const emptyCharacter: Character = {
   literal: "",
@@ -68,7 +68,7 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
   };
 
   return (
-    <Card className={charactersCard}>
+    <Card className={styles.charactersCard}>
       {!loading &&
         characters.map((character) => (
           <CharacterButton

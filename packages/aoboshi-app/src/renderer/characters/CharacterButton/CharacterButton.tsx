@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { characterButton } from "./CharacterButton.css";
+import * as styles from "./CharacterButton.css";
 
 type CharacterButtonProps = ComponentPropsWithoutRef<"button"> & {
   highlight?: boolean;
@@ -18,7 +18,7 @@ export const CharacterButton: FunctionComponent<CharacterButtonProps> = ({
 }) => {
   return (
     <button
-      className={clsx(characterButton, className, {
+      className={clsx(styles.characterButton, className, {
         unseen: !seen,
         highlight,
         selected,

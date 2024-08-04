@@ -1,14 +1,14 @@
 import {
-  cloneElement,
   FunctionComponent,
-  isValidElement,
   MouseEventHandler,
   ReactNode,
+  cloneElement,
+  isValidElement,
   useRef,
   useState,
 } from "react";
 import { Popup } from "@mui/base/Unstable_Popup/Popup";
-import { tooltip } from "./Tooltip.css";
+import * as styles from "./Tooltip.css";
 
 type TooltipProps = {
   title: string;
@@ -48,7 +48,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
     <>
       {cloneElement(children, childrenProps)}
       <Popup anchor={ref.current} open={open} placement="bottom" offset={8}>
-        <div className={tooltip}>{title}</div>
+        <div className={styles.tooltip}>{title}</div>
       </Popup>
     </>
   );

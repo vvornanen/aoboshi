@@ -1,5 +1,5 @@
 import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
-import { tagTypes } from "../../preload/IpcApi";
+import { tagTypes } from "~/preload";
 
 export enum IpcApiErrorCode {
   NotFound = 404,

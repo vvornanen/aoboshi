@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
-import { Typography } from "../../common/Typography/Typography";
-import { CompletedBadge } from "../CompletedBadge/CompletedBadge";
-import { Skeleton } from "../../common/Skeleton/Skeleton";
+import { Typography } from "~common/Typography";
+import { CompletedBadge } from "~books/CompletedBadge";
+import { Skeleton } from "~common/Skeleton";
 
 type ChapterSectionHeaderProps = ComponentPropsWithoutRef<"div"> & {
   title?: string;

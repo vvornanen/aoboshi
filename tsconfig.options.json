@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "composite": true,
+    "rootDirs": ["${configDir}/src"],
+    "outDir": "${configDir}/dist",
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": true,
     "incremental": true,
     "noEmitOnError": true,
     "skipLibCheck": true,
@@ -15,6 +16,11 @@
     "resolveJsonModule": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "target": "ES2022"
-  }
+    "target": "ES2022",
+    "paths": {
+      "~": ["${configDir}/src"],
+      "~/*": ["${configDir}/src/*"]
+    }
+  },
+  "include": ["${configDir}/src/**/*.ts"]
 }

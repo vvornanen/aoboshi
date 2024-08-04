@@ -3,9 +3,9 @@ import {
   reactRouterParameters,
   withRouter,
 } from "storybook-addon-remix-react-router";
-import { ListItem } from "../ListItem/ListItem";
-import { ListSubheader } from "../ListSubheader/ListSubheader";
 import { List } from "./List";
+import { ListItem } from "~common/ListItem";
+import { ListSubheader } from "~common/ListSubheader";
 
 const meta = {
   component: List,

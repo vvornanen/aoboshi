@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { windowControlsHeight } from "../../styles.css";
+import { windowControlsHeight } from "~/renderer/styles.css";
 
 export const toolbar = style({
   display: "flex",

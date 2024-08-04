@@ -1,5 +1,5 @@
-import { test, expect } from "vitest";
-import { getCodePoint, KANA_REGEXP, KANJI_REGEXP } from "./Character";
+import { expect, test } from "vitest";
+import { KANA_REGEXP, KANJI_REGEXP, getCodePoint } from ".";
 
 test.each([
   { literal: "", expectedError: "Literal must not be empty" },

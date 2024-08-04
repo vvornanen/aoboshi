@@ -10,8 +10,8 @@ import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
-import { options } from "../i18n";
-import { App } from "./app/App";
+import { options } from "~/i18n";
+import { App } from "~app/App";
 import "./styles.css";
 
 use(initReactI18next).init(options);

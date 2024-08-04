@@ -1,5 +1,5 @@
 import { keyframes, style } from "@vanilla-extract/css";
-import { vars } from "../../../theme/theme.css";
+import * as theme from "~theme/theme.css";
 
 const strokeActive = keyframes({
   "0%": {
@@ -15,7 +15,7 @@ export const strokeContainer = style({});
 
 export const stroke = style({
   strokeWidth: 4,
-  stroke: vars.color.strokeDim,
+  stroke: theme.vars.color.strokeDim,
   strokeLinecap: "round",
   strokeLinejoin: "round",
   fill: "none",
@@ -26,7 +26,7 @@ export const hiddenStroke = style({
 });
 
 export const currentStroke = style({
-  stroke: vars.color.stroke,
+  stroke: theme.vars.color.stroke,
   zIndex: 1,
   selectors: {
     [`.${strokeContainer}:hover &`]: {
@@ -46,7 +46,7 @@ export const strokeGrid = style({
   top: 0,
   bottom: 0,
   pointerEvents: "none",
-  color: vars.color.strokeGrid,
+  color: theme.vars.color.strokeGrid,
 });
 
 export const strokeContent = style({

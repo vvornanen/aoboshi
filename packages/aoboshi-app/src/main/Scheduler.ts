@@ -1,11 +1,13 @@
 import path from "path";
 import Bree from "bree"; // eslint-disable-line import/default, import/no-named-as-default, import/no-named-as-default-member
-import { JobName } from "../jobs";
-import { OnAfterInit } from "../worker/ApplicationContext";
-import { propertiesAsEnv } from "../worker/ApplicationProperties";
-import { IpcEventType } from "../preload/IpcApi";
-import { isInvalidateTagsMessage } from "../worker/postMessage";
-import { MainApplicationContext } from "./MainApplicationContext";
+import { MainApplicationContext } from "~/main";
+import {
+  OnAfterInit,
+  isInvalidateTagsMessage,
+  propertiesAsEnv,
+} from "~/worker";
+import { IpcEventType } from "~/preload";
+import { JobName } from "~/jobs";
 
 type WorkerMessage = {
   name: JobName;

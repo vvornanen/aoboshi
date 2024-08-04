@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Typography } from "../Typography/Typography";
 import { Ruby } from "./Ruby";
+import { Typography } from "~common/Typography";
 
 const meta = {
   component: Ruby,

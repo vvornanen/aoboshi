@@ -1,4 +1,4 @@
-import { Migration } from "../main/migration/Migration";
+import { type Migration } from "~/main/migration";
 
 export default {
   description: "Create character table",

@@ -1,6 +1,6 @@
 import { keyframes, style, styleVariants } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
-import { typographyLineHeight } from "../Typography/Typography.css";
+import * as theme from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
 
 const pulse = keyframes({
   "0%": { opacity: 1 },
@@ -9,7 +9,7 @@ const pulse = keyframes({
 });
 
 const skeletonBase = style({
-  backgroundColor: vars.color.disabled,
+  backgroundColor: theme.vars.color.disabled,
   animationName: pulse,
   animationDelay: "0.5s",
   animationTimingFunction: "ease-in-out",
@@ -22,7 +22,7 @@ export const skeletonVariants = styleVariants({
     skeletonBase,
     {
       width: "fit-content",
-      transform: `scaleY(calc(1 / ${typographyLineHeight}))`,
+      transform: `scaleY(calc(1 / ${typographyStyles.typographyLineHeight}))`,
     },
   ],
   circular: [
@@ -35,19 +35,19 @@ export const skeletonVariants = styleVariants({
   rounded: [
     skeletonBase,
     {
-      borderRadius: vars.shape.borderRadius,
+      borderRadius: theme.vars.shape.borderRadius,
     },
   ],
   roundedSmall: [
     skeletonBase,
     {
-      borderRadius: vars.shape.borderRadiusSm,
+      borderRadius: theme.vars.shape.borderRadiusSm,
     },
   ],
 });
 
 export const skeletonLight = style({
-  backgroundColor: vars.color.hover,
+  backgroundColor: theme.vars.color.hover,
 });
 
 export const skeletonContent = style({

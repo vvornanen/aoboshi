@@ -1,10 +1,10 @@
-import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
 import { Database } from "better-sqlite3";
 import {
   Character,
+  CharacterRepository,
   getCodePoint,
-} from "@vvornanen/aoboshi-core/characters/Character";
-import { AbstractSqliteRepository } from "../AbstractSqliteRepository";
+} from "@vvornanen/aoboshi-core/characters";
+import { AbstractSqliteRepository } from "~/worker";
 
 type CharacterRow = {
   id: number;

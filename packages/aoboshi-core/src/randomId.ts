@@ -1,4 +1,3 @@
-import { getRandomValues } from "crypto";
 import { base62Encode } from "./baseEncode";
 
 /**
@@ -9,6 +8,6 @@ import { base62Encode } from "./baseEncode";
  */
 export const randomId = (): string => {
   const buf = new BigUint64Array(2);
-  getRandomValues(buf);
+  crypto.getRandomValues(buf);
   return base62Encode(buf[0] + (buf[1] << 64n)).padStart(22, "0");
 };

@@ -1,4 +1,4 @@
-import { afterEach, describe, test, expect, vi, Mock } from "vitest";
+import { Mock, afterEach, describe, expect, test, vi } from "vitest";
 import { AnkiClient } from "./AnkiClient";
 import { card1, card2, note1, note2 } from "./fixtures";
 import { AnkiCardReview, ReviewType } from "./AnkiCardReview";

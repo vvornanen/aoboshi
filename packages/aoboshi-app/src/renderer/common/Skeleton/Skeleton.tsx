@@ -1,14 +1,10 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
-import { maru } from "../maru";
-import {
-  skeletonContent,
-  skeletonLight,
-  skeletonVariants,
-} from "./Skeleton.css";
+import * as styles from "./Skeleton.css";
+import { maru } from "~common";
 
 type SkeletonProps = ComponentPropsWithoutRef<"div"> & {
-  variant?: keyof typeof skeletonVariants;
+  variant?: keyof typeof styles.skeletonVariants;
   color?: "default" | "light";
 
   /**
@@ -29,15 +25,15 @@ export const Skeleton: FunctionComponent<SkeletonProps> = ({
   return (
     <div
       role="presentation"
-      className={clsx(skeletonVariants[variant], className, {
-        [skeletonLight]: color === "light",
+      className={clsx(styles.skeletonVariants[variant], className, {
+        [styles.skeletonLight]: color === "light",
       })}
       {...props}
     >
       {variant === "text" && length && (
-        <div className={skeletonContent}>{maru(length)}</div>
+        <div className={styles.skeletonContent}>{maru(length)}</div>
       )}
-      {children && <div className={skeletonContent}>{children}</div>}
+      {children && <div className={styles.skeletonContent}>{children}</div>}
     </div>
   );
 };

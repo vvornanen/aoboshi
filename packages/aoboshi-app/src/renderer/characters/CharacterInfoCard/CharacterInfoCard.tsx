@@ -1,12 +1,14 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Character } from "@vvornanen/aoboshi-core/characters/Character";
-import { labelSmall } from "../../common/Typography/Typography.css";
-import { CharacterType } from "./CharacterType";
-import { CharacterFigures } from "./figures/CharacterFigures";
-import { CharacterReadings } from "./readings/CharacterReadings";
-import { CharacterStrokes } from "./strokes/CharacterStrokes";
-import { infoBox, infoBoxContainer } from "./CharacterInfoCard.css";
+import { Character } from "@vvornanen/aoboshi-core/characters";
+import * as styles from "./CharacterInfoCard.css";
+import {
+  CharacterFigures,
+  CharacterReadings,
+  CharacterStrokes,
+  CharacterType,
+} from ".";
+import * as typographyStyles from "~common/Typography/Typography.css";
 
 type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
   character: Character;
@@ -33,9 +35,11 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
       aria-busy={loading}
       {...props}
     >
-      <div className={labelSmall}>{t("CharacterInfoCard.caption")}</div>
+      <div className={typographyStyles.labelSmall}>
+        {t("CharacterInfoCard.caption")}
+      </div>
       <div
-        className={infoBoxContainer}
+        className={styles.infoBoxContainer}
         style={{
           gridTemplateColumns: `repeat(${columns}, ${size}px)`,
           gridAutoRows: size,
@@ -43,7 +47,7 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
         }}
       >
         <div
-          className={infoBox}
+          className={styles.infoBox}
           aria-label={t("CharacterInfoCard.printTypeLabel")}
           style={{
             gridColumnStart: 1,
@@ -55,7 +59,7 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
           <CharacterType literal={character.literal} variant="print" />
         </div>
         <div
-          className={infoBox}
+          className={styles.infoBox}
           aria-label={t("CharacterInfoCard.textbookTypeLabel")}
           style={{
             gridColumnStart: 4,
@@ -67,7 +71,7 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
           <CharacterType literal={character.literal} variant="textbook" />
         </div>
         <div
-          className={infoBox}
+          className={styles.infoBox}
           style={{
             gridColumnStart: 7,
             gridColumnEnd: 13,
@@ -78,7 +82,7 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
           <CharacterFigures character={character} loading={loading} />
         </div>
         <div
-          className={infoBox}
+          className={styles.infoBox}
           style={{
             gridColumnStart: 13,
             gridColumnEnd: 29,

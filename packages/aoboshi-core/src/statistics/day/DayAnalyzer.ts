@@ -1,14 +1,13 @@
-import { randomId } from "../../randomId";
-import { isReview } from "../CardReview";
+import { StatisticsByDay, StatisticsByDayRepository } from "~/statistics/day";
 import {
+  AnalysisContext,
+  Analyzer,
   getCharactersFromExpression,
+  isReview,
   mergeStatisticsByDay,
   timestampToDate,
-} from "../statisticsUtils";
-import { Analyzer } from "../Analyzer";
-import { AnalysisContext } from "../AnalysisContext";
-import { StatisticsByDay } from "./StatisticsByDay";
-import { StatisticsByDayRepository } from "./StatisticsByDayRepository";
+} from "~/statistics";
+import { randomId } from "~";
 
 /**
  * Generates daily card review statistics.

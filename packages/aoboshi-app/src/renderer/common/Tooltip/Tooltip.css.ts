@@ -1,13 +1,13 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
-import { bodyMedium } from "../Typography/Typography.css";
+import * as theme from "~theme/theme.css";
+import * as typographyStyles from "~common/Typography/Typography.css";
 
 export const tooltip = style([
-  bodyMedium,
+  typographyStyles.bodyMedium,
   {
-    backgroundColor: vars.color.tooltip,
+    backgroundColor: theme.vars.color.tooltip,
     color: "white",
-    borderRadius: vars.shape.borderRadius,
+    borderRadius: theme.vars.shape.borderRadius,
     paddingLeft: 8,
     paddingRight: 8,
     paddingTop: 4,

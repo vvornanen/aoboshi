@@ -2,11 +2,7 @@ import { ComponentPropsWithoutRef, FunctionComponent, useMemo } from "react";
 import { clsx } from "clsx";
 import { hash } from "@vvornanen/aoboshi-core";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-import {
-  badgeAngle,
-  completedBadge,
-  completedBadgeRoot,
-} from "./CompletedBadge.css";
+import * as styles from "./CompletedBadge.css";
 
 type CompletedBadgeProps = ComponentPropsWithoutRef<"div"> & {
   /**
@@ -32,12 +28,12 @@ export const CompletedBadge: FunctionComponent<CompletedBadgeProps> = ({
   const angle = useMemo(() => newAngle(maxAngle, seed), [seed]);
 
   return (
-    <div className={clsx(completedBadgeRoot, className)} {...props}>
+    <div className={clsx(styles.completedBadgeRoot, className)} {...props}>
       {children}
       {show && (
         <div
-          className={completedBadge}
-          style={assignInlineVars({ [badgeAngle]: `${angle}deg` })}
+          className={styles.completedBadge}
+          style={assignInlineVars({ [styles.badgeAngle]: `${angle}deg` })}
         >
           💮
         </div>

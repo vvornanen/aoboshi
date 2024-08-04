@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, useEffect } from "react";
-import { useMediaQuery } from "../common/useMediaQuery";
-import { darkThemeClass, lightThemeClass } from "./theme.css";
+import * as theme from "~theme/theme.css";
+import { useMediaQuery } from "~common";
 
 export type ThemeProviderProps = {
   children?: ReactNode;
@@ -10,7 +10,9 @@ export const ThemeProvider: FunctionComponent<ThemeProviderProps> = ({
   children,
 }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const themeClass = prefersDarkMode ? darkThemeClass : lightThemeClass;
+  const themeClass = prefersDarkMode
+    ? theme.darkThemeClass
+    : theme.lightThemeClass;
 
   useEffect(() => {
     document.documentElement.className = themeClass;

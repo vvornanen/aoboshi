@@ -1,11 +1,11 @@
 import {
-  cloneElement,
   ComponentPropsWithoutRef,
   FunctionComponent,
+  cloneElement,
   isValidElement,
 } from "react";
 import { clsx } from "clsx";
-import { mediumSize, primaryColor } from "./SvgIcon.css";
+import * as styles from "./SvgIcon.css";
 
 export type SvgIconProps = ComponentPropsWithoutRef<"svg"> & {
   color?: "inherit" | "primary";
@@ -29,8 +29,8 @@ export const SvgIcon: FunctionComponent<SvgIconProps> = ({
     ...children.props,
     ...props,
     className: clsx(className, {
-      [primaryColor]: color === "primary",
-      [mediumSize]: size === "medium",
+      [styles.primaryColor]: color === "primary",
+      [styles.mediumSize]: size === "medium",
     }),
   };
 

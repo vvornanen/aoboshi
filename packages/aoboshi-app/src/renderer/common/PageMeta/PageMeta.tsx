@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
-import { visuallyHidden } from "../../styles.css";
+import { visuallyHidden } from "~/renderer/styles.css";
 
 type PageMetaProps = {
   title: string;

@@ -2,19 +2,19 @@ import { FunctionComponent, useId } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../Sidebar/Sidebar";
-import { noDrag, windowControlsHeight } from "../../styles.css";
-import { SidebarIcon } from "../../icons/SidebarIcon";
-import { IconButton } from "../../common/IconButton/IconButton";
-import { Toolbar } from "../Toolbar/Toolbar";
-import { useSelector } from "../useSelector";
-import { useDispatch } from "../useDispatch";
+import * as styles from "./SidebarLayout.css";
+import { Sidebar } from "~app/Sidebar";
+import { noDrag, windowControlsHeight } from "~/renderer/styles.css";
+import { SidebarIcon } from "~icons";
+import { IconButton } from "~common/IconButton";
+import { Toolbar } from "~app/Toolbar";
 import {
   selectSidebarOpen,
   selectSidebarWidth,
   toggleSidebar,
-} from "../settingsSlice";
-import { content, dragRegion, layout, toggleButton } from "./SidebarLayout.css";
+} from "~app/settingsSlice";
+import { useDispatch } from "~app/useDispatch";
+import { useSelector } from "~app/useSelector";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -28,10 +28,10 @@ export const SidebarLayout: FunctionComponent = () => {
   };
 
   return (
-    <div className={layout}>
-      <div className={dragRegion} />
+    <div className={styles.layout}>
+      <div className={styles.dragRegion} />
       <IconButton
-        className={clsx(toggleButton, noDrag)}
+        className={clsx(styles.toggleButton, noDrag)}
         onClick={handleToggleSidebar}
         title={t("Layout.toggleSidebar")}
         aria-controls={sidebarId}
@@ -41,7 +41,7 @@ export const SidebarLayout: FunctionComponent = () => {
       </IconButton>
       <Sidebar id={sidebarId} width={sidebarWidth} open={sidebarOpen} />
       <div
-        className={content}
+        className={styles.content}
         style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
       >
         <Toolbar>{/* Toolbar content */}</Toolbar>

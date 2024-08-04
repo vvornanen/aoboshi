@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { vars } from "../../theme/theme.css";
 import { CompletedBadge as CompletedBadgeComponent } from "./CompletedBadge";
+import * as theme from "~theme/theme.css";
 
 const meta = {
   component: CompletedBadgeComponent,
@@ -19,10 +19,10 @@ export const CompletedBadge: Story = {
     <CompletedBadgeComponent {...args}>
       <div
         style={{
-          backgroundColor: vars.color.surfaceContainerHigh,
+          backgroundColor: theme.vars.color.surfaceContainerHigh,
           width: 128,
           height: 32,
-          borderRadius: vars.shape.borderRadiusSm,
+          borderRadius: theme.vars.shape.borderRadiusSm,
         }}
       ></div>
     </CompletedBadgeComponent>

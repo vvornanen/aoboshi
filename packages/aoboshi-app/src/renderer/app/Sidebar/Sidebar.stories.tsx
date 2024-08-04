@@ -4,8 +4,8 @@ import {
   withRouter,
 } from "storybook-addon-remix-react-router";
 import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
-import { IpcApi } from "../../../preload/IpcApi";
 import { Sidebar } from "./Sidebar";
+import { IpcApi } from "~/preload";
 
 const meta = {
   component: Sidebar,

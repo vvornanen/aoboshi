@@ -1,9 +1,9 @@
 import { ComponentPropsWithRef, forwardRef } from "react";
 import { clsx } from "clsx";
 import { NavLink } from "react-router-dom";
-import { Skeleton } from "../Skeleton/Skeleton";
 import * as styles from "./ListItem.css";
 import { listItemClasses } from "./listItemClasses";
+import { Skeleton } from "~common/Skeleton";
 
 type ListItemProps = ComponentPropsWithRef<"a"> & {
   to?: string;

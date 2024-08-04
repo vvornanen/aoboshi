@@ -1,5 +1,6 @@
 import { ConfigEnv, defineConfig, mergeConfig } from "vite";
-import { getBuildConfig, external, hotRestartPlugin } from "./vite.base.config";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { external, getBuildConfig, hotRestartPlugin } from "./vite.base.config";
 
 // https://vitejs.dev/config
 export default defineConfig((env) => {
@@ -22,7 +23,7 @@ export default defineConfig((env) => {
         },
       },
     },
-    plugins: [hotRestartPlugin("reload")],
+    plugins: [tsconfigPaths(), hotRestartPlugin("reload")],
   };
 
   return mergeConfig(getBuildConfig(forgeEnv), config);

@@ -1,5 +1,5 @@
 import { createVar, style } from "@vanilla-extract/css";
-import { vars } from "../../theme/theme.css";
+import * as theme from "~theme/theme.css";
 
 type VariantParameters = {
   fontFamily?: string;
@@ -17,8 +17,8 @@ const createVariant = ({
   lineHeight = 1.5,
 }: VariantParameters = {}) => {
   return {
-    fontFamily: fontFamily || vars.typography.fontFamily,
-    fontSize: fontSize ? `${fontSize}px` : vars.typography.fontSize,
+    fontFamily: fontFamily || theme.vars.typography.fontFamily,
+    fontSize: fontSize ? `${fontSize}px` : theme.vars.typography.fontSize,
     fontWeight: fontWeight,
     lineHeight: lineHeight,
     vars: {
@@ -29,7 +29,7 @@ const createVariant = ({
 
 export const headlineLarge = style(
   createVariant({
-    fontFamily: vars.typography.fontFamily,
+    fontFamily: theme.vars.typography.fontFamily,
     fontSize: 22,
     fontWeight: 700,
     lineHeight: 1.1,
@@ -38,7 +38,7 @@ export const headlineLarge = style(
 
 export const headlineMedium = style(
   createVariant({
-    fontFamily: vars.typography.fontFamily,
+    fontFamily: theme.vars.typography.fontFamily,
     fontSize: 16,
     fontWeight: 700,
     lineHeight: 1.2,
@@ -47,21 +47,21 @@ export const headlineMedium = style(
 
 export const textbookDisplay = style(
   createVariant({
-    fontFamily: vars.typography.textbook.fontFamily,
+    fontFamily: theme.vars.typography.textbook.fontFamily,
     fontSize: 64,
   }),
 );
 
 export const textbookLarge = style(
   createVariant({
-    fontFamily: vars.typography.textbook.fontFamily,
+    fontFamily: theme.vars.typography.textbook.fontFamily,
     fontSize: 24,
   }),
 );
 
 export const printDisplay = style(
   createVariant({
-    fontFamily: vars.typography.print.fontFamily,
+    fontFamily: theme.vars.typography.print.fontFamily,
     fontSize: 64,
   }),
 );

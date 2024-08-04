@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.options.json",
   "compilerOptions": {
     "rootDirs": ["./src", "./tests"],
-    "outDir": "./dist"
+    "paths": {
+      "~": ["./src"],
+      "~/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "tests/*.ts"]
+  "include": ["./src/**/*.ts", "./tests/**/*.ts"]
 }

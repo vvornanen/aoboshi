@@ -1,15 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/test";
-import { Grade } from "@vvornanen/aoboshi-core/characters/Character";
+import { Grade } from "@vvornanen/aoboshi-core/characters";
 import { characterFixtures } from "@vvornanen/aoboshi-core/fixtures/characterFixtures";
 import { createCharacter } from "@vvornanen/aoboshi-core/fixtures/createCharacter";
-import { IpcApi } from "../../../preload/IpcApi";
 import { CharactersCard } from "./CharactersCard";
-import {
-  allSeen,
-  allUnseen,
-  someSeenAndHighlighted,
-} from "./characterStatusFixtures";
+import * as fixtures from "./characterStatusFixtures";
+import { IpcApi } from "~/preload";
 
 const meta = {
   component: CharactersCard,
@@ -20,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const UnseenAndHighlight: Story = {
   args: {
-    characters: someSeenAndHighlighted,
+    characters: fixtures.someSeenAndHighlighted,
     loading: false,
   },
   parameters: {
@@ -32,7 +28,7 @@ export const UnseenAndHighlight: Story = {
 
 export const AllSeen: Story = {
   args: {
-    characters: allSeen,
+    characters: fixtures.allSeen,
     loading: false,
   },
 };
@@ -41,7 +37,7 @@ export const AllUnseen: Story = {
   ...AllSeen,
   args: {
     ...AllSeen.args,
-    characters: allUnseen,
+    characters: fixtures.allUnseen,
   },
 };
 

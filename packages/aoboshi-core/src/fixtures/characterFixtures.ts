@@ -1,5 +1,5 @@
-import { Character, Grade } from "../characters/Character";
 import { createCharacter } from "./createCharacter";
+import { Character, Grade } from "~/characters";
 
 export const characterFixtures = {
   ["学"]: createCharacter({

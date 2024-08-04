@@ -1,10 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import {
+  drag,
   windowControlsHeight,
   windowControlsWidth,
-  drag,
-} from "../../styles.css";
-import { zIndex } from "../../theme/zIndex";
+} from "~/renderer/styles.css";
+import { zIndex } from "~theme";
 
 export const layout = style({
   position: "relative",

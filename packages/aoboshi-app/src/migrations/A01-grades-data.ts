@@ -1,6 +1,6 @@
-import { Book } from "@vvornanen/aoboshi-core/books/Book";
-import { Migration } from "../main/migration/Migration";
-import { gradesBookId } from "../worker/books/books";
+import { type Book } from "@vvornanen/aoboshi-core/books";
+import { type Migration } from "~/main/migration";
+import { gradesBookId } from "~/worker/books";
 
 const grades: Book = {
   id: gradesBookId,

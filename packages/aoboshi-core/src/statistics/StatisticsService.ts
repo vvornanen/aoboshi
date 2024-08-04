@@ -1,11 +1,11 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { randomId } from "../randomId";
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
 import { CardReview, NewCard } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
 import { TimeZoneConfig } from "./statisticsUtils";
 import { Analyzer } from "./Analyzer";
 import { AnalysisContext } from "./AnalysisContext";
+import { randomId } from "~";
 
 /** Generates statistics from card reviews */
 export class StatisticsService {

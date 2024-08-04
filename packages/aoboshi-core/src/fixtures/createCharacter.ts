@@ -1,4 +1,4 @@
-import { Character } from "../characters/Character";
+import { Character } from "~/characters";
 
 /**
  * Creates a {@link Character} object for testing purposes.

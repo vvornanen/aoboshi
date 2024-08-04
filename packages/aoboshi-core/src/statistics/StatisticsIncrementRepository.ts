@@ -1,5 +1,5 @@
-import { Repository } from "../Repository";
-import { StatisticsIncrement } from "./StatisticsIncrement";
+import { StatisticsIncrement } from "~/statistics";
+import { Repository } from "~";
 
 export interface StatisticsIncrementRepository
   extends Repository<StatisticsIncrement, string> {

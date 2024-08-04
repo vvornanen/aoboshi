@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Skeleton } from "../../../common/Skeleton/Skeleton";
-import { formatReading } from "./formatReading";
 import {
   characterReadings,
-  readingsContainer,
   reading,
+  readingsContainer,
 } from "./CharacterReadings.css";
+import { formatReading } from "~characters/CharacterInfoCard";
+import { Skeleton } from "~common/Skeleton";
 
 type CharacterReadingsProps = {
   onyomi: string[];

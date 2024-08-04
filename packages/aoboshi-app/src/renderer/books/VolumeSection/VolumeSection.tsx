@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef, FunctionComponent, useId } from "react";
-import { Volume } from "@vvornanen/aoboshi-core/books/Book";
-import { ChapterSection } from "../ChapterSection/ChapterSection";
-import { Typography } from "../../common/Typography/Typography";
-import { Skeleton } from "../../common/Skeleton/Skeleton";
-import { volumeHeading } from "./VolumeSection.css";
+import { Volume } from "@vvornanen/aoboshi-core/books";
+import * as styles from "./VolumeSection.css";
+import { ChapterSection } from "~books/ChapterSection";
+import { Typography } from "~common/Typography";
+import { Skeleton } from "~common/Skeleton";
 
 type VolumeSectionProps = ComponentPropsWithoutRef<"section"> & {
   volume?: Volume;
@@ -22,7 +22,7 @@ export const VolumeSection: FunctionComponent<VolumeSectionProps> = ({
         id={headingId}
         variant="headlineMedium"
         component="h2"
-        className={volumeHeading}
+        className={styles.volumeHeading}
       >
         {!loading && volume?.title}
         {loading && <Skeleton length={8} />}

@@ -1,5 +1,5 @@
-import { Repository } from "../Repository";
-import { Character } from "./Character";
+import { Character } from ".";
+import { Repository } from "~";
 
 /**
  * Persists characters in a repository (e.g. SQLite database)

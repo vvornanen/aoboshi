@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
-import { test, expect } from "vitest";
-import { AnkiClient } from "../src";
+import { expect, test } from "vitest";
+import { AnkiClient } from "~";
 
 dotenv.config();
 

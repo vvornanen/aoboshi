@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { SidebarIcon } from "../../icons/SidebarIcon";
 import { IconButton } from "./IconButton";
+import { SidebarIcon } from "~icons";
 
 const meta = {
   component: IconButton,

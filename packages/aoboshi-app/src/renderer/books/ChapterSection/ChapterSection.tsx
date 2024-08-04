@@ -5,13 +5,12 @@ import {
   useMemo,
 } from "react";
 import { clsx } from "clsx";
-import { Chapter } from "@vvornanen/aoboshi-core/books/Book";
-import { CharactersCard } from "../../characters/CharactersCard/CharactersCard";
-import { useStatisticsByCharacters } from "../../statistics/useStatisticsByCharacters";
-import { useStatisticsByChapter } from "../../statistics/useStatisticsByChapter";
-import { ChapterSectionHeader } from "../ChapterSectionHeader/ChapterSectionHeader";
-import { ChapterProgress } from "../ChapterProgress/ChapterProgress";
-import { chapterSection, progress, sectionHeader } from "./ChapterSection.css";
+import { Chapter } from "@vvornanen/aoboshi-core/books";
+import * as styles from "./ChapterSection.css";
+import { CharactersCard } from "~characters/CharactersCard";
+import { useStatisticsByChapter, useStatisticsByCharacters } from "~statistics";
+import { ChapterSectionHeader } from "~books/ChapterSectionHeader";
+import { ChapterProgress } from "~books/ChapterProgress";
 
 type ChapterSectionProps = Omit<
   ComponentPropsWithoutRef<"section">,
@@ -56,7 +55,7 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
 
   return (
     <section
-      className={clsx(chapterSection, className)}
+      className={clsx(styles.chapterSection, className)}
       {...props}
       aria-labelledby={headingId}
       aria-busy={loading}
@@ -65,12 +64,15 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
         id={headingId}
         title={chapter?.title || ""}
         completed={completed}
-        className={sectionHeader}
+        className={styles.sectionHeader}
         loading={loading}
       />
       {!loading && characters.length > 0 && (
         <>
-          <ChapterProgress data={statisticsByChapter} className={progress} />
+          <ChapterProgress
+            data={statisticsByChapter}
+            className={styles.progress}
+          />
           <CharactersCard characters={characters} />
         </>
       )}
@@ -79,7 +81,7 @@ export const ChapterSection: FunctionComponent<ChapterSectionProps> = ({
           <ChapterProgress
             loading
             data={statisticsByChapter}
-            className={progress}
+            className={styles.progress}
           />
           <CharactersCard loading />
         </>

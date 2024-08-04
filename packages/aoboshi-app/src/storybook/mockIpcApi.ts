@@ -1,5 +1,5 @@
 import { createCharacter } from "@vvornanen/aoboshi-core/fixtures/createCharacter";
-import { IPC_API_KEY, IpcApi } from "../preload/IpcApi";
+import { IPC_API_KEY, IpcApi } from "~/preload";
 
 /**
  * Default mock implementation for IpcApi.

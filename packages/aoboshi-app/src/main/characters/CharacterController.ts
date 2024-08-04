@@ -1,7 +1,7 @@
 import { ipcMain } from "electron";
-import { CharacterRepository } from "@vvornanen/aoboshi-core/characters/CharacterRepository";
-import { OnAfterInit } from "../../worker/ApplicationContext";
-import { IpcEventType } from "../../preload/IpcApi";
+import { CharacterRepository } from "@vvornanen/aoboshi-core/characters";
+import { OnAfterInit } from "~/worker";
+import { IpcEventType } from "~/preload";
 
 /**
  * Handles inter-process events from the renderer process.

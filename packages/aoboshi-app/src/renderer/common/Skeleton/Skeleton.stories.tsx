@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Fragment } from "react";
-import { Typography } from "../Typography/Typography";
 import { Skeleton } from "./Skeleton";
+import { Typography } from "~common/Typography";
 
 const meta = {
   component: Skeleton,

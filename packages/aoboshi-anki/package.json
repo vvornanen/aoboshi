@@ -3,11 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "tsup"
+  },
   "dependencies": {
     "@js-temporal/polyfill": "^0.4.4"
   },
   "exports": {
     "./*": "./dist/src/*.js",
     "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   }
 }

@@ -4,7 +4,23 @@
     "rootDirs": ["./src", ".storybook"],
     "emitDeclarationOnly": false,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "~/*": ["./src/*"],
+      "~app/*": ["./src/renderer/app/*"],
+      "~books": ["./src/renderer/books"],
+      "~books/*": ["./src/renderer/books/*"],
+      "~characters": ["./src/renderer/characters"],
+      "~characters/*": ["./src/renderer/characters/*"],
+      "~common": ["./src/renderer/common"],
+      "~common/*": ["./src/renderer/common/*"],
+      "~icons": ["./src/renderer/icons"],
+      "~recentlyStudied/*": ["./src/renderer/recentlyStudied/*"],
+      "~statistics": ["./src/renderer/statistics"],
+      "~statistics/*": ["./src/renderer/statistics/*"],
+      "~theme": ["./src/renderer/theme"],
+      "~theme/*": ["./src/renderer/theme/*"]
+    }
   },
   "include": [
     "vite.*.config.ts",

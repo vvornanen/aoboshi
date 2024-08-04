@@ -1,12 +1,12 @@
-import { BookRepository } from "../../books/BookRepository";
-import { Chapter } from "../../books/Book";
-import { randomId } from "../../randomId";
-import { StatisticsByCharacter } from "../character/StatisticsByCharacter";
-import { mergeStatisticsByChapter } from "../statisticsUtils";
-import { Analyzer } from "../Analyzer";
-import { AnalysisContext } from "../AnalysisContext";
-import { StatisticsByChapter } from "./StatisticsByChapter";
-import { StatisticsByChapterRepository } from "./StatisticsByChapterRepository";
+import { StatisticsByChapter, StatisticsByChapterRepository } from ".";
+import { BookRepository, Chapter } from "~/books";
+import { randomId } from "~";
+import { StatisticsByCharacter } from "~/statistics/character";
+import {
+  AnalysisContext,
+  Analyzer,
+  mergeStatisticsByChapter,
+} from "~/statistics";
 
 /**
  * Generates card review statistics aggregated by book chapter.

@@ -5,12 +5,11 @@ import {
   isValidElement,
 } from "react";
 import { clsx } from "clsx";
+import { RecipeVariants } from "@vanilla-extract/recipes";
 import * as styles from "./SvgIcon.css";
 
-export type SvgIconProps = ComponentPropsWithoutRef<"svg"> & {
-  color?: "inherit" | "primary";
-  size?: "medium";
-};
+export type SvgIconProps = ComponentPropsWithoutRef<"svg"> &
+  RecipeVariants<typeof styles.svgIcon>;
 
 export const SvgIcon: FunctionComponent<SvgIconProps> = ({
   color = "inherit",
@@ -28,10 +27,7 @@ export const SvgIcon: FunctionComponent<SvgIconProps> = ({
   const svgProps = {
     ...children.props,
     ...props,
-    className: clsx(className, {
-      [styles.primaryColor]: color === "primary",
-      [styles.mediumSize]: size === "medium",
-    }),
+    className: clsx(className, styles.svgIcon({ color, size })),
   };
 
   return cloneElement(children, svgProps);

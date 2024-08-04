@@ -1,10 +1,24 @@
-import { style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 
-export const primaryColor = style({
-  color: theme.vars.color.primary,
-});
-
-export const mediumSize = style({
-  height: 20,
+export const svgIcon = recipe({
+  variants: {
+    color: {
+      inherit: {
+        color: "inherit",
+      },
+      primary: {
+        color: theme.vars.color.primary,
+      },
+    },
+    size: {
+      medium: {
+        height: 20,
+      },
+    },
+  },
+  defaultVariants: {
+    color: "inherit",
+    size: "medium",
+  },
 });

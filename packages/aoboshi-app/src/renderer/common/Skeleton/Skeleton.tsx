@@ -1,18 +1,17 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { clsx } from "clsx";
+import { RecipeVariants } from "@vanilla-extract/recipes";
 import * as styles from "./Skeleton.css";
 import { maru } from "~common";
 
-type SkeletonProps = ComponentPropsWithoutRef<"div"> & {
-  variant?: keyof typeof styles.skeletonVariants;
-  color?: "default" | "light";
-
-  /**
-   * Number of characters to use as a placeholder text.
-   * Skeleton uses this text content to infer its size based on the typography.
-   */
-  length?: number;
-};
+type SkeletonProps = ComponentPropsWithoutRef<"div"> &
+  RecipeVariants<typeof styles.skeleton> & {
+    /**
+     * Number of characters to use as a placeholder text.
+     * Skeleton uses this text content to infer its size based on the typography.
+     */
+    length?: number;
+  };
 
 export const Skeleton: FunctionComponent<SkeletonProps> = ({
   variant = "text",
@@ -25,9 +24,7 @@ export const Skeleton: FunctionComponent<SkeletonProps> = ({
   return (
     <div
       role="presentation"
-      className={clsx(styles.skeletonVariants[variant], className, {
-        [styles.skeletonLight]: color === "light",
-      })}
+      className={clsx(className, styles.skeleton({ variant, color }))}
       {...props}
     >
       {variant === "text" && length && (

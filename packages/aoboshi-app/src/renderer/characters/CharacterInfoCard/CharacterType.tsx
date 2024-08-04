@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
-import { clsx } from "clsx";
-import * as typographyStyles from "~common/Typography/Typography.css";
+import { typographyVariant } from "~common/Typography/Typography.css";
 
 type CharacterTypeProps = {
   /**
@@ -28,9 +27,8 @@ export const CharacterType: FunctionComponent<CharacterTypeProps> = ({
       dominantBaseline="central"
       textAnchor="middle"
       fill="currentColor"
-      className={clsx({
-        [typographyStyles.textbookDisplay]: variant === "textbook",
-        [typographyStyles.printDisplay]: variant === "print",
+      className={typographyVariant({
+        variant: variant === "textbook" ? "textbookDisplay" : "printDisplay",
       })}
     >
       {[...literal][0]}

@@ -10,9 +10,12 @@ export const IconButton: FunctionComponent<IconButtonProps> = ({
   ...props
 }) => (
   <button
-    className={clsx(styles.iconButton, styles.defaultColor, className, {
-      disabled,
-    })}
+    className={clsx(
+      className,
+      styles.iconButton({
+        disabled,
+      }),
+    )}
     disabled={disabled}
     {...props}
   ></button>

@@ -1,73 +1,52 @@
-import { createVar, style } from "@vanilla-extract/css";
+import { createVar } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 
-type VariantParameters = {
-  fontFamily?: string;
-  fontSize?: number;
-  fontWeight?: number;
-  lineHeight?: number;
-};
+const pxToRem = (value: number) => `${value / 16}rem`;
 
-export const typographyLineHeight = createVar();
+export const lineHeight = createVar();
 
-const createVariant = ({
-  fontFamily,
-  fontSize,
-  fontWeight = 400,
-  lineHeight = 1.5,
-}: VariantParameters = {}) => {
-  return {
-    fontFamily: fontFamily || theme.vars.typography.fontFamily,
-    fontSize: fontSize ? `${fontSize}px` : theme.vars.typography.fontSize,
-    fontWeight: fontWeight,
+export const typographyVariant = recipe({
+  base: {
+    fontFamily: theme.vars.typography.fontFamily,
+    fontSize: theme.vars.typography.fontSize,
+    fontWeight: 400,
     lineHeight: lineHeight,
     vars: {
-      [typographyLineHeight]: String(lineHeight),
+      [lineHeight]: "1.5",
     },
-  };
-};
-
-export const headlineLarge = style(
-  createVariant({
-    fontFamily: theme.vars.typography.fontFamily,
-    fontSize: 22,
-    fontWeight: 700,
-    lineHeight: 1.1,
-  }),
-);
-
-export const headlineMedium = style(
-  createVariant({
-    fontFamily: theme.vars.typography.fontFamily,
-    fontSize: 16,
-    fontWeight: 700,
-    lineHeight: 1.2,
-  }),
-);
-
-export const textbookDisplay = style(
-  createVariant({
-    fontFamily: theme.vars.typography.textbook.fontFamily,
-    fontSize: 64,
-  }),
-);
-
-export const textbookLarge = style(
-  createVariant({
-    fontFamily: theme.vars.typography.textbook.fontFamily,
-    fontSize: 24,
-  }),
-);
-
-export const printDisplay = style(
-  createVariant({
-    fontFamily: theme.vars.typography.print.fontFamily,
-    fontSize: 64,
-  }),
-);
-
-export const bodyLarge = style(createVariant({ fontSize: 15 }));
-
-export const bodyMedium = style(createVariant({ fontSize: 13 }));
-
-export const labelSmall = style(createVariant({ fontSize: 11 }));
+  },
+  variants: {
+    variant: {
+      headlineLarge: {
+        fontSize: pxToRem(22),
+        fontWeight: 700,
+        vars: {
+          [lineHeight]: "1.1",
+        },
+      },
+      headlineMedium: {
+        fontSize: pxToRem(16),
+        fontWeight: 700,
+        vars: {
+          [lineHeight]: "1.2",
+        },
+      },
+      textbookDisplay: {
+        fontFamily: theme.vars.typography.textbook.fontFamily,
+        fontSize: pxToRem(64),
+      },
+      textbookLarge: {
+        fontFamily: theme.vars.typography.textbook.fontFamily,
+        fontSize: pxToRem(24),
+      },
+      printDisplay: {
+        fontFamily: theme.vars.typography.print.fontFamily,
+        fontSize: pxToRem(64),
+      },
+      bodyLarge: { fontSize: pxToRem(15) },
+      bodyMedium: { fontSize: pxToRem(13) },
+      labelSmall: { fontSize: pxToRem(11) },
+    },
+  },
+});

@@ -8,7 +8,7 @@ import {
   CharacterStrokes,
   CharacterType,
 } from ".";
-import * as typographyStyles from "~common/Typography/Typography.css";
+import { typographyVariant } from "~common/Typography/Typography.css";
 
 type CharacterInfoCardProps = ComponentPropsWithoutRef<"div"> & {
   character: Character;
@@ -35,7 +35,11 @@ export const CharacterInfoCard: FunctionComponent<CharacterInfoCardProps> = ({
       aria-busy={loading}
       {...props}
     >
-      <div className={typographyStyles.labelSmall}>
+      <div
+        className={typographyVariant({
+          variant: "labelSmall",
+        })}
+      >
         {t("CharacterInfoCard.caption")}
       </div>
       <div

@@ -1,4 +1,5 @@
-import { keyframes, style, styleVariants } from "@vanilla-extract/css";
+import { keyframes, style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 import * as typographyStyles from "~common/Typography/Typography.css";
 
@@ -8,46 +9,43 @@ const pulse = keyframes({
   "100%": { opacity: 1 },
 });
 
-const skeletonBase = style({
-  backgroundColor: theme.vars.color.disabled,
-  animationName: pulse,
-  animationDelay: "0.5s",
-  animationTimingFunction: "ease-in-out",
-  animationDuration: "2s",
-  animationIterationCount: "infinite",
-});
-
-export const skeletonVariants = styleVariants({
-  text: [
-    skeletonBase,
-    {
-      width: "fit-content",
-      transform: `scaleY(calc(1 / ${typographyStyles.typographyLineHeight}))`,
+export const skeleton = recipe({
+  base: {
+    backgroundColor: theme.vars.color.disabled,
+    animationName: pulse,
+    animationDelay: "0.5s",
+    animationTimingFunction: "ease-in-out",
+    animationDuration: "2s",
+    animationIterationCount: "infinite",
+  },
+  variants: {
+    variant: {
+      text: {
+        width: "fit-content",
+        transform: `scaleY(calc(1 / ${typographyStyles.lineHeight}))`,
+      },
+      circular: {
+        borderRadius: "50%",
+      },
+      rectangular: {},
+      rounded: {
+        borderRadius: theme.vars.shape.borderRadius,
+      },
+      roundedSmall: {
+        borderRadius: theme.vars.shape.borderRadiusSm,
+      },
     },
-  ],
-  circular: [
-    skeletonBase,
-    {
-      borderRadius: "50%",
+    color: {
+      default: {},
+      light: {
+        backgroundColor: theme.vars.color.hover,
+      },
     },
-  ],
-  rectangular: [skeletonBase, {}],
-  rounded: [
-    skeletonBase,
-    {
-      borderRadius: theme.vars.shape.borderRadius,
-    },
-  ],
-  roundedSmall: [
-    skeletonBase,
-    {
-      borderRadius: theme.vars.shape.borderRadiusSm,
-    },
-  ],
-});
-
-export const skeletonLight = style({
-  backgroundColor: theme.vars.color.hover,
+  },
+  defaultVariants: {
+    variant: "text",
+    color: "default",
+  },
 });
 
 export const skeletonContent = style({

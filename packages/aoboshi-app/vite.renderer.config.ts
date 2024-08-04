@@ -1,6 +1,7 @@
 import { ConfigEnv, defineConfig, Plugin, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
+import tsconfigPaths from "vite-tsconfig-paths";
 import { exposeRendererPlugin } from "./vite.base.config";
 
 type ContentSecurityPolicyOptions = {
@@ -66,6 +67,7 @@ export default defineConfig((env) => {
       outDir: `../../.vite/renderer/${name}`,
     },
     plugins: [
+      tsconfigPaths(),
       react(),
       vanillaExtractPlugin(),
       exposeRendererPlugin(name),

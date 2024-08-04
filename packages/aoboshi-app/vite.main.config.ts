@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ConfigEnv, defineConfig, mergeConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 import {
   getBuildConfig,
   getBuildDefine,
@@ -50,7 +51,7 @@ export default defineConfig((env) => {
         },
       },
     },
-    plugins: [hotRestartPlugin("restart")],
+    plugins: [tsconfigPaths(), hotRestartPlugin("restart")],
     define,
     resolve: {
       // Load the Node.js entry.

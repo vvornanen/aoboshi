@@ -8,7 +8,7 @@
     "make": "yarn rebuild:sqlite && electron-forge make",
     "package": "yarn rebuild:sqlite && electron-forge package",
     "publish": "yarn rebuild:sqlite && electron-forge publish",
-    "start": "yarn rebuild:sqlite && DB_FILENAME=dev.db electron-forge start",
+    "start": "yarn rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
@@ -60,6 +60,7 @@
     "@vanilla-extract/vite-plugin": "^4.0.13",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "chromatic": "^11.7.0",
+    "dotenv-cli": "^7.4.2",
     "electron": "31.3.1",
     "prop-types": "^15.8.1",
     "storybook": "^8.2.7",

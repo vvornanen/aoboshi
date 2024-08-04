@@ -12,6 +12,6 @@ export const ${NAME}: FunctionComponent<${NAME}Props> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={clsx(className)} {...props}/>
+    <div className={clsx(styles.wrapper, className)} {...props}/>
   );
 };

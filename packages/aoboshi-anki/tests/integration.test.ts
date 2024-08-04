@@ -21,7 +21,7 @@ test("integration", async () => {
   console.log("getCards", JSON.stringify(cardsByIds, null, 2));
   expect(allCards).toHaveLength(1);
 
-  const notes = await client.getNotes(cardsByIds.map((card) => card.note));
+  const notes = await client.getNotes(cardsByIds.map((card) => card.noteId));
   console.log("getNotes", JSON.stringify(notes, null, 2));
   expect(notes).toHaveLength(1);
 

@@ -11,5 +11,9 @@
     "./*": "./dist/*.js",
     "./kanjidic/*": "./dist/kanjidic/*.js",
     "./package.json": "./package.json"
+  },
+  "devDependencies": {
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   }
 }

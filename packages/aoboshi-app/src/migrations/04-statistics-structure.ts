@@ -1,29 +1,10 @@
-CREATE TABLE Migration
-        (
-            id          text primary key,
-            description text not null,
-            hash        text not null,
-            timestamp   text not null
-        );
-CREATE TABLE Book
-        (
-            id text primary key,
-            title text,
-            titleShort text,
-            volumes text
-        );
-CREATE TABLE Character
-        (
-            id          int primary key,
-            literal     text not null,
-            radical     text,
-            grade       int,
-            strokeCount int  not null,
-            onyomi      text not null,
-            kunyomi     text not null,
-            strokes     text
-        );
-CREATE TABLE StatisticsIncrement
+import { type Migration } from "~/main/migration";
+
+export default {
+  description: "Create statistics tables",
+  async run({ database }): Promise<void> {
+    database.exec(`
+        create table StatisticsIncrement
         (
             id               text primary key,
             start            text,
@@ -31,8 +12,11 @@ CREATE TABLE StatisticsIncrement
             numberOfReviews  int not null,
             numberOfNewCards int not null,
             duration         int not null
-        );
-CREATE TABLE StatisticsByCharacter
+        )
+    `);
+
+    database.exec(`
+        create table StatisticsByCharacter
         (
             id              text primary key,
             literal         text not null,
@@ -41,8 +25,11 @@ CREATE TABLE StatisticsByCharacter
             lastReviewed    text,
             numberOfReviews int  not null,
             numberOfCards   int  not null
-        );
-CREATE TABLE StatisticsByDay
+        )
+    `);
+
+    database.exec(`
+        create table StatisticsByDay
         (
             id                          text primary key,
             date                        text not null,
@@ -53,8 +40,11 @@ CREATE TABLE StatisticsByDay
             numberOfFirstSeenCharacters int  not null,
             numberOfReviewedCharacters  int  not null,
             numberOfReviews             int  not null
-        );
-CREATE TABLE StatisticsByChapter
+        )
+    `);
+
+    database.exec(`
+        create table StatisticsByChapter
         (
             id                       text primary key,
             bookId                   text not null,
@@ -68,4 +58,7 @@ CREATE TABLE StatisticsByChapter
             totalNumberOfCharacters  int  not null,
 
             foreign key (bookId) references Book (id) on delete cascade
-        );
+        )
+    `);
+  },
+} satisfies Migration;

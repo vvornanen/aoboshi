@@ -12,6 +12,7 @@ import {
   mergeStatisticsByCharacter,
   timestampToDate,
 } from "~/statistics";
+import { nullableMaxInstant } from "~";
 
 /**
  * Adapter for fetching card statistics from an external source such as Anki
@@ -50,7 +51,7 @@ export class CharacterAnalyzer implements Analyzer {
   }
 
   async getStatisticsByCharacters(context: AnalysisContext) {
-    let latestReviewTime: Temporal.Instant | undefined;
+    let latestReviewTime: Temporal.Instant | undefined = undefined;
     const reviewDays = new Set<string>();
     const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
 
@@ -63,13 +64,7 @@ export class CharacterAnalyzer implements Analyzer {
         timestampToDate(reviewTimestamp, context.timeZoneConfig);
       reviewDate && reviewDays.add(reviewDate.toString());
 
-      if (
-        !latestReviewTime ||
-        !reviewTimestamp ||
-        Temporal.Instant.compare(latestReviewTime, reviewTimestamp) < 0
-      ) {
-        latestReviewTime = reviewTimestamp;
-      }
+      latestReviewTime = nullableMaxInstant(latestReviewTime, reviewTimestamp);
 
       const characters: string[] = getCharactersFromExpression(
         review.expression,

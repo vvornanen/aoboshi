@@ -87,3 +87,15 @@ export const nullableMaxDate = (
 };
 
 const nonEmpty = <T>(value: T | undefined | null): value is T => !!value;
+
+/** Returns true if the first timestamp is after the second timestamp */
+export const isInstantAfter = (
+  first: Temporal.Instant | string | null | undefined,
+  second: Temporal.Instant | string | null | undefined,
+): boolean => {
+  if (!first || !second) {
+    return false;
+  }
+
+  return Temporal.Instant.compare(first, second) > 0;
+};

@@ -1,5 +1,7 @@
 import { expect, test } from "vitest";
+import { Temporal } from "@js-temporal/polyfill";
 import {
+  isInstantAfter,
   maxDate,
   minDate,
   nullableMaxDate,
@@ -100,4 +102,39 @@ test.each([
   },
 ])("nullableMaxDate %s", ({ values, expected }) => {
   expect(nullableMaxDate(...values)?.toString()).toEqual(expected);
+});
+
+test.each([
+  { first: null, second: null, expected: false },
+  { first: undefined, second: undefined, expected: false },
+  { first: "", second: "", expected: false },
+  { first: "2024-01-01T00:00:00.000Z", second: undefined, expected: false },
+  { first: undefined, second: "2024-01-01T00:00:00.000Z", expected: false },
+  {
+    first: "2024-01-01T00:00:00.000Z",
+    second: "2024-01-01T00:00:00.000Z",
+    expected: false,
+  },
+  {
+    first: "2024-01-01T00:00:00.000Z",
+    second: "2024-01-01T00:00:00.001Z",
+    expected: false,
+  },
+  {
+    first: "2024-01-01T00:00:00.001Z",
+    second: "2024-01-01T00:00:00.000Z",
+    expected: true,
+  },
+  {
+    first: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    second: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    expected: false,
+  },
+  {
+    first: Temporal.Instant.from("2024-01-01T00:00:00.001Z"),
+    second: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    expected: true,
+  },
+])("isInstantAfter %s", ({ first, second, expected }) => {
+  expect(isInstantAfter(first, second)).toBe(expected);
 });

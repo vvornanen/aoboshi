@@ -1,6 +1,8 @@
 import { Repository } from "@vvornanen/aoboshi-core";
 import { Database } from "better-sqlite3";
 
+export type PreparedStatement<R> = { run: (row: R) => void };
+
 /**
  * Generic implementation for storing entities in an SQLite database.
  */
@@ -12,10 +14,14 @@ export abstract class AbstractSqliteRepository<T, R, ID>
     protected tableName: string,
   ) {}
 
-  abstract save(entity: T): void;
+  save(entity: T): void {
+    const statement = this.prepareSave();
+    statement.run(this.toRow(entity));
+  }
 
   saveAll(entities: T[]): void {
-    entities.forEach((entity) => this.save(entity));
+    const statement = this.prepareSave();
+    entities.forEach((entity) => statement.run(this.toRow(entity)));
   }
 
   findById(id: ID): T | null {
@@ -58,7 +64,11 @@ export abstract class AbstractSqliteRepository<T, R, ID>
     this.db.exec(`delete from ${this.tableName} where true`);
   }
 
+  protected abstract prepareSave(): PreparedStatement<R>;
+
   protected abstract getId(entity: T): ID;
 
   protected abstract toEntity(row: R): T;
+
+  protected abstract toRow(entity: T): R;
 }

@@ -3,7 +3,7 @@ import {
   StatisticsByCharacter,
   StatisticsByCharacterRepository,
 } from "@vvornanen/aoboshi-core/statistics/character";
-import { AbstractSqliteRepository } from "~/worker";
+import { AbstractSqliteRepository, PreparedStatement } from "~/worker";
 
 type StatisticsByCharacterRow = {
   id: string;
@@ -27,10 +27,20 @@ export class StatisticsByCharacterSqliteRepository
     super(db, "StatisticsByCharacter");
   }
 
-  save(entity: StatisticsByCharacter) {
-    this.db
+  findByLiteral(literal: string): StatisticsByCharacter | null {
+    const row = this.db
       .prepare(
-        `
+        `select *
+                from StatisticsByCharacter
+                where literal = ?`,
+      )
+      .get(literal) as StatisticsByCharacterRow | undefined;
+    return row ? this.toEntity(row) : null;
+  }
+
+  protected prepareSave(): PreparedStatement<StatisticsByCharacterRow> {
+    return this.db.prepare<unknown[], StatisticsByCharacterRow>(
+      `
             insert into StatisticsByCharacter (id, literal, firstAdded,
                                                firstReviewed, lastReviewed,
                                                numberOfReviews, numberOfCards)
@@ -43,26 +53,18 @@ export class StatisticsByCharacterSqliteRepository
                                       numberOfReviews = @numberOfReviews,
                                       numberOfCards   = @numberOfCards
         `,
-      )
-      .run(entity);
-  }
-
-  findByLiteral(literal: string): StatisticsByCharacter | null {
-    const row = this.db
-      .prepare(
-        `select *
-                from StatisticsByCharacter
-                where literal = ?`,
-      )
-      .get(literal) as StatisticsByCharacterRow | undefined;
-    return row ? this.toEntity(row) : null;
+    );
   }
 
   protected getId(entity: StatisticsByCharacter) {
     return entity.id;
   }
 
-  protected toEntity(row: StatisticsByCharacterRow) {
-    return { ...row };
+  protected toEntity(row: StatisticsByCharacterRow): StatisticsByCharacter {
+    return row;
+  }
+
+  protected toRow(entity: StatisticsByCharacter): StatisticsByCharacterRow {
+    return entity;
   }
 }

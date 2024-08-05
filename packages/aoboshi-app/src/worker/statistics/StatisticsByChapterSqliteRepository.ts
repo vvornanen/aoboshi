@@ -3,7 +3,7 @@ import {
   StatisticsByChapter,
   StatisticsByChapterRepository,
 } from "@vvornanen/aoboshi-core/statistics/chapter";
-import { AbstractSqliteRepository } from "~/worker";
+import { AbstractSqliteRepository, PreparedStatement } from "~/worker";
 
 type StatisticsByChapterRow = {
   id: string;
@@ -30,10 +30,20 @@ export class StatisticsByChapterSqliteRepository
     super(db, "StatisticsByChapter");
   }
 
-  save(entity: StatisticsByChapter) {
-    this.db
+  findByChapter(chapterId: string): StatisticsByChapter | null {
+    const row = this.db
       .prepare(
-        `
+        `select *
+       from StatisticsByChapter
+       where chapterId = ?`,
+      )
+      .get(chapterId) as StatisticsByChapterRow | undefined;
+    return row ? this.toEntity(row) : null;
+  }
+
+  protected prepareSave(): PreparedStatement<StatisticsByChapterRow> {
+    return this.db.prepare(
+      `
             insert into StatisticsByChapter (id, bookId, chapterId,
                                              seenCharacters, newCharacters,
                                              unseenCharacters,
@@ -55,26 +65,18 @@ export class StatisticsByChapterSqliteRepository
                                       numberOfUnseenCharacters = @numberOfUnseenCharacters,
                                       totalNumberOfCharacters  = @totalNumberOfCharacters
         `,
-      )
-      .run(entity);
-  }
-
-  findByChapter(chapterId: string): StatisticsByChapter | null {
-    const row = this.db
-      .prepare(
-        `select *
-       from StatisticsByChapter
-       where chapterId = ?`,
-      )
-      .get(chapterId) as StatisticsByChapterRow | undefined;
-    return row ? this.toEntity(row) : null;
+    );
   }
 
   protected getId(entity: StatisticsByChapter) {
     return entity.id;
   }
 
-  protected toEntity(row: StatisticsByChapterRow) {
-    return { ...row };
+  protected toEntity(row: StatisticsByChapterRow): StatisticsByChapter {
+    return row;
+  }
+
+  protected toRow(entity: StatisticsByChapter): StatisticsByChapterRow {
+    return entity;
   }
 }

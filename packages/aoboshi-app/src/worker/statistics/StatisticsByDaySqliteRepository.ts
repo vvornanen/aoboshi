@@ -3,7 +3,7 @@ import {
   StatisticsByDay,
   StatisticsByDayRepository,
 } from "@vvornanen/aoboshi-core/statistics/day";
-import { AbstractSqliteRepository } from "~/worker";
+import { AbstractSqliteRepository, PreparedStatement } from "~/worker";
 
 type StatisticsByDayRow = {
   id: string;
@@ -25,25 +25,6 @@ export class StatisticsByDaySqliteRepository
     super(db, "StatisticsByDay");
   }
 
-  save(entity: StatisticsByDay) {
-    this.db
-      .prepare(
-        `
-            insert into StatisticsByDay (id, date, addedCharacters, firstSeenCharacters, reviewedCharacters, numberOfAddedCharacters, numberOfFirstSeenCharacters, numberOfReviewedCharacters, numberOfReviews)
-            values (@id, @date, @addedCharacters, @firstSeenCharacters, @reviewedCharacters, @numberOfAddedCharacters, @numberOfFirstSeenCharacters, @numberOfReviewedCharacters, @numberOfReviews)
-            on conflict do update set date = @date,
-                                      addedCharacters = @addedCharacters,
-                                      firstSeenCharacters = @firstSeenCharacters,
-                                      reviewedCharacters = @reviewedCharacters,
-                                      numberOfAddedCharacters = @numberOfAddedCharacters,
-                                      numberOfFirstSeenCharacters = @numberOfFirstSeenCharacters,
-                                      numberOfReviewedCharacters = @numberOfReviewedCharacters,
-                                      numberOfReviews = @numberOfReviews
-        `,
-      )
-      .run(entity);
-  }
-
   findByDate(date: string): StatisticsByDay | null {
     const row = this.db
       .prepare(
@@ -55,11 +36,32 @@ export class StatisticsByDaySqliteRepository
     return row ? this.toEntity(row) : null;
   }
 
+  protected prepareSave(): PreparedStatement<StatisticsByDayRow> {
+    return this.db.prepare(
+      `
+            insert into StatisticsByDay (id, date, addedCharacters, firstSeenCharacters, reviewedCharacters, numberOfAddedCharacters, numberOfFirstSeenCharacters, numberOfReviewedCharacters, numberOfReviews)
+            values (@id, @date, @addedCharacters, @firstSeenCharacters, @reviewedCharacters, @numberOfAddedCharacters, @numberOfFirstSeenCharacters, @numberOfReviewedCharacters, @numberOfReviews)
+            on conflict do update set date = @date,
+                                      addedCharacters = @addedCharacters,
+                                      firstSeenCharacters = @firstSeenCharacters,
+                                      reviewedCharacters = @reviewedCharacters,
+                                      numberOfAddedCharacters = @numberOfAddedCharacters,
+                                      numberOfFirstSeenCharacters = @numberOfFirstSeenCharacters,
+                                      numberOfReviewedCharacters = @numberOfReviewedCharacters,
+                                      numberOfReviews = @numberOfReviews
+        `,
+    );
+  }
+
   protected getId(entity: StatisticsByDay) {
     return entity.id;
   }
 
-  protected toEntity(row: StatisticsByDayRow) {
-    return { ...row };
+  protected toEntity(row: StatisticsByDayRow): StatisticsByDay {
+    return row;
+  }
+
+  protected toRow(entity: StatisticsByDay): StatisticsByDayRow {
+    return entity;
   }
 }

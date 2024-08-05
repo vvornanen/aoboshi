@@ -214,6 +214,48 @@ describe("getAllCards", () => {
   });
 });
 
+describe("findCardIds", () => {
+  test("no cards", async () => {
+    mockResponse(200, {
+      result: [],
+      error: null,
+    });
+
+    const actual = await client.findCardIds("test");
+
+    expect(mockFetch).toHaveBeenNthCalledWith(1, ankiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "findCards",
+        version: 6,
+        key: apiKey,
+        params: { query: "test" },
+      }),
+    });
+    expect(actual).toHaveLength(0);
+  });
+
+  test("returns card ids", async () => {
+    mockResponse(200, {
+      result: [card1.id, card2.id],
+      error: null,
+    });
+
+    const actual = await client.findCardIds("test");
+
+    expect(mockFetch).toHaveBeenNthCalledWith(1, ankiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "findCards",
+        version: 6,
+        key: apiKey,
+        params: { query: "test" },
+      }),
+    });
+    expect(actual).toEqual([card1.id, card2.id]);
+  });
+});
+
 describe("findCards", () => {
   test("no cards", async () => {
     mockResponse(200, {

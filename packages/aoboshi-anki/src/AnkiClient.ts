@@ -57,15 +57,28 @@ export class AnkiClient {
   }
 
   /**
-   * Finds cards matching the given query.
+   * Finds card ids matching the given query.
+   *
+   * A faster alternative to {@link findCards} when only ids are sufficient.
    *
    * @param query Anki search query
    * @see https://docs.ankiweb.net/searching.html
    */
-  async findCards(query: string): Promise<AnkiCard[]> {
-    const cardIds = await this.doFetch<number[]>("findCards", {
+  async findCardIds(query: string): Promise<number[]> {
+    return this.doFetch<number[]>("findCards", {
       query,
     });
+  }
+
+  /**
+   * Finds cards matching the given query.
+   *
+   * @param query Anki search query
+   * @see findCardIds
+   * @see https://docs.ankiweb.net/searching.html
+   */
+  async findCards(query: string): Promise<AnkiCard[]> {
+    const cardIds = await this.findCardIds(query);
 
     if (cardIds.length === 0) {
       return [];

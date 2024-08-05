@@ -55,12 +55,11 @@ const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
     return [];
   }
 
-  // TODO: Add limit param to AnkiClient.getReviews()
-  const reviews = (
-    await ankiClient.getReviews(deckName, lastSyncTimestamp.toString())
-  )
-    .toSorted((a, b) => Temporal.Instant.compare(a.reviewTime, b.reviewTime))
-    .slice(0, limit);
+  const reviews = await ankiClient.getReviews(
+    deckName,
+    lastSyncTimestamp.toString(),
+    limit,
+  );
   const cards = await getCardsForReviews(reviews);
 
   return reviews

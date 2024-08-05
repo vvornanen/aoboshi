@@ -116,12 +116,24 @@ export class AnkiClient {
    *
    * @param deckName
    * @param start latest ISO 8601 timestamp not included in the result
+   * @param limit optionally, maximum number of reviews to return
    */
-  async getReviews(deckName: string, start: string): Promise<AnkiCardReview[]> {
+  async getReviews(
+    deckName: string,
+    start: string,
+    limit?: number,
+  ): Promise<AnkiCardReview[]> {
     const result = await this.doFetch<AnkiCardReviewTuple[]>("cardReviews", {
       deck: deckName,
       startID: Temporal.Instant.from(start).epochMilliseconds,
     });
+
+    // Order by review time asc
+    result.sort((a, b) => a[0] - b[0]);
+
+    if (limit !== undefined) {
+      result.length = Math.min(limit, result.length);
+    }
 
     return result.map(fromTuple);
   }

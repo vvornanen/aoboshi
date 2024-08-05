@@ -423,4 +423,44 @@ describe("getReviews", () => {
     });
     expect(actual).toEqual(expected);
   });
+
+  test("sorts result by review time", async () => {
+    mockResponse(200, {
+      result: [
+        [1684437453914, 1642625603410, 1233, 3, 33, 25, 1300, 6022, 1],
+        [1684437445608, 1654550170849, 1233, 3, 1, -600, 1300, 16891, 2],
+      ],
+      error: null,
+    });
+
+    const expected = ["2023-05-18T19:17:25.608Z", "2023-05-18T19:17:33.914Z"];
+
+    const actual = await client.getReviews("test", "2023-05-18T19:17:16.023Z");
+
+    expect(actual.map((card) => card.reviewTime)).toEqual(expected);
+  });
+
+  test.each([
+    { limit: undefined, expected: [1654550170849, 1642625603410] },
+    { limit: 0, expected: [] },
+    { limit: 1, expected: [1654550170849] },
+    { limit: 2, expected: [1654550170849, 1642625603410] },
+    { limit: 10, expected: [1654550170849, 1642625603410] },
+  ])("limits number of returned cards %s", async ({ limit, expected }) => {
+    mockResponse(200, {
+      result: [
+        [1684437445608, 1654550170849, 1233, 3, 1, -600, 1300, 16891, 2],
+        [1684437453914, 1642625603410, 1233, 3, 33, 25, 1300, 6022, 1],
+      ],
+      error: null,
+    });
+
+    const actual = await client.getReviews(
+      "test",
+      "2023-05-18T19:17:16.023Z",
+      limit,
+    );
+
+    expect(actual.map((card) => card.cardId)).toEqual(expected);
+  });
 });

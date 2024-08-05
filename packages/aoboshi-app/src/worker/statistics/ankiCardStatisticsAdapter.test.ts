@@ -1,6 +1,6 @@
 import { afterEach, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
-import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
+import { AnkiClient } from "@vvornanen/aoboshi-anki";
 import { CardStatisticsByCharacter } from "@vvornanen/aoboshi-core/statistics/character";
 import { createAnkiCardStatisticsAdapter } from "~/worker/statistics/ankiCardStatisticsAdapter";
 
@@ -12,48 +12,16 @@ afterEach(() => {
 });
 
 test("no cards found", async () => {
-  ankiClient.findCards.mockResolvedValueOnce([]);
+  ankiClient.findCardIds.mockResolvedValueOnce([]);
 
   const actual = await ankiCardStatisticsAdapter("学");
 
   expect(actual).toBeNull();
-  expect(ankiClient.findCards).toHaveBeenCalledWith("expression:*学*");
+  expect(ankiClient.findCardIds).toHaveBeenCalledWith("expression:*学*");
 });
 
 test("ankiCardStatisticsAdapter", async () => {
-  ankiClient.findCards.mockResolvedValueOnce([
-    {
-      id: 1684434203213,
-      created: "2023-05-18T18:23:23.213Z",
-      modified: "2022-03-01T17:47:44Z",
-      fields: {
-        Expression: {
-          value: "音楽",
-          order: 0,
-        },
-        Meaning: {
-          value: "",
-          order: 1,
-        },
-        Reading: {
-          value: "",
-          order: 2,
-        },
-      },
-      modelName: "Japanese",
-      deckName: "test",
-      easeFactor: 1750,
-      interval: "P935D",
-      noteId: 1684434396302,
-      status: "review",
-      numberOfReviews: 13,
-      numberOfLapses: 0,
-      numberOfRemainingReviews: {
-        today: 0,
-        untilGraduation: 0,
-      },
-    },
-  ] satisfies AnkiCard[]);
+  ankiClient.findCardIds.mockResolvedValueOnce([1684434203213]);
 
   const actual = await ankiCardStatisticsAdapter("学");
 
@@ -64,5 +32,5 @@ test("ankiCardStatisticsAdapter", async () => {
   };
 
   expect(actual).toEqual(expected);
-  expect(ankiClient.findCards).toHaveBeenCalledWith("expression:*学*");
+  expect(ankiClient.findCardIds).toHaveBeenCalledWith("expression:*学*");
 });

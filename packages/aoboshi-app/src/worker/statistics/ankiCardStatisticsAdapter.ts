@@ -1,4 +1,4 @@
-import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
+import { AnkiClient } from "@vvornanen/aoboshi-anki";
 import { KANJI_REGEXP } from "@vvornanen/aoboshi-core/characters";
 import { Temporal } from "@js-temporal/polyfill";
 import { GetCardStatisticsByCharacter } from "@vvornanen/aoboshi-core/statistics/character";
@@ -12,26 +12,20 @@ export const createAnkiCardStatisticsAdapter =
       return null;
     }
 
-    // TODO: Use AnkiClient.findCardIds()
-    const cards = await ankiClient.findCards(`expression:*${literal}*`);
+    const cardIds = await ankiClient.findCardIds(`expression:*${literal}*`);
 
-    if (cards.length === 0) {
+    if (cardIds.length === 0) {
       return null;
     }
 
-    const firstAdded = getFirstAdded(cards);
+    const firstCardId = Math.min(...cardIds);
+    const firstAdded = Temporal.Instant.fromEpochMilliseconds(firstCardId);
 
     return {
       literal,
       firstAdded: firstAdded.toString({ smallestUnit: "millisecond" }),
-      numberOfCards: cards.length,
+      numberOfCards: cardIds.length,
     };
   };
 
 const isValidCharacter = (literal: string) => !!literal.match(KANJI_REGEXP);
-
-const getFirstAdded = (cards: AnkiCard[]): Temporal.Instant =>
-  cards.reduce((prev, card) => {
-    const created = Temporal.Instant.from(card.created);
-    return Temporal.Instant.compare(prev, created) < 0 ? prev : created;
-  }, Temporal.Now.instant());

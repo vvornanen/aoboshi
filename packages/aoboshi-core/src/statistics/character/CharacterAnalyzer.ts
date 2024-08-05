@@ -86,7 +86,10 @@ export class CharacterAnalyzer implements Analyzer {
           statisticsByCharacters.get(literal),
           {
             literal,
-            firstAdded: cardStatistics.firstAdded,
+            firstAdded: timestampToDate(
+              cardStatistics.firstAdded,
+              context.timeZoneConfig,
+            ).toString(),
             firstReviewed: reviewDate?.toString() || null,
             lastReviewed: reviewDate?.toString() || null,
             numberOfReviews: reviewDate ? 1 : 0,

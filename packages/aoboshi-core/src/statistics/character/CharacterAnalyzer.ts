@@ -71,28 +71,37 @@ export class CharacterAnalyzer implements Analyzer {
       );
 
       for (const literal of characters) {
-        const cardStatistics = await this.getCardStatisticsByCharacter(literal);
-
-        if (!cardStatistics) {
-          throw new Error(`Card statistics not found for character ${literal}`);
-        }
-
         const merged = mergeStatisticsByCharacter(
           statisticsByCharacters.get(literal),
           {
             literal,
-            firstAdded: timestampToDate(
-              cardStatistics.firstAdded,
-              context.timeZoneConfig,
-            ).toString(),
+            firstAdded: null,
             firstReviewed: reviewDate?.toString() || null,
             lastReviewed: reviewDate?.toString() || null,
             numberOfReviews: reviewDate ? 1 : 0,
-            numberOfCards: cardStatistics.numberOfCards,
+            numberOfCards: 0,
           },
         );
         statisticsByCharacters.set(literal, merged);
       }
+    }
+
+    for (const stats of statisticsByCharacters.values()) {
+      const cardStatistics = await this.getCardStatisticsByCharacter(
+        stats.literal,
+      );
+
+      if (!cardStatistics) {
+        throw new Error(
+          `Card statistics not found for character ${stats.literal}`,
+        );
+      }
+
+      stats.firstAdded = timestampToDate(
+        cardStatistics.firstAdded,
+        context.timeZoneConfig,
+      ).toString();
+      stats.numberOfCards = cardStatistics.numberOfCards;
     }
 
     return {

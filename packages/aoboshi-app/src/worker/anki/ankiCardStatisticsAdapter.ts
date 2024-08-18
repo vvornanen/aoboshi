@@ -1,7 +1,7 @@
 import { KANJI_REGEXP } from "@vvornanen/aoboshi-core/characters";
 import { Temporal } from "@js-temporal/polyfill";
 import { GetCardStatisticsByCharacter } from "@vvornanen/aoboshi-core/statistics/character";
-import { AnkiService } from "~/worker/anki";
+import { AnkiService } from "~/worker/anki/index";
 
 /**
  * Creates a callback function which fetches card information from Anki.

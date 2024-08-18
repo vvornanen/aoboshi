@@ -1,8 +1,8 @@
 import { afterEach, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
 import { CardStatisticsByCharacter } from "@vvornanen/aoboshi-core/statistics/character";
-import { createAnkiCardStatisticsAdapter } from "~/worker/statistics/ankiCardStatisticsAdapter";
-import { AnkiService } from "~/worker/anki";
+import { createAnkiCardStatisticsAdapter } from "~/worker/anki/ankiCardStatisticsAdapter";
+import { AnkiService } from "~/worker/anki/index";
 
 const ankiService = mock<AnkiService>();
 const ankiCardStatisticsAdapter = createAnkiCardStatisticsAdapter(ankiService);

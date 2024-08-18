@@ -1,4 +1,3 @@
-export * from "./ankiCardStatisticsAdapter";
 export * from "./StatisticsByChapterSqliteRepository";
 export * from "./StatisticsByCharacterSqliteRepository";
 export * from "./StatisticsByDaySqliteRepository";

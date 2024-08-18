@@ -22,13 +22,12 @@ import { getDatabase } from "./database";
 import { BookSqliteRepository } from "./books";
 import { CharacterSqliteRepository } from "./characters";
 import { ApplicationProperties, getEnvironmentVariable } from "~/worker";
-import { AnkiService } from "~/worker/anki";
+import { AnkiService, createAnkiCardStatisticsAdapter } from "~/worker/anki";
 import {
   StatisticsByChapterSqliteRepository,
   StatisticsByCharacterSqliteRepository,
   StatisticsByDaySqliteRepository,
   StatisticsIncrementSqliteRepository,
-  createAnkiCardStatisticsAdapter,
 } from "~/worker/statistics";
 
 /**

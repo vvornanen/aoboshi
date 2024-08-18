@@ -4,6 +4,7 @@ export default defineConfig({
   entry: [
     "src/index.ts",
     "src/books/index.ts",
+    "src/collections/index.ts",
     "src/characters/index.ts",
     "src/fixtures/bookFixtures.ts",
     "src/fixtures/characterFixtures.ts",

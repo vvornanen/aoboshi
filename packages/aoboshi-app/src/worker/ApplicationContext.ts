@@ -85,7 +85,7 @@ export class ApplicationContext implements OnAfterInit {
       properties.anki.deckName,
     );
     const ankiCardStatisticsAdapter = createAnkiCardStatisticsAdapter(
-      this.ankiClient,
+      this.ankiService,
     );
 
     // Statistics

@@ -22,6 +22,7 @@ import { getDatabase } from "./database";
 import { BookSqliteRepository } from "./books";
 import { CharacterSqliteRepository } from "./characters";
 import { ApplicationProperties, getEnvironmentVariable } from "~/worker";
+import { AnkiService } from "~/worker/anki";
 import {
   StatisticsByChapterSqliteRepository,
   StatisticsByCharacterSqliteRepository,
@@ -57,6 +58,7 @@ export class ApplicationContext implements OnAfterInit {
   bookRepository: BookRepository;
   characterRepository: CharacterRepository;
   ankiClient: AnkiClient;
+  ankiService: AnkiService;
   statisticsIncrementRepository: StatisticsIncrementRepository;
   statisticsByCharacterRepository: StatisticsByCharacterRepository;
   statisticsByDayRepository: StatisticsByDayRepository;
@@ -77,6 +79,10 @@ export class ApplicationContext implements OnAfterInit {
     this.ankiClient = new AnkiClient(
       properties.anki.url,
       properties.anki.apiKey,
+    );
+    this.ankiService = new AnkiService(
+      this.ankiClient,
+      properties.anki.deckName,
     );
     const ankiCardStatisticsAdapter = createAnkiCardStatisticsAdapter(
       this.ankiClient,

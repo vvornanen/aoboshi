@@ -8,7 +8,7 @@ const jobs = [
   },
   {
     name: "anki-statistics",
-    interval: "every 1 mins",
+    timeout: 0, // Job runs indefinitely
   },
 ] as const satisfies JobOptions[];
 

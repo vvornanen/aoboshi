@@ -1,3 +1,4 @@
+import { workerData } from "node:worker_threads";
 import { Temporal } from "@js-temporal/polyfill";
 import {
   CardReview,
@@ -5,8 +6,8 @@ import {
   StatisticsIncrement,
 } from "@vvornanen/aoboshi-core/statistics";
 import { AnkiCard, AnkiCardReview } from "@vvornanen/aoboshi-anki";
-import { isInstantAfter } from "@vvornanen/aoboshi-core";
-import { getApplicationContext } from "~/worker";
+import { FibonacciScheduler, isInstantAfter } from "@vvornanen/aoboshi-core";
+import { Logger, getApplicationContext } from "~/worker";
 
 const {
   ankiClient,
@@ -15,6 +16,9 @@ const {
   statisticsIncrementRepository,
   database,
 } = getApplicationContext();
+
+const logger = new Logger(workerData.job?.name);
+logger.setLogLevel(properties.logLevel);
 
 const deckName = properties.anki.deckName;
 
@@ -51,10 +55,10 @@ const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
   const lastSyncTimestamp = getLastSyncTimestamp();
 
   if (!isInstantAfter(latestReviewTimestamp, lastSyncTimestamp)) {
-    console.log("No new reviews");
     return [];
   }
 
+  // TODO: Return total number of reviews
   const reviews = await ankiClient.getReviews(
     deckName,
     lastSyncTimestamp.toString(),
@@ -67,7 +71,7 @@ const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
       const card = cards.get(review.cardId);
 
       if (!card) {
-        console.error(
+        logger.error(
           `Card ${review.cardId} was not found, review time ${review.reviewTime}`,
         );
         return null;
@@ -97,49 +101,75 @@ const doGenerateStatistics = database.transaction(
 );
 
 const logStart = () => {
-  console.log(`Generating statistics from Anki deck ${deckName}`);
+  logger.debug(`Generating statistics from Anki deck ${deckName}`);
 };
 
 const logAlreadyUpToDate = () => {
-  console.log("No new reviews or cards found");
+  logger.debug("No new reviews or cards found");
 };
 
 const logProcessing = (reviews: CardReview[]) => {
-  console.log(
-    `Processing ${reviews.length} reviews from ${reviews[0].reviewTime} to ${reviews[reviews.length - 1].reviewTime}`,
+  logger.debug(
+    `Processing ${reviews.length} reviews from ${reviews.at(0)?.reviewTime} to ${reviews.at(-1)?.reviewTime}`,
   );
 };
 
 const logResult = (increment: StatisticsIncrement) => {
-  if (increment.numberOfNewCards > 0) {
-    console.log(
-      `Processed ${increment.numberOfReviews} reviews and ${increment.numberOfNewCards} new cards in ${increment.duration}ms`,
-    );
-  } else {
-    console.log(
-      `Processed ${increment.numberOfReviews} reviews in ${increment.duration}ms`,
-    );
-  }
+  logger.info(
+    `Processed ${increment.numberOfReviews} reviews${increment.numberOfNewCards > 0 ? ` and ${increment.numberOfNewCards} new cards` : ""} from ${increment.start} to ${increment.end} in ${Math.round(increment.duration)}ms`,
+  );
 };
 
-(async () => {
+const run = async (): Promise<number> => {
+  performance.mark("startAnkiStatistics");
   logStart();
 
-  const reviews = await fetchReviews();
+  const limit = 1000;
+
+  const reviews = await fetchReviews(limit);
   const newCards = await fetchNewCards();
   const reviewsAndNewCards: (CardReview | NewCard)[] = [
     ...reviews,
     ...newCards,
   ];
 
-  if (reviewsAndNewCards.length === 0) {
+  if (reviews.length === 0) {
     logAlreadyUpToDate();
-    return;
+    return 0;
   }
 
   logProcessing(reviews);
 
   const increment = await doGenerateStatistics(reviewsAndNewCards);
 
-  logResult(increment);
+  // TODO: Move to StatisticsService
+  performance.mark("endAnkiStatistics");
+  const measure = performance.measure(
+    "ankiStatistics",
+    "startAnkiStatistics",
+    "endAnkiStatistics",
+  );
+
+  logResult({ ...increment, duration: measure.duration });
+
+  return reviews.length;
+};
+
+const scheduler = new FibonacciScheduler(async () => {
+  try {
+    const numberOfReviewsProcessed = await run();
+
+    if (numberOfReviewsProcessed > 0) {
+      scheduler.reset();
+    }
+
+    // TODO: Cancel timeout
+    // https://github.com/breejs/bree?tab=readme-ov-file#cancellation-retries-stalled-jobs-and-graceful-reloading
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+(async () => {
+  scheduler.start();
 })();

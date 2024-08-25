@@ -96,8 +96,8 @@ const fetchNewCards = async (): Promise<NewCard[]> => {
 };
 
 const doGenerateStatistics = database.transaction(
-  (reviewsAndNewCards: (CardReview | NewCard)[]) =>
-    statisticsService.generateStatistics(reviewsAndNewCards),
+  (reviewsAndNewCards: (CardReview | NewCard)[], startMark: string) =>
+    statisticsService.generateStatistics(reviewsAndNewCards, startMark),
 );
 
 const logStart = () => {
@@ -121,7 +121,7 @@ const logResult = (increment: StatisticsIncrement) => {
 };
 
 const run = async (): Promise<number> => {
-  performance.mark("startAnkiStatistics");
+  const startMark = performance.mark("startAnkiStatistics").name;
   logStart();
 
   const limit = 1000;
@@ -139,18 +139,8 @@ const run = async (): Promise<number> => {
   }
 
   logProcessing(reviews);
-
-  const increment = await doGenerateStatistics(reviewsAndNewCards);
-
-  // TODO: Move to StatisticsService
-  performance.mark("endAnkiStatistics");
-  const measure = performance.measure(
-    "ankiStatistics",
-    "startAnkiStatistics",
-    "endAnkiStatistics",
-  );
-
-  logResult({ ...increment, duration: measure.duration });
+  const increment = await doGenerateStatistics(reviewsAndNewCards, startMark);
+  logResult(increment);
 
   return reviews.length;
 };

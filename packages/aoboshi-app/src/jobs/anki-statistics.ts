@@ -1,4 +1,4 @@
-import { workerData } from "node:worker_threads";
+import { parentPort, workerData } from "node:worker_threads";
 import { Temporal } from "@js-temporal/polyfill";
 import {
   CardReview,
@@ -162,14 +162,27 @@ const scheduler = new FibonacciScheduler(async () => {
     if (numberOfReviewsProcessed > 0) {
       scheduler.reset();
     }
-
-    // TODO: Cancel timeout
-    // https://github.com/breejs/bree?tab=readme-ov-file#cancellation-retries-stalled-jobs-and-graceful-reloading
   } catch (error) {
     console.error(error);
   }
 });
 
-(async () => {
-  scheduler.start();
-})();
+const cancel = () => {
+  scheduler.stop();
+
+  if (parentPort) {
+    parentPort.postMessage("cancelled");
+  } else {
+    process.exit(1);
+  }
+};
+
+scheduler.start();
+
+if (parentPort) {
+  parentPort.once("message", (message) => {
+    if (message === "cancel") {
+      cancel();
+    }
+  });
+}

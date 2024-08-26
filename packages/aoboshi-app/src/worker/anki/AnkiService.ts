@@ -1,4 +1,3 @@
-import { performance } from "node:perf_hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
 import { TTLSetMultimap } from "@vvornanen/aoboshi-core/collections";
@@ -35,7 +34,7 @@ export class AnkiService {
       return this.cardIdsByCharacter.get(literal);
     }
 
-    performance.mark("startGetCardIdsByLiteral");
+    const startMark = performance.mark("startGetCardIdsByLiteral").name;
     this.cardIdsByCharacter = new TTLSetMultimap(this.ttl);
 
     // Find all card ids
@@ -55,12 +54,8 @@ export class AnkiService {
       start += limit;
     }
 
-    performance.mark("endGetCardIdsByLiteral");
-    performance.measure(
-      "getCardIdsByLiteral",
-      "startGetCardIdsByLiteral",
-      "endGetCardIdsByLiteral",
-    );
+    const endMark = performance.mark("endGetCardIdsByLiteral").name;
+    performance.measure("getCardIdsByLiteral", startMark, endMark);
 
     return this.cardIdsByCharacter.get(literal);
   }

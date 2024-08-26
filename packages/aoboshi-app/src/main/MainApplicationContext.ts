@@ -62,9 +62,9 @@ export const getMainApplicationContext = (): MainApplicationContext => {
           ? path.join(__dirname, "../../src/resources")
           : process.resourcesPath,
       anki: {
-        url: getEnvironmentVariable("ANKI_URL"),
-        apiKey: getEnvironmentVariable("ANKI_API_KEY"),
-        deckName: getEnvironmentVariable("ANKI_DECK_NAME"),
+        url: getEnvironmentVariable("ANKI_URL", ""),
+        apiKey: getEnvironmentVariable("ANKI_API_KEY", ""),
+        deckName: getEnvironmentVariable("ANKI_DECK_NAME", ""),
       },
     };
 

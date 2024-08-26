@@ -219,7 +219,13 @@ const cancel = () => {
   postMessage("cancelled");
 };
 
-scheduler.start();
+if (!properties.anki.url) {
+  logger.info("Skipping because Anki integration is disabled");
+} else if (!deckName) {
+  throw new Error("Anki deck not defined");
+} else {
+  scheduler.start();
+}
 
 if (parentPort) {
   parentPort.once("message", (message) => {

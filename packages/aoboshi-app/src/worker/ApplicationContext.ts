@@ -140,9 +140,9 @@ export const getApplicationContext = (): ApplicationContext => {
       resourcesPath: getEnvironmentVariable("RESOURCES_PATH"),
       logLevel: getEnvironmentVariable("LOGLEVEL"),
       anki: {
-        url: getEnvironmentVariable("ANKI_URL"),
-        apiKey: getEnvironmentVariable("ANKI_API_KEY"),
-        deckName: getEnvironmentVariable("ANKI_DECK_NAME"),
+        url: getEnvironmentVariable("ANKI_URL", ""),
+        apiKey: getEnvironmentVariable("ANKI_API_KEY", ""),
+        deckName: getEnvironmentVariable("ANKI_DECK_NAME", ""),
       },
     };
 

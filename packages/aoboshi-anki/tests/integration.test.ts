@@ -27,13 +27,13 @@ test("integration", async () => {
 
   const reviews = await client.getReviews("test", "2023-05-18T19:13:52.547Z");
   console.log("getReviews", JSON.stringify(reviews, null, 2));
-  expect(reviews).toHaveLength(2);
+  expect(reviews.reviews).toHaveLength(2);
 
   const reviewsInFuture = await client.getReviews(
     "test",
     "2023-05-19T12:00:00.000Z",
   );
-  expect(reviewsInFuture).toHaveLength(0);
+  expect(reviewsInFuture.reviews).toHaveLength(0);
 
   await client.deleteDecks(["test"]);
 }, 30000);

@@ -58,8 +58,7 @@ const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
     return [];
   }
 
-  // TODO: Return total number of reviews
-  const reviews = await ankiClient.getReviews(
+  const { reviews } = await ankiClient.getReviews(
     deckName,
     lastSyncTimestamp.toString(),
     limit,

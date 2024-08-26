@@ -373,7 +373,8 @@ describe("getReviews", () => {
         params: { deck: "test", startID: 1684437232547 },
       }),
     });
-    expect(actual).toHaveLength(0);
+    expect(actual.reviews).toHaveLength(0);
+    expect(actual.meta.numberOfReviews).toBe(0);
   });
 
   test("returns reviews", async () => {
@@ -421,7 +422,8 @@ describe("getReviews", () => {
         params: { deck: "test", startID: 1684437436023 },
       }),
     });
-    expect(actual).toEqual(expected);
+    expect(actual.reviews).toEqual(expected);
+    expect(actual.meta.numberOfReviews).toBe(expected.length);
   });
 
   test("sorts result by review time", async () => {
@@ -437,7 +439,7 @@ describe("getReviews", () => {
 
     const actual = await client.getReviews("test", "2023-05-18T19:17:16.023Z");
 
-    expect(actual.map((card) => card.reviewTime)).toEqual(expected);
+    expect(actual.reviews.map((card) => card.reviewTime)).toEqual(expected);
   });
 
   test.each([
@@ -461,6 +463,7 @@ describe("getReviews", () => {
       limit,
     );
 
-    expect(actual.map((card) => card.cardId)).toEqual(expected);
+    expect(actual.reviews.map((card) => card.cardId)).toEqual(expected);
+    expect(actual.meta.totalNumberOfReviews).toBe(2);
   });
 });

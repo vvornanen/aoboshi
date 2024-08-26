@@ -9,6 +9,16 @@ import {
 import { AnkiAction, AnkiRequest } from "./AnkiRequest";
 import { AnkiResponse } from "./AnkiResponse";
 
+export type AnkiGetReviewsResponse = {
+  meta: {
+    start: string;
+    limit?: number;
+    numberOfReviews: number;
+    totalNumberOfReviews: number;
+  };
+  reviews: AnkiCardReview[];
+};
+
 /**
  * Client for AnkiConnect API.
  *
@@ -122,7 +132,7 @@ export class AnkiClient {
     deckName: string,
     start: string,
     limit?: number,
-  ): Promise<AnkiCardReview[]> {
+  ): Promise<AnkiGetReviewsResponse> {
     const result = await this.doFetch<AnkiCardReviewTuple[]>("cardReviews", {
       deck: deckName,
       startID: Temporal.Instant.from(start).epochMilliseconds,
@@ -131,11 +141,21 @@ export class AnkiClient {
     // Order by review time asc
     result.sort((a, b) => a[0] - b[0]);
 
+    const totalNumberOfReviews = result.length;
+
     if (limit !== undefined) {
       result.length = Math.min(limit, result.length);
     }
 
-    return result.map(fromTuple);
+    return {
+      meta: {
+        start,
+        limit,
+        numberOfReviews: result.length,
+        totalNumberOfReviews,
+      },
+      reviews: result.map(fromTuple),
+    };
   }
 
   /**

@@ -214,6 +214,48 @@ describe("getAllCards", () => {
   });
 });
 
+describe("findCardIds", () => {
+  test("no cards", async () => {
+    mockResponse(200, {
+      result: [],
+      error: null,
+    });
+
+    const actual = await client.findCardIds("test");
+
+    expect(mockFetch).toHaveBeenNthCalledWith(1, ankiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "findCards",
+        version: 6,
+        key: apiKey,
+        params: { query: "test" },
+      }),
+    });
+    expect(actual).toHaveLength(0);
+  });
+
+  test("returns card ids", async () => {
+    mockResponse(200, {
+      result: [card1.id, card2.id],
+      error: null,
+    });
+
+    const actual = await client.findCardIds("test");
+
+    expect(mockFetch).toHaveBeenNthCalledWith(1, ankiUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "findCards",
+        version: 6,
+        key: apiKey,
+        params: { query: "test" },
+      }),
+    });
+    expect(actual).toEqual([card1.id, card2.id]);
+  });
+});
+
 describe("findCards", () => {
   test("no cards", async () => {
     mockResponse(200, {
@@ -331,7 +373,8 @@ describe("getReviews", () => {
         params: { deck: "test", startID: 1684437232547 },
       }),
     });
-    expect(actual).toHaveLength(0);
+    expect(actual.reviews).toHaveLength(0);
+    expect(actual.meta.numberOfReviews).toBe(0);
   });
 
   test("returns reviews", async () => {
@@ -379,6 +422,48 @@ describe("getReviews", () => {
         params: { deck: "test", startID: 1684437436023 },
       }),
     });
-    expect(actual).toEqual(expected);
+    expect(actual.reviews).toEqual(expected);
+    expect(actual.meta.numberOfReviews).toBe(expected.length);
+  });
+
+  test("sorts result by review time", async () => {
+    mockResponse(200, {
+      result: [
+        [1684437453914, 1642625603410, 1233, 3, 33, 25, 1300, 6022, 1],
+        [1684437445608, 1654550170849, 1233, 3, 1, -600, 1300, 16891, 2],
+      ],
+      error: null,
+    });
+
+    const expected = ["2023-05-18T19:17:25.608Z", "2023-05-18T19:17:33.914Z"];
+
+    const actual = await client.getReviews("test", "2023-05-18T19:17:16.023Z");
+
+    expect(actual.reviews.map((card) => card.reviewTime)).toEqual(expected);
+  });
+
+  test.each([
+    { limit: undefined, expected: [1654550170849, 1642625603410] },
+    { limit: 0, expected: [] },
+    { limit: 1, expected: [1654550170849] },
+    { limit: 2, expected: [1654550170849, 1642625603410] },
+    { limit: 10, expected: [1654550170849, 1642625603410] },
+  ])("limits number of returned cards %s", async ({ limit, expected }) => {
+    mockResponse(200, {
+      result: [
+        [1684437445608, 1654550170849, 1233, 3, 1, -600, 1300, 16891, 2],
+        [1684437453914, 1642625603410, 1233, 3, 33, 25, 1300, 6022, 1],
+      ],
+      error: null,
+    });
+
+    const actual = await client.getReviews(
+      "test",
+      "2023-05-18T19:17:16.023Z",
+      limit,
+    );
+
+    expect(actual.reviews.map((card) => card.cardId)).toEqual(expected);
+    expect(actual.meta.totalNumberOfReviews).toBe(2);
   });
 });

@@ -4,7 +4,7 @@ export type CardStatisticsByCharacter = {
   literal: string;
 
   /**
-   * ISO 8601 date string when the first card containing the character was
+   * ISO 8601 timestamp string when the first card containing the character was
    * added to the deck.
    */
   firstAdded: string;

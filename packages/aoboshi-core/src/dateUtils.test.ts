@@ -1,8 +1,12 @@
 import { expect, test } from "vitest";
+import { Temporal } from "@js-temporal/polyfill";
 import {
+  isInstantAfter,
   maxDate,
+  maxInstant,
   minDate,
   nullableMaxDate,
+  nullableMaxInstant,
   nullableMinDate,
 } from "./dateUtils";
 
@@ -100,4 +104,91 @@ test.each([
   },
 ])("nullableMaxDate %s", ({ values, expected }) => {
   expect(nullableMaxDate(...values)?.toString()).toEqual(expected);
+});
+
+test.each([
+  { first: null, second: null, expected: false },
+  { first: undefined, second: undefined, expected: false },
+  { first: "", second: "", expected: false },
+  { first: "2024-01-01T00:00:00.000Z", second: undefined, expected: false },
+  { first: undefined, second: "2024-01-01T00:00:00.000Z", expected: false },
+  {
+    first: "2024-01-01T00:00:00.000Z",
+    second: "2024-01-01T00:00:00.000Z",
+    expected: false,
+  },
+  {
+    first: "2024-01-01T00:00:00.000Z",
+    second: "2024-01-01T00:00:00.001Z",
+    expected: false,
+  },
+  {
+    first: "2024-01-01T00:00:00.001Z",
+    second: "2024-01-01T00:00:00.000Z",
+    expected: true,
+  },
+  {
+    first: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    second: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    expected: false,
+  },
+  {
+    first: Temporal.Instant.from("2024-01-01T00:00:00.001Z"),
+    second: Temporal.Instant.from("2024-01-01T00:00:00.000Z"),
+    expected: true,
+  },
+])("isInstantAfter %s", ({ first, second, expected }) => {
+  expect(isInstantAfter(first, second)).toBe(expected);
+});
+
+test.each([
+  {
+    values: ["2024-01-02T00:00:00.001Z"],
+    expected: "2024-01-02T00:00:00.001Z",
+  },
+  {
+    values: ["2024-01-01T00:00:00.002Z", "2024-01-01T00:00:00.001Z"],
+    expected: "2024-01-01T00:00:00.002Z",
+  },
+  {
+    values: [
+      "2024-01-01T00:00:00.002Z",
+      "2024-01-01T00:00:00.001Z",
+      "2024-01-01T00:00:00.003Z",
+    ],
+    expected: "2024-01-01T00:00:00.003Z",
+  },
+])("maxInstant %s", ({ values, expected }) => {
+  expect(maxInstant(...values).toString()).toEqual(expected);
+});
+
+test("maxInstant throws error on empty arguments", () => {
+  expect(() => maxInstant()).toThrowError(
+    "Expected at least one instant as argument",
+  );
+});
+
+test.each([
+  {
+    values: [],
+    expected: undefined,
+  },
+  {
+    values: [null],
+    expected: undefined,
+  },
+  {
+    values: [undefined],
+    expected: undefined,
+  },
+  {
+    values: [undefined, "2024-01-01T00:00:00.001Z"],
+    expected: "2024-01-01T00:00:00.001Z",
+  },
+  {
+    values: ["2024-01-01T00:00:00.002Z", null, "2024-01-01T00:00:00.001Z"],
+    expected: "2024-01-01T00:00:00.002Z",
+  },
+])("nullableMaxInstant %s", ({ values, expected }) => {
+  expect(nullableMaxInstant(...values)?.toString()).toEqual(expected);
 });

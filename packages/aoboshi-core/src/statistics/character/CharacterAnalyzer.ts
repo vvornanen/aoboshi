@@ -12,6 +12,7 @@ import {
   mergeStatisticsByCharacter,
   timestampToDate,
 } from "~/statistics";
+import { nullableMaxInstant } from "~";
 
 /**
  * Adapter for fetching card statistics from an external source such as Anki
@@ -50,7 +51,7 @@ export class CharacterAnalyzer implements Analyzer {
   }
 
   async getStatisticsByCharacters(context: AnalysisContext) {
-    let latestReviewTime: Temporal.Instant | undefined;
+    let latestReviewTime: Temporal.Instant | undefined = undefined;
     const reviewDays = new Set<string>();
     const statisticsByCharacters = new Map<string, StatisticsByCharacter>();
 
@@ -63,38 +64,44 @@ export class CharacterAnalyzer implements Analyzer {
         timestampToDate(reviewTimestamp, context.timeZoneConfig);
       reviewDate && reviewDays.add(reviewDate.toString());
 
-      if (
-        !latestReviewTime ||
-        !reviewTimestamp ||
-        Temporal.Instant.compare(latestReviewTime, reviewTimestamp) < 0
-      ) {
-        latestReviewTime = reviewTimestamp;
-      }
+      latestReviewTime = nullableMaxInstant(latestReviewTime, reviewTimestamp);
 
       const characters: string[] = getCharactersFromExpression(
         review.expression,
       );
 
       for (const literal of characters) {
-        const cardStatistics = await this.getCardStatisticsByCharacter(literal);
-
-        if (!cardStatistics) {
-          throw new Error(`Card statistics not found for character ${literal}`);
-        }
-
         const merged = mergeStatisticsByCharacter(
           statisticsByCharacters.get(literal),
           {
             literal,
-            firstAdded: cardStatistics.firstAdded,
+            firstAdded: null,
             firstReviewed: reviewDate?.toString() || null,
             lastReviewed: reviewDate?.toString() || null,
             numberOfReviews: reviewDate ? 1 : 0,
-            numberOfCards: cardStatistics.numberOfCards,
+            numberOfCards: 0,
           },
         );
         statisticsByCharacters.set(literal, merged);
       }
+    }
+
+    for (const stats of statisticsByCharacters.values()) {
+      const cardStatistics = await this.getCardStatisticsByCharacter(
+        stats.literal,
+      );
+
+      if (!cardStatistics) {
+        throw new Error(
+          `Card statistics not found for character ${stats.literal}`,
+        );
+      }
+
+      stats.firstAdded = timestampToDate(
+        cardStatistics.firstAdded,
+        context.timeZoneConfig,
+      ).toString();
+      stats.numberOfCards = cardStatistics.numberOfCards;
     }
 
     return {

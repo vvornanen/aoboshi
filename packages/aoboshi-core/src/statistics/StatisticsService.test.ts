@@ -1,6 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { mock } from "vitest-mock-extended";
-import { Temporal } from "@js-temporal/polyfill";
 import * as fixtures from "./statisticsFixtures";
 import {
   AnalysisContext,
@@ -34,8 +33,16 @@ const statisticsService = new StatisticsService(
   statisticsIncrementRepository,
 );
 
+const mockPerformace = mock<Performance>();
+vi.stubGlobal("performance", mockPerformace);
+
 beforeEach(() => {
   mockRandomId();
+
+  mockPerformace.mark.mockImplementation((name) => new PerformanceMark(name));
+  mockPerformace.measure.mockReturnValueOnce(
+    mock<PerformanceMeasure>({ duration: 1213 }),
+  );
 });
 
 afterEach(() => {
@@ -86,9 +93,6 @@ describe("generateStatistics", () => {
 
   test("saves increment", async () => {
     mockRandomId("random id");
-    const spy = vi.spyOn(Temporal.Now, "instant");
-    spy.mockReturnValueOnce(Temporal.Instant.from("2016-01-14T12:15:10.121Z"));
-    spy.mockReturnValueOnce(Temporal.Instant.from("2016-01-14T12:15:11.334Z"));
 
     await statisticsService.generateStatistics(testCase.reviews);
 
@@ -97,21 +101,20 @@ describe("generateStatistics", () => {
       start: null,
       end: testCase.latestReviewTime,
       numberOfReviews: 1,
+      numberOfNewCards: 0,
       duration: 1213,
     } satisfies StatisticsIncrement);
   });
 
   test("continues from previous increment", async () => {
     mockRandomId("random id");
-    const spy = vi.spyOn(Temporal.Now, "instant");
-    spy.mockReturnValueOnce(Temporal.Instant.from("2016-01-14T12:15:10.121Z"));
-    spy.mockReturnValueOnce(Temporal.Instant.from("2016-01-14T12:15:11.334Z"));
 
     statisticsIncrementRepository.findLatest.mockReturnValueOnce({
       id: "existing id",
       start: null,
       end: "2016-01-13T17:02:13.111Z",
       numberOfReviews: 1,
+      numberOfNewCards: 0,
       duration: 213,
     } satisfies StatisticsIncrement);
 
@@ -122,6 +125,35 @@ describe("generateStatistics", () => {
       start: "2016-01-13T17:02:13.111Z",
       end: testCase.latestReviewTime,
       numberOfReviews: 1,
+      numberOfNewCards: 0,
+      duration: 1213,
+    } satisfies StatisticsIncrement);
+  });
+
+  test("saves number of new cards", async () => {
+    const testCase = fixtures.oneNewCardNoReviews;
+
+    const context: AnalysisContext = {
+      reviews: testCase.reviews,
+      statisticsByCharacters: testCase.statisticsByCharacters,
+      reviewDays: testCase.reviewDays,
+      latestReviewTime: testCase.latestReviewTime,
+      timeZoneConfig: testCase.timeZoneConfig,
+    };
+
+    analyzer1.run.mockReset();
+    analyzer1.run.mockReturnValueOnce(context);
+
+    mockRandomId("random id");
+
+    await statisticsService.generateStatistics(testCase.reviews);
+
+    expect(statisticsIncrementRepository.save).toHaveBeenCalledWith({
+      id: "random id",
+      start: null,
+      end: null,
+      numberOfReviews: 0,
+      numberOfNewCards: 1,
       duration: 1213,
     } satisfies StatisticsIncrement);
   });

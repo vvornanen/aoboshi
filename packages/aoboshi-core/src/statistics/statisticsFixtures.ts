@@ -37,7 +37,7 @@ export const oneCardOneReview = {
     if (literal === "学") {
       return {
         literal: "学",
-        firstAdded: "2016-01-12",
+        firstAdded: "2016-01-12T12:45:00Z",
         numberOfCards: 1,
       };
     }
@@ -73,7 +73,7 @@ export const oneNewCardNoReviews = {
     if (literal === "学") {
       return {
         literal: "学",
-        firstAdded: "2016-01-12",
+        firstAdded: "2016-01-12T14:14:18Z",
         numberOfCards: 1,
       };
     }
@@ -125,19 +125,19 @@ export const multipleReviews = {
     if (literal === "学") {
       return {
         literal: "学",
-        firstAdded: "2016-01-12",
+        firstAdded: "2016-01-12T08:14:59Z",
         numberOfCards: 2,
       };
     } else if (literal === "大") {
       return {
         literal: "大",
-        firstAdded: "2016-01-12",
+        firstAdded: "2016-01-12T18:19:02Z",
         numberOfCards: 1,
       };
     } else if (literal === "日") {
       return {
         literal: "日",
-        firstAdded: "2015-12-01",
+        firstAdded: "2015-12-01T21:58:04Z",
         numberOfCards: 5,
       };
     }

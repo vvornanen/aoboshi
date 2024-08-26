@@ -4,7 +4,7 @@ import {
   CharacterRepository,
   getCodePoint,
 } from "@vvornanen/aoboshi-core/characters";
-import { AbstractSqliteRepository } from "~/worker";
+import { AbstractSqliteRepository, PreparedStatement } from "~/worker";
 
 type CharacterRow = {
   id: number;
@@ -25,38 +25,6 @@ export class CharacterSqliteRepository
     super(db, "Character");
   }
 
-  save(character: Character): void {
-    try {
-      this.db
-        .prepare(
-          `
-            insert into Character (id, literal, radical, grade, strokeCount, onyomi, kunyomi,
-                                   strokes)
-            values (@id, @literal, @radical, @grade, @strokeCount, @onyomi, @kunyomi, @strokes)
-            on conflict do update set radical     = @radical,
-                                      grade       = @grade,
-                                      strokeCount = @strokeCount,
-                                      onyomi      = @onyomi,
-                                      kunyomi     = @kunyomi,
-                                      strokes     = @strokes
-        `,
-        )
-        .run({
-          id: this.getId(character),
-          literal: character.literal,
-          radical: character.radical,
-          grade: character.grade,
-          strokeCount: character.strokeCount,
-          onyomi: JSON.stringify(character.onyomi),
-          kunyomi: JSON.stringify(character.kunyomi),
-          strokes: character.strokes || null,
-        });
-    } catch (error) {
-      console.error(error);
-      throw new Error(`Could not save character [${character.literal}]`);
-    }
-  }
-
   findByLiteral(literal: string): Character | null {
     return this.findById(getCodePoint(literal));
   }
@@ -67,6 +35,22 @@ export class CharacterSqliteRepository
 
   deleteByLiteral(literal: string): void {
     this.deleteById(getCodePoint(literal));
+  }
+
+  protected prepareSave(): PreparedStatement<CharacterRow> {
+    return this.db.prepare(
+      `
+            insert into Character (id, literal, radical, grade, strokeCount, onyomi, kunyomi,
+                                   strokes)
+            values (@id, @literal, @radical, @grade, @strokeCount, @onyomi, @kunyomi, @strokes)
+            on conflict do update set radical     = @radical,
+                                      grade       = @grade,
+                                      strokeCount = @strokeCount,
+                                      onyomi      = @onyomi,
+                                      kunyomi     = @kunyomi,
+                                      strokes     = @strokes
+        `,
+    );
   }
 
   protected getId(entity: Character): number {
@@ -83,6 +67,19 @@ export class CharacterSqliteRepository
       onyomi: JSON.parse(row.onyomi),
       kunyomi: JSON.parse(row.kunyomi),
       strokes: row.strokes || undefined,
+    };
+  }
+
+  protected toRow(entity: Character): CharacterRow {
+    return {
+      id: this.getId(entity),
+      literal: entity.literal,
+      radical: entity.radical,
+      grade: entity.grade,
+      strokeCount: entity.strokeCount,
+      onyomi: JSON.stringify(entity.onyomi),
+      kunyomi: JSON.stringify(entity.kunyomi),
+      strokes: entity.strokes || null,
     };
   }
 }

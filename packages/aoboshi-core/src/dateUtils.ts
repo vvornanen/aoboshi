@@ -87,3 +87,57 @@ export const nullableMaxDate = (
 };
 
 const nonEmpty = <T>(value: T | undefined | null): value is T => !!value;
+
+/** Returns true if the first timestamp is after the second timestamp */
+export const isInstantAfter = (
+  first: Temporal.Instant | string | null | undefined,
+  second: Temporal.Instant | string | null | undefined,
+): boolean => {
+  if (!first || !second) {
+    return false;
+  }
+
+  return Temporal.Instant.compare(first, second) > 0;
+};
+
+/**
+ * Returns the latest of the given timestamps.
+ *
+ * @param values Instant objects or ISO 8601 datetime strings
+ */
+export const maxInstant = (...values: (string | Temporal.Instant)[]) => {
+  if (values.length === 0) {
+    throw new Error("Expected at least one instant as argument");
+  }
+
+  let max = Temporal.Instant.from(values[0]);
+
+  for (const value of values) {
+    const date = Temporal.Instant.from(value);
+    if (!max || Temporal.Instant.compare(max, date) < 0) {
+      max = date;
+    }
+  }
+
+  return max;
+};
+
+/**
+ * Returns the latest of the given timestamps.
+ *
+ * Ignores all falsy values.
+ *
+ * @param values nullable Instant objects or ISO 8601 datetime strings
+ * @return undefined if all given values are null or undefined
+ */
+export const nullableMaxInstant = (
+  ...values: (string | Temporal.Instant | undefined | null)[]
+): Temporal.Instant | undefined => {
+  const nonEmptyValues = values.filter(nonEmpty);
+
+  if (nonEmptyValues.length === 0) {
+    return undefined;
+  }
+
+  return maxInstant(...nonEmptyValues);
+};

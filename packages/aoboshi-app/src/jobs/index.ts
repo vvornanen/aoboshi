@@ -6,6 +6,10 @@ const jobs = [
     name: "import-kanji",
     timeout: false, // Run only manually or from migration
   },
+  {
+    name: "anki-statistics",
+    timeout: 0, // Job runs indefinitely
+  },
 ] as const satisfies JobOptions[];
 
 /** Union of valid job names that can be passed to the Scheduler */

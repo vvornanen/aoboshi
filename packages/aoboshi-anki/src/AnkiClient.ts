@@ -9,6 +9,16 @@ import {
 import { AnkiAction, AnkiRequest } from "./AnkiRequest";
 import { AnkiResponse } from "./AnkiResponse";
 
+export type AnkiGetReviewsResponse = {
+  meta: {
+    start: string;
+    limit?: number;
+    numberOfReviews: number;
+    totalNumberOfReviews: number;
+  };
+  reviews: AnkiCardReview[];
+};
+
 /**
  * Client for AnkiConnect API.
  *
@@ -57,15 +67,28 @@ export class AnkiClient {
   }
 
   /**
-   * Finds cards matching the given query.
+   * Finds card ids matching the given query.
+   *
+   * A faster alternative to {@link findCards} when only ids are sufficient.
    *
    * @param query Anki search query
    * @see https://docs.ankiweb.net/searching.html
    */
-  async findCards(query: string): Promise<AnkiCard[]> {
-    const cardIds = await this.doFetch<number[]>("findCards", {
+  async findCardIds(query: string): Promise<number[]> {
+    return this.doFetch<number[]>("findCards", {
       query,
     });
+  }
+
+  /**
+   * Finds cards matching the given query.
+   *
+   * @param query Anki search query
+   * @see findCardIds
+   * @see https://docs.ankiweb.net/searching.html
+   */
+  async findCards(query: string): Promise<AnkiCard[]> {
+    const cardIds = await this.findCardIds(query);
 
     if (cardIds.length === 0) {
       return [];
@@ -103,14 +126,36 @@ export class AnkiClient {
    *
    * @param deckName
    * @param start latest ISO 8601 timestamp not included in the result
+   * @param limit optionally, maximum number of reviews to return
    */
-  async getReviews(deckName: string, start: string): Promise<AnkiCardReview[]> {
+  async getReviews(
+    deckName: string,
+    start: string,
+    limit?: number,
+  ): Promise<AnkiGetReviewsResponse> {
     const result = await this.doFetch<AnkiCardReviewTuple[]>("cardReviews", {
       deck: deckName,
       startID: Temporal.Instant.from(start).epochMilliseconds,
     });
 
-    return result.map(fromTuple);
+    // Order by review time asc
+    result.sort((a, b) => a[0] - b[0]);
+
+    const totalNumberOfReviews = result.length;
+
+    if (limit !== undefined) {
+      result.length = Math.min(limit, result.length);
+    }
+
+    return {
+      meta: {
+        start,
+        limit,
+        numberOfReviews: result.length,
+        totalNumberOfReviews,
+      },
+      reviews: result.map(fromTuple),
+    };
   }
 
   /**

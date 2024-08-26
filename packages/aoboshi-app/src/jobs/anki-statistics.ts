@@ -5,9 +5,13 @@ import {
   NewCard,
   StatisticsIncrement,
 } from "@vvornanen/aoboshi-core/statistics";
-import { AnkiCard, AnkiCardReview } from "@vvornanen/aoboshi-anki";
+import {
+  AnkiCard,
+  AnkiCardReview,
+  AnkiGetReviewsResponse,
+} from "@vvornanen/aoboshi-anki";
 import { FibonacciScheduler, isInstantAfter } from "@vvornanen/aoboshi-core";
-import { Logger, getApplicationContext } from "~/worker";
+import { Logger, getApplicationContext, postMessage } from "~/worker";
 
 const {
   ankiClient,
@@ -50,22 +54,31 @@ const getCardsForReviews = async (reviews: AnkiCardReview[]) => {
 
 const getExpression = (card: AnkiCard) => card.fields["Expression"]?.value;
 
-const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
+const fetchReviews = async (
+  limit = 100,
+): Promise<{ meta: AnkiGetReviewsResponse["meta"]; reviews: CardReview[] }> => {
   const latestReviewTimestamp = await getLatestReviewTimestamp();
   const lastSyncTimestamp = getLastSyncTimestamp();
 
   if (!isInstantAfter(latestReviewTimestamp, lastSyncTimestamp)) {
-    return [];
+    return {
+      meta: {
+        start: lastSyncTimestamp.toString(),
+        numberOfReviews: 0,
+        totalNumberOfReviews: 0,
+      },
+      reviews: [],
+    };
   }
 
-  const { reviews } = await ankiClient.getReviews(
+  const { meta, reviews } = await ankiClient.getReviews(
     deckName,
     lastSyncTimestamp.toString(),
     limit,
   );
   const cards = await getCardsForReviews(reviews);
 
-  return reviews
+  const result = reviews
     .map((review) => {
       const card = cards.get(review.cardId);
 
@@ -83,6 +96,8 @@ const fetchReviews = async (limit = 100): Promise<CardReview[]> => {
       };
     })
     .filter((review) => review !== null);
+
+  return { meta, reviews: result };
 };
 
 const fetchNewCards = async (): Promise<NewCard[]> => {
@@ -113,33 +128,75 @@ const logProcessing = (reviews: CardReview[]) => {
   );
 };
 
-const logResult = (increment: StatisticsIncrement) => {
+const logResult = (
+  increment: StatisticsIncrement,
+  numberOfReviewsProcessed: number,
+  totalNumberOfReviews: number,
+) => {
   logger.info(
-    `Processed ${increment.numberOfReviews} reviews${increment.numberOfNewCards > 0 ? ` and ${increment.numberOfNewCards} new cards` : ""} from ${increment.start} to ${increment.end} in ${Math.round(increment.duration)}ms`,
+    `Processed ${numberOfReviewsProcessed}/${totalNumberOfReviews} reviews${increment.numberOfNewCards > 0 ? ` and ${increment.numberOfNewCards} new cards` : ""} from ${increment.start} to ${increment.end} in ${Math.round(increment.duration)}ms`,
   );
+};
+
+const limit = 1000;
+let numberOfReviewsProcessed = 0;
+let totalNumberOfReviews = 0;
+
+const resetProgress = () => {
+  numberOfReviewsProcessed = 0;
+  totalNumberOfReviews = 0;
+  reportProgress();
+};
+
+const updateProgress = (
+  numberOfReviewsInIncrement: number,
+  numberOfReviewsRemaining: number,
+) => {
+  totalNumberOfReviews =
+    numberOfReviewsProcessed +
+    numberOfReviewsInIncrement +
+    numberOfReviewsRemaining;
+  numberOfReviewsProcessed += numberOfReviewsInIncrement;
+  reportProgress();
+};
+
+const isLongRunningProcess = () => totalNumberOfReviews > limit;
+
+const reportProgress = () => {
+  const value =
+    totalNumberOfReviews > 0 && isLongRunningProcess()
+      ? numberOfReviewsProcessed / totalNumberOfReviews
+      : -1;
+  postMessage({ type: "progress", value });
 };
 
 const run = async (): Promise<number> => {
   const startMark = performance.mark("startAnkiStatistics").name;
   logStart();
 
-  const limit = 1000;
+  const { meta, reviews } = await fetchReviews(limit);
 
-  const reviews = await fetchReviews(limit);
+  if (reviews.length === 0) {
+    logAlreadyUpToDate();
+    resetProgress();
+    return 0;
+  }
+
+  updateProgress(0, meta.totalNumberOfReviews);
+
   const newCards = await fetchNewCards();
   const reviewsAndNewCards: (CardReview | NewCard)[] = [
     ...reviews,
     ...newCards,
   ];
 
-  if (reviews.length === 0) {
-    logAlreadyUpToDate();
-    return 0;
-  }
-
   logProcessing(reviews);
   const increment = await doGenerateStatistics(reviewsAndNewCards, startMark);
-  logResult(increment);
+  updateProgress(
+    increment.numberOfReviews,
+    meta.totalNumberOfReviews - increment.numberOfReviews,
+  );
+  logResult(increment, numberOfReviewsProcessed, totalNumberOfReviews);
 
   return reviews.length;
 };
@@ -158,12 +215,8 @@ const scheduler = new FibonacciScheduler(async () => {
 
 const cancel = () => {
   scheduler.stop();
-
-  if (parentPort) {
-    parentPort.postMessage("cancelled");
-  } else {
-    process.exit(1);
-  }
+  resetProgress();
+  postMessage("cancelled");
 };
 
 scheduler.start();

@@ -13,10 +13,6 @@ export class StatisticsService {
     private statisticsIncrementRepository: StatisticsIncrementRepository,
   ) {}
 
-  markStartGenerateStatistics() {
-    performance.mark("startGenerateStatistics");
-  }
-
   /**
    * Generates statistics using the configured analyzers.
    *

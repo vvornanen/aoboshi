@@ -55,7 +55,7 @@ export const oneCardOneReview = {
       numberOfCards: 1,
     },
   ] satisfies StatisticsByCharacter[],
-  reviewDays: ["2016-01-13"],
+  reviewDays: ["2016-01-12", "2016-01-13"],
   latestReviewTime: "2016-01-13T19:57:33.016Z",
   timeZoneConfig,
 } satisfies TestCase;
@@ -91,7 +91,7 @@ export const oneNewCardNoReviews = {
       numberOfCards: 1,
     },
   ],
-  reviewDays: [],
+  reviewDays: ["2016-01-12"],
   latestReviewTime: undefined,
   timeZoneConfig,
 } satisfies TestCase;
@@ -173,7 +173,7 @@ export const multipleReviews = {
       numberOfCards: 5,
     },
   ],
-  reviewDays: ["2016-01-13", "2016-01-14"],
+  reviewDays: ["2015-12-01", "2016-01-12", "2016-01-13", "2016-01-14"],
   latestReviewTime: "2016-01-14T20:15:02.330Z",
   timeZoneConfig,
 } satisfies TestCase;

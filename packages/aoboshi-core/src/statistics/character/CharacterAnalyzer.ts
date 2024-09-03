@@ -102,6 +102,7 @@ export class CharacterAnalyzer implements Analyzer {
         context.timeZoneConfig,
       ).toString();
       stats.numberOfCards = cardStatistics.numberOfCards;
+      reviewDays.add(stats.firstAdded);
     }
 
     return {
@@ -109,7 +110,7 @@ export class CharacterAnalyzer implements Analyzer {
       latestReviewTime: latestReviewTime?.toString({
         smallestUnit: "millisecond",
       }),
-      reviewDays: Array.from(reviewDays),
+      reviewDays: Array.from(reviewDays).sort(),
     };
   }
 

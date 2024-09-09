@@ -40,6 +40,10 @@ export class MainWindow {
       this.window = null;
     });
 
+    this.window.on("close", () => {
+      this.window?.setProgressBar(-1);
+    });
+
     // and load the index.html of the app.
     if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
       await this.window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
@@ -52,5 +56,9 @@ export class MainWindow {
 
   send(eventType: IpcEventType, payload: unknown) {
     this.window?.webContents.send(eventType, payload);
+  }
+
+  setProgress(value: number) {
+    this.window?.setProgressBar(value);
   }
 }

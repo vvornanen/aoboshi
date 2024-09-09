@@ -4,6 +4,7 @@ import { MainApplicationContext } from "~/main";
 import {
   OnAfterInit,
   isInvalidateTagsMessage,
+  isProgressMessage,
   propertiesAsEnv,
 } from "~/worker";
 import { IpcEventType } from "~/preload";
@@ -30,6 +31,8 @@ export class Scheduler implements OnAfterInit {
       workerMessageHandler: ({ message }: WorkerMessage) => {
         if (isInvalidateTagsMessage(message)) {
           context.mainWindow.send(IpcEventType.InvalidateTags, message.tags);
+        } else if (isProgressMessage(message)) {
+          context.mainWindow.setProgress(message.value);
         }
       },
     });

@@ -1,7 +1,6 @@
 import { Database } from "better-sqlite3";
 import { BookRepository } from "@vvornanen/aoboshi-core/books";
 import { CharacterRepository } from "@vvornanen/aoboshi-core/characters";
-import { AnkiClient } from "@vvornanen/aoboshi-anki";
 import {
   StatisticsIncrementRepository,
   StatisticsService,
@@ -29,6 +28,11 @@ import {
   StatisticsByDaySqliteRepository,
   StatisticsIncrementSqliteRepository,
 } from "~/worker/statistics";
+import {
+  AppSettingsService,
+  SettingsRepository,
+  SettingsSqliteRepository,
+} from "~/worker/settings";
 
 /**
  * Services may implement this interface if they need to call other services
@@ -54,9 +58,10 @@ const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
  */
 export class ApplicationContext implements OnAfterInit {
   database: Database;
+  settingsRepository: SettingsRepository;
+  settingsService: AppSettingsService;
   bookRepository: BookRepository;
   characterRepository: CharacterRepository;
-  ankiClient: AnkiClient;
   ankiService: AnkiService;
   statisticsIncrementRepository: StatisticsIncrementRepository;
   statisticsByCharacterRepository: StatisticsByCharacterRepository;
@@ -70,19 +75,15 @@ export class ApplicationContext implements OnAfterInit {
       properties.logLevel === "trace",
     );
 
+    this.settingsRepository = new SettingsSqliteRepository(this.database);
+    this.settingsService = new AppSettingsService(this.settingsRepository);
+
     // Core repositories
     this.bookRepository = new BookSqliteRepository(this.database);
     this.characterRepository = new CharacterSqliteRepository(this.database);
 
     // Anki integration
-    this.ankiClient = new AnkiClient(
-      properties.anki.url,
-      properties.anki.apiKey,
-    );
-    this.ankiService = new AnkiService(
-      this.ankiClient,
-      properties.anki.deckName,
-    );
+    this.ankiService = new AnkiService(properties, this.settingsService);
     const ankiCardStatisticsAdapter = createAnkiCardStatisticsAdapter(
       this.ankiService,
     );
@@ -111,6 +112,7 @@ export class ApplicationContext implements OnAfterInit {
         ),
       ],
       this.statisticsIncrementRepository,
+      this.settingsService,
     );
   }
 
@@ -139,11 +141,6 @@ export const getApplicationContext = (): ApplicationContext => {
       dbFilename: getEnvironmentVariable("DB_FILENAME"),
       resourcesPath: getEnvironmentVariable("RESOURCES_PATH"),
       logLevel: getEnvironmentVariable("LOGLEVEL"),
-      anki: {
-        url: getEnvironmentVariable("ANKI_URL", ""),
-        apiKey: getEnvironmentVariable("ANKI_API_KEY", ""),
-        deckName: getEnvironmentVariable("ANKI_DECK_NAME", ""),
-      },
     };
 
     applicationContext = new ApplicationContext(properties);

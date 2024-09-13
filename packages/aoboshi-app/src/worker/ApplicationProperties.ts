@@ -2,11 +2,6 @@ export type ApplicationProperties = {
   dbFilename: string;
   resourcesPath: string;
   logLevel: string;
-  anki: {
-    url: string;
-    apiKey: string;
-    deckName: string; // For now, only one deck is supported
-  };
 };
 
 export type ApplicationEnvironmentVariable =
@@ -41,7 +36,7 @@ export const propertiesAsEnv = (
   DB_FILENAME: properties.dbFilename,
   RESOURCES_PATH: properties.resourcesPath,
   LOGLEVEL: properties.logLevel,
-  ANKI_URL: properties.anki.url,
-  ANKI_API_KEY: properties.anki.apiKey,
-  ANKI_DECK_NAME: properties.anki.deckName,
+  ANKI_URL: getEnvironmentVariable("ANKI_URL", ""),
+  ANKI_API_KEY: getEnvironmentVariable("ANKI_API_KEY", ""),
+  ANKI_DECK_NAME: getEnvironmentVariable("ANKI_DECK_NAME", ""),
 });

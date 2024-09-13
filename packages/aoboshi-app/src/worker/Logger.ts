@@ -20,6 +20,10 @@ export class Logger {
     this.logLevel = logLevel.toLowerCase();
   }
 
+  isDebugEnabled() {
+    return ["debug", "trace"].includes(this.logLevel);
+  }
+
   error(message: string) {
     this.log("ERROR", message);
   }
@@ -29,7 +33,7 @@ export class Logger {
   }
 
   debug(message: string) {
-    if (["debug", "trace"].includes(this.logLevel)) {
+    if (this.isDebugEnabled()) {
       this.log("DEBUG", message);
     }
   }

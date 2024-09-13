@@ -5,17 +5,13 @@ import {
   NewCard,
   StatisticsIncrement,
 } from "@vvornanen/aoboshi-core/statistics";
-import {
-  AnkiCard,
-  AnkiCardReview,
-  AnkiGetReviewsResponse,
-} from "@vvornanen/aoboshi-anki";
-import { FibonacciScheduler, isInstantAfter } from "@vvornanen/aoboshi-core";
+import { FibonacciScheduler } from "@vvornanen/aoboshi-core";
 import { Logger, getApplicationContext, postMessage } from "~/worker";
 
 const {
-  ankiClient,
+  ankiService,
   properties,
+  settingsService,
   statisticsService,
   statisticsIncrementRepository,
   database,
@@ -24,89 +20,11 @@ const {
 const logger = new Logger(workerData.job?.name);
 logger.setLogLevel(properties.logLevel);
 
-const deckName = properties.anki.deckName;
-
 const getLastSyncTimestamp = () => {
   const lastIncrement = statisticsIncrementRepository.findLatest();
   return lastIncrement?.end
     ? Temporal.Instant.from(lastIncrement.end)
     : Temporal.Instant.fromEpochSeconds(0);
-};
-
-const getLatestReviewTimestamp = async () => {
-  const result = await ankiClient.getLatestReviewTimestamp(deckName);
-  return result === null ? null : Temporal.Instant.from(result);
-};
-
-const getUniqueCardIds = (reviews: AnkiCardReview[]) => {
-  const cardIds = new Set<number>(reviews.map((review) => review.cardId));
-  return Array.from(cardIds);
-};
-
-const getCardsForReviews = async (reviews: AnkiCardReview[]) => {
-  const cards = await ankiClient.getCards(getUniqueCardIds(reviews));
-
-  const cardsMap = new Map<number, AnkiCard>();
-  cards.forEach((card) => cardsMap.set(card.id, card));
-
-  return cardsMap;
-};
-
-const getExpression = (card: AnkiCard) => card.fields["Expression"]?.value;
-
-const fetchReviews = async (
-  limit = 100,
-): Promise<{ meta: AnkiGetReviewsResponse["meta"]; reviews: CardReview[] }> => {
-  const latestReviewTimestamp = await getLatestReviewTimestamp();
-  const lastSyncTimestamp = getLastSyncTimestamp();
-
-  if (!isInstantAfter(latestReviewTimestamp, lastSyncTimestamp)) {
-    return {
-      meta: {
-        start: lastSyncTimestamp.toString(),
-        numberOfReviews: 0,
-        totalNumberOfReviews: 0,
-      },
-      reviews: [],
-    };
-  }
-
-  const { meta, reviews } = await ankiClient.getReviews(
-    deckName,
-    lastSyncTimestamp.toString(),
-    limit,
-  );
-  const cards = await getCardsForReviews(reviews);
-
-  const result = reviews
-    .map((review) => {
-      const card = cards.get(review.cardId);
-
-      if (!card) {
-        logger.error(
-          `Card ${review.cardId} was not found, review time ${review.reviewTime}`,
-        );
-        return null;
-      }
-
-      return {
-        cardId: review.cardId,
-        reviewTime: review.reviewTime,
-        expression: getExpression(card),
-      };
-    })
-    .filter((review) => review !== null);
-
-  return { meta, reviews: result };
-};
-
-const fetchNewCards = async (): Promise<NewCard[]> => {
-  const cards = await ankiClient.findCards(`deck:${deckName} is:new`);
-
-  return cards.map((card) => ({
-    cardId: card.id,
-    expression: getExpression(card),
-  }));
 };
 
 const doGenerateStatistics = database.transaction(
@@ -115,7 +33,12 @@ const doGenerateStatistics = database.transaction(
 );
 
 const logStart = () => {
-  logger.debug(`Generating statistics from Anki deck ${deckName}`);
+  if (logger.isDebugEnabled()) {
+    const settings = settingsService.getSettings();
+    logger.debug(
+      `Generating statistics from Anki deck ${settings.anki?.deckName}`,
+    );
+  }
 };
 
 const logAlreadyUpToDate = () => {
@@ -174,7 +97,10 @@ const run = async (): Promise<number> => {
   const startMark = performance.mark("startAnkiStatistics").name;
   logStart();
 
-  const { meta, reviews } = await fetchReviews(limit);
+  const { meta, reviews } = await ankiService.fetchReviews(
+    getLastSyncTimestamp(),
+    limit,
+  );
 
   if (reviews.length === 0) {
     logAlreadyUpToDate();
@@ -184,7 +110,7 @@ const run = async (): Promise<number> => {
 
   updateProgress(0, meta.totalNumberOfReviews);
 
-  const newCards = await fetchNewCards();
+  const newCards = await ankiService.fetchNewCards();
   const reviewsAndNewCards: (CardReview | NewCard)[] = [
     ...reviews,
     ...newCards,
@@ -219,10 +145,10 @@ const cancel = () => {
   postMessage("cancelled");
 };
 
-if (!properties.anki.url) {
+const settings = settingsService.getSettings();
+
+if (!settings.anki) {
   logger.info("Skipping because Anki integration is disabled");
-} else if (!deckName) {
-  throw new Error("Anki deck not defined");
 } else {
   scheduler.start();
 }

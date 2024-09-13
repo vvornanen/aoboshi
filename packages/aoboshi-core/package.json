@@ -12,6 +12,7 @@
     "./characters": "./dist/characters/index.js",
     "./collections": "./dist/collections/index.js",
     "./fixtures/*": "./dist/fixtures/*.js",
+    "./settings": "./dist/settings/index.js",
     "./statistics": "./dist/statistics/index.js",
     "./statisticsFixtures": "./dist/statistics/statisticsFixtures.js",
     "./statistics/chapter": "./dist/statistics/chapter/index.js",

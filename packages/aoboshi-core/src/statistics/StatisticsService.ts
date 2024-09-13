@@ -1,16 +1,17 @@
 import { StatisticsIncrementRepository } from "./StatisticsIncrementRepository";
 import { CardReview, NewCard, isReview } from "./CardReview";
 import { StatisticsIncrement } from "./StatisticsIncrement";
-import { TimeZoneConfig } from "./statisticsUtils";
 import { Analyzer } from "./Analyzer";
 import { AnalysisContext } from "./AnalysisContext";
 import { randomId } from "~";
+import { SettingsService } from "~/settings";
 
 /** Generates statistics from card reviews */
 export class StatisticsService {
   constructor(
     private analyzers: Analyzer[],
     private statisticsIncrementRepository: StatisticsIncrementRepository,
+    private settingsService: SettingsService,
   ) {}
 
   /**
@@ -74,7 +75,6 @@ export class StatisticsService {
   }
 
   private getTimeZoneConfig() {
-    // TODO: Get time zones from settings service
-    return [{ timeZone: "UTC" }] satisfies TimeZoneConfig[];
+    return this.settingsService.getSettings().timeZoneConfig;
   }
 }

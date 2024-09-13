@@ -29,6 +29,11 @@ import {
   StatisticsByDaySqliteRepository,
   StatisticsIncrementSqliteRepository,
 } from "~/worker/statistics";
+import {
+  SettingsRepository,
+  SettingsService,
+  SettingsSqliteRepository,
+} from "~/worker/settings";
 
 /**
  * Services may implement this interface if they need to call other services
@@ -54,6 +59,8 @@ const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
  */
 export class ApplicationContext implements OnAfterInit {
   database: Database;
+  settingsRepository: SettingsRepository;
+  settingsService: SettingsService;
   bookRepository: BookRepository;
   characterRepository: CharacterRepository;
   ankiClient: AnkiClient;
@@ -69,6 +76,9 @@ export class ApplicationContext implements OnAfterInit {
       properties.dbFilename,
       properties.logLevel === "trace",
     );
+
+    this.settingsRepository = new SettingsSqliteRepository(this.database);
+    this.settingsService = new SettingsService(this.settingsRepository);
 
     // Core repositories
     this.bookRepository = new BookSqliteRepository(this.database);

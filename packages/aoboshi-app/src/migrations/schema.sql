@@ -74,3 +74,8 @@ CREATE TABLE StatisticsByChapter
 CREATE UNIQUE INDEX StatisticsByChapter_book_chapter
             on StatisticsByChapter (bookId, chapterId)
     ;
+CREATE TABLE Settings
+        (
+            id       int primary key,
+            settings text
+        );

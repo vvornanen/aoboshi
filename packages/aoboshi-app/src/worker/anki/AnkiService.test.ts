@@ -12,7 +12,7 @@ import { mock } from "vitest-mock-extended";
 import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
 import { Temporal } from "@js-temporal/polyfill";
 import { AnkiService } from "~/worker/anki";
-import { SettingsService } from "~/worker/settings";
+import { AppSettingsService } from "~/worker/settings";
 
 const deckName = "test";
 const ttl = Temporal.Duration.from({ milliseconds: 1000 });
@@ -25,7 +25,7 @@ const cardIds = Array.from(
     ).epochMilliseconds,
 );
 
-const mockSettingsService = mock<SettingsService>();
+const mockSettingsService = mock<AppSettingsService>();
 const mockAnkiClient = mock<AnkiClient>();
 let ankiService: AnkiService;
 

@@ -1,6 +1,6 @@
 import { Repository } from "@vvornanen/aoboshi-core";
-import { Settings } from "~/worker/settings";
+import { AppSettings } from "~/worker/settings";
 
-export interface SettingsRepository extends Repository<Settings, number> {
-  find(): Settings | null;
+export interface SettingsRepository extends Repository<AppSettings, number> {
+  find(): AppSettings | null;
 }

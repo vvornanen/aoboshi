@@ -3,7 +3,7 @@ import path from "node:path";
 import BetterSqlite3 from "better-sqlite3";
 import { afterEach, beforeAll, expect, test } from "vitest";
 import {
-  Settings,
+  AppSettings,
   SettingsRepository,
   SettingsSqliteRepository,
 } from "~/worker/settings";
@@ -26,7 +26,9 @@ afterEach(() => {
 });
 
 test("save inserts new row", () => {
-  const expected = { timeZoneConfig: [{ timeZone: "UTC" }] } satisfies Settings;
+  const expected = {
+    timeZoneConfig: [{ timeZone: "UTC" }],
+  } satisfies AppSettings;
   settingsRepository.save(expected);
   const actual = settingsRepository.find();
   expect(actual).toEqual(expected);
@@ -44,7 +46,7 @@ test("save updates existing row", () => {
       apiKey: "test",
       deckName: "test",
     },
-  } satisfies Settings;
+  } satisfies AppSettings;
 
   settingsRepository.save(expected);
   const actual = settingsRepository.find();

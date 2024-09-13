@@ -1,6 +1,6 @@
 import { Database } from "better-sqlite3";
 import { AbstractSqliteRepository, PreparedStatement } from "~/worker";
-import { Settings } from "~/worker/settings/Settings";
+import { AppSettings } from "~/worker/settings/AppSettings";
 import { SettingsRepository } from "~/worker/settings/SettingsRepository";
 
 type SettingsRow = {
@@ -9,14 +9,14 @@ type SettingsRow = {
 };
 
 export class SettingsSqliteRepository
-  extends AbstractSqliteRepository<Settings, SettingsRow, number>
+  extends AbstractSqliteRepository<AppSettings, SettingsRow, number>
   implements SettingsRepository
 {
   constructor(db: Database) {
     super(db, "Settings");
   }
 
-  find(): Settings | null {
+  find(): AppSettings | null {
     return this.findById(this.getId());
   }
 
@@ -34,11 +34,11 @@ export class SettingsSqliteRepository
     return 1;
   }
 
-  protected toEntity(row: SettingsRow): Settings {
+  protected toEntity(row: SettingsRow): AppSettings {
     return JSON.parse(row.settings);
   }
 
-  protected toRow(entity: Settings): SettingsRow {
+  protected toRow(entity: AppSettings): SettingsRow {
     return {
       id: 1,
       settings: JSON.stringify(entity),

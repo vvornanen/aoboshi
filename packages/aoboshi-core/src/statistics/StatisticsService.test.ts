@@ -9,6 +9,7 @@ import {
   StatisticsService,
 } from "~/statistics";
 import { randomId } from "~/randomId";
+import { SettingsService } from "~/settings";
 
 vi.mock("~/randomId", () => {
   return {
@@ -24,6 +25,8 @@ const mockRandomId = (value?: string) => {
   }
 };
 
+const mockSettingsService = mock<SettingsService>();
+
 const statisticsIncrementRepository = mock<StatisticsIncrementRepository>();
 const analyzer1 = mock<Analyzer>();
 const analyzer2 = mock<Analyzer>();
@@ -31,6 +34,7 @@ const analyzer2 = mock<Analyzer>();
 const statisticsService = new StatisticsService(
   [analyzer1, analyzer2],
   statisticsIncrementRepository,
+  mockSettingsService,
 );
 
 const mockPerformace = mock<Performance>();
@@ -38,6 +42,10 @@ vi.stubGlobal("performance", mockPerformace);
 
 beforeEach(() => {
   mockRandomId();
+
+  mockSettingsService.getSettings.mockReturnValue({
+    timeZoneConfig: [{ timeZone: "UTC" }],
+  });
 
   mockPerformace.mark.mockImplementation((name) => new PerformanceMark(name));
   mockPerformace.measure.mockReturnValueOnce(

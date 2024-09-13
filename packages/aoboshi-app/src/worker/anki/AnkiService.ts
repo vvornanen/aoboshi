@@ -13,7 +13,7 @@ import {
 } from "@vvornanen/aoboshi-core/statistics";
 import { isInstantAfter } from "@vvornanen/aoboshi-core";
 import { ApplicationProperties, Logger } from "~/worker";
-import { SettingsService } from "~/worker/settings";
+import { AppSettingsService } from "~/worker/settings";
 
 export class AnkiService {
   private logger = new Logger("AnkiService");
@@ -26,7 +26,7 @@ export class AnkiService {
 
   constructor(
     properties: Pick<ApplicationProperties, "logLevel">,
-    private settingsService: SettingsService,
+    private settingsService: AppSettingsService,
   ) {
     this.logger.setLogLevel(properties.logLevel);
   }

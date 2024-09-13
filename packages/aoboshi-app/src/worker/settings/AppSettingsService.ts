@@ -1,18 +1,19 @@
-import { Settings, SettingsRepository } from "~/worker/settings";
+import { SettingsService } from "@vvornanen/aoboshi-core/settings";
+import { AppSettings, SettingsRepository } from "~/worker/settings";
 import { getEnvironmentVariable } from "~/worker";
 
-export class SettingsService {
+export class AppSettingsService implements SettingsService<AppSettings> {
   constructor(private settingsRepository: SettingsRepository) {}
 
-  getSettings(): Settings {
+  getSettings(): AppSettings {
     return this.settingsRepository.find() ?? this.getDefaultSettings();
   }
 
-  saveSettings(settings: Settings) {
+  saveSettings(settings: AppSettings) {
     this.settingsRepository.save(settings);
   }
 
-  private getDefaultSettings(): Settings {
+  private getDefaultSettings(): AppSettings {
     return {
       timeZoneConfig: [{ timeZone: "UTC" }],
       anki: process.env.ANKI_URL

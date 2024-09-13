@@ -1,4 +1,4 @@
-export * from "./SettingsService";
-export * from "./Settings";
+export * from "./AppSettingsService";
+export * from "./AppSettings";
 export * from "./SettingsSqliteRepository";
 export * from "./SettingsRepository";

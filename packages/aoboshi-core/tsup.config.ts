@@ -9,6 +9,7 @@ export default defineConfig({
     "src/fixtures/bookFixtures.ts",
     "src/fixtures/characterFixtures.ts",
     "src/fixtures/createCharacter.ts",
+    "src/settings/index.ts",
     "src/statistics/index.ts",
     "src/statistics/chapter/index.ts",
     "src/statistics/character/index.ts",

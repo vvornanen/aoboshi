@@ -29,8 +29,8 @@ import {
   StatisticsIncrementSqliteRepository,
 } from "~/worker/statistics";
 import {
+  AppSettingsService,
   SettingsRepository,
-  SettingsService,
   SettingsSqliteRepository,
 } from "~/worker/settings";
 
@@ -59,7 +59,7 @@ const hasOnAfterInit = (service: unknown): service is OnAfterInit => {
 export class ApplicationContext implements OnAfterInit {
   database: Database;
   settingsRepository: SettingsRepository;
-  settingsService: SettingsService;
+  settingsService: AppSettingsService;
   bookRepository: BookRepository;
   characterRepository: CharacterRepository;
   ankiService: AnkiService;
@@ -76,7 +76,7 @@ export class ApplicationContext implements OnAfterInit {
     );
 
     this.settingsRepository = new SettingsSqliteRepository(this.database);
-    this.settingsService = new SettingsService(this.settingsRepository);
+    this.settingsService = new AppSettingsService(this.settingsRepository);
 
     // Core repositories
     this.bookRepository = new BookSqliteRepository(this.database);
@@ -112,6 +112,7 @@ export class ApplicationContext implements OnAfterInit {
         ),
       ],
       this.statisticsIncrementRepository,
+      this.settingsService,
     );
   }
 

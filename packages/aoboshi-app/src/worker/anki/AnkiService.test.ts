@@ -12,6 +12,7 @@ import { mock } from "vitest-mock-extended";
 import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
 import { Temporal } from "@js-temporal/polyfill";
 import { AnkiService } from "~/worker/anki";
+import { SettingsService } from "~/worker/settings";
 
 const deckName = "test";
 const ttl = Temporal.Duration.from({ milliseconds: 1000 });
@@ -24,7 +25,8 @@ const cardIds = Array.from(
     ).epochMilliseconds,
 );
 
-const ankiClient = mock<AnkiClient>();
+const mockSettingsService = mock<SettingsService>();
+const mockAnkiClient = mock<AnkiClient>();
 let ankiService: AnkiService;
 
 beforeAll(() => {
@@ -36,8 +38,18 @@ afterAll(() => {
 });
 
 beforeEach(() => {
-  ankiService = new AnkiService(ankiClient, deckName);
+  mockSettingsService.getSettings.mockReturnValue({
+    timeZoneConfig: [{ timeZone: "UTC" }],
+    anki: {
+      url: "http://localhost:3000",
+      apiKey: "secret",
+      deckName: "test",
+    },
+  });
+
+  ankiService = new AnkiService({ logLevel: "info" }, mockSettingsService);
   ankiService.setTTL(ttl);
+  ankiService.setAnkiClient(mockAnkiClient);
 });
 
 afterEach(() => {
@@ -51,7 +63,7 @@ describe("getCardIdsByLiteral", () => {
     const actual = await ankiService.getCardIdsByLiteral("学");
 
     expect(actual).toEqual([cardIds[0]]);
-    expect(ankiClient.getCards).toHaveBeenCalledOnce();
+    expect(mockAnkiClient.getCards).toHaveBeenCalledOnce();
   });
 
   test("fetches over limit", async () => {
@@ -60,7 +72,7 @@ describe("getCardIdsByLiteral", () => {
     const actual = await ankiService.getCardIdsByLiteral("学");
 
     expect(actual).toHaveLength(cardIds.length);
-    expect(ankiClient.getCards).toHaveBeenCalledTimes(2);
+    expect(mockAnkiClient.getCards).toHaveBeenCalledTimes(2);
   });
 
   test("no cards", async () => {
@@ -69,11 +81,10 @@ describe("getCardIdsByLiteral", () => {
     const actual = await ankiService.getCardIdsByLiteral("学");
 
     expect(actual).toHaveLength(0);
-    expect(ankiClient.getCards).not.toHaveBeenCalled();
+    expect(mockAnkiClient.getCards).not.toHaveBeenCalled();
   });
 
   test("returns cached card ids", async () => {
-    vi.resetAllMocks();
     mockOneCard();
     const actual1 = await ankiService.getCardIdsByLiteral("学");
     expect(actual1).toHaveLength(1);
@@ -83,7 +94,7 @@ describe("getCardIdsByLiteral", () => {
     const actual2 = await ankiService.getCardIdsByLiteral("学");
     expect(actual2).toHaveLength(1);
 
-    expect(ankiClient.findCardIds).toHaveBeenCalledTimes(1);
+    expect(mockAnkiClient.findCardIds).toHaveBeenCalledTimes(1);
   });
 
   test("re-fetches card after cache is expired", async () => {
@@ -96,14 +107,14 @@ describe("getCardIdsByLiteral", () => {
     const actual2 = await ankiService.getCardIdsByLiteral("学");
     expect(actual2).toHaveLength(cardIds.length);
 
-    expect(ankiClient.findCardIds).toHaveBeenCalledTimes(2);
+    expect(mockAnkiClient.findCardIds).toHaveBeenCalledTimes(2);
   });
 
   test("card missing expression field", async () => {
-    ankiClient.findCardIds
+    mockAnkiClient.findCardIds
       .calledWith(`deck:${deckName}`)
       .mockResolvedValue([1]);
-    ankiClient.getCards.mockResolvedValue([
+    mockAnkiClient.getCards.mockResolvedValue([
       {
         ...mockCard,
         id: 1,
@@ -139,16 +150,18 @@ const mockCard: AnkiCard = {
 };
 
 const mockNoCards = () => {
-  ankiClient.findCardIds.calledWith(`deck:${deckName}`).mockResolvedValue([]);
+  mockAnkiClient.findCardIds
+    .calledWith(`deck:${deckName}`)
+    .mockResolvedValue([]);
 };
 
 const mockOneCard = () => {
   const oneCardId = [cardIds[0]];
 
-  ankiClient.findCardIds
+  mockAnkiClient.findCardIds
     .calledWith(`deck:${deckName}`)
     .mockResolvedValue(oneCardId);
-  ankiClient.getCards.mockResolvedValue([
+  mockAnkiClient.getCards.mockResolvedValue([
     {
       ...mockCard,
       id: oneCardId[0],
@@ -160,10 +173,10 @@ const mockOneCard = () => {
 };
 
 const mockAllCards = () => {
-  ankiClient.findCardIds
+  mockAnkiClient.findCardIds
     .calledWith(`deck:${deckName}`)
     .mockResolvedValue(cardIds);
-  ankiClient.getCards.mockResolvedValueOnce(
+  mockAnkiClient.getCards.mockResolvedValueOnce(
     cardIds.slice(0, 1000).map(
       (cardId) =>
         ({
@@ -175,7 +188,7 @@ const mockAllCards = () => {
         }) satisfies AnkiCard,
     ),
   );
-  ankiClient.getCards.mockResolvedValueOnce(
+  mockAnkiClient.getCards.mockResolvedValueOnce(
     cardIds.slice(1000).map(
       (cardId) =>
         ({

@@ -1,21 +1,57 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { AnkiCard, AnkiClient } from "@vvornanen/aoboshi-anki";
+import {
+  AnkiCard,
+  AnkiCardReview,
+  AnkiClient,
+  AnkiGetReviewsResponse,
+} from "@vvornanen/aoboshi-anki";
 import { TTLSetMultimap } from "@vvornanen/aoboshi-core/collections";
-import { getCharactersFromExpression } from "@vvornanen/aoboshi-core/statistics";
+import {
+  CardReview,
+  NewCard,
+  getCharactersFromExpression,
+} from "@vvornanen/aoboshi-core/statistics";
+import { isInstantAfter } from "@vvornanen/aoboshi-core";
+import { ApplicationProperties, Logger } from "~/worker";
+import { SettingsService } from "~/worker/settings";
 
 export class AnkiService {
+  private logger = new Logger("AnkiService");
+  private ankiClient: AnkiClient | null = null;
+
   // Initially expired to trigger lazy fetch on first getter call
   private cardIdsByCharacter: TTLSetMultimap<string, number> =
     new TTLSetMultimap(0);
   private ttl = Temporal.Duration.from({ hours: 1 });
 
   constructor(
-    private ankiClient: AnkiClient,
-    private deckName: string,
-  ) {}
+    properties: Pick<ApplicationProperties, "logLevel">,
+    private settingsService: SettingsService,
+  ) {
+    this.logger.setLogLevel(properties.logLevel);
+  }
 
   setTTL(value: Temporal.Duration) {
     this.ttl = value;
+  }
+
+  getAnkiClient() {
+    const settings = this.settingsService.getSettings();
+
+    if (!settings.anki) {
+      throw new Error("Anki settings not configured");
+    }
+
+    const ankiClient = this.ankiClient
+      ? this.ankiClient
+      : new AnkiClient(settings.anki?.url, settings.anki?.apiKey);
+    const deckName = settings.anki.deckName;
+
+    return { ankiClient, deckName };
+  }
+
+  setAnkiClient(ankiClient: AnkiClient) {
+    this.ankiClient = ankiClient;
   }
 
   /**
@@ -37,17 +73,17 @@ export class AnkiService {
     const startMark = performance.mark("startGetCardIdsByLiteral").name;
     this.cardIdsByCharacter = new TTLSetMultimap(this.ttl);
 
+    const { ankiClient, deckName } = this.getAnkiClient();
+
     // Find all card ids
-    const allCardIds = await this.ankiClient.findCardIds(
-      `deck:${this.deckName}`,
-    );
+    const allCardIds = await ankiClient.findCardIds(`deck:${deckName}`);
 
     // Fetch next 1000 cards
     let start = 0;
     const limit = 1000;
 
     while (start < allCardIds.length) {
-      const cards = await this.ankiClient.getCards(
+      const cards = await ankiClient.getCards(
         allCardIds.slice(start, start + limit),
       );
       this.cacheCardIds(cards);
@@ -60,6 +96,70 @@ export class AnkiService {
     return this.cardIdsByCharacter.get(literal);
   }
 
+  async getLatestReviewTimestamp() {
+    const { ankiClient, deckName } = this.getAnkiClient();
+    const result = await ankiClient.getLatestReviewTimestamp(deckName);
+    return result === null ? null : Temporal.Instant.from(result);
+  }
+
+  async fetchReviews(
+    start: Temporal.Instant,
+    limit = 100,
+  ): Promise<{ meta: AnkiGetReviewsResponse["meta"]; reviews: CardReview[] }> {
+    const { ankiClient, deckName } = this.getAnkiClient();
+    const latestReviewTimestamp = await this.getLatestReviewTimestamp();
+
+    if (!isInstantAfter(latestReviewTimestamp, start)) {
+      return {
+        meta: {
+          start: start.toString(),
+          numberOfReviews: 0,
+          totalNumberOfReviews: 0,
+        },
+        reviews: [],
+      };
+    }
+
+    const { meta, reviews } = await ankiClient.getReviews(
+      deckName,
+      start.toString(),
+      limit,
+    );
+    const cards = await this.getCardsForReviews(reviews);
+
+    const result = reviews
+      .map((review) => {
+        const card = cards.get(review.cardId);
+
+        if (!card) {
+          this.logger.error(
+            `Card ${review.cardId} was not found, review time ${review.reviewTime}`,
+          );
+          return null;
+        }
+
+        return {
+          cardId: review.cardId,
+          reviewTime: review.reviewTime,
+          expression: getExpression(card),
+        };
+      })
+      .filter((review) => review !== null);
+
+    return { meta, reviews: result };
+  }
+
+  async fetchNewCards(): Promise<NewCard[]> {
+    const { ankiClient, deckName } = this.getAnkiClient();
+
+    const cards = await ankiClient.findCards(`deck:${deckName} is:new`);
+
+    return cards.map((card) => ({
+      cardId: card.id,
+      expression: getExpression(card),
+    }));
+  }
+
   private cacheCardIds(cards: AnkiCard[]) {
     for (const card of cards) {
       const characters = getCharactersFromExpression(getExpression(card));
@@ -69,6 +169,16 @@ export class AnkiService {
       }
     }
   }
+
+  private async getCardsForReviews(reviews: AnkiCardReview[]) {
+    const { ankiClient } = this.getAnkiClient();
+    const cards = await ankiClient.getCards(getUniqueCardIds(reviews));
+
+    const cardsMap = new Map<number, AnkiCard>();
+    cards.forEach((card) => cardsMap.set(card.id, card));
+
+    return cardsMap;
+  }
 }
 
 const getExpression = (card: AnkiCard): string => {
@@ -77,4 +187,9 @@ const getExpression = (card: AnkiCard): string => {
   }
 
   return card.fields["Expression"].value;
+};
+
+const getUniqueCardIds = (reviews: AnkiCardReview[]) => {
+  const cardIds = new Set<number>(reviews.map((review) => review.cardId));
+  return Array.from(cardIds);
 };

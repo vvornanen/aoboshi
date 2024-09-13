@@ -1,7 +1,6 @@
 import { Database } from "better-sqlite3";
 import { BookRepository } from "@vvornanen/aoboshi-core/books";
 import { CharacterRepository } from "@vvornanen/aoboshi-core/characters";
-import { AnkiClient } from "@vvornanen/aoboshi-anki";
 import {
   StatisticsIncrementRepository,
   StatisticsService,
@@ -63,7 +62,6 @@ export class ApplicationContext implements OnAfterInit {
   settingsService: SettingsService;
   bookRepository: BookRepository;
   characterRepository: CharacterRepository;
-  ankiClient: AnkiClient;
   ankiService: AnkiService;
   statisticsIncrementRepository: StatisticsIncrementRepository;
   statisticsByCharacterRepository: StatisticsByCharacterRepository;
@@ -85,14 +83,7 @@ export class ApplicationContext implements OnAfterInit {
     this.characterRepository = new CharacterSqliteRepository(this.database);
 
     // Anki integration
-    this.ankiClient = new AnkiClient(
-      properties.anki.url,
-      properties.anki.apiKey,
-    );
-    this.ankiService = new AnkiService(
-      this.ankiClient,
-      properties.anki.deckName,
-    );
+    this.ankiService = new AnkiService(properties, this.settingsService);
     const ankiCardStatisticsAdapter = createAnkiCardStatisticsAdapter(
       this.ankiService,
     );

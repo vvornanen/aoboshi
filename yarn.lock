@@ -4203,7 +4203,7 @@ __metadata:
     "@vvornanen/aoboshi-kanji": "workspace:^"
     better-sqlite3: "npm:^11.3.0"
     bree: "npm:^9.2.4"
-    chroma-js: "npm:^2.6.0"
+    chroma-js: "npm:^3.1.1"
     chromatic: "npm:^11.10.2"
     clsx: "npm:^2.1.1"
     dotenv-cli: "npm:^7.4.2"
@@ -5213,10 +5213,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "chroma-js@npm:2.6.0"
-  checksum: 10/245f0a0b1da7c4cedf30e490db9ab4e9e71fde207cbe1ca05e25ef5ba517df2509b96b29d2c168786237c8162a03dccea38721c4927249cd1d5c5fe0184fc13c
+"chroma-js@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "chroma-js@npm:3.1.1"
+  checksum: 10/71018790cef594904ee7d765ef22e45c781f2019d3aa878616a49a3c5e0d85179c5ceaab418d75f48e0089b597b57e99264320cdf3ac60deb2a067a9e5067f12
   languageName: node
   linkType: hard
 

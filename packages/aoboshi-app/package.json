@@ -61,7 +61,7 @@
     "@vitejs/plugin-react-swc": "^3.7.0",
     "chromatic": "^11.10.2",
     "dotenv-cli": "^7.4.2",
-    "electron": "31.6.0",
+    "electron": "32.1.2",
     "prop-types": "^15.8.1",
     "storybook": "^8.3.2",
     "storybook-addon-remix-react-router": "^3.0.0",

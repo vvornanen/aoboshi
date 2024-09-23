@@ -1,12 +1,12 @@
 import { exec as execCb } from "node:child_process";
 import { promisify } from "node:util";
-import fs from "node:fs";
-import path from "node:path";
+import { readdirSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const exec = promisify(execCb);
 
 const getAbsolutePath = (value: string) =>
-  path.dirname(require.resolve(path.join(value, "package.json")));
+  dirname(require.resolve(join(value, "package.json")));
 
 export default {
   packagerConfig: {
@@ -28,7 +28,7 @@ export default {
   ],
   hooks: {
     packageAfterCopy: async (_: unknown, buildPath: string) => {
-      const files = fs.readdirSync(buildPath);
+      const files = readdirSync(buildPath);
       const include = [".vite", "node_modules", "package.json"];
 
       // Clean up all unnecessary source files from the package
@@ -39,7 +39,7 @@ export default {
       }
     },
     packageAfterPrune: async (_: unknown, buildPath: string) => {
-      const nodeModulesDir = path.join(buildPath, "node_modules");
+      const nodeModulesDir = join(buildPath, "node_modules");
 
       await exec(`mkdir -p ${nodeModulesDir}`);
 

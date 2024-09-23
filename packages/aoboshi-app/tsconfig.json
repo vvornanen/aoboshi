@@ -20,7 +20,8 @@
       "~statistics/*": ["./src/renderer/statistics/*"],
       "~theme": ["./src/renderer/theme"],
       "~theme/*": ["./src/renderer/theme/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": [
     "vite.*.config.ts",

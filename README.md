@@ -92,23 +92,6 @@ Then all other dependencies with
 yarn upgrade-interactive
 ```
 
-## Upgrading Chrome DevTools extensions
-
-Electron supports Chrome [DevTools extensions](https://www.electronjs.org/docs/latest/tutorial/devtools-extension).
-React Developer Tools are installed automatically when the application is run with `yarn start`.
-To ensure that the installed extensions are compatible with the current Electron version,
-the extensions are bundled as zip files under `packages/aoboshi-app/src/resources`.
-
-To update the bundled extensions from locally installed Chrome, run:
-
-```
-# React Developer Tools
-EXTENSION_ID=fmkadmapgofadopljbjfkapdkoienihi
-RESOURCES_PATH=$(realpath packages/aoboshi-app/src/resources)
-(cd ~/Library/Application\ Support/Google/Chrome/Default/Extensions && \
-  zip -r ${RESOURCES_PATH}/react-dev-tools.zip ${EXTENSION_ID} -x "*.DS_Store")
-```
-
 ## Notice
 
 The KANJIDIC2 file are released under a [Creative Commons Attribution-ShareAlike 4.0](https://creativecommons.org/licenses/by-sa/4.0/) licence.

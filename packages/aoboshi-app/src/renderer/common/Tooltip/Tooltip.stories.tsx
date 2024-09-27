@@ -14,11 +14,13 @@ export const Tooltip: Story = {
     title: "Tooltip text",
   },
   render: (args) => (
-    <TooltipComponent {...args}>Text with tooltip</TooltipComponent>
+    <TooltipComponent {...args}>
+      <button style={{ outline: "revert" }}>Button with tooltip</button>
+    </TooltipComponent>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    await userEvent.hover(canvas.getByText("Text with tooltip"));
+    await userEvent.hover(canvas.getByText("Button with tooltip"));
   },
 };

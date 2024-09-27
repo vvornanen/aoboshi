@@ -1,55 +1,31 @@
-import {
-  FunctionComponent,
-  MouseEventHandler,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-  useRef,
-  useState,
-} from "react";
-import { Popup } from "@mui/base/Unstable_Popup/Popup";
+import { FunctionComponent, ReactElement } from "react";
+import * as BaseTooltip from "@radix-ui/react-tooltip";
 import * as styles from "./Tooltip.css";
 
-type TooltipProps = {
+export type TooltipProps = {
   title: string;
-  children?: ReactNode;
+  children?: ReactElement;
 };
 
 export const Tooltip: FunctionComponent<TooltipProps> = ({
   title,
-  children: childrenProp,
+  children,
 }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [open, setOpen] = useState(false);
-
-  const handleMouseEnter: MouseEventHandler = () => {
-    setOpen(true);
-  };
-
-  const handleMouseLeave: MouseEventHandler = () => {
-    setOpen(false);
-  };
-
-  const children = isValidElement(childrenProp) ? (
-    childrenProp
-  ) : (
-    <span>{childrenProp}</span>
-  );
-
-  const childrenProps = {
-    ...children.props,
-    ref: ref,
-    "aria-label": title,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-  };
-
   return (
-    <>
-      {cloneElement(children, childrenProps)}
-      <Popup anchor={ref.current} open={open} placement="bottom" offset={8}>
-        <div className={styles.tooltip}>{title}</div>
-      </Popup>
-    </>
+    <BaseTooltip.Provider delayDuration={300}>
+      <BaseTooltip.Root>
+        <BaseTooltip.Trigger asChild>{children}</BaseTooltip.Trigger>
+        <BaseTooltip.Portal>
+          <BaseTooltip.Content
+            className={styles.tooltip}
+            side="bottom"
+            sideOffset={4}
+          >
+            {title}
+            <BaseTooltip.Arrow />
+          </BaseTooltip.Content>
+        </BaseTooltip.Portal>
+      </BaseTooltip.Root>
+    </BaseTooltip.Provider>
   );
 };

@@ -5,8 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { ClickAwayListener } from "@mui/base";
-import { Popup } from "@mui/base/Unstable_Popup/Popup";
+import * as Popover from "@radix-ui/react-popover";
 import { Character } from "@vvornanen/aoboshi-core/characters";
 import * as styles from "./CharactersCard.css";
 import { CharacterButton } from "~characters/CharacterButton";
@@ -58,7 +57,11 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
 
   const handleClose = () => {
     setSelectedCharacter(null);
-    popoverAnchorRef.current = null;
+
+    if (popoverAnchorRef.current) {
+      popoverAnchorRef.current.focus();
+      popoverAnchorRef.current = null;
+    }
   };
 
   const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -93,31 +96,33 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
         />
       )}
       {popoverOpen && (
-        <ClickAwayListener
-          mouseEvent="onMouseDown"
-          touchEvent="onTouchStart"
-          onClickAway={handleClose}
-        >
-          <Popup
-            anchor={popoverAnchorRef.current}
-            open={popoverOpen}
-            placement="bottom-start"
-          >
-            <Card variant="raised">
-              {!error && (
-                <CharacterInfoCard
-                  key={selectedCharacter}
-                  character={
-                    data || { ...emptyCharacter, literal: selectedCharacter }
-                  }
-                  loading={isFetching}
-                />
-              )}
-              {/* TODO: Error component */}
-              {error && <Typography>{error.message}</Typography>}
-            </Card>
-          </Popup>
-        </ClickAwayListener>
+        <Popover.Root open onOpenChange={handleClose}>
+          <Popover.Anchor virtualRef={popoverAnchorRef} />
+          <Popover.Portal>
+            <Popover.Content
+              asChild
+              side="bottom"
+              align="start"
+              avoidCollisions
+              collisionPadding={8}
+            >
+              <Card variant="raised">
+                {!error && (
+                  <CharacterInfoCard
+                    tabIndex={0}
+                    key={selectedCharacter}
+                    character={
+                      data || { ...emptyCharacter, literal: selectedCharacter }
+                    }
+                    loading={isFetching}
+                  />
+                )}
+                {/* TODO: Error component */}
+                {error && <Typography>{error.message}</Typography>}
+              </Card>
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
       )}
     </Card>
   );

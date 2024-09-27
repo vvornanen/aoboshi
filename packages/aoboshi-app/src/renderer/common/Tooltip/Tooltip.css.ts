@@ -15,3 +15,9 @@ export const tooltip = style([
     paddingBottom: 4,
   }),
 ]);
+
+export const tooltipArrow = style(
+  commonLayer({
+    fill: theme.vars.color.tooltip,
+  }),
+);

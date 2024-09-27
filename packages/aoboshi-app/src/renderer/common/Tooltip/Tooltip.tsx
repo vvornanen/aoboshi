@@ -22,7 +22,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
             sideOffset={4}
           >
             {title}
-            <BaseTooltip.Arrow />
+            <BaseTooltip.Arrow className={styles.tooltipArrow} />
           </BaseTooltip.Content>
         </BaseTooltip.Portal>
       </BaseTooltip.Root>

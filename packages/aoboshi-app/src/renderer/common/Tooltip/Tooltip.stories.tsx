@@ -3,6 +3,13 @@ import { Tooltip as TooltipComponent } from "./Tooltip";
 
 const meta = {
   component: TooltipComponent,
+  decorators: [
+    (Story) => (
+      <div style={{ minHeight: 100 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof TooltipComponent>;
 
 export default meta;

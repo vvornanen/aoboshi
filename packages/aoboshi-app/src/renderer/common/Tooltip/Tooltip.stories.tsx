@@ -5,7 +5,7 @@ const meta = {
   component: TooltipComponent,
   decorators: [
     (Story) => (
-      <div style={{ minHeight: 100 }}>
+      <div style={{ minHeight: 100, width: "fit-content" }}>
         <Story />
       </div>
     ),

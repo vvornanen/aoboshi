@@ -7,6 +7,7 @@ export const figure = style([
   {
     whiteSpace: "nowrap",
     border: "none",
+    color: "inherit",
     backgroundColor: "transparent",
     padding: 0,
     selectors: {

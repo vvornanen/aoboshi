@@ -1,55 +1,36 @@
-import {
-  FunctionComponent,
-  MouseEventHandler,
-  ReactNode,
-  cloneElement,
-  isValidElement,
-  useRef,
-  useState,
-} from "react";
-import { Popup } from "@mui/base/Unstable_Popup/Popup";
+import { FunctionComponent, ReactElement } from "react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { type TooltipContentProps } from "@radix-ui/react-tooltip";
 import * as styles from "./Tooltip.css";
 
-type TooltipProps = {
+export type TooltipProps = TooltipContentProps & {
   title: string;
-  children?: ReactNode;
+  children?: ReactElement;
+  defaultOpen?: boolean;
 };
 
 export const Tooltip: FunctionComponent<TooltipProps> = ({
   title,
-  children: childrenProp,
+  children,
+  defaultOpen,
+  ...props
 }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [open, setOpen] = useState(false);
-
-  const handleMouseEnter: MouseEventHandler = () => {
-    setOpen(true);
-  };
-
-  const handleMouseLeave: MouseEventHandler = () => {
-    setOpen(false);
-  };
-
-  const children = isValidElement(childrenProp) ? (
-    childrenProp
-  ) : (
-    <span>{childrenProp}</span>
-  );
-
-  const childrenProps = {
-    ...children.props,
-    ref: ref,
-    "aria-label": title,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-  };
-
   return (
-    <>
-      {cloneElement(children, childrenProps)}
-      <Popup anchor={ref.current} open={open} placement="bottom" offset={8}>
-        <div className={styles.tooltip}>{title}</div>
-      </Popup>
-    </>
+    <TooltipPrimitive.Provider delayDuration={300}>
+      <TooltipPrimitive.Root defaultOpen={defaultOpen}>
+        <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+        <TooltipPrimitive.Portal>
+          <TooltipPrimitive.Content
+            className={styles.tooltip}
+            side="bottom"
+            sideOffset={4}
+            {...props}
+          >
+            {title}
+            <TooltipPrimitive.Arrow className={styles.tooltipArrow} />
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Portal>
+      </TooltipPrimitive.Root>
+    </TooltipPrimitive.Provider>
   );
 };

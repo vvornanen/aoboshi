@@ -39,21 +39,25 @@ export const GradeFigure: FunctionComponent<GradeFigureProps> = ({
           grade: character.grade,
         })}
       >
-        <span className={styles.circledFigure}>
+        <button className={styles.circledFigure}>
           {t("CharacterInfoCard.grade.kyoiku")}
-        </span>
+        </button>
       </Tooltip>
     );
   } else if (character.grade === Grade.Joyo) {
     return (
       <Tooltip title={t("CharacterInfoCard.grade.joyouTooltip")}>
-        <span>{t("CharacterInfoCard.grade.joyou")}</span>
+        <button className={styles.figure}>
+          {t("CharacterInfoCard.grade.joyou")}
+        </button>
       </Tooltip>
     );
   } else {
     return (
       <Tooltip title={t("CharacterInfoCard.grade.jinmeiyoTooltip")}>
-        <span>{t("CharacterInfoCard.grade.jinmeiyo")}</span>
+        <button className={styles.figure}>
+          {t("CharacterInfoCard.grade.jinmeiyo")}
+        </button>
       </Tooltip>
     );
   }

@@ -21,7 +21,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
   const { t } = useTranslation();
 
   // TODO: Skip query if sidebar is not open
-  // Use a skip state and Base UI CssTransition when closing the sidebar to
+  // Use a skip state and CSS transition when closing the sidebar to
   // keep data visible until the slide animation ends.
   const {
     data: books,

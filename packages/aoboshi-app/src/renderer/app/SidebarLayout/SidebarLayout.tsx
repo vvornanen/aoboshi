@@ -1,4 +1,4 @@
-import { FunctionComponent, useId } from "react";
+import { FunctionComponent, useId, useState } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
@@ -25,9 +25,22 @@ export const SidebarLayout: FunctionComponent = () => {
   const sidebarOpen = useSelector(selectSidebarOpen);
   const sidebarWidth = useSelector(selectSidebarWidth);
   const sidebarId = useId();
+  const [sidebarVisible, setSidebarVisible] = useState(sidebarOpen);
 
   const handleToggleSidebar = () => {
     dispatch(toggleSidebar());
+  };
+
+  const handleAnimationStart = () => {
+    if (sidebarOpen) {
+      setSidebarVisible(true);
+    }
+  };
+
+  const handleAnimationComplete = () => {
+    if (!sidebarOpen) {
+      setSidebarVisible(false);
+    }
   };
 
   const transition: Transition = shouldReduceMotion
@@ -51,8 +64,12 @@ export const SidebarLayout: FunctionComponent = () => {
         style={assignInlineVars({ [styles.sidebarWidth]: `${sidebarWidth}px` })}
         transition={transition}
         animate={{ x: sidebarOpen ? 0 : -sidebarWidth }}
+        onAnimationStart={handleAnimationStart}
+        onAnimationComplete={handleAnimationComplete}
       >
-        <Sidebar id={sidebarId} className={styles.sidebar} />
+        {sidebarVisible && (
+          <Sidebar id={sidebarId} className={styles.sidebar} />
+        )}
         <motion.div layout transition={transition} className={styles.toolbar}>
           <Toolbar>{/* Toolbar content */}</Toolbar>
         </motion.div>

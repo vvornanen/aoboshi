@@ -1,15 +1,15 @@
 import { InitOptions } from "i18next";
-import { jp } from "./locales/jp";
+import { ja } from "./locales/ja";
 
 export const defaultNS = "translation";
 export const resources = {
-  jp: {
-    translation: jp,
+  ja: {
+    translation: ja,
   },
 } as const;
 
 export const options = {
-  lng: "jp",
+  lng: "ja",
   ns: [defaultNS],
   defaultNS,
   resources,

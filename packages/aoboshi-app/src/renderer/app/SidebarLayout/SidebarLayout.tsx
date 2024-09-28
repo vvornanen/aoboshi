@@ -2,6 +2,8 @@ import { FunctionComponent, useId } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router-dom";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { Transition, motion, useReducedMotion } from "framer-motion";
 import * as styles from "./SidebarLayout.css";
 import { Sidebar } from "~app/Sidebar";
 import { SidebarIcon } from "~icons";
@@ -15,10 +17,10 @@ import {
 import { useDispatch } from "~app/useDispatch";
 import { useSelector } from "~app/useSelector";
 import { noDrag } from "~common/window.css";
-import * as theme from "~theme/theme.css";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
+  const shouldReduceMotion = useReducedMotion();
   const dispatch = useDispatch();
   const sidebarOpen = useSelector(selectSidebarOpen);
   const sidebarWidth = useSelector(selectSidebarWidth);
@@ -28,8 +30,12 @@ export const SidebarLayout: FunctionComponent = () => {
     dispatch(toggleSidebar());
   };
 
+  const transition: Transition = shouldReduceMotion
+    ? { type: false }
+    : { type: "spring", stiffness: 300, damping: 30 };
+
   return (
-    <div className={styles.layout}>
+    <div className={styles.sidebarLayout}>
       <div className={styles.dragRegion} />
       <IconButton
         className={clsx(styles.toggleButton, noDrag)}
@@ -40,21 +46,24 @@ export const SidebarLayout: FunctionComponent = () => {
       >
         <SidebarIcon />
       </IconButton>
-      <Sidebar id={sidebarId} width={sidebarWidth} open={sidebarOpen} />
-      <div
-        className={styles.content}
-        style={{ marginLeft: sidebarOpen ? 0 : -sidebarWidth }}
+      <motion.div
+        className={styles.sidebarContainer({ open: sidebarOpen })}
+        style={assignInlineVars({ [styles.sidebarWidth]: `${sidebarWidth}px` })}
+        transition={transition}
+        animate={{ x: sidebarOpen ? 0 : -sidebarWidth }}
       >
-        <Toolbar>{/* Toolbar content */}</Toolbar>
-        <div
-          style={{
-            maxHeight: `calc(100vh - ${theme.vars.windowControls.height})`,
-            overflowY: "auto",
-          }}
+        <Sidebar id={sidebarId} className={styles.sidebar} />
+        <motion.div layout transition={transition} className={styles.toolbar}>
+          <Toolbar>{/* Toolbar content */}</Toolbar>
+        </motion.div>
+        <motion.div
+          layout="position"
+          transition={transition}
+          className={styles.main}
         >
           <Outlet />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

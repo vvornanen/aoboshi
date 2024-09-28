@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { clsx } from "clsx";
 import * as styles from "./Sidebar.css";
 import { useFindAllBooksQuery } from "~books";
 import { Typography } from "~common/Typography";
@@ -8,14 +9,10 @@ import { ListSubheader } from "~common/ListSubheader";
 import { ListItem } from "~common/ListItem";
 import { List } from "~common/List";
 
-type SidebarProps = ComponentPropsWithoutRef<"aside"> & {
-  width: number;
-  open: boolean;
-};
+type SidebarProps = ComponentPropsWithoutRef<"aside">;
 
 export const Sidebar: FunctionComponent<SidebarProps> = ({
-  width,
-  open,
+  className,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -30,7 +27,7 @@ export const Sidebar: FunctionComponent<SidebarProps> = ({
   } = useFindAllBooksQuery();
 
   return (
-    <aside className={styles.sidebar({ open })} style={{ width }} {...props}>
+    <aside className={clsx(className, styles.sidebar)} {...props}>
       <nav>
         <List>
           <ListItem to="/">{t("Sidebar.recentlyStudied")}</ListItem>

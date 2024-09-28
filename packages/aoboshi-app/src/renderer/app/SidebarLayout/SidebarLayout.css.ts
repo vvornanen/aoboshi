@@ -1,13 +1,45 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 import { zIndex } from "~theme";
 import { drag } from "~common/window.css";
 import * as theme from "~theme/theme.css";
 
-export const layout = style({
+export const sidebarWidth = createVar();
+export const toggleButtonWidth = createVar();
+
+export const sidebarLayout = style({
   position: "relative",
-  display: "flex",
-  justifyContent: "stretch",
-  height: "100vh",
+});
+
+export const sidebarContainer = recipe({
+  base: {
+    display: "grid",
+    height: "100vh",
+    gridTemplateRows: `${theme.vars.windowControls.height} 1fr`,
+    vars: {
+      [toggleButtonWidth]: "28px",
+    },
+  },
+  variants: {
+    open: {
+      true: {
+        gridTemplateAreas: `
+          "sidebar toolbar"
+          "sidebar main"
+          `,
+        gridTemplateColumns: `${sidebarWidth} 1fr`,
+        width: "100vw",
+      },
+      false: {
+        gridTemplateAreas: `
+          "sidebar window-controls toolbar"
+          "sidebar main main"
+          `,
+        gridTemplateColumns: `${sidebarWidth} calc(${theme.vars.windowControls.width} + ${toggleButtonWidth}) 1fr`,
+        width: `calc(100vw + ${sidebarWidth})`,
+      },
+    },
+  },
 });
 
 export const dragRegion = style([
@@ -27,9 +59,15 @@ export const toggleButton = style({
   zIndex: zIndex.drawer + 1,
 });
 
-export const content = style({
-  flexGrow: 1,
-  transitionProperty: "margin-left",
-  transitionDuration: "600ms",
-  transitionTimingFunction: "cubic-bezier(.2,0,0,1)",
+export const sidebar = style({
+  gridArea: "sidebar",
+});
+
+export const toolbar = style({
+  gridArea: "toolbar",
+});
+
+export const main = style({
+  gridArea: "main",
+  overflowY: "auto",
 });

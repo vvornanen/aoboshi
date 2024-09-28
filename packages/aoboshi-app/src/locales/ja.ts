@@ -1,4 +1,4 @@
-export const jp = {
+export const ja = {
   CharacterInfoCard: {
     caption: "活字体　筆字体　種別／画数／参照　音読み／訓読み　書き順",
     strokeCount: "{{strokeCount}}画",

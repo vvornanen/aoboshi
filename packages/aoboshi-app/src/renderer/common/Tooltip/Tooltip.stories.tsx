@@ -1,13 +1,27 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Tooltip as TooltipComponent } from "./Tooltip";
+import { Card } from "~common/Card";
 
 const meta = {
   component: TooltipComponent,
+  argTypes: {
+    side: {
+      control: "radio",
+      options: ["top", "right", "bottom", "left"],
+    },
+  },
   decorators: [
     (Story) => (
-      <div style={{ minHeight: 100, width: "fit-content" }}>
+      <Card
+        style={{
+          display: "grid",
+          placeContent: "center",
+          height: 150,
+          width: 400,
+        }}
+      >
         <Story />
-      </div>
+      </Card>
     ),
   ],
 } satisfies Meta<typeof TooltipComponent>;
@@ -19,6 +33,7 @@ export const Tooltip: Story = {
   args: {
     title: "Tooltip text",
     defaultOpen: true,
+    side: "bottom",
   },
   render: (args) => (
     <TooltipComponent {...args}>

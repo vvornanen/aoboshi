@@ -1,6 +1,7 @@
-import { FunctionComponent, ReactElement } from "react";
+import { FunctionComponent, ReactElement, useRef, useState } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { type TooltipContentProps } from "@radix-ui/react-tooltip";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import * as styles from "./Tooltip.css";
 
 export type TooltipProps = TooltipContentProps & {
@@ -12,24 +13,53 @@ export type TooltipProps = TooltipContentProps & {
 export const Tooltip: FunctionComponent<TooltipProps> = ({
   title,
   children,
-  defaultOpen,
+  defaultOpen = false,
+  side = "bottom",
   ...props
 }) => {
+  const shouldReduceMotion = useReducedMotion();
+  const initial = useRef(true);
+  const [open, setOpen] = useState(defaultOpen);
+
+  const initialScale = shouldReduceMotion ? 1 : 0.5;
+  const initiallyOpen = defaultOpen && initial.current;
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    initial.current = false;
+  };
+
   return (
     <TooltipPrimitive.Provider delayDuration={300}>
-      <TooltipPrimitive.Root defaultOpen={defaultOpen}>
+      <TooltipPrimitive.Root open={open} onOpenChange={handleOpenChange}>
         <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-        <TooltipPrimitive.Portal>
-          <TooltipPrimitive.Content
-            className={styles.tooltip}
-            side="bottom"
-            sideOffset={4}
-            {...props}
-          >
-            {title}
-            <TooltipPrimitive.Arrow className={styles.tooltipArrow} />
-          </TooltipPrimitive.Content>
-        </TooltipPrimitive.Portal>
+        <AnimatePresence>
+          {open && (
+            <TooltipPrimitive.Portal forceMount>
+              <TooltipPrimitive.Content
+                forceMount
+                asChild
+                side={side}
+                sideOffset={4}
+                {...props}
+              >
+                <motion.div
+                  key="tooltip"
+                  className={styles.tooltip}
+                  initial={
+                    initiallyOpen ? false : { opacity: 0, scale: initialScale }
+                  }
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: initialScale }}
+                  transition={{ type: "spring", stiffness: 2000, damping: 70 }}
+                >
+                  {title}
+                  <TooltipPrimitive.Arrow className={styles.tooltipArrow} />
+                </motion.div>
+              </TooltipPrimitive.Content>
+            </TooltipPrimitive.Portal>
+          )}
+        </AnimatePresence>
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );

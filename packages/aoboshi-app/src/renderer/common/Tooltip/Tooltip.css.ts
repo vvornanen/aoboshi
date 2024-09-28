@@ -13,6 +13,20 @@ export const tooltip = style([
     paddingRight: 8,
     paddingTop: 4,
     paddingBottom: 4,
+    selectors: {
+      "&[data-side='top']": {
+        transformOrigin: "50% 100%",
+      },
+      "&[data-side='right']": {
+        transformOrigin: "0% 50%",
+      },
+      "&[data-side='bottom']": {
+        transformOrigin: "50% 0%",
+      },
+      "&[data-side='left']": {
+        transformOrigin: "100% 50%",
+      },
+    },
   }),
 ]);
 

@@ -25,6 +25,12 @@ export default tseslint.config(
     rules: {
       eqeqeq: ["error", "always"],
       "sort-imports": ["error", { ignoreDeclarationSort: true }],
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        {
+          allowInterfaces: "with-single-extends",
+        },
+      ],
       "import/no-extraneous-dependencies": [
         "error",
         { includeInternal: true, includeTypes: true },

@@ -52,9 +52,17 @@ export const GradeFigure: FunctionComponent<GradeFigureProps> = ({
         </button>
       </Tooltip>
     );
-  } else {
+  } else if (character.grade === Grade.Jinmeiyo) {
     return (
       <Tooltip title={t("CharacterInfoCard.grade.jinmeiyoTooltip")}>
+        <button className={styles.figure}>
+          {t("CharacterInfoCard.grade.jinmeiyo")}
+        </button>
+      </Tooltip>
+    );
+  } else {
+    return (
+      <Tooltip title={t("CharacterInfoCard.grade.jinmeiyoVariantTooltip")}>
         <button className={styles.figure}>
           {t("CharacterInfoCard.grade.jinmeiyo")}
         </button>

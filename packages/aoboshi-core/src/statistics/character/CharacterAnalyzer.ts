@@ -62,7 +62,10 @@ export class CharacterAnalyzer implements Analyzer {
       const reviewDate =
         reviewTimestamp &&
         timestampToDate(reviewTimestamp, context.timeZoneConfig);
-      reviewDate && reviewDays.add(reviewDate.toString());
+
+      if (reviewDate) {
+        reviewDays.add(reviewDate.toString());
+      }
 
       latestReviewTime = nullableMaxInstant(latestReviewTime, reviewTimestamp);
 

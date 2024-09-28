@@ -9,7 +9,14 @@ import { IpcApi } from "~/preload";
 
 const meta = {
   component: Sidebar,
-  decorators: [withRouter],
+  decorators: [
+    withRouter,
+    (Story) => (
+      <div style={{ width: 200 }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     layout: "fullscreen",
     reactRouter: reactRouterParameters({
@@ -23,10 +30,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    width: 200,
-    open: true,
-  },
   parameters: {
     ipcApi: {
       findAllBooks: async () => [grades],

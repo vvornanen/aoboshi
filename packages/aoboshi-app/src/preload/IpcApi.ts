@@ -1,5 +1,6 @@
 import { Book } from "@vvornanen/aoboshi-core/books";
 import { Character } from "@vvornanen/aoboshi-core/characters";
+import { StatisticsIncrement } from "@vvornanen/aoboshi-core/statistics";
 
 export const IPC_API_KEY = "ipcApi";
 
@@ -10,6 +11,7 @@ export enum IpcEventType {
   FindBookById = "books:findById",
   FindAllBooks = "books:findAll",
   FindCharacterByLiteral = "characters:findByLiteral",
+  FindLatestStatisticsIncrement = "statistics:findLatestStatisticsIncrement",
 }
 
 /**
@@ -31,7 +33,12 @@ export type OnNavigateHandler = (to: string) => void;
  *
  * @see https://redux-toolkit.js.org/rtk-query/usage/automated-refetching
  */
-export const tagTypes = ["Book", "Character"] as const;
+export const tagTypes = [
+  "Book",
+  "Character",
+  "StatisticsIncrement",
+  "LatestStatisticsIncrement",
+] as const;
 
 export type TagType = (typeof tagTypes)[number];
 
@@ -64,4 +71,5 @@ export interface IpcApi {
   findBookById: (id: string) => Promise<Book | null>;
   findAllBooks: () => Promise<Book[]>;
   findCharacterByLiteral: (literal: string) => Promise<Character | null>;
+  findLatestStatisticsIncrement: () => Promise<StatisticsIncrement | null>;
 }

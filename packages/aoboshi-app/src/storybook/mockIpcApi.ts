@@ -14,6 +14,7 @@ const defaultMockApi: IpcApi = {
   findAllBooks: async () => [],
   findCharacterByLiteral: async (literal: string) =>
     createCharacter({ literal }),
+  findLatestStatisticsIncrement: async () => null,
 };
 
 /**

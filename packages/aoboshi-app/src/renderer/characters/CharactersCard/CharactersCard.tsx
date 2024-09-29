@@ -70,22 +70,9 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
     }
   };
 
-  return (
-    <Card className={styles.charactersCard}>
-      {!loading &&
-        characters.map((character) => (
-          <CharacterButton
-            key={character.literal}
-            seen={character.seen}
-            highlight={character.highlight}
-            selected={character.literal === selectedCharacter}
-            onClick={(event) => handleClick(character.literal, event)}
-            onKeyDown={handleKeyDown}
-          >
-            {character.literal}
-          </CharacterButton>
-        ))}
-      {loading && (
+  if (loading) {
+    return (
+      <Card>
         <Skeleton
           variant="rounded"
           color="light"
@@ -94,7 +81,25 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
             height: 150,
           }}
         />
-      )}
+      </Card>
+    );
+  }
+
+  return (
+    <Card className={styles.charactersCard}>
+      {characters.map((character) => (
+        <div key={character.literal} className={styles.gridCell}>
+          <CharacterButton
+            seen={character.seen}
+            highlight={character.highlight}
+            selected={character.literal === selectedCharacter}
+            onClick={(event) => handleClick(character.literal, event)}
+            onKeyDown={handleKeyDown}
+          >
+            {character.literal}
+          </CharacterButton>
+        </div>
+      ))}
       {popoverOpen && (
         <Popover.Root open onOpenChange={handleClose}>
           <Popover.Anchor virtualRef={popoverAnchorRef} />

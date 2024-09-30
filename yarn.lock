@@ -2586,6 +2586,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sinonjs/commons@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@sinonjs/commons@npm:3.0.1"
+  dependencies:
+    type-detect: "npm:4.0.8"
+  checksum: 10/a0af217ba7044426c78df52c23cedede6daf377586f3ac58857c565769358ab1f44ebf95ba04bbe38814fba6e316ca6f02870a009328294fc2c555d0f85a7117
+  languageName: node
+  linkType: hard
+
+"@sinonjs/fake-timers@npm:^13.0.2":
+  version: 13.0.2
+  resolution: "@sinonjs/fake-timers@npm:13.0.2"
+  dependencies:
+    "@sinonjs/commons": "npm:^3.0.1"
+  checksum: 10/77cca5c548e2529931908c48ac375f162ee901bc52110197b4c470b2535c6c571f9ecd4fa12157f4d2ae174c5391f03940fb563a681a691fb44204a0ef3ded35
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:8.3.4":
   version: 8.3.4
   resolution: "@storybook/addon-actions@npm:8.3.4"
@@ -3658,6 +3676,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sinonjs__fake-timers@npm:^8.1.5":
+  version: 8.1.5
+  resolution: "@types/sinonjs__fake-timers@npm:8.1.5"
+  checksum: 10/3a0b285fcb8e1eca435266faa27ffff206608b69041022a42857274e44d9305822e85af5e7a43a9fae78d2ab7dc0fcb49f3ae3bda1fa81f0203064dbf5afd4f6
+  languageName: node
+  linkType: hard
+
 "@types/unist@npm:*, @types/unist@npm:^3.0.0":
   version: 3.0.2
   resolution: "@types/unist@npm:3.0.2"
@@ -4120,6 +4145,7 @@ __metadata:
     "@radix-ui/react-popover": "npm:^1.1.1"
     "@radix-ui/react-tooltip": "npm:^1.1.2"
     "@reduxjs/toolkit": "npm:^2.2.7"
+    "@sinonjs/fake-timers": "npm:^13.0.2"
     "@storybook/addon-essentials": "npm:^8.3.4"
     "@storybook/addon-interactions": "npm:^8.3.4"
     "@storybook/addon-links": "npm:^8.3.4"
@@ -4138,6 +4164,7 @@ __metadata:
     "@types/chroma-js": "npm:^2.4.4"
     "@types/react": "npm:18.3.10"
     "@types/react-dom": "npm:^18.3.0"
+    "@types/sinonjs__fake-timers": "npm:^8.1.5"
     "@vanilla-extract/css": "npm:^1.15.5"
     "@vanilla-extract/dynamic": "npm:^2.1.2"
     "@vanilla-extract/recipes": "npm:^0.5.5"
@@ -13555,6 +13582,13 @@ __metadata:
   dependencies:
     prelude-ls: "npm:^1.2.1"
   checksum: 10/14687776479d048e3c1dbfe58a2409e00367810d6960c0f619b33793271ff2a27f81b52461f14a162f1f89a9b1d8da1b237fc7c99b0e1fdcec28ec63a86b1fec
+  languageName: node
+  linkType: hard
+
+"type-detect@npm:4.0.8":
+  version: 4.0.8
+  resolution: "type-detect@npm:4.0.8"
+  checksum: 10/5179e3b8ebc51fce1b13efb75fdea4595484433f9683bbc2dca6d99789dba4e602ab7922d2656f2ce8383987467f7770131d4a7f06a26287db0615d2f4c4ce7d
   languageName: node
   linkType: hard
 

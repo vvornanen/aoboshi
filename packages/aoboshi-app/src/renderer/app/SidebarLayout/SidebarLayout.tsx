@@ -70,9 +70,9 @@ export const SidebarLayout: FunctionComponent = () => {
         {sidebarVisible && (
           <Sidebar id={sidebarId} className={styles.sidebar} />
         )}
-        <motion.div layout transition={transition} className={styles.toolbar}>
-          <Toolbar>{/* Toolbar content */}</Toolbar>
-        </motion.div>
+        <div className={styles.toolbar}>
+          <Toolbar />
+        </div>
         <motion.div
           layout="position"
           transition={transition}

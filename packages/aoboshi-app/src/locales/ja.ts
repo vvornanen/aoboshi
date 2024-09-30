@@ -32,6 +32,9 @@ export const ja = {
     library: "ライブラリ",
     recentlyStudied: "最近の学習",
   },
+  Toolbar: {
+    latestReview: "最後の学習:",
+  },
   applicationMenu: {
     about: "アオボシについて",
     close: "閉じる",

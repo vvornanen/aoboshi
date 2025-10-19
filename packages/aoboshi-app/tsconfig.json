@@ -16,6 +16,8 @@
       "~common/*": ["./src/renderer/common/*"],
       "~icons": ["./src/renderer/icons"],
       "~recentlyStudied/*": ["./src/renderer/recentlyStudied/*"],
+      "~search": ["./src/renderer/search"],
+      "~search/*": ["./src/renderer/search/*"],
       "~statistics": ["./src/renderer/statistics"],
       "~statistics/*": ["./src/renderer/statistics/*"],
       "~theme": ["./src/renderer/theme"],

@@ -30,17 +30,20 @@ export const searchButton = style([
   },
 ]);
 
-export const dialog = style({
-  position: "fixed",
-  top: 12,
-  padding: 0,
-  overflow: "hidden",
-  left: `max(${theme.vars.windowControls.width}, calc(50% - ${dialogWidth} / 2))`,
-  width: `min(${dialogWidth}, calc(100vw - 16px - ${theme.vars.windowControls.width}))`,
-  vars: {
-    [dialogWidth]: "650px",
+export const dialog = style([
+  noDrag,
+  {
+    position: "fixed",
+    top: 12,
+    padding: 0,
+    overflow: "hidden",
+    left: `max(${theme.vars.windowControls.width}, calc(50% - ${dialogWidth} / 2))`,
+    width: `min(${dialogWidth}, calc(100vw - 16px - ${theme.vars.windowControls.width}))`,
+    vars: {
+      [dialogWidth]: "650px",
+    },
   },
-});
+]);
 
 export const searchInput = style([
   typographyVariant({ variant: "bodyMedium" }),

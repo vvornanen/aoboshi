@@ -10,6 +10,7 @@ import { useSelector } from "~app/useSelector";
 import { useLatestReviewTimestamp } from "~statistics/useLatestReviewTimestamp";
 import { Skeleton } from "~common/Skeleton";
 import { maru } from "~common";
+import { SearchField } from "~search/SearchField";
 
 // TODO: Move to theme
 const transition = { type: "spring", stiffness: 300, damping: 30 };
@@ -28,7 +29,11 @@ export const Toolbar: FunctionComponent<ToolbarProps> = ({
         className={clsx(styles.toolbar({ sidebarOpen }), className)}
         {...props}
       >
-        <div className={styles.search}></div>
+        <div className={styles.search}>
+          <motion.div layout="position" transition={transition}>
+            <SearchField />
+          </motion.div>
+        </div>
         <motion.div
           layout="position"
           className={styles.latestReview}

@@ -3,6 +3,7 @@ import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 import { toggleButtonWidth } from "~app/SidebarLayout/SidebarLayout.css";
 import { typographyVariant } from "~common/Typography/Typography.css";
+import { noDrag } from "~common/window.css";
 
 export const toolbar = recipe({
   base: [
@@ -41,11 +42,17 @@ export const latestReview = style({
   textOverflow: "ellipsis",
 });
 
-export const latestReviewLabel = style({
-  display: "inline",
-  marginInlineEnd: "0.25em",
-});
+export const latestReviewLabel = style([
+  noDrag,
+  {
+    display: "inline",
+    marginInlineEnd: "0.25em",
+  },
+]);
 
-export const latestReviewTime = style({
-  display: "inline",
-});
+export const latestReviewTime = style([
+  noDrag,
+  {
+    display: "inline",
+  },
+]);

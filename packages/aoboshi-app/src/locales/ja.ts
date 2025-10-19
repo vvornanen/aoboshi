@@ -28,6 +28,11 @@ export const ja = {
   RecentlyStudiedPage: {
     title: "最近の学習",
   },
+  SearchField: {
+    inputLabel: "検索",
+    inputPlaceholder: "文字を検索する",
+    recentLabel: "最近の検索",
+  },
   Sidebar: {
     library: "ライブラリ",
     recentlyStudied: "最近の学習",

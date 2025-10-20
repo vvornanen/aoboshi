@@ -39,6 +39,8 @@ export const ja = {
   },
   Toolbar: {
     latestReview: "最後の学習:",
+    latestReviewErrorButtonLabel: "最後の学習を表示できませんでした",
+    latestReviewErrorPopoverText: "下記のエラーが発生しました",
   },
   applicationMenu: {
     about: "アオボシについて",

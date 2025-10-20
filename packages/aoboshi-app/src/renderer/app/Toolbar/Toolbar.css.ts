@@ -19,10 +19,10 @@ export const toolbar = recipe({
     sidebarOpen: {
       false: {
         // TODO: var toolbarPaddingStart
-        gridTemplateColumns: `calc(200px - ${theme.vars.windowControls.width} - ${toggleButtonWidth}) 1fr 200px`,
+        gridTemplateColumns: `calc(224px - ${theme.vars.windowControls.width} - ${toggleButtonWidth}) 1fr 224px`,
       },
       true: {
-        gridTemplateColumns: `200px 1fr 200px`,
+        gridTemplateColumns: `224px 1fr 224px`,
       },
     },
   },
@@ -37,6 +37,7 @@ export const latestReview = style({
   gridArea: "latestReview",
   display: "flex",
   justifyContent: "flex-end",
+  alignItems: "center",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -54,5 +55,31 @@ export const latestReviewTime = style([
   noDrag,
   {
     display: "inline",
+  },
+]);
+
+// TODO: Replace with reusable Button component
+export const latestReviewErrorButton = style([
+  noDrag,
+  {
+    color: theme.vars.color.onSurface,
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: theme.vars.shape.borderRadius,
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingRight: 6,
+    paddingLeft: 6,
+    selectors: {
+      "&:hover": {
+        backgroundColor: theme.vars.color.hover,
+      },
+      "&:active": {
+        backgroundColor: theme.vars.color.activated,
+      },
+      "&:focus-visible": {
+        backgroundColor: theme.vars.color.focus,
+      },
+    },
   },
 ]);

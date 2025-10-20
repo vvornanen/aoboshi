@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { StatisticsIncrement } from "@vvornanen/aoboshi-core/statistics";
+import { userEvent, waitFor, within } from "@storybook/test";
 import { Toolbar } from "./Toolbar";
 import { IpcApi } from "~/preload";
 
@@ -62,5 +63,11 @@ export const LatestTimestampError: Story = {
         throw new Error("Mock error");
       },
     } satisfies Partial<IpcApi>,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await waitFor(() => canvas.getByText(/できません/));
+    await userEvent.click(canvas.getByText(/できません/));
   },
 };

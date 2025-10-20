@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { clsx } from "clsx";
+import * as Popover from "@radix-ui/react-popover";
 import * as styles from "./Toolbar.css";
 import { RelativeTime } from "~common/RelativeTime";
 import { Container } from "~common/Container";
@@ -11,6 +12,8 @@ import { useLatestReviewTimestamp } from "~statistics/useLatestReviewTimestamp";
 import { Skeleton } from "~common/Skeleton";
 import { maru } from "~common";
 import { SearchField } from "~search/SearchField";
+import { Card } from "~common/Card";
+import { Typography } from "~common/Typography";
 
 // TODO: Move to theme
 const transition = { type: "spring", stiffness: 300, damping: 30 };
@@ -59,9 +62,33 @@ const LatestReview = () => {
       </Skeleton>
     );
   } else if (error) {
-    return error.message;
+    return (
+      <Popover.Root>
+        {/* TODO: Use Button component in the trigger */}
+        <Popover.Trigger className={styles.latestReviewErrorButton}>
+          {t("Toolbar.latestReviewErrorButtonLabel")}
+        </Popover.Trigger>
+        <Popover.Portal>
+          <Popover.Content
+            asChild
+            side="bottom"
+            align="start"
+            avoidCollisions
+            collisionPadding={8}
+          >
+            <Card variant="raised">
+              {/* TODO: Error component */}
+              <Typography component="p">
+                {t("Toolbar.latestReviewErrorPopoverText")}
+              </Typography>
+              <Typography component="p">{error.message}</Typography>
+            </Card>
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>
+    );
   } else if (!latestReviewTimestamp) {
-    return null;
+    return null; // Anki integration not enabled
   }
 
   return (

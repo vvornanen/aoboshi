@@ -25,6 +25,7 @@ export class ApplicationMenu implements OnAfterInit {
   private fileMenu: Electron.MenuItemConstructorOptions | null = null;
   private editMenu: Electron.MenuItemConstructorOptions | null = null;
   private viewMenu: Electron.MenuItemConstructorOptions | null = null;
+  private navigateMenu: Electron.MenuItemConstructorOptions | null = null;
   private windowMenu: Electron.MenuItemConstructorOptions | null = null;
   private helpMenu: Electron.MenuItemConstructorOptions | null = null;
   private devMenu: Electron.MenuItemConstructorOptions | null = null;
@@ -42,6 +43,7 @@ export class ApplicationMenu implements OnAfterInit {
     this.fileMenu = this.buildFileMenu();
     this.editMenu = this.buildEditMenu();
     this.viewMenu = this.buildViewMenu();
+    this.navigateMenu = this.buildNavigateMenu();
     this.windowMenu = this.buildWindowMenu();
     this.helpMenu = this.buildHelpMenu();
     this.devMenu = this.buildDevMenu();
@@ -97,6 +99,7 @@ export class ApplicationMenu implements OnAfterInit {
       this.fileMenu,
       this.editMenu,
       this.viewMenu,
+      this.navigateMenu,
       this.devToolsEnabled ? this.devMenu : null,
       this.windowMenu,
       this.helpMenu,
@@ -275,6 +278,27 @@ export class ApplicationMenu implements OnAfterInit {
             ? t("applicationMenu.leaveFullscreen")
             : t("applicationMenu.enterFullscreen"),
           role: "togglefullscreen",
+        },
+      ],
+    };
+  }
+
+  private buildNavigateMenu(): Electron.MenuItemConstructorOptions {
+    const onSearch = (
+      _: MenuItem,
+      focusedWindow: BrowserWindow | undefined,
+    ) => {
+      focusedWindow?.webContents.send(IpcEventType.Search);
+    };
+
+    return {
+      id: "navigate",
+      label: t("applicationMenu.navigate"),
+      submenu: [
+        {
+          label: t("applicationMenu.search"),
+          accelerator: "Command+K",
+          click: onSearch,
         },
       ],
     };

@@ -1,4 +1,9 @@
-import { ComponentPropsWithoutRef, FunctionComponent, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  FunctionComponent,
+  useEffect,
+  useState,
+} from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -23,6 +28,10 @@ export const SearchField: FunctionComponent<SearchFieldProps> = ({
   const { t } = useTranslation();
   const [open, setOpen] = useState(defaultOpen);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    window.ipcApi.onSearch(() => setOpen(true));
+  }, []);
 
   const handleSearch = () => {
     // TODO: Navigate to search results page

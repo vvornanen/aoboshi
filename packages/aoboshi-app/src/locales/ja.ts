@@ -58,6 +58,8 @@ export const ja = {
     hideSidebar: "サイドバーを非表示",
     leaveFullscreen: "フルスクリーンを解除",
     minimize: "しまう",
+    navigate: "移動",
+    search: "検索…",
     selectAll: "すべてを選択",
     services: "サービス",
     paste: "ペースト",

@@ -12,6 +12,7 @@ export enum IpcEventType {
   FindAllBooks = "books:findAll",
   FindCharacterByLiteral = "characters:findByLiteral",
   FindLatestStatisticsIncrement = "statistics:findLatestStatisticsIncrement",
+  Search = "search",
 }
 
 /**
@@ -27,6 +28,11 @@ export type OnToggleSidebarHandler = (open: boolean) => void;
  * @param to router path where to navigate
  */
 export type OnNavigateHandler = (to: string) => void;
+
+/**
+ * Called when search dialog is triggered from the main process (e.g. application menu)
+ */
+export type OnSearchHandler = () => void;
 
 /**
  * Tag types used for Redux Toolkit Query automated re-fetching.
@@ -67,6 +73,8 @@ export interface IpcApi {
 
   /** Called when the database is updated so that Redux Toolkit Query can re-fetch changed data. */
   onInvalidateTags: (callback: OnInvalidateTagsHandler) => void;
+
+  onSearch: (callback: OnSearchHandler) => void;
 
   findBookById: (id: string) => Promise<Book | null>;
   findAllBooks: () => Promise<Book[]>;

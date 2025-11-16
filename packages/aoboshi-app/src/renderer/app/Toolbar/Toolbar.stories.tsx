@@ -55,6 +55,16 @@ export const Loading: Story = {
   },
 };
 
+export const Popover: Story = {
+  ...Default,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await waitFor(() => canvas.getByText(/時間前/));
+    await userEvent.click(canvas.getByText(/時間前/));
+  },
+};
+
 export const LatestTimestampError: Story = {
   ...Default,
   parameters: {

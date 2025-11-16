@@ -15,6 +15,7 @@ import { SearchField } from "~search/SearchField";
 import { Card } from "~common/Card";
 import { Typography } from "~common/Typography";
 import * as transitions from "~theme/transitions";
+import { DateTime } from "~common/DateTime";
 
 type ToolbarProps = Omit<ComponentPropsWithoutRef<"div">, "children">;
 
@@ -91,11 +92,27 @@ const LatestReview = () => {
   }
 
   return (
-    <button className={styles.latestReviewButton}>
-      <span className={styles.latestReviewLabel}>
-        {t("Toolbar.latestReview")}
-      </span>
-      <RelativeTime date={latestReviewTimestamp} />
-    </button>
+    <Popover.Root>
+      {/* TODO: Use Button component in the trigger */}
+      <Popover.Trigger className={styles.latestReviewButton}>
+        <span className={styles.latestReviewLabel}>
+          {t("Toolbar.latestReview")}
+        </span>
+        <RelativeTime date={latestReviewTimestamp} />
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          asChild
+          side="bottom"
+          align="end"
+          avoidCollisions
+          collisionPadding={8}
+        >
+          <Card variant="raised">
+            <DateTime value={latestReviewTimestamp} />
+          </Card>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 };

@@ -14,6 +14,7 @@ import { maru } from "~common";
 import { SearchField } from "~search/SearchField";
 import { Card } from "~common/Card";
 import { Typography } from "~common/Typography";
+import * as transitions from "~theme/transitions";
 
 type ToolbarProps = Omit<ComponentPropsWithoutRef<"div">, "children">;
 
@@ -24,10 +25,9 @@ export const Toolbar: FunctionComponent<ToolbarProps> = ({
   const shouldReduceMotion = useReducedMotion();
   const sidebarOpen = useSelector(selectSidebarOpen);
 
-  // TODO: Move to theme
   const transition: Transition = shouldReduceMotion
-    ? { type: false }
-    : { type: "spring", stiffness: 300, damping: 30 };
+    ? transitions.none
+    : transitions.sidebar;
 
   return (
     <Container>

@@ -17,6 +17,7 @@ import {
 import { useDispatch } from "~app/useDispatch";
 import { useSelector } from "~app/useSelector";
 import { noDrag } from "~common/window.css";
+import * as transitions from "~theme/transitions";
 
 export const SidebarLayout: FunctionComponent = () => {
   const { t } = useTranslation();
@@ -44,8 +45,8 @@ export const SidebarLayout: FunctionComponent = () => {
   };
 
   const transition: Transition = shouldReduceMotion
-    ? { type: false }
-    : { type: "spring", stiffness: 300, damping: 30 };
+    ? transitions.none
+    : transitions.sidebar;
 
   return (
     <div className={styles.sidebarLayout}>

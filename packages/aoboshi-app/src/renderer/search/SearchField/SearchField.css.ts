@@ -16,7 +16,6 @@ export const searchButton = style([
     borderRadius: theme.vars.shape.borderRadiusSm,
     paddingBlock: 4,
     paddingInline: 8,
-    width: 300,
     userSelect: "none",
     textAlign: "start",
     selectors: {
@@ -29,6 +28,10 @@ export const searchButton = style([
     },
   },
 ]);
+
+export const searchButtonLabel = style({
+  display: "inline-block", // Layout animation transforms do not work with inline
+});
 
 export const dialog = style([
   noDrag,

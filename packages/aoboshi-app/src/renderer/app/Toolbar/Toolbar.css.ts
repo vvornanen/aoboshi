@@ -1,9 +1,11 @@
-import { style } from "@vanilla-extract/css";
+import { createVar, style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import * as theme from "~theme/theme.css";
 import { toggleButtonWidth } from "~app/SidebarLayout/SidebarLayout.css";
 import { typographyVariant } from "~common/Typography/Typography.css";
 import { noDrag } from "~common/window.css";
+
+const toolbarPaddingInlineStart = createVar();
 
 export const toolbar = recipe({
   base: [
@@ -11,6 +13,7 @@ export const toolbar = recipe({
     {
       display: "grid",
       gridTemplateAreas: "'actions search latestReview'",
+      gridTemplateColumns: `calc(224px - ${toolbarPaddingInlineStart}) 1fr 224px`,
       alignContent: "center",
       height: theme.vars.windowControls.height,
     },
@@ -18,11 +21,14 @@ export const toolbar = recipe({
   variants: {
     sidebarOpen: {
       false: {
-        // TODO: var toolbarPaddingStart
-        gridTemplateColumns: `calc(224px - ${theme.vars.windowControls.width} - ${toggleButtonWidth}) 1fr 224px`,
+        vars: {
+          [toolbarPaddingInlineStart]: `calc(${theme.vars.windowControls.width} - ${toggleButtonWidth})`,
+        },
       },
       true: {
-        gridTemplateColumns: `224px 1fr 224px`,
+        vars: {
+          [toolbarPaddingInlineStart]: "0",
+        },
       },
     },
   },
@@ -31,35 +37,24 @@ export const toolbar = recipe({
 export const search = style({
   gridArea: "search",
   justifySelf: "center",
+  width: "clamp(100px, 100%, 300px)",
+});
+
+export const searchField = style({
+  width: "100%",
 });
 
 export const latestReview = style({
   gridArea: "latestReview",
-  display: "flex",
-  justifyContent: "flex-end",
-  alignItems: "center",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
+  justifySelf: "end",
 });
 
-export const latestReviewLabel = style([
-  noDrag,
-  {
-    display: "inline",
-    marginInlineEnd: "0.25em",
-  },
-]);
-
-export const latestReviewTime = style([
-  noDrag,
-  {
-    display: "inline",
-  },
-]);
+export const latestReviewLabel = style({
+  marginInlineEnd: "0.25em",
+});
 
 // TODO: Replace with reusable Button component
-export const latestReviewErrorButton = style([
+export const latestReviewButton = style([
   noDrag,
   {
     color: theme.vars.color.onSurface,

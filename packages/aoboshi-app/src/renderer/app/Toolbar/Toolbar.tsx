@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { Transition, motion, useReducedMotion } from "framer-motion";
 import { clsx } from "clsx";
 import * as Popover from "@radix-ui/react-popover";
 import * as styles from "./Toolbar.css";
@@ -15,16 +15,19 @@ import { SearchField } from "~search/SearchField";
 import { Card } from "~common/Card";
 import { Typography } from "~common/Typography";
 
-// TODO: Move to theme
-const transition = { type: "spring", stiffness: 300, damping: 30 };
-
 type ToolbarProps = Omit<ComponentPropsWithoutRef<"div">, "children">;
 
 export const Toolbar: FunctionComponent<ToolbarProps> = ({
   className,
   ...props
 }) => {
+  const shouldReduceMotion = useReducedMotion();
   const sidebarOpen = useSelector(selectSidebarOpen);
+
+  // TODO: Move to theme
+  const transition: Transition = shouldReduceMotion
+    ? { type: false }
+    : { type: "spring", stiffness: 300, damping: 30 };
 
   return (
     <Container>
@@ -32,18 +35,14 @@ export const Toolbar: FunctionComponent<ToolbarProps> = ({
         className={clsx(styles.toolbar({ sidebarOpen }), className)}
         {...props}
       >
-        <div className={styles.search}>
+        <motion.div layout transition={transition} className={styles.search}>
+          <SearchField className={styles.searchField} />
+        </motion.div>
+        <div className={styles.latestReview}>
           <motion.div layout="position" transition={transition}>
-            <SearchField />
+            <LatestReview />
           </motion.div>
         </div>
-        <motion.div
-          layout="position"
-          className={styles.latestReview}
-          transition={transition}
-        >
-          <LatestReview />
-        </motion.div>
       </div>
     </Container>
   );
@@ -65,7 +64,7 @@ const LatestReview = () => {
     return (
       <Popover.Root>
         {/* TODO: Use Button component in the trigger */}
-        <Popover.Trigger className={styles.latestReviewErrorButton}>
+        <Popover.Trigger className={styles.latestReviewButton}>
           {t("Toolbar.latestReviewErrorButtonLabel")}
         </Popover.Trigger>
         <Popover.Portal>
@@ -92,11 +91,11 @@ const LatestReview = () => {
   }
 
   return (
-    <dl>
-      <dt className={styles.latestReviewLabel}>{t("Toolbar.latestReview")}</dt>
-      <dd className={styles.latestReviewTime}>
-        <RelativeTime date={latestReviewTimestamp} />
-      </dd>
-    </dl>
+    <button className={styles.latestReviewButton}>
+      <span className={styles.latestReviewLabel}>
+        {t("Toolbar.latestReview")}
+      </span>
+      <RelativeTime date={latestReviewTimestamp} />
+    </button>
   );
 };

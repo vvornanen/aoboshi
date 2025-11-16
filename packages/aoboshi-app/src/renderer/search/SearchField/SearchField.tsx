@@ -3,13 +3,14 @@ import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Command } from "cmdk";
+import { motion } from "framer-motion";
 import * as styles from "./SearchField.css";
 import * as cardStyles from "~common/Card/Card.css";
 import { visuallyHidden } from "~common/visuallyHidden.css";
 
 type SearchFieldProps = Pick<
   ComponentPropsWithoutRef<"button">,
-  "className"
+  "className" | "style"
 > & {
   defaultOpen?: boolean;
 };
@@ -17,6 +18,7 @@ type SearchFieldProps = Pick<
 export const SearchField: FunctionComponent<SearchFieldProps> = ({
   defaultOpen = false,
   className,
+  ...props
 }) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(defaultOpen);
@@ -30,8 +32,13 @@ export const SearchField: FunctionComponent<SearchFieldProps> = ({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger className={clsx(styles.searchButton, className)}>
-        {t("SearchField.inputLabel")}
+      <Dialog.Trigger
+        className={clsx(styles.searchButton, className)}
+        {...props}
+      >
+        <motion.span layout="position" className={styles.searchButtonLabel}>
+          {t("SearchField.inputLabel")}
+        </motion.span>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Content

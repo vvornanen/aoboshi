@@ -23,7 +23,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => <SearchField {...args} style={{ width: 300 }} />,
+};
 
 export const Open: Story = {
   play: async ({ canvasElement }) => {

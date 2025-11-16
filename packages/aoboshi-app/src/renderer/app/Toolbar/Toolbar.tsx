@@ -72,7 +72,7 @@ const LatestReview = () => {
           <Popover.Content
             asChild
             side="bottom"
-            align="start"
+            align="end"
             avoidCollisions
             collisionPadding={8}
           >

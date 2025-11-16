@@ -81,6 +81,7 @@ const updateProgress = (
     numberOfReviewsRemaining;
   numberOfReviewsProcessed += numberOfReviewsInIncrement;
   reportProgress();
+  postMessage({ type: "invalidateTags", tags: ["LatestStatisticsIncrement"] });
 };
 
 const isLongRunningProcess = () => totalNumberOfReviews > limit;
@@ -123,7 +124,6 @@ const run = async (): Promise<number> => {
     meta.totalNumberOfReviews - increment.numberOfReviews,
   );
   logResult(increment, numberOfReviewsProcessed, totalNumberOfReviews);
-  postMessage({ type: "invalidateTags", tags: ["LatestStatisticsIncrement"] });
 
   return reviews.length;
 };

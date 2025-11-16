@@ -8,6 +8,7 @@ import {
   ApplicationProperties,
   getEnvironmentVariable,
 } from "~/worker";
+import { StatisticsController } from "~/main/statistics";
 
 /** Extends the common application context with services available only in the main thread */
 export class MainApplicationContext extends ApplicationContext {
@@ -16,6 +17,7 @@ export class MainApplicationContext extends ApplicationContext {
   scheduler: Scheduler;
   bookController: BookController;
   characterController: CharacterController;
+  statisticsController: StatisticsController;
 
   constructor(properties: ApplicationProperties) {
     super(properties);
@@ -37,6 +39,9 @@ export class MainApplicationContext extends ApplicationContext {
     this.bookController = new BookController(this.bookRepository);
     this.characterController = new CharacterController(
       this.characterRepository,
+    );
+    this.statisticsController = new StatisticsController(
+      this.statisticsIncrementRepository,
     );
   }
 }

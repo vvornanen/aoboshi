@@ -4,9 +4,10 @@ import { use } from "i18next";
 import { initReactI18next } from "react-i18next";
 import {
   storeLoader,
+  withFakeTimers,
+  withIpcApi,
   withStoreProvider,
-} from "~/storybook/storeProvider.decorator";
-import { withIpcApi } from "~/storybook/ipcApi.decorator";
+} from "~/storybook";
 import { darkThemeClass, lightThemeClass } from "~/renderer/theme/theme.css";
 import "~/renderer/styles.css";
 import { options } from "~/i18n";
@@ -31,6 +32,7 @@ const preview: Preview = {
       },
       defaultTheme: "light",
     }),
+    withFakeTimers,
     withStoreProvider,
     withIpcApi,
   ],

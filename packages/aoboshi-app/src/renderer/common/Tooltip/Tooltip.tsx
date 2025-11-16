@@ -3,6 +3,7 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { type TooltipContentProps } from "@radix-ui/react-tooltip";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import * as styles from "./Tooltip.css";
+import * as transitions from "~theme/transitions";
 
 export type TooltipProps = TooltipContentProps & {
   title: string;
@@ -23,6 +24,10 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
 
   const initialScale = shouldReduceMotion ? 1 : 0.5;
   const initiallyOpen = defaultOpen && initial.current;
+
+  const transition = shouldReduceMotion
+    ? transitions.none
+    : transitions.tooltip;
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
@@ -51,7 +56,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
                   }
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: initialScale }}
-                  transition={{ type: "spring", stiffness: 2000, damping: 70 }}
+                  transition={transition}
                 >
                   {title}
                   <TooltipPrimitive.Arrow className={styles.tooltipArrow} />

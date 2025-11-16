@@ -81,6 +81,7 @@ const updateProgress = (
     numberOfReviewsRemaining;
   numberOfReviewsProcessed += numberOfReviewsInIncrement;
   reportProgress();
+  postMessage({ type: "invalidateTags", tags: ["LatestStatisticsIncrement"] });
 };
 
 const isLongRunningProcess = () => totalNumberOfReviews > limit;

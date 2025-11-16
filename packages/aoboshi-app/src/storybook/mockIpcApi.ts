@@ -10,10 +10,12 @@ const defaultMockApi: IpcApi = {
   toggleSidebar: () => {},
   onNavigate: () => {},
   onInvalidateTags: () => {},
+  onSearch: () => {},
   findBookById: async () => null,
   findAllBooks: async () => [],
   findCharacterByLiteral: async (literal: string) =>
     createCharacter({ literal }),
+  findLatestStatisticsIncrement: async () => null,
 };
 
 /**

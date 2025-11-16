@@ -28,9 +28,19 @@ export const ja = {
   RecentlyStudiedPage: {
     title: "最近の学習",
   },
+  SearchField: {
+    inputLabel: "検索",
+    inputPlaceholder: "文字を検索する",
+    recentLabel: "最近の検索",
+  },
   Sidebar: {
     library: "ライブラリ",
     recentlyStudied: "最近の学習",
+  },
+  Toolbar: {
+    latestReview: "最後の学習:",
+    latestReviewErrorButtonLabel: "最後の学習を表示できませんでした",
+    latestReviewErrorPopoverText: "下記のエラーが発生しました",
   },
   applicationMenu: {
     about: "アオボシについて",
@@ -48,6 +58,8 @@ export const ja = {
     hideSidebar: "サイドバーを非表示",
     leaveFullscreen: "フルスクリーンを解除",
     minimize: "しまう",
+    navigate: "移動",
+    search: "検索…",
     selectAll: "すべてを選択",
     services: "サービス",
     paste: "ペースト",

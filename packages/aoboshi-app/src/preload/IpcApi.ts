@@ -1,5 +1,6 @@
 import { Book } from "@vvornanen/aoboshi-core/books";
 import { Character } from "@vvornanen/aoboshi-core/characters";
+import { StatisticsIncrement } from "@vvornanen/aoboshi-core/statistics";
 
 export const IPC_API_KEY = "ipcApi";
 
@@ -10,6 +11,8 @@ export enum IpcEventType {
   FindBookById = "books:findById",
   FindAllBooks = "books:findAll",
   FindCharacterByLiteral = "characters:findByLiteral",
+  FindLatestStatisticsIncrement = "statistics:findLatestStatisticsIncrement",
+  Search = "search",
 }
 
 /**
@@ -27,11 +30,21 @@ export type OnToggleSidebarHandler = (open: boolean) => void;
 export type OnNavigateHandler = (to: string) => void;
 
 /**
+ * Called when search dialog is triggered from the main process (e.g. application menu)
+ */
+export type OnSearchHandler = () => void;
+
+/**
  * Tag types used for Redux Toolkit Query automated re-fetching.
  *
  * @see https://redux-toolkit.js.org/rtk-query/usage/automated-refetching
  */
-export const tagTypes = ["Book", "Character"] as const;
+export const tagTypes = [
+  "Book",
+  "Character",
+  "StatisticsIncrement",
+  "LatestStatisticsIncrement",
+] as const;
 
 export type TagType = (typeof tagTypes)[number];
 
@@ -61,7 +74,10 @@ export interface IpcApi {
   /** Called when the database is updated so that Redux Toolkit Query can re-fetch changed data. */
   onInvalidateTags: (callback: OnInvalidateTagsHandler) => void;
 
+  onSearch: (callback: OnSearchHandler) => void;
+
   findBookById: (id: string) => Promise<Book | null>;
   findAllBooks: () => Promise<Book[]>;
   findCharacterByLiteral: (literal: string) => Promise<Character | null>;
+  findLatestStatisticsIncrement: () => Promise<StatisticsIncrement | null>;
 }

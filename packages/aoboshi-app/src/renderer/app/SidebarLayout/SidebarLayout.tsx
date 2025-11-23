@@ -1,7 +1,7 @@
 import { FunctionComponent, useId, useState } from "react";
 import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import { Transition, motion, useReducedMotion } from "motion/react";
 import * as styles from "./SidebarLayout.css";

@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Typography } from "~common/Typography";
 import { PageMeta } from "~common/PageMeta";

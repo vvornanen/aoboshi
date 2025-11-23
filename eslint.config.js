@@ -12,7 +12,12 @@ import storybook from "eslint-plugin-storybook";
 
 export default tseslint.config(
   {
-    ignores: ["packages/*/.vite/**", "packages/*/dist/**", "packages/*/out/**"],
+    ignores: [
+      "packages/*/.vite/**",
+      "packages/*/dist/**",
+      "packages/*/out/**",
+      ".yarn/**",
+    ],
   },
   {
     files: ["packages/**/*.{ts,tsx}"],

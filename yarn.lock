@@ -4654,7 +4654,7 @@ __metadata:
   resolution: "@vvornanen/aoboshi-kanji@workspace:packages/aoboshi-kanji"
   dependencies:
     "@vvornanen/aoboshi-core": "workspace:^"
-    fast-xml-parser: "npm:^4.5.3"
+    fast-xml-parser: "npm:^5.3.2"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
     vitest: "npm:^2.1.9"
@@ -7988,14 +7988,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.5.3":
-  version: 4.5.3
-  resolution: "fast-xml-parser@npm:4.5.3"
+"fast-xml-parser@npm:^5.3.2":
+  version: 5.3.2
+  resolution: "fast-xml-parser@npm:5.3.2"
   dependencies:
-    strnum: "npm:^1.1.1"
+    strnum: "npm:^2.1.0"
   bin:
     fxparser: src/cli/cli.js
-  checksum: 10/ca22bf9d65c10b8447c1034c13403e90ecee210e2b3852690df3d8a42b8a46ec655fae7356096abd98a15b89ddaf11878587b1773e0c3be4cbc2ac4af4c7bf95
+  checksum: 10/8157045ebb1709696729f75c5a1d31e1224df73d51300dadd2468224b9ffdc3197615712affee4578889534ed47d6344545765a0d63b3151749dd427b68b70da
   languageName: node
   linkType: hard
 
@@ -13356,10 +13356,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strnum@npm:^1.1.1":
-  version: 1.1.2
-  resolution: "strnum@npm:1.1.2"
-  checksum: 10/ccd6297a1fdaf0fc8ea0ea904acdae76878d49a4b0d98a70155df4bc081fd88eac5ec99fb150f3d1d1af065c1898d38420705259ba6c39aa850c671bcd54e35d
+"strnum@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "strnum@npm:2.1.1"
+  checksum: 10/d5fe6e4333cddc17569331048e403e876ffcf629989815f0359b0caf05dae9441b7eef3d7dd07427313ac8b3f05a8f60abc1f61efc15f97245dbc24028362bc9
   languageName: node
   linkType: hard
 

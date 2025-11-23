@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import chroma from "chroma-js";
 
 export const alpha = (color: string, value: number): string =>

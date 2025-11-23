@@ -1,5 +1,5 @@
 import { createHashRouter } from "react-router";
-import { BookPage } from "~books/BookPage";
+import { BookPage, BookPageLoader } from "~books/BookPage";
 import { SidebarLayout } from "~app/SidebarLayout";
 import { RecentlyStudiedPage } from "~recentlyStudied/RecentlyStudiedPage";
 
@@ -14,6 +14,13 @@ export const router = createHashRouter([
       },
       {
         path: "books/:bookId",
+        loader: ({ params }) => {
+          if (!params.bookId) {
+            throw new Error("Missing book id");
+          }
+
+          return { bookId: params.bookId } satisfies ReturnType<BookPageLoader>;
+        },
         element: <BookPage />,
       },
     ],

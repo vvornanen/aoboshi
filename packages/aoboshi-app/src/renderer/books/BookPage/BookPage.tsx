@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useParams } from "react-router";
+import { LoaderFunctionArgs, useLoaderData } from "react-router";
 import { skipToken } from "@reduxjs/toolkit/query";
 import { Typography } from "~common/Typography";
 import { PageMeta } from "~common/PageMeta";
@@ -8,8 +8,10 @@ import { Container } from "~common/Container";
 import { useFindBookByIdQuery } from "~books";
 import { Skeleton } from "~common/Skeleton";
 
+export type BookPageLoader = (args: LoaderFunctionArgs) => { bookId: string };
+
 export const BookPage: FunctionComponent = () => {
-  const { bookId } = useParams();
+  const { bookId } = useLoaderData<BookPageLoader>();
   const {
     data: book,
     error,

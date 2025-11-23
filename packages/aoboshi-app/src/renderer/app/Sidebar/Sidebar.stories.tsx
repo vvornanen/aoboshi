@@ -1,8 +1,4 @@
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  reactRouterParameters,
-  withRouter,
-} from "storybook-addon-remix-react-router";
 import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
 import { Sidebar } from "./Sidebar";
 import { IpcApi } from "~/preload";
@@ -10,7 +6,6 @@ import { IpcApi } from "~/preload";
 const meta = {
   component: Sidebar,
   decorators: [
-    withRouter,
     (Story) => (
       <div style={{ width: 200 }}>
         <Story />
@@ -19,10 +14,9 @@ const meta = {
   ],
   parameters: {
     layout: "fullscreen",
-    reactRouter: reactRouterParameters({
+    route: {
       location: {},
-      routing: "/*",
-    }),
+    },
   },
 } satisfies Meta<typeof Sidebar>;
 

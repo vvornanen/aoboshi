@@ -1,6 +1,6 @@
 import type { Preview, ReactRenderer } from "@storybook/react";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { use } from "i18next";
+import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import {
   storeLoader,
@@ -13,7 +13,8 @@ import "~/renderer/styles.css";
 import { options } from "~/i18n";
 import { withReactRouter } from "~/storybook/reactRouter.decorator";
 
-use(initReactI18next).init(options);
+// eslint-disable-next-line import/no-named-as-default-member
+i18next.use(initReactI18next).init(options);
 
 const preview: Preview = {
   parameters: {

@@ -33,29 +33,23 @@ type RouteAnnouncerProps = {
 
 /** Notifies screen readers with a new page title when the route changes. */
 const RouteAnnouncer: FunctionComponent<RouteAnnouncerProps> = ({ title }) => {
+  const [prevTitle, setPrevTitle] = useState<string | undefined>(undefined);
   const [alertVisible, setAlertVisible] = useState(false);
 
-  useEffect(() => {
+  if (title !== prevTitle) {
     setAlertVisible(true);
+    setPrevTitle(title);
+  }
 
-    const timeout = setTimeout(() => setAlertVisible(false), 5000);
-
+  useEffect(() => {
+    const timeout = setTimeout(() => setAlertVisible(false), 10000);
     return () => clearTimeout(timeout);
   }, [title]);
 
-  return (
-    <>
-      {alertVisible &&
-        createPortal(
-          <div
-            data-route-announcer=""
-            className={visuallyHidden}
-            aria-live="polite"
-          >
-            {title}
-          </div>,
-          document.body,
-        )}
-    </>
+  return createPortal(
+    <div aria-live="polite" className={visuallyHidden}>
+      {alertVisible && title}
+    </div>,
+    document.body,
   );
 };

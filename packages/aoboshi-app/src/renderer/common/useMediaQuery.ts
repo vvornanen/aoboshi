@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 /**
  * Run the given media query and listens for changes.
@@ -7,18 +7,21 @@ import { useEffect, useState } from "react";
  * @return true if the query matches, updates when the result changes
  */
 export const useMediaQuery = (query: string): boolean => {
-  const [result, setResult] = useState(window.matchMedia(query).matches);
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      const mediaQuery = window.matchMedia(query);
+      mediaQuery.addEventListener("change", callback);
+      return () => mediaQuery.removeEventListener("change", callback);
+    },
+    [query],
+  );
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
+  const getSnapshot = useCallback(
+    () => window.matchMedia(query).matches,
+    [query],
+  );
 
-    setResult(mediaQuery.matches);
-
-    const listener = (event: MediaQueryListEvent) => setResult(event.matches);
-    mediaQuery.addEventListener("change", listener);
-
-    return () => mediaQuery.removeEventListener("change", listener);
-  }, [query]);
-
-  return result;
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 };
+
+const getServerSnapshot = () => false;

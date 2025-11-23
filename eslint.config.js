@@ -12,16 +12,21 @@ import storybook from "eslint-plugin-storybook";
 
 export default tseslint.config(
   {
-    ignores: ["packages/*/.vite/**", "packages/*/dist/**", "packages/*/out/**"],
+    ignores: [
+      "packages/*/.vite/**",
+      "packages/*/dist/**",
+      "packages/*/out/**",
+      ".yarn/**",
+    ],
   },
   {
     files: ["packages/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      importPlugin.configs.typescript,
+      tseslint.configs.recommended,
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.typescript,
     ],
-    plugins: { import: importPlugin },
     rules: {
       eqeqeq: ["error", "always"],
       "sort-imports": ["error", { ignoreDeclarationSort: true }],
@@ -36,28 +41,24 @@ export default tseslint.config(
         { includeInternal: true, includeTypes: true },
       ],
       "import/no-relative-parent-imports": "error",
-      // Copy rules from the recommended config because eslint-plugin-import does not yet support flat config
-      // See: https://github.com/import-js/eslint-plugin-import/issues/2948
-      ...importPlugin.configs.recommended.rules,
       "import/first": "error",
       "import/no-duplicates": "error",
       "import/order": "error",
       "import/namespace": "off",
       "import/newline-after-import": "error",
       "import/no-unresolved": "off",
-      // Disable rules below temporarily because because eslint-plugin-import does not yet support flat config
-      "import/default": "off",
-      "import/no-named-as-default": "off",
-      "import/no-named-as-default-member": "off",
     },
   },
   {
     files: ["packages/aoboshi-app/**/*.{ts,tsx}"],
-    extends: [reactRecommended, reactJsxRuntime, importPlugin.configs.electron],
+    extends: [
+      reactRecommended,
+      reactJsxRuntime,
+      reactHooks.configs.flat.recommended,
+      importPlugin.flatConfigs.electron,
+      jsxA11y.flatConfigs.recommended,
+    ],
     plugins: {
-      import: importPlugin,
-      "jsx-a11y": jsxA11y,
-      "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
     settings: {
@@ -66,12 +67,6 @@ export default tseslint.config(
       },
     },
     rules: {
-      // Copy rules from the recommended config because eslint-plugin-jsx-a11y does not yet support flat config
-      // See: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/965
-      ...jsxA11y.configs.recommended.rules,
-      // Copy rules from the recommended config because eslint-plugin-react-hooks does not yet support flat config
-      // See: https://github.com/facebook/react/issues/28313
-      ...reactHooks.configs.recommended.rules,
       "import/no-restricted-paths": [
         "error",
         {
@@ -156,17 +151,13 @@ export default tseslint.config(
       ],
     },
   },
+  storybook.configs["flat/recommended"],
   {
     files: ["packages/aoboshi-app/src/**/*.stories.{ts,tsx}"],
-    plugins: { storybook },
-    // Copy rules from the recommended config because eslint-plugin-storybook does not yet support flat config
-    // See: https://github.com/storybookjs/eslint-plugin-storybook/issues/135
-    rules: storybook.configs.recommended.overrides[0].rules,
-  },
-  {
-    files: ["packages/aoboshi-app/.storybook/main.ts"],
-    plugins: { storybook },
-    rules: storybook.configs.recommended.overrides[1].rules,
+    rules: {
+      // Disable temporarily until Storybook is upgraded to >=9
+      "storybook/no-renderer-packages": "off",
+    },
   },
   prettier,
 );

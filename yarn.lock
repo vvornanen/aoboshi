@@ -4804,15 +4804,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/compiler@npm:^0.1.0":
-  version: 0.1.3
-  resolution: "@vanilla-extract/compiler@npm:0.1.3"
+"@vanilla-extract/compiler@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@vanilla-extract/compiler@npm:0.3.1"
   dependencies:
-    "@vanilla-extract/css": "npm:^1.17.2"
-    "@vanilla-extract/integration": "npm:^8.0.2"
-    vite: "npm:^5.0.0 || ^6.0.0"
-    vite-node: "npm:^3.0.4"
-  checksum: 10/f3314ae542ff1396eb9c5a88bb40fe0d67af3b52059d7de8158673d0386615b85dda4a9771c31a511c2073a2de8746ae82ffb3273075275b42c897e835027e6e
+    "@vanilla-extract/css": "npm:^1.17.4"
+    "@vanilla-extract/integration": "npm:^8.0.4"
+    vite: "npm:^5.0.0 || ^6.0.0 || ^7.0.0"
+    vite-node: "npm:^3.2.2"
+  checksum: 10/afb7eb4cde2e7b861e475146e628448f9b757f7709b33fae3c8eecf28ddcac7c462dad5a052473352699f3b606af35a245e3ecc69f19b231bf9cb6051730d6a8
   languageName: node
   linkType: hard
 
@@ -4836,7 +4836,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/css@npm:^1.17.2, @vanilla-extract/css@npm:^1.17.4":
+"@vanilla-extract/css@npm:^1.17.4":
   version: 1.17.4
   resolution: "@vanilla-extract/css@npm:1.17.4"
   dependencies:
@@ -4865,7 +4865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/integration@npm:^8.0.0, @vanilla-extract/integration@npm:^8.0.2":
+"@vanilla-extract/integration@npm:^8.0.4":
   version: 8.0.4
   resolution: "@vanilla-extract/integration@npm:8.0.4"
   dependencies:
@@ -4906,15 +4906,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vanilla-extract/vite-plugin@npm:^4.0.20":
-  version: 4.0.20
-  resolution: "@vanilla-extract/vite-plugin@npm:4.0.20"
+"@vanilla-extract/vite-plugin@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@vanilla-extract/vite-plugin@npm:5.1.1"
   dependencies:
-    "@vanilla-extract/compiler": "npm:^0.1.0"
-    "@vanilla-extract/integration": "npm:^8.0.0"
+    "@vanilla-extract/compiler": "npm:^0.3.1"
+    "@vanilla-extract/integration": "npm:^8.0.4"
   peerDependencies:
-    vite: ^4.0.3 || ^5.0.0
-  checksum: 10/3c31b30f378fae379c14f9f11b3a19094ea98b786efcef2584118a58ccaf3e6bc323de6bb3b7659212507dbfb312033ea60fdca81cfb4e01869c726f680bd79d
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+  checksum: 10/b2a8d4bea8e2fb8b55f754a93efb096b26aafb60b09f87fc870e8cb435728dfdf1fdbe43f70cf26a7d0a113909c188e7cd5714dd59c1d3a5328a661ecec04a7a
   languageName: node
   linkType: hard
 
@@ -5130,7 +5130,7 @@ __metadata:
     "@vanilla-extract/css": "npm:^1.15.5"
     "@vanilla-extract/dynamic": "npm:^2.1.2"
     "@vanilla-extract/recipes": "npm:^0.5.5"
-    "@vanilla-extract/vite-plugin": "npm:^4.0.20"
+    "@vanilla-extract/vite-plugin": "npm:^5.1.1"
     "@vitejs/plugin-react-swc": "npm:^3.11.0"
     "@vvornanen/aoboshi-anki": "workspace:^"
     "@vvornanen/aoboshi-core": "workspace:^"
@@ -8870,7 +8870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.4, fdir@npm:^6.5.0":
+"fdir@npm:^6.5.0":
   version: 6.5.0
   resolution: "fdir@npm:6.5.0"
   peerDependencies:
@@ -12532,13 +12532,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "picomatch@npm:4.0.2"
-  checksum: 10/ce617b8da36797d09c0baacb96ca8a44460452c89362d7cb8f70ca46b4158ba8bc3606912de7c818eb4a939f7f9015cef3c766ec8a0c6bfc725fdc078e39c717
-  languageName: node
-  linkType: hard
-
 "picomatch@npm:^4.0.3":
   version: 4.0.3
   resolution: "picomatch@npm:4.0.3"
@@ -12695,7 +12688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.3, postcss@npm:^8.5.6":
+"postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
@@ -13722,7 +13715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.34.8, rollup@npm:^4.34.9, rollup@npm:^4.43.0":
+"rollup@npm:^4.34.8, rollup@npm:^4.43.0":
   version: 4.53.3
   resolution: "rollup@npm:4.53.3"
   dependencies:
@@ -14940,7 +14933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.11, tinyglobby@npm:^0.2.13, tinyglobby@npm:^0.2.15":
+"tinyglobby@npm:^0.2.11, tinyglobby@npm:^0.2.15":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
   dependencies:
@@ -15797,7 +15790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:^3.0.4":
+"vite-node@npm:^3.2.2":
   version: 3.2.4
   resolution: "vite-node@npm:3.2.4"
   dependencies:
@@ -15871,62 +15864,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0 || ^6.0.0":
-  version: 6.4.1
-  resolution: "vite@npm:6.4.1"
-  dependencies:
-    esbuild: "npm:^0.25.0"
-    fdir: "npm:^6.4.4"
-    fsevents: "npm:~2.3.3"
-    picomatch: "npm:^4.0.2"
-    postcss: "npm:^8.5.3"
-    rollup: "npm:^4.34.9"
-    tinyglobby: "npm:^0.2.13"
-  peerDependencies:
-    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
-    jiti: ">=1.21.0"
-    less: "*"
-    lightningcss: ^1.21.0
-    sass: "*"
-    sass-embedded: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.16.0
-    tsx: ^4.8.1
-    yaml: ^2.4.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    jiti:
-      optional: true
-    less:
-      optional: true
-    lightningcss:
-      optional: true
-    sass:
-      optional: true
-    sass-embedded:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-    tsx:
-      optional: true
-    yaml:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: 10/ea2083b6b1d1c9e85a13d6797ae989aa1dbc27a5c054319c71141934bf3f8dba8d54b510618040f95751148da63787f28f043df7458a194c81f8b6d8a2d32844
-  languageName: node
-  linkType: hard
-
-"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
+"vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0, vite@npm:^5.0.0 || ^6.0.0 || ^7.0.0-0":
   version: 7.2.4
   resolution: "vite@npm:7.2.4"
   dependencies:

@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef } from "react";
 import { clsx } from "clsx";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import * as styles from "./ListItem.css";
 import { Skeleton } from "~common/Skeleton";
 

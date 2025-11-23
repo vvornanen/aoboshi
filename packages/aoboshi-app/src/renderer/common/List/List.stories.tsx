@@ -1,20 +1,14 @@
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  reactRouterParameters,
-  withRouter,
-} from "storybook-addon-remix-react-router";
 import { List } from "./List";
 import { ListItem } from "~common/ListItem";
 import { ListSubheader } from "~common/ListSubheader";
 
 const meta = {
   component: List,
-  decorators: [withRouter],
   parameters: {
-    reactRouter: reactRouterParameters({
+    route: {
       location: {},
-      routing: "/*",
-    }),
+    },
   },
 } satisfies Meta<typeof List>;
 

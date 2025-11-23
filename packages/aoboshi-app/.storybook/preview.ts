@@ -11,6 +11,7 @@ import {
 import { darkThemeClass, lightThemeClass } from "~/renderer/theme/theme.css";
 import "~/renderer/styles.css";
 import { options } from "~/i18n";
+import { withReactRouter } from "~/storybook/reactRouter.decorator";
 
 use(initReactI18next).init(options);
 
@@ -34,6 +35,7 @@ const preview: Preview = {
     }),
     withFakeTimers,
     withStoreProvider,
+    withReactRouter,
     withIpcApi,
   ],
 };

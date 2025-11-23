@@ -8,7 +8,7 @@ import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Command } from "cmdk";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import * as styles from "./SearchField.css";
 import * as cardStyles from "~common/Card/Card.css";
 import { visuallyHidden } from "~common/visuallyHidden.css";

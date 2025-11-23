@@ -1,24 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
-import {
-  reactRouterParameters,
-  withRouter,
-} from "storybook-addon-remix-react-router";
 import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
 import { BookPage } from "./BookPage";
 import { IpcApi } from "~/preload";
 
 const meta = {
   component: BookPage,
-  decorators: [withRouter],
   parameters: {
-    reactRouter: reactRouterParameters({
-      location: {
-        pathParams: {
-          bookId: grades.id,
-        },
+    route: {
+      loader() {
+        return { bookId: grades.id };
       },
-      routing: "/books/:bookId",
-    }),
+      location: {},
+    },
   },
 } satisfies Meta<typeof BookPage>;
 

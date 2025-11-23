@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Transition, motion, useReducedMotion } from "framer-motion";
+import { Transition, motion, useReducedMotion } from "motion/react";
 import { clsx } from "clsx";
 import * as Popover from "@radix-ui/react-popover";
 import * as styles from "./Toolbar.css";

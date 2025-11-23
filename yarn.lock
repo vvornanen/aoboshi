@@ -4719,7 +4719,7 @@ __metadata:
     better-sqlite3: "npm:^11.3.0"
     bree: "npm:^9.2.4"
     chroma-js: "npm:^3.1.2"
-    chromatic: "npm:^11.29.0"
+    chromatic: "npm:^13.3.4"
     clsx: "npm:^2.1.1"
     cmdk: "npm:^1.0.4"
     dotenv-cli: "npm:^7.4.4"
@@ -5963,9 +5963,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^11.29.0":
-  version: 11.29.0
-  resolution: "chromatic@npm:11.29.0"
+"chromatic@npm:^13.3.4":
+  version: 13.3.4
+  resolution: "chromatic@npm:13.3.4"
   peerDependencies:
     "@chromatic-com/cypress": ^0.*.* || ^1.0.0
     "@chromatic-com/playwright": ^0.*.* || ^1.0.0
@@ -5978,7 +5978,7 @@ __metadata:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 10/8416acc2f5d61bbbaffb232906244c1a84b6068b2801ae166b76c880a45bc42282bc79ea36c58811a9e6d9e9ea142de5610165940fac2c7bf1d4fc1ba6bc091c
+  checksum: 10/9c9f576940f8a1d2d293a1cbf8ebcbcf8a8ec23af288c287e907d56d3f4e155289ac302fdd2e219c96b10f6243348d1264992c23164ac0cd914c6c3da856e006
   languageName: node
   linkType: hard
 

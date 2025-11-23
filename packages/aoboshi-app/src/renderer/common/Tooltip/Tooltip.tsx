@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactElement, useRef, useState } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { type TooltipContentProps } from "@radix-ui/react-tooltip";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import * as styles from "./Tooltip.css";
 import * as transitions from "~theme/transitions";
 

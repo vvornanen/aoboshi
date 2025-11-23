@@ -8,7 +8,19 @@ and character radical and stroke information from [KanjiVG](https://kanjivg.taga
 
 ## First time setup
 
+This project requires Node version matching the version used in the current
+Electron version. Run `nvm use` to install the correct Node version, or see
+[nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#calling-nvm-use-automatically-in-a-directory-with-a-nvmrc-file)
+for how to configure your shell to change the version automatically.
+
 ```
+# Install correct Node version
+nvm use
+
+# Yarn must be re-enabled when Node version changes
+corepack enable yarn
+
+# Install dependencies
 yarn
 ```
 

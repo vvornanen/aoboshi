@@ -58,7 +58,7 @@
   },
   "packageManager": "yarn@4.3.1",
   "engines": {
-    "node": ">=20",
+    "node": "20.16",
     "npm": "Please use yarn instead of npm",
     "yarn": ">=3.6"
   }

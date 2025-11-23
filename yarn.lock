@@ -3807,10 +3807,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chroma-js@npm:^2.4.5":
-  version: 2.4.5
-  resolution: "@types/chroma-js@npm:2.4.5"
-  checksum: 10/8b4eeb55ff122d758a598a014f5e7ad14bbc5cfe45ce10a907f33b3d4082e1921655bc83dbaf6728886f4344ee78301b2934ad319656845208ee0164a90a5051
+"@types/chroma-js@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "@types/chroma-js@npm:3.1.2"
+  checksum: 10/f94b9c398d026198c2840bd5dc7243cd0f6ace7f18843b8cdb91946be909b527455da23c1ed55a3fd46f42f57f8ec8b1f304620d3444389c5cc87fb5d3f6e3c2
   languageName: node
   linkType: hard
 
@@ -4555,7 +4555,7 @@ __metadata:
     "@storybook/test": "npm:^8.6.14"
     "@storybook/theming": "npm:^8.6.14"
     "@types/better-sqlite3": "npm:^7.6.13"
-    "@types/chroma-js": "npm:^2.4.5"
+    "@types/chroma-js": "npm:^3.1.2"
     "@types/react": "npm:18.3.27"
     "@types/react-dom": "npm:^18.3.7"
     "@types/sinonjs__fake-timers": "npm:^15.0.1"

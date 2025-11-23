@@ -65,7 +65,7 @@
     "@vanilla-extract/vite-plugin": "^5.1.1",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "chromatic": "^13.3.4",
-    "dotenv-cli": "^7.4.4",
+    "dotenv-cli": "^11.0.0",
     "electron": "32.3.3",
     "prop-types": "^15.8.1",
     "storybook": "^8.6.14",

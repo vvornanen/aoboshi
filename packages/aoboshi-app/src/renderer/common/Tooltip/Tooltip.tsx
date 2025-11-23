@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, useRef, useState } from "react";
+import { FunctionComponent, ReactElement, useState } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { type TooltipContentProps } from "@radix-ui/react-tooltip";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -19,11 +19,11 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
   ...props
 }) => {
   const shouldReduceMotion = useReducedMotion();
-  const initial = useRef(true);
+  const [initial, setInitial] = useState(true);
   const [open, setOpen] = useState(defaultOpen);
 
   const initialScale = shouldReduceMotion ? 1 : 0.5;
-  const initiallyOpen = defaultOpen && initial.current;
+  const initiallyOpen = defaultOpen && initial;
 
   const transition = shouldReduceMotion
     ? transitions.none
@@ -31,7 +31,7 @@ export const Tooltip: FunctionComponent<TooltipProps> = ({
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
-    initial.current = false;
+    setInitial(false);
   };
 
   return (

@@ -28,6 +28,7 @@ export const Default: Story = {
 };
 
 export const Open: Story = {
+  ...Default,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -36,6 +37,7 @@ export const Open: Story = {
 };
 
 export const Query: Story = {
+  ...Default,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement.ownerDocument.body);
 

@@ -67,7 +67,7 @@ export const SearchField: FunctionComponent<SearchFieldProps> = ({
               value={query}
               onValueChange={setQuery}
             ></Command.Input>
-            <Command.List>
+            <Command.List className={styles.list}>
               {query.trim().length > 0 && (
                 <Command.Item
                   className={styles.item}

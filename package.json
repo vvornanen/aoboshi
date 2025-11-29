@@ -59,6 +59,6 @@
   "engines": {
     "node": "22.20",
     "npm": "Please use yarn instead of npm",
-    "yarn": ">=3.6"
+    "yarn": ">=4.10"
   }
 }

@@ -10,6 +10,7 @@ export const searchButton = style([
   noDrag,
   {
     backgroundColor: theme.vars.color.surface,
+    color: theme.vars.color.onSurface,
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: theme.vars.color.outlineVariant,
@@ -52,9 +53,8 @@ export const searchInput = style([
   typographyVariant({ variant: "bodyMedium" }),
   {
     backgroundColor: theme.vars.color.surface,
-    borderStyle: "none none solid none",
-    borderWidth: 1,
-    borderColor: theme.vars.color.outlineVariant,
+    color: theme.vars.color.onSurface,
+    borderStyle: "none",
     paddingBlock: 12,
     paddingInline: 16,
     width: "100%",
@@ -62,6 +62,16 @@ export const searchInput = style([
     textAlign: "start",
   },
 ]);
+
+export const list = style({
+  selectors: {
+    "&:has([cmdk-item])": {
+      borderBlockStartStyle: "solid",
+      borderBlockStartWidth: 1,
+      borderBlockStartColor: theme.vars.color.outlineVariant,
+    },
+  },
+});
 
 export const item = style([
   typographyVariant({ variant: "bodyMedium" }),

@@ -27,10 +27,16 @@ const getLastSyncTimestamp = () => {
     : Temporal.Instant.fromEpochSeconds(0);
 };
 
-const doGenerateStatistics = database.transaction(
-  (reviewsAndNewCards: (CardReview | NewCard)[], startMark: string) =>
-    statisticsService.generateStatistics(reviewsAndNewCards, startMark),
-);
+const doGenerateStatistics = async (
+  reviewsAndNewCards: (CardReview | NewCard)[],
+  startMark: string,
+) => {
+  const context = await statisticsService.prepareStatistics(reviewsAndNewCards);
+
+  return database.transaction(() =>
+    statisticsService.generateStatistics(context, startMark),
+  )();
+};
 
 const logStart = () => {
   if (logger.isDebugEnabled()) {

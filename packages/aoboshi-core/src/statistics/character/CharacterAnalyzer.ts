@@ -6,13 +6,13 @@ import {
 } from "~/statistics/character";
 import {
   AnalysisContext,
-  Analyzer,
   getCharactersFromExpression,
   isReview,
   mergeStatisticsByCharacter,
   timestampToDate,
 } from "~/statistics";
 import { nullableMaxInstant } from "~";
+import { PreProcessingAnalyzer } from "~/statistics/PreProcessingAnalyzer";
 
 /**
  * Adapter for fetching card statistics from an external source such as Anki
@@ -29,25 +29,25 @@ export type GetCardStatisticsByCharacter = (
  *
  * Incrementally merges the generated statistics with existing data.
  */
-export class CharacterAnalyzer implements Analyzer {
+export class CharacterAnalyzer implements PreProcessingAnalyzer {
   constructor(
     private statisticsByCharacterRepository: StatisticsByCharacterRepository,
     private getCardStatisticsByCharacter: GetCardStatisticsByCharacter,
   ) {}
 
-  async run(context: AnalysisContext) {
+  async prepare(context: AnalysisContext) {
     const { statisticsByCharacters, latestReviewTime, reviewDays } =
       await this.getStatisticsByCharacters(context);
-    const result = this.mergeAndSaveStatisticsByCharacters(
-      statisticsByCharacters,
+
+    return { ...context, statisticsByCharacters, latestReviewTime, reviewDays };
+  }
+
+  run(context: AnalysisContext) {
+    const statisticsByCharacters = this.mergeAndSaveStatisticsByCharacters(
+      context.statisticsByCharacters,
     );
 
-    return {
-      ...context,
-      statisticsByCharacters: result,
-      latestReviewTime,
-      reviewDays,
-    };
+    return { ...context, statisticsByCharacters };
   }
 
   async getStatisticsByCharacters(context: AnalysisContext) {

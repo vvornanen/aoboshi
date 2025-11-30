@@ -3,13 +3,13 @@ import { mock } from "vitest-mock-extended";
 import * as fixtures from "./statisticsFixtures";
 import {
   AnalysisContext,
-  Analyzer,
   StatisticsIncrement,
   StatisticsIncrementRepository,
   StatisticsService,
 } from "~/statistics";
 import { randomId } from "~/randomId";
 import { SettingsService } from "~/settings";
+import { PreProcessingAnalyzer } from "~/statistics/PreProcessingAnalyzer";
 
 vi.mock("~/randomId", () => {
   return {
@@ -28,8 +28,8 @@ const mockRandomId = (value?: string) => {
 const mockSettingsService = mock<SettingsService>();
 
 const statisticsIncrementRepository = mock<StatisticsIncrementRepository>();
-const analyzer1 = mock<Analyzer>();
-const analyzer2 = mock<Analyzer>();
+const analyzer1 = mock<PreProcessingAnalyzer>();
+const analyzer2 = mock<PreProcessingAnalyzer>();
 
 const statisticsService = new StatisticsService(
   [analyzer1, analyzer2],
@@ -37,8 +37,8 @@ const statisticsService = new StatisticsService(
   mockSettingsService,
 );
 
-const mockPerformace = mock<Performance>();
-vi.stubGlobal("performance", mockPerformace);
+const mockPerformance = mock<Performance>();
+vi.stubGlobal("performance", mockPerformance);
 
 beforeEach(() => {
   mockRandomId();
@@ -47,8 +47,8 @@ beforeEach(() => {
     timeZoneConfig: [{ timeZone: "UTC" }],
   });
 
-  mockPerformace.mark.mockImplementation((name) => new PerformanceMark(name));
-  mockPerformace.measure.mockReturnValueOnce(
+  mockPerformance.mark.mockImplementation((name) => new PerformanceMark(name));
+  mockPerformance.measure.mockReturnValueOnce(
     mock<PerformanceMeasure>({ duration: 1213 }),
   );
 });
@@ -57,52 +57,68 @@ afterEach(() => {
   vi.resetAllMocks();
 });
 
-describe("generateStatistics", () => {
-  const testCase = fixtures.oneCardOneReview;
+const testCase = fixtures.oneCardOneReview;
+
+const initialContextValue = {
+  reviews: testCase.reviews,
+  statisticsByCharacters: [],
+  reviewDays: [],
+  latestReviewTime: undefined,
+  timeZoneConfig: [{ timeZone: "UTC" }],
+};
+
+describe("prepareStatistics", () => {
+  const analyzer1ResolvedValue: AnalysisContext = {
+    reviews: testCase.reviews,
+    statisticsByCharacters: testCase.statisticsByCharacters,
+    reviewDays: testCase.reviewDays,
+    latestReviewTime: testCase.latestReviewTime,
+    timeZoneConfig: testCase.timeZoneConfig,
+  };
 
   beforeEach(() => {
-    const context: AnalysisContext = {
-      reviews: testCase.reviews,
-      statisticsByCharacters: testCase.statisticsByCharacters,
-      reviewDays: testCase.reviewDays,
-      latestReviewTime: testCase.latestReviewTime,
-      timeZoneConfig: testCase.timeZoneConfig,
-    };
-
-    analyzer1.run.mockReturnValueOnce(context);
+    analyzer1.prepare.mockResolvedValueOnce(analyzer1ResolvedValue);
+    analyzer2.prepare.mockResolvedValue();
   });
 
   test("calls first analyzer with initial context", async () => {
-    await statisticsService.generateStatistics(testCase.reviews);
-    expect(analyzer1.run).toHaveBeenCalledWith({
-      reviews: testCase.reviews,
-      statisticsByCharacters: [],
-      reviewDays: [],
-      latestReviewTime: undefined,
-      timeZoneConfig: [{ timeZone: "UTC" }],
-    });
+    await statisticsService.prepareStatistics(testCase.reviews);
+    expect(analyzer1.prepare).toHaveBeenCalledWith(initialContextValue);
   });
 
   test("passes context returned from previous analyzer", async () => {
-    const context: AnalysisContext = {
-      reviews: testCase.reviews,
-      statisticsByCharacters: testCase.statisticsByCharacters,
-      reviewDays: testCase.reviewDays,
-      latestReviewTime: testCase.latestReviewTime,
-      timeZoneConfig: testCase.timeZoneConfig,
-    };
+    await statisticsService.prepareStatistics(testCase.reviews);
+    expect(analyzer2.prepare).toHaveBeenCalledWith(analyzer1ResolvedValue);
+  });
+});
 
-    analyzer1.run.mockReturnValueOnce(context);
+describe("generateStatistics", () => {
+  const analyzer1ReturnValue: AnalysisContext = {
+    reviews: testCase.reviews,
+    statisticsByCharacters: testCase.statisticsByCharacters,
+    reviewDays: testCase.reviewDays,
+    latestReviewTime: testCase.latestReviewTime,
+    timeZoneConfig: testCase.timeZoneConfig,
+  };
 
-    await statisticsService.generateStatistics(testCase.reviews);
-
-    expect(analyzer2.run).toHaveBeenCalledWith(context);
+  beforeEach(() => {
+    analyzer1.run.mockReturnValueOnce(analyzer1ReturnValue);
   });
 
-  test("saves increment", async () => {
+  test("calls first analyzer with initial context", () => {
+    statisticsService.generateStatistics(initialContextValue);
+    expect(analyzer1.run).toHaveBeenCalledWith(initialContextValue);
+  });
+
+  test("passes context returned from previous analyzer", () => {
+    statisticsService.generateStatistics(initialContextValue);
+    expect(analyzer2.run).toHaveBeenCalledWith(analyzer1ReturnValue);
+  });
+
+  test("saves increment", () => {
     mockRandomId("random id");
 
-    await statisticsService.generateStatistics(testCase.reviews);
+    statisticsService.generateStatistics(initialContextValue);
 
     expect(statisticsIncrementRepository.save).toHaveBeenCalledWith({
       id: "random id",
@@ -114,7 +130,7 @@ describe("generateStatistics", () => {
     } satisfies StatisticsIncrement);
   });
 
-  test("continues from previous increment", async () => {
+  test("continues from previous increment", () => {
     mockRandomId("random id");
 
     statisticsIncrementRepository.findLatest.mockReturnValueOnce({
@@ -126,7 +142,7 @@ describe("generateStatistics", () => {
       duration: 213,
     } satisfies StatisticsIncrement);
 
-    await statisticsService.generateStatistics(testCase.reviews);
+    statisticsService.generateStatistics(initialContextValue);
 
     expect(statisticsIncrementRepository.save).toHaveBeenCalledWith({
       id: "random id",
@@ -138,7 +154,7 @@ describe("generateStatistics", () => {
     } satisfies StatisticsIncrement);
   });
 
-  test("saves number of new cards", async () => {
+  test("saves number of new cards", () => {
     const testCase = fixtures.oneNewCardNoReviews;
 
     const context: AnalysisContext = {
@@ -154,7 +170,7 @@ describe("generateStatistics", () => {
 
     mockRandomId("random id");
 
-    await statisticsService.generateStatistics(testCase.reviews);
+    statisticsService.generateStatistics(initialContextValue);
 
     expect(statisticsIncrementRepository.save).toHaveBeenCalledWith({
       id: "random id",

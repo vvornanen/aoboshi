@@ -7,6 +7,7 @@ import {
 } from "~/statistics/character";
 import * as fixtures from "~/statistics/statisticsFixtures";
 import { randomId } from "~";
+import { AnalysisContext } from "~/statistics";
 
 vi.mock("~/randomId", () => {
   return {
@@ -39,8 +40,8 @@ afterEach(() => {
 });
 
 describe("getStatisticsByCharacters", () => {
-  test("no reviews", async () => {
-    const actual = await analyzer.run(fixtures.noReviews);
+  test("no reviews", () => {
+    const actual = analyzer.run(fixtures.noReviews);
 
     expect(actual.statisticsByCharacters).toHaveLength(0);
     expect(actual.reviewDays).toHaveLength(0);
@@ -77,9 +78,8 @@ describe("getStatisticsByCharacters", () => {
   });
 });
 
-describe("run", () => {
-  const testCase = {
-    ...fixtures.oneCardOneReview,
+describe("prepare", () => {
+  const initialContextValue: AnalysisContext = {
     reviews: [
       {
         cardId: "1",
@@ -87,26 +87,83 @@ describe("run", () => {
         reviewTime: "2016-01-15T18:45:21Z",
       },
     ],
+    statisticsByCharacters: [],
+    latestReviewTime: undefined,
+    reviewDays: [],
+    timeZoneConfig: [{ timeZone: "UTC" }],
+  };
+
+  beforeEach(() => {
+    getCardStatisticsByCharacter.mockImplementation(
+      fixtures.oneCardOneReview.getCardStatisticsByCharacter,
+    );
+  });
+
+  test("statisticsByCharacters", async () => {
+    const actual = await analyzer.prepare(initialContextValue);
+    expect(actual.statisticsByCharacters).toEqual([
+      {
+        id: "1",
+        literal: "学",
+        firstAdded: "2016-01-12",
+        firstReviewed: "2016-01-15",
+        lastReviewed: "2016-01-15",
+        numberOfReviews: 1,
+        numberOfCards: 1,
+      },
+    ]);
+  });
+
+  test("latestReviewTime", async () => {
+    const actual = await analyzer.prepare(initialContextValue);
+    expect(actual.latestReviewTime).toBe("2016-01-15T18:45:21.000Z");
+  });
+
+  test("reviewDays", async () => {
+    const actual = await analyzer.prepare(initialContextValue);
+    expect(actual.reviewDays).toEqual(["2016-01-12", "2016-01-15"]);
+  });
+});
+
+describe("run", () => {
+  const contextValue = {
+    reviews: [
+      {
+        cardId: "1",
+        expression: "学",
+        reviewTime: "2016-01-15T18:45:21Z",
+      },
+    ],
+    statisticsByCharacters: [
+      {
+        id: "1",
+        literal: "学",
+        firstAdded: "2016-01-12",
+        firstReviewed: "2016-01-15",
+        lastReviewed: "2016-01-15",
+        numberOfReviews: 1,
+        numberOfCards: 1,
+      },
+    ],
+    latestReviewTime: "2016-01-15T18:45:21.000Z",
+    reviewDays: ["2016-01-12", "2016-01-15"],
+    timeZoneConfig: [{ timeZone: "UTC" }],
   };
 
   beforeEach(() => {
     mockRandomId("random id");
 
-    getCardStatisticsByCharacter.mockImplementation(
-      testCase.getCardStatisticsByCharacter,
-    );
-
     statisticsByCharacterRepository.findByLiteral.mockReturnValueOnce(
-      testCase.statisticsByCharacters[0],
+      fixtures.oneCardOneReview.statisticsByCharacters[0],
     );
   });
 
-  test("merges and saves statistics by character", async () => {
-    await analyzer.run(testCase);
+  test("merges and saves statistics by character", () => {
+    analyzer.run(contextValue);
 
     const expected: StatisticsByCharacter[] = [
       {
-        ...testCase.statisticsByCharacters[0],
+        ...fixtures.oneCardOneReview.statisticsByCharacters[0],
         lastReviewed: "2016-01-15",
         numberOfReviews: 2,
         numberOfCards: 1,

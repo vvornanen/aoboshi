@@ -4,8 +4,10 @@ import { Repository } from "~";
 /**
  * Persists statistics in a repository (e.g. SQLite database)
  */
-export interface StatisticsByCharacterRepository
-  extends Repository<StatisticsByCharacter, string> {
+export interface StatisticsByCharacterRepository extends Repository<
+  StatisticsByCharacter,
+  string
+> {
   /**
    * Finds latest statistics by character literal.
    *

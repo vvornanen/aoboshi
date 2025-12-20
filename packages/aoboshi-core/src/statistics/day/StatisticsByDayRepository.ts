@@ -4,8 +4,10 @@ import { StatisticsByDay } from "~/statistics/day";
 /**
  * Persists statistics in a repository (e.g. SQLite database)
  */
-export interface StatisticsByDayRepository
-  extends Repository<StatisticsByDay, string> {
+export interface StatisticsByDayRepository extends Repository<
+  StatisticsByDay,
+  string
+> {
   /**
    * Finds latest statistics by day.
    *

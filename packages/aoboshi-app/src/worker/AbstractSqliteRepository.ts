@@ -6,9 +6,10 @@ export type PreparedStatement<R> = { run: (row: R) => void };
 /**
  * Generic implementation for storing entities in an SQLite database.
  */
-export abstract class AbstractSqliteRepository<T, R, ID>
-  implements Repository<T, ID>
-{
+export abstract class AbstractSqliteRepository<T, R, ID> implements Repository<
+  T,
+  ID
+> {
   protected constructor(
     protected db: Database,
     protected tableName: string,

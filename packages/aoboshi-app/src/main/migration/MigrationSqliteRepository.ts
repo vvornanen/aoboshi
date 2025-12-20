@@ -9,8 +9,10 @@ export type ExecutedMigration = {
   timestamp: string;
 };
 
-export interface MigrationRepository
-  extends Repository<ExecutedMigration, string> {}
+export interface MigrationRepository extends Repository<
+  ExecutedMigration,
+  string
+> {}
 
 export class MigrationSqliteRepository
   extends AbstractSqliteRepository<ExecutedMigration, ExecutedMigration, string>

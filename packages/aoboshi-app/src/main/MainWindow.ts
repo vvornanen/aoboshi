@@ -19,7 +19,7 @@ export class MainWindow {
       titleBarStyle: "hiddenInset",
       trafficLightPosition: { x: 20, y: 18 },
       webPreferences: {
-        preload: path.join(__dirname, "preload.js"),
+        preload: path.join(import.meta.dirname, "preload.mjs"),
       },
     });
 
@@ -49,7 +49,10 @@ export class MainWindow {
       await this.window.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     } else {
       await this.window.loadFile(
-        path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
+        path.join(
+          import.meta.dirname,
+          `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`,
+        ),
       );
     }
   }

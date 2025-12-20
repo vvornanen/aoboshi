@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "main": ".vite/build/main.js",
+  "type": "module",
   "scripts": {
     "rebuild:sqlite": "electron-rebuild -f -w better-sqlite3",
     "make": "yarn rebuild:sqlite && electron-forge make",

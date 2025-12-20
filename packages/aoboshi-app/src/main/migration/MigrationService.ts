@@ -40,7 +40,7 @@ const getContentHash = (path: string): string => {
 };
 
 const getMigrationFiles = (): MigrationFile[] => {
-  const migrationsDir = join(__dirname, "migrations");
+  const migrationsDir = join(import.meta.dirname, "migrations");
 
   return fs
     .readdirSync(migrationsDir)

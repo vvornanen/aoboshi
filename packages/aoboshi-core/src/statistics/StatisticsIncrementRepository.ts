@@ -1,8 +1,10 @@
 import { StatisticsIncrement } from "~/statistics";
 import { Repository } from "~";
 
-export interface StatisticsIncrementRepository
-  extends Repository<StatisticsIncrement, string> {
+export interface StatisticsIncrementRepository extends Repository<
+  StatisticsIncrement,
+  string
+> {
   /**
    * Finds the latest increment.
    *

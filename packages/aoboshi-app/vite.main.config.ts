@@ -30,7 +30,7 @@ export default defineConfig((env) => {
       lib: {
         entry: forgeConfigSelf.entry,
         fileName: () => "[name].js",
-        formats: ["cjs"],
+        formats: ["es"],
       },
       rollupOptions: {
         external: [...external, "better-sqlite3"],

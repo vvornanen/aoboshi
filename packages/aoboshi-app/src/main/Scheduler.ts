@@ -23,7 +23,7 @@ export class Scheduler implements OnAfterInit {
 
   constructor(context: MainApplicationContext) {
     this.bree = new Bree({
-      root: path.join(__dirname, "jobs"),
+      root: path.join(import.meta.dirname, "jobs"),
       worker: {
         // Pass application properties to worker threads
         env: propertiesAsEnv(context.properties),

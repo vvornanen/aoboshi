@@ -64,7 +64,7 @@ export const getMainApplicationContext = (): MainApplicationContext => {
       logLevel: getEnvironmentVariable("LOGLEVEL", "info"),
       resourcesPath:
         process.env.NODE_ENV === "development"
-          ? path.join(__dirname, "../../src/resources")
+          ? path.join(import.meta.dirname, "../../src/resources")
           : process.resourcesPath,
     };
 

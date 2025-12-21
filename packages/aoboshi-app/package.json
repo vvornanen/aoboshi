@@ -43,7 +43,7 @@
     "@electron-forge/maker-zip": "^7.10.2",
     "@electron-forge/plugin-vite": "^7.10.2",
     "@electron/rebuild": "^4.0.2",
-    "@sinonjs/fake-timers": "^15.0.0",
+    "@sinonjs/fake-timers": "^15.1.0",
     "@storybook/addon-essentials": "^8.6.15",
     "@storybook/addon-interactions": "^8.6.15",
     "@storybook/addon-links": "^8.6.15",

@@ -64,7 +64,7 @@
     "@types/react-dom": "^18.3.7",
     "@types/sinonjs__fake-timers": "^15.0.1",
     "@vanilla-extract/vite-plugin": "^5.1.4",
-    "@vitejs/plugin-react-swc": "^3.11.0",
+    "@vitejs/plugin-react-swc": "^4.2.2",
     "chromatic": "^13.3.4",
     "dotenv-cli": "^11.0.0",
     "electron": "^39.2.7",

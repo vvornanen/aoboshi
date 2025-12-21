@@ -4993,7 +4993,7 @@ __metadata:
     dotenv: "npm:^17.2.3"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite-tsconfig-paths: "npm:^4.3.2"
+    vite-tsconfig-paths: "npm:^6.0.3"
     vitest: "npm:^2.1.9"
   languageName: unknown
   linkType: soft
@@ -5058,7 +5058,7 @@ __metadata:
     storybook: "npm:^8.6.15"
     typescript: "npm:^5.9.3"
     vite: "npm:^7.3.0"
-    vite-tsconfig-paths: "npm:^4.3.2"
+    vite-tsconfig-paths: "npm:^6.0.3"
     vitest: "npm:^2.1.9"
     vitest-mock-extended: "npm:^2.0.2"
   languageName: unknown
@@ -5071,7 +5071,7 @@ __metadata:
     "@js-temporal/polyfill": "npm:^0.4.4"
     tsup: "npm:^8.5.1"
     typescript: "npm:^5.9.3"
-    vite-tsconfig-paths: "npm:^4.3.2"
+    vite-tsconfig-paths: "npm:^6.0.3"
     vitest: "npm:^2.1.9"
     vitest-mock-extended: "npm:^2.0.2"
   languageName: unknown
@@ -5113,7 +5113,7 @@ __metadata:
     prettier: "npm:3.7.4"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.50.0"
-    vite-tsconfig-paths: "npm:^4.3.2"
+    vite-tsconfig-paths: "npm:^6.0.3"
     vitest: "npm:^2.1.9"
     vitest-mock-extended: "npm:^2.0.2"
   languageName: unknown
@@ -15593,9 +15593,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-tsconfig-paths@npm:^4.3.2":
-  version: 4.3.2
-  resolution: "vite-tsconfig-paths@npm:4.3.2"
+"vite-tsconfig-paths@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "vite-tsconfig-paths@npm:6.0.3"
   dependencies:
     debug: "npm:^4.1.1"
     globrex: "npm:^0.1.2"
@@ -15605,7 +15605,7 @@ __metadata:
   peerDependenciesMeta:
     vite:
       optional: true
-  checksum: 10/c12e2087fd01ac8a694850c649b79d5b9798cdba0ef9ab4116f669d8ffa1a9a3195c5a14410d3d9a12d2f08cd35ddd74f03d9c7b13a2d590d002055cdaab45c0
+  checksum: 10/271cdc040a03181d13e4253e99ec6deec1cbe4ec4cb2a1377d46dba403483f8e38a5c2ed29ad0493ed51c2cfd658847cb1cdc73e438d6a8bcdd2b52df19d72e2
   languageName: node
   linkType: hard
 

@@ -43,7 +43,7 @@
     "@electron-forge/maker-zip": "^7.10.2",
     "@electron-forge/plugin-vite": "^7.10.2",
     "@electron/rebuild": "^4.0.2",
-    "@sinonjs/fake-timers": "^15.0.0",
+    "@sinonjs/fake-timers": "^15.1.0",
     "@storybook/addon-essentials": "^8.6.15",
     "@storybook/addon-interactions": "^8.6.15",
     "@storybook/addon-links": "^8.6.15",
@@ -73,8 +73,8 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "^2.1.9",
-    "vitest-mock-extended": "^2.0.2"
+    "vitest": "^4.0.16",
+    "vitest-mock-extended": "^3.1.0"
   },
   "productName": "Aoboshi"
 }

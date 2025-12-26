@@ -9,8 +9,8 @@
     "postinstall": "husky",
     "lint": "eslint .",
     "test:rebuild": "yarn rebuild better-sqlite3",
-    "test": "yarn test:rebuild && vitest src",
-    "test:integration": "vitest integration",
+    "test": "yarn test:rebuild && vitest --project !anki-integration",
+    "test:integration": "vitest --project anki-integration",
     "build": "yarn workspaces foreach -Apt run build",
     "schema": "sqlite3 packages/aoboshi-app/dev.db .schema > packages/aoboshi-app/src/migrations/schema.sql",
     "dev": "concurrently 'yarn build --watch' 'yarn storybook'",
@@ -44,14 +44,14 @@
     "eslint-plugin-react-refresh": "^0.4.26",
     "eslint-plugin-storybook": "^10.1.9",
     "husky": "^9.1.7",
-    "jsdom": "26.1.0",
+    "jsdom": "27.3.0",
     "lint-staged": "^16.2.7",
     "prettier": "3.7.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.0",
     "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "^2.1.9",
-    "vitest-mock-extended": "^2.0.2"
+    "vitest": "^4.0.16",
+    "vitest-mock-extended": "^3.1.0"
   },
   "resolutions": {
     "@vitejs/plugin-react": ">=4.2.1"

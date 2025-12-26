@@ -29,21 +29,21 @@ const ankiUrl = "http://localhost:8000";
 const apiKey = "test";
 const client = new AnkiClient(ankiUrl, apiKey);
 
-test("not found", () => {
+test("not found", async () => {
   mockResponse(404, null);
 
-  expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
+  await expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
     "Anki request failed",
   );
 });
 
-test("invalid api key", () => {
+test("invalid api key", async () => {
   mockResponse(200, {
     result: null,
     error: "valid api key must be provided",
   });
 
-  expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
+  await expect(client.getLatestReviewTimestamp("deck")).rejects.toThrowError(
     "Anki request failed: valid api key must be provided",
   );
 });

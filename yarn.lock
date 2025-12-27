@@ -3690,6 +3690,7 @@ __metadata:
     jsdom: "npm:27.3.0"
     lint-staged: "npm:^16.2.7"
     prettier: "npm:3.7.4"
+    storybook: "npm:9.1.17"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.50.0"
     vite-tsconfig-paths: "npm:^6.0.3"

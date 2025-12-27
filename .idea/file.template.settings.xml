@@ -3,9 +3,9 @@
   <component name="ExportableFileTemplateSettings">
     <default_templates>
       <template name="React Component.tsx" file-name="${NAME}/${NAME}.tsx" reformat="true" live-template-enabled="false">
-        <template name="React Component.tsx.child.2.ts" file-name="${NAME}/index.ts" reformat="true" live-template-enabled="false" />
         <template name="React Component.tsx.child.0.tsx" file-name="${NAME}/${NAME}.stories.tsx" reformat="true" live-template-enabled="false" />
         <template name="React Component.tsx.child.1.ts" file-name="${NAME}/${NAME}.css.ts" reformat="true" live-template-enabled="false" />
+        <template name="React Component.tsx.child.2.ts" file-name="${NAME}/index.ts" reformat="true" live-template-enabled="false" />
       </template>
       <template name="React Component.tsx.child.0.tsx" file-name="${NAME}/${NAME}.stories.tsx" reformat="true" live-template-enabled="false" />
       <template name="React Component.tsx.child.1.ts" file-name="${NAME}/${NAME}.css.ts" reformat="true" live-template-enabled="false" />

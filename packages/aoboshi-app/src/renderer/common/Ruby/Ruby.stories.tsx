@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Ruby } from "./Ruby";
 import { Typography } from "~common/Typography";
 

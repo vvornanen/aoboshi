@@ -1,4 +1,4 @@
-import { makeDecorator } from "@storybook/preview-api";
+import { makeDecorator } from "storybook/preview-api";
 import * as FakeTimers from "@sinonjs/fake-timers";
 import { InstalledClock } from "@sinonjs/fake-timers";
 

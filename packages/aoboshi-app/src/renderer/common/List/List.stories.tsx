@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { List } from "./List";
 import { ListItem } from "~common/ListItem";
 import { ListSubheader } from "~common/ListSubheader";

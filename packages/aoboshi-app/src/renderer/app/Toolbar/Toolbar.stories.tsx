@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { StatisticsIncrement } from "@vvornanen/aoboshi-core/statistics";
-import { userEvent, waitFor, within } from "@storybook/test";
+import { userEvent, waitFor, within } from "storybook/test";
 import { Toolbar } from "./Toolbar";
 import { IpcApi } from "~/preload";
 

@@ -1,4 +1,4 @@
-import { makeDecorator } from "@storybook/preview-api";
+import { makeDecorator } from "storybook/preview-api";
 import { createRoutesStub } from "react-router";
 import type { ReactNode } from "react";
 

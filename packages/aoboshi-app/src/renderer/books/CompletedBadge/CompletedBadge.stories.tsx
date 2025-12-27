@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CompletedBadge as CompletedBadgeComponent } from "./CompletedBadge";
 import * as theme from "~theme/theme.css";
 

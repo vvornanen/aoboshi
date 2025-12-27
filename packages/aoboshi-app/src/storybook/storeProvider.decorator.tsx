@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { makeDecorator } from "@storybook/preview-api";
+import { makeDecorator } from "storybook/preview-api";
 import { Provider } from "react-redux";
 import { mockIpcApi } from "./mockIpcApi";
 import { ipcApi } from "~app/ipcApi";

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ChapterProgress as ChapterProgressComponent } from "./ChapterProgress";
 
 const meta = {

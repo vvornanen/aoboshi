@@ -1,4 +1,4 @@
-import type { Preview, ReactRenderer } from "@storybook/react";
+import type { Preview, ReactRenderer } from "@storybook/react-vite";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -23,6 +23,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+    docs: {
+      codePanel: true,
     },
   },
   loaders: [storeLoader],

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Tooltip as TooltipComponent } from "./Tooltip";
 import { Card } from "~common/Card";
 

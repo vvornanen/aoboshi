@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { grades } from "@vvornanen/aoboshi-core/fixtures/bookFixtures";
 import { BookPage } from "./BookPage";
 import { IpcApi } from "~/preload";

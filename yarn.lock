@@ -2487,6 +2487,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-vitest@npm:^10.1.10":
+  version: 10.1.10
+  resolution: "@storybook/addon-vitest@npm:10.1.10"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/icons": "npm:^2.0.0"
+  peerDependencies:
+    "@vitest/browser": ^3.0.0 || ^4.0.0
+    "@vitest/browser-playwright": ^4.0.0
+    "@vitest/runner": ^3.0.0 || ^4.0.0
+    storybook: ^10.1.10
+    vitest: ^3.0.0 || ^4.0.0
+  peerDependenciesMeta:
+    "@vitest/browser":
+      optional: true
+    "@vitest/browser-playwright":
+      optional: true
+    "@vitest/runner":
+      optional: true
+    vitest:
+      optional: true
+  checksum: 10/249cfaf7ffec7fec0fae772d90c9153003b727fb97d7e7c5636cdb835cf65e78caf2b45000373719803b317be70888df932b42d4d9147dbab6df4979c8ba92b7
+  languageName: node
+  linkType: hard
+
 "@storybook/builder-vite@npm:10.1.10":
   version: 10.1.10
   resolution: "@storybook/builder-vite@npm:10.1.10"
@@ -3494,6 +3519,7 @@ __metadata:
     "@storybook/addon-docs": "npm:10.1.10"
     "@storybook/addon-links": "npm:10.1.10"
     "@storybook/addon-themes": "npm:10.1.10"
+    "@storybook/addon-vitest": "npm:^10.1.10"
     "@storybook/react-vite": "npm:10.1.10"
     "@types/better-sqlite3": "npm:^7.6.13"
     "@types/chroma-js": "npm:^3.1.2"

@@ -18,6 +18,25 @@ i18next.use(initReactI18next).init(options);
 
 const preview: Preview = {
   parameters: {
+    a11y: {
+      test: "error",
+      options: {
+        // See: https://www.deque.com/axe/core-documentation/api-documentation/#axe-core-tags
+        runOnly: [
+          "wcag2a",
+          "wcag2aa",
+          "wcag21a",
+          "wcag21aa",
+          "wcag22aa",
+          "best-practice",
+        ],
+        rules: {
+          // Disable region rule by default because it causes false negatives in component stories.
+          // This rule may be enabled separately for page-level stories.
+          region: { enabled: false },
+        },
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

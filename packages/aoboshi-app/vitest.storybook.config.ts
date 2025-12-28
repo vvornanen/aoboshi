@@ -14,6 +14,9 @@ export default defineProject({
       storybookScript: "yarn storybook",
     }),
   ],
+  optimizeDeps: {
+    include: ["@vanilla-extract/recipes/createRuntimeFn"],
+  },
   test: {
     name: "app/storybook",
     browser: {

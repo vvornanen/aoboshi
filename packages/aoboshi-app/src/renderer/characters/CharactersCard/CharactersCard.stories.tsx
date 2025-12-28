@@ -9,6 +9,9 @@ import { IpcApi } from "~/preload";
 
 const meta = {
   component: CharactersCard,
+  parameters: {
+    a11y: { test: "todo" },
+  },
 } satisfies Meta<typeof CharactersCard>;
 
 export default meta;

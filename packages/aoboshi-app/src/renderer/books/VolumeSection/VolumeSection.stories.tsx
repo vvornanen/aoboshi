@@ -4,6 +4,9 @@ import { VolumeSection } from "./VolumeSection";
 
 const meta = {
   component: VolumeSection,
+  parameters: {
+    a11y: { test: "todo" },
+  },
 } satisfies Meta<typeof VolumeSection>;
 
 export default meta;

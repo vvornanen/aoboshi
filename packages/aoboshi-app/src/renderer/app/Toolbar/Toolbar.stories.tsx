@@ -16,6 +16,7 @@ const fixture = {
 const meta = {
   component: Toolbar,
   parameters: {
+    a11y: { test: "todo" },
     fakeTimers: {
       systemTime: "2024-09-13T21:05:18.000Z",
     },

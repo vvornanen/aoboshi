@@ -4,8 +4,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineProject({
   plugins: [tsconfigPaths()],
   test: {
-    name: "anki-integration",
+    name: { label: "anki/unit", color: "blue" },
     environment: "node",
-    include: ["tests/integration.test.ts"],
+    include: ["src/**/*.test.ts"],
   },
 });

@@ -2,9 +2,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    projects: [
-      "packages/*/vitest.config.ts",
-      "packages/*/vitest.config.{unit,integration}.ts",
-    ],
+    coverage: {
+      provider: "v8",
+      include: ["packages/*/src/**/*.{ts,tsx}"],
+      exclude: ["**/index.ts", "**/*.css.ts"],
+    },
+    projects: ["packages/*/vitest?(.*).config.ts"],
   },
 });

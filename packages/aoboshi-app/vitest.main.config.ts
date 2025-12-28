@@ -4,7 +4,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineProject({
   plugins: [tsconfigPaths()],
   test: {
-    name: { label: "core", color: "green" },
+    name: { label: "app/main", color: "cyan" },
     environment: "node",
+    include: ["src/{main,worker}/**/*.test.ts"],
   },
 });

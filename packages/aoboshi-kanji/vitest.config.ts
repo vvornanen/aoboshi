@@ -2,7 +2,7 @@ import { defineProject } from "vitest/config";
 
 export default defineProject({
   test: {
-    name: "kanji",
+    name: { label: "kanji", color: "yellow" },
     environment: "node",
   },
 });

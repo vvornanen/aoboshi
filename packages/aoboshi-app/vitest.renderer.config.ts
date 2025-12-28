@@ -6,7 +6,7 @@ import { playwright } from "@vitest/browser-playwright";
 export default defineProject({
   plugins: [vanillaExtractPlugin(), tsconfigPaths()],
   test: {
-    name: "app/renderer",
+    name: { label: "app/renderer", color: "cyan" },
     browser: {
       provider: playwright(),
       enabled: true,

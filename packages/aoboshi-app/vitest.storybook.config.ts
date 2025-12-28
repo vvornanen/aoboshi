@@ -18,7 +18,7 @@ export default defineProject({
     include: ["@vanilla-extract/recipes/createRuntimeFn"],
   },
   test: {
-    name: "app/storybook",
+    name: { label: "app/storybook", color: "magenta" },
     browser: {
       provider: playwright(),
       enabled: true,

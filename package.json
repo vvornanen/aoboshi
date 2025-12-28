@@ -34,6 +34,7 @@
     "@commitlint/config-conventional": "^20.2.0",
     "@playwright/test": "^1.57.0",
     "@types/node": "22.19.3",
+    "@vitest/coverage-v8": "^4.0.16",
     "concurrently": "^9.2.1",
     "dotenv": "^17.2.3",
     "eslint": "^9.39.2",

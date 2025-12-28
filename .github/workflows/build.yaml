@@ -35,7 +35,7 @@ jobs:
         run: yarn prettier --check .
 
       - name: Install Playwright browser binaries
-        run: yarn playwright install --with-deps
+        run: yarn playwright install --with-deps chromium
 
       - name: Run unit tests
         run: yarn test

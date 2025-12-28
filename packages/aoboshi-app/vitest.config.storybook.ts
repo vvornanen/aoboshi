@@ -15,7 +15,7 @@ export default defineProject({
     }),
   ],
   test: {
-    name: "storybook",
+    name: "app/storybook",
     browser: {
       provider: playwright(),
       enabled: true,

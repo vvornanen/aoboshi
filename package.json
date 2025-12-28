@@ -11,6 +11,7 @@
     "test:rebuild": "yarn rebuild better-sqlite3",
     "test": "yarn test:rebuild && vitest --project !anki-integration",
     "test:integration": "vitest --project anki-integration",
+    "test:storybook": "vitest --project storybook",
     "build": "yarn workspaces foreach -Apt run build",
     "schema": "sqlite3 packages/aoboshi-app/dev.db .schema > packages/aoboshi-app/src/migrations/schema.sql",
     "dev": "concurrently 'yarn build --watch' 'yarn storybook'",

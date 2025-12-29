@@ -6,6 +6,7 @@ import { IpcApi } from "~/preload";
 const meta = {
   component: BookPage,
   parameters: {
+    a11y: { test: "todo" },
     route: {
       loader() {
         return { bookId: grades.id };

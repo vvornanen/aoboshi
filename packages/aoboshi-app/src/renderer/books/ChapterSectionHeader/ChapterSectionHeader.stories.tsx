@@ -3,6 +3,9 @@ import { ChapterSectionHeader as ChapterSectionHeaderComponent } from "./Chapter
 
 const meta = {
   component: ChapterSectionHeaderComponent,
+  parameters: {
+    a11y: { test: "todo" },
+  },
 } satisfies Meta<typeof ChapterSectionHeaderComponent>;
 
 export default meta;

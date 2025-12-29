@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     "../src/renderer/**/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
+    getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-links"),
     getAbsolutePath("@storybook/addon-themes"),
     getAbsolutePath("@storybook/addon-docs"),

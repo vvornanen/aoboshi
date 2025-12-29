@@ -6,6 +6,7 @@ import { ListSubheader } from "~common/ListSubheader";
 const meta = {
   component: List,
   parameters: {
+    a11y: { test: "todo" },
     route: {
       location: {},
     },

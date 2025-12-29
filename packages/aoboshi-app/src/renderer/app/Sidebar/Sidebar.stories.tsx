@@ -13,6 +13,7 @@ const meta = {
     ),
   ],
   parameters: {
+    a11y: { test: "todo" },
     layout: "fullscreen",
     route: {
       location: {},

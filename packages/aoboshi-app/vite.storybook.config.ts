@@ -7,4 +7,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [tsconfigPaths(), react(), vanillaExtractPlugin()],
   root: "src/renderer",
+  optimizeDeps: {
+    include: [
+      "@sinonjs/fake-timers",
+      "@storybook/addon-themes",
+      "@vanilla-extract/recipes/createRuntimeFn",
+      "chroma-js",
+      "i18next",
+    ],
+  },
 });

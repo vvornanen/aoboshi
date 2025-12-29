@@ -4,6 +4,9 @@ import { CharacterInfoCard } from "./CharacterInfoCard";
 
 const meta = {
   component: CharacterInfoCard,
+  parameters: {
+    a11y: { test: "todo" },
+  },
   argTypes: {
     size: { type: "number" },
   },

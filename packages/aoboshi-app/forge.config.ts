@@ -11,7 +11,7 @@ const getAbsolutePath = (value: string) =>
 export default {
   packagerConfig: {
     appBundleId: "com.github.vvornanen.aoboshi",
-    appCopyright: "© 2025 Ville Vornanen",
+    appCopyright: "© 2026 Ville Vornanen",
     icon: "src/resources/aoboshi",
     extraResource: [
       "src/resources/ja.lproj",

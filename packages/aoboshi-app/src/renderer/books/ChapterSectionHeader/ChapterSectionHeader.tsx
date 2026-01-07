@@ -30,7 +30,7 @@ export const ChapterSectionHeader: FunctionComponent<
         id={id}
         variant="bodyLarge"
         component="h3"
-        aria-busy={loading}
+        aria-hidden={loading || undefined}
       >
         {!loading && title}
         {loading && <Skeleton length={16} />}

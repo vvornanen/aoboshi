@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, FunctionComponent } from "react";
+import { ComponentPropsWithoutRef, FunctionComponent, useId } from "react";
 import { useTranslation } from "react-i18next";
 import { Transition, motion, useReducedMotion } from "motion/react";
 import { clsx } from "clsx";
@@ -51,6 +51,7 @@ export const Toolbar: FunctionComponent<ToolbarProps> = ({
 
 const LatestReview = () => {
   const { t } = useTranslation();
+  const errorPopoverLabelId = useId();
   const { latestReviewTimestamp, isLoading, error } =
     useLatestReviewTimestamp();
 
@@ -75,10 +76,11 @@ const LatestReview = () => {
             align="end"
             avoidCollisions
             collisionPadding={8}
+            aria-labelledby={errorPopoverLabelId}
           >
             <Card variant="raised">
               {/* TODO: Error component */}
-              <Typography component="p">
+              <Typography component="p" id={errorPopoverLabelId}>
                 {t("Toolbar.latestReviewErrorPopoverText")}
               </Typography>
               <Typography component="p">{error.message}</Typography>
@@ -107,6 +109,7 @@ const LatestReview = () => {
           align="end"
           avoidCollisions
           collisionPadding={8}
+          aria-label={t("Toolbar.latestReviewPopoverLabel")}
         >
           <Card variant="raised">
             <DateTime value={latestReviewTimestamp} />

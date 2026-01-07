@@ -4,9 +4,6 @@ import { ChapterSection } from "./ChapterSection";
 
 const meta = {
   component: ChapterSection,
-  parameters: {
-    a11y: { test: "todo" },
-  },
 } satisfies Meta<typeof ChapterSection>;
 
 export default meta;

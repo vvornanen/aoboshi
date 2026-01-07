@@ -23,6 +23,7 @@ export const VolumeSection: FunctionComponent<VolumeSectionProps> = ({
         variant="headlineMedium"
         component="h2"
         className={styles.volumeHeading}
+        aria-hidden={loading || undefined}
       >
         {!loading && volume?.title}
         {loading && <Skeleton length={8} />}

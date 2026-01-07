@@ -22,6 +22,9 @@ export const ja = {
       other: "常用外",
     },
   },
+  CharactersCard: {
+    popoverLabel: "「{{character}}」を調べる",
+  },
   Layout: {
     toggleSidebar: "サイドバーを表示します",
   },
@@ -39,6 +42,7 @@ export const ja = {
   },
   Toolbar: {
     latestReview: "最後の学習:",
+    latestReviewPopoverLabel: "最後の学習",
     latestReviewErrorButtonLabel: "最後の学習を表示できませんでした",
     latestReviewErrorPopoverText: "下記のエラーが発生しました",
   },

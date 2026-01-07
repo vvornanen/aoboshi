@@ -36,7 +36,11 @@ export const BookPage: FunctionComponent = () => {
         aria-busy={isLoading}
         style={{ paddingTop: 16, paddingBottom: 48 }}
       >
-        <Typography variant="headlineLarge" component="h1">
+        <Typography
+          variant="headlineLarge"
+          component="h1"
+          aria-hidden={isLoading || undefined}
+        >
           {book?.title}
           {isLoading && <Skeleton length={8} />}
         </Typography>

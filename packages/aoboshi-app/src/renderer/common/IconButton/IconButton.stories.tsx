@@ -5,9 +5,6 @@ import { SidebarIcon } from "~icons";
 
 const meta = {
   component: IconButton,
-  parameters: {
-    a11y: { test: "todo" },
-  },
 } satisfies Meta<typeof IconButton>;
 
 export default meta;
@@ -15,6 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    title: "Title",
     disabled: false,
     onClick: fn(),
   },

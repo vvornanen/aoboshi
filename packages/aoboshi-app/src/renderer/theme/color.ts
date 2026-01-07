@@ -89,7 +89,7 @@ export const lightPalette = {
     surfaceContainerHigh: neutralTones[96],
     surfaceContainerHighest: neutralTones[90],
     onSurface: alpha(neutralTones[0], 0.87),
-    onSurfaceVariant: alpha(neutralTones[0], 0.54),
+    onSurfaceVariant: alpha(neutralTones[0], 0.55),
   },
   outline: {
     outline: neutralTones[0],

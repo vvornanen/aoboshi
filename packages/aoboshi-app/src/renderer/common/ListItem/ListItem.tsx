@@ -19,6 +19,8 @@ export const ListItem = forwardRef<HTMLAnchorElement, ListItemProps>(
       <li>
         <NavLink
           ref={ref}
+          aria-hidden={loading || undefined}
+          tabIndex={loading ? -1 : undefined}
           className={({ isActive }) =>
             clsx(
               className,

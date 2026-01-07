@@ -7,6 +7,7 @@ import {
 } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { Character } from "@vvornanen/aoboshi-core/characters";
+import { useTranslation } from "react-i18next";
 import * as styles from "./CharactersCard.css";
 import { CharacterButton } from "~characters/CharacterButton";
 import { Card } from "~common/Card";
@@ -35,6 +36,7 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
   characters = [],
   loading = false,
 }) => {
+  const { t } = useTranslation();
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(
     null,
   );
@@ -110,6 +112,9 @@ export const CharactersCard: FunctionComponent<CharactersCardProps> = ({
               align="start"
               avoidCollisions
               collisionPadding={8}
+              aria-label={t("CharactersCard.popoverLabel", {
+                character: selectedCharacter,
+              })}
             >
               <Card variant="raised">
                 {!error && (

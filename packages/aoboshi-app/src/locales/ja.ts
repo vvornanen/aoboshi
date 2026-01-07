@@ -22,6 +22,9 @@ export const ja = {
       other: "常用外",
     },
   },
+  CharactersCard: {
+    popoverLabel: "「{{character}}」を調べる",
+  },
   Layout: {
     toggleSidebar: "サイドバーを表示します",
   },

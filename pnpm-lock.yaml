@@ -187,9 +187,6 @@ importers:
       concurrently:
         specifier: ^10.0.5
         version: 10.0.5
-      dotenv:
-        specifier: ^17.4.2
-        version: 17.4.2
       eslint:
         specifier: ^9.39.5
         version: 9.39.5(jiti@2.6.1)(supports-color@8.1.1)
@@ -252,8 +249,8 @@ importers:
         version: 0.4.4
     devDependencies:
       dotenv:
-        specifier: ^17.4.2
-        version: 17.4.2
+        specifier: ^18.0.4
+        version: 18.0.4
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.15.7)(jiti@2.6.1)(postcss@8.5.6)(supports-color@8.1.1)(typescript@5.9.3)(yaml@2.8.1)
@@ -399,6 +396,9 @@ importers:
       chromatic:
         specifier: ^13.3.5
         version: 13.3.5
+      dotenv:
+        specifier: ^18.0.4
+        version: 18.0.4
       dotenv-cli:
         specifier: ^11.0.0
         version: 11.0.0
@@ -3193,6 +3193,11 @@ packages:
   dotenv@17.4.2:
     resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
     engines: {node: '>=12'}
+
+  dotenv@18.0.4:
+    resolution: {integrity: sha512-jGt9uI5BIxpVO15kvy+iEFqNAwxYClKWnkptLjSNPnFLC003Imd0ofr3aEVsbpHdSBdSsbcApNIlz4nbyGMwdA==}
+    engines: {node: '>=12'}
+    hasBin: true
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -9070,6 +9075,8 @@ snapshots:
   dotenv@16.6.1: {}
 
   dotenv@17.4.2: {}
+
+  dotenv@18.0.4: {}
 
   dunder-proto@1.0.1:
     dependencies:

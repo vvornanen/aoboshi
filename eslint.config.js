@@ -1,10 +1,9 @@
 // @ts-check
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
-import reactRecommended from "eslint-plugin-react/configs/recommended.js";
-import reactJsxRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
+import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
+import { reactRefresh } from "eslint-plugin-react-refresh";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import importPlugin from "eslint-plugin-import";
 import prettier from "eslint-config-prettier";
@@ -47,14 +46,14 @@ export default tseslint.config(
   {
     files: ["packages/aoboshi-app/**/*.{ts,tsx}"],
     extends: [
-      reactRecommended,
-      reactJsxRuntime,
+      react.configs.flat.recommended,
+      react.configs.flat["jsx-runtime"],
       reactHooks.configs.flat.recommended,
       importPlugin.flatConfigs.electron,
       jsxA11y.flatConfigs.recommended,
     ],
     plugins: {
-      "react-refresh": reactRefresh,
+      "react-refresh": reactRefresh.plugin,
     },
     settings: {
       react: {
@@ -147,12 +146,6 @@ export default tseslint.config(
     },
   },
   storybook.configs["flat/recommended"],
-  {
-    files: ["packages/aoboshi-app/src/**/*.stories.{ts,tsx}"],
-    rules: {
-      // Disable temporarily until Storybook is upgraded to >=9
-      "storybook/no-renderer-packages": "off",
-    },
-  },
+  reactRefresh.configs.vite(),
   prettier,
 );

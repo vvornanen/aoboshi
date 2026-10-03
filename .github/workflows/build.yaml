@@ -17,28 +17,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v3
         with:
-          node-version-file: .nvmrc
-          cache: yarn
-
-      - name: Install
-        run: yarn --immutable
+          cache: true
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Prettier
-        run: yarn prettier --check .
+        run: pnpm prettier --check .
 
       - name: Install Playwright browser binaries
-        run: yarn playwright install --with-deps chromium
+        run: pnpm playwright install --with-deps chromium
 
       - name: Run unit tests
-        run: yarn test
+        run: pnpm test
 
       - name: Publish to Chromatic
         uses: chromaui/action@v13
@@ -60,22 +57,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v6
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@v3
         with:
-          node-version-file: .nvmrc
-          cache: yarn
-
-      - name: Install
-        run: yarn --immutable
+          cache: true
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Package
-        run: yarn package:ci
+        run: pnpm package:ci
 
       - name: Run Playwright tests
-        run: yarn playwright test
+        run: pnpm playwright test
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v5

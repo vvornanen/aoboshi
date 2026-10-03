@@ -11,7 +11,7 @@ export default defineProject({
     tsconfigPaths(),
     storybookTest({
       configDir: join(import.meta.dirname, ".storybook"),
-      storybookScript: "yarn storybook",
+      storybookScript: "pnpm storybook",
     }),
   ],
   optimizeDeps: {

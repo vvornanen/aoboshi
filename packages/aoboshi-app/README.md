@@ -4,7 +4,7 @@ An Electron application including a React app in the renderer process
 and an SQLite database in the main process.
 The main process uses worker threads for running background tasks.
 
-All yarn commands should be run in the repository root directory.
+All pnpm commands should be run in the repository root directory.
 
 ## Directory structure
 
@@ -45,7 +45,7 @@ aoboshi-app/
 │  │  ├─ books/           # Feature
 │  │  └─ characters/      # Feature
 │  └─ i18n.ts             # Common i18next options for both main and renderer processes
-├─ dev.db                 # SQLite database created when running yarn start
+├─ dev.db                 # SQLite database created when running pnpm start
 ├─ forge.config.ts        # Electron Forge configuration
 ├─ package.json
 ├─ vite.main.config.ts

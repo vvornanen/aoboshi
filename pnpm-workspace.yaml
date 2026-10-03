@@ -27,17 +27,6 @@ minimumReleaseAgeExclude:
 packages:
   - "packages/*"
 
-tasks:
-  build:
-    dependsOn:
-      - ^build
-  package:
-    dependsOn:
-      - build
-  "package:ci":
-    dependsOn:
-      - build
-
 allowBuilds:
   "@swc/core": true
   better-sqlite3: true

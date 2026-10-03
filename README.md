@@ -83,6 +83,7 @@ pnpm test:integration
 Playwright runs end-to-end tests inside Electron.
 
 ```
+pnpm build
 pnpm package:ci
 pnpm playwright test
 ```

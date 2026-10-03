@@ -1,6 +1,6 @@
 .idea/fileTemplates
-.yarn
 coverage
 packages/*/.vite
 packages/*/out
 packages/*/dist
+pnpm-lock.yaml

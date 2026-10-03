@@ -104,8 +104,8 @@ First, add a migration file modifying the schema.
 Then, update the schema by running:
 
 ```zsh
-yarn start
-yarn schema
+pnpm start
+pnpm schema
 ```
 
 Finally, commit the changed file to the version control.

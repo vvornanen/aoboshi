@@ -2,25 +2,22 @@
   "name": "@vvornanen/aoboshi",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "postinstall": "husky",
     "lint": "eslint .",
-    "test:rebuild": "yarn rebuild better-sqlite3",
-    "test": "yarn test:rebuild && vitest --project !anki/integration",
+    "test:rebuild": "pnpm rebuild better-sqlite3",
+    "test": "pnpm test:rebuild && vitest --project !anki/integration",
     "test:integration": "vitest --project anki/integration",
     "test:storybook": "vitest --project app/storybook",
-    "build": "yarn workspaces foreach -Apt run build",
+    "build": "pnpm --recursive build",
     "schema": "sqlite3 packages/aoboshi-app/dev.db .schema > packages/aoboshi-app/src/migrations/schema.sql",
-    "dev": "concurrently 'yarn build --watch' 'yarn storybook'",
-    "package": "yarn workspace @vvornanen/aoboshi-app package && open packages/aoboshi-app/out",
-    "package:ci": "yarn workspace @vvornanen/aoboshi-app package",
-    "make": "yarn workspace @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
-    "start": "yarn workspace @vvornanen/aoboshi-app start",
-    "storybook": "yarn workspace @vvornanen/aoboshi-app storybook",
-    "chromatic": "yarn workspace @vvornanen/aoboshi-app chromatic --exit-zero-on-changes"
+    "dev": "concurrently 'pnpm build --watch' 'pnpm storybook'",
+    "package": "pnpm --filter @vvornanen/aoboshi-app package && open packages/aoboshi-app/out",
+    "package:ci": "pnpm --filter @vvornanen/aoboshi-app package",
+    "make": "pnpm --filter @vvornanen/aoboshi-app make && open packages/aoboshi-app/out",
+    "start": "pnpm --filter @vvornanen/aoboshi-app start",
+    "storybook": "pnpm --filter @vvornanen/aoboshi-app storybook",
+    "chromatic": "pnpm --filter @vvornanen/aoboshi-app chromatic --exit-zero-on-changes"
   },
   "lint-staged": {
     "*.{html,css,md,mdx,json}": "prettier --write",
@@ -58,10 +55,17 @@
   "resolutions": {
     "@vitejs/plugin-react": ">=4.2.1"
   },
-  "packageManager": "yarn@4.12.0",
-  "engines": {
-    "node": "22.20",
-    "npm": "Please use yarn instead of npm",
-    "yarn": ">=4.10"
+  "packageManager": "pnpm@12.8.1",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=12.0.0 <13.0.0",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "~22.20.0",
+      "onFail": "download"
+    }
   }
 }

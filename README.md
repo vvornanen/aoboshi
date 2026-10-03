@@ -17,17 +17,15 @@ for how to configure your shell to change the version automatically.
 # Install correct Node version
 nvm use
 
-# Yarn must be re-enabled when Node version changes
-corepack enable yarn
-
 # Install dependencies
-yarn
+pnpm install
 ```
 
 ## Running the app
 
 ```
-yarn start
+pnpm build
+pnpm start
 ```
 
 ## Tests
@@ -49,7 +47,7 @@ Unit tests have been written mostly for other code than UI components.
 The tests are run with vitest.
 
 ```
-yarn test
+pnpm test
 ```
 
 ### Manual testing
@@ -57,7 +55,7 @@ yarn test
 Individual UI components can be tested manually in Storybook.
 
 ```
-yarn storybook
+pnpm storybook
 ```
 
 ### Visual snapshot tests
@@ -77,7 +75,7 @@ ANKI_API_KEY=secret
 ```
 
 ```
-yarn test:integration
+pnpm test:integration
 ```
 
 ### Playwright tests
@@ -85,23 +83,8 @@ yarn test:integration
 Playwright runs end-to-end tests inside Electron.
 
 ```
-yarn build
-yarn package:ci
-yarn playwright test
-```
-
-## Upgrading dependencies
-
-First, upgrade Storybook to the latest version with
-
-```bash
-yarn workspace @vvornanen/aoboshi-app dlx storybook@latest upgrade
-```
-
-Then all other dependencies with
-
-```bash
-yarn upgrade-interactive
+pnpm package:ci
+pnpm playwright test
 ```
 
 ## Notice

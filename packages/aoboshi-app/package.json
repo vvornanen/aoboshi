@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "rebuild:sqlite": "electron-rebuild -f -w better-sqlite3",
-    "make": "yarn rebuild:sqlite && electron-forge make",
-    "package": "yarn rebuild:sqlite && electron-forge package",
-    "publish": "yarn rebuild:sqlite && electron-forge publish",
-    "start": "yarn rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
+    "make": "pnpm rebuild:sqlite && electron-forge make",
+    "package": "pnpm rebuild:sqlite && electron-forge package",
+    "publish": "pnpm rebuild:sqlite && electron-forge publish",
+    "start": "pnpm rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
@@ -32,8 +32,8 @@
     "cmdk": "^1.1.1",
     "i18next": "^25.7.3",
     "motion": "^12.23.26",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-i18next": "^16.5.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.10.1"

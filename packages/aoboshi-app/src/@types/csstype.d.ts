@@ -4,11 +4,6 @@ declare module "csstype" {
     // See: https://www.electronjs.org/docs/latest/tutorial/window-customization#set-custom-draggable-region
     // See: https://github.com/frenic/csstype/issues/71
     WebkitAppRegion?:
-      | "drag"
-      | "inherit"
-      | "initial"
-      | "no-drag"
-      | "none"
-      | "unset";
+      "drag" | "inherit" | "initial" | "no-drag" | "none" | "unset";
   }
 }

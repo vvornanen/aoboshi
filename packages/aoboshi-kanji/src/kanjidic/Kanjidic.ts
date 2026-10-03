@@ -24,12 +24,7 @@ export type KanjidicQueryCode = {
 export type KanjidicReading = {
   "#text": string;
   "@_r_type":
-    | "pinyin"
-    | "korean_r"
-    | "korean_h"
-    | "vietnam"
-    | "ja_on"
-    | "ja_kun";
+    "pinyin" | "korean_r" | "korean_h" | "vietnam" | "ja_on" | "ja_kun";
 };
 
 export type KanjidicMeaning = string | { "#text": string; "@_m_lang": string };

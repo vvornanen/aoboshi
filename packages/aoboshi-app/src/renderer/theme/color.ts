@@ -11,19 +11,7 @@ const activatedOpacity = 0.12;
 const disabledOpacity = 0.38;
 
 type TonalValue =
-  | 0
-  | 10
-  | 20
-  | 30
-  | 40
-  | 50
-  | 60
-  | 70
-  | 80
-  | 90
-  | 95
-  | 99
-  | 100;
+  0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 95 | 99 | 100;
 type TonalPalette = Record<TonalValue, string>;
 const tonalValues: TonalValue[] = [
   0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 99, 100,

@@ -4,6 +4,7 @@ coverage
 .env
 *.tsbuildinfo
 .DS_Store
+*.log
 packages/*/dist
 packages/*/*.tsbuildinfo
 /test-results/

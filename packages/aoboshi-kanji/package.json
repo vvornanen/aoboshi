@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@vvornanen/aoboshi-core": "workspace:^",
-    "fast-xml-parser": "^5.3.3"
+    "fast-xml-parser": "^5.11.1"
   },
   "exports": {
     "./kanjidic": "./dist/kanjidic/index.js",
@@ -18,6 +18,6 @@
   "devDependencies": {
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.1.11"
   }
 }

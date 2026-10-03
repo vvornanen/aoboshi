@@ -42,3 +42,4 @@ update:
   githubActions: true
   ignoreDeps:
     - eslint # TODO: Remove when plugins support v10
+    - "@eslint/js"

@@ -1,5 +1,6 @@
 // @ts-check
 import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -9,7 +10,7 @@ import importPlugin from "eslint-plugin-import";
 import prettier from "eslint-config-prettier";
 import storybook from "eslint-plugin-storybook";
 
-export default tseslint.config(
+export default defineConfig([
   {
     ignores: ["packages/*/.vite/**", "packages/*/dist/**", "packages/*/out/**"],
   },
@@ -17,7 +18,7 @@ export default tseslint.config(
     files: ["packages/**/*.{ts,tsx}"],
     extends: [
       eslint.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
     ],
@@ -148,4 +149,4 @@ export default tseslint.config(
   storybook.configs["flat/recommended"],
   reactRefresh.configs.vite(),
   prettier,
-);
+]);

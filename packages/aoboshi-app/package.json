@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "rebuild:sqlite": "electron-rebuild -f -w better-sqlite3",
-    "make": "yarn rebuild:sqlite && electron-forge make",
-    "package": "yarn rebuild:sqlite && electron-forge package",
-    "publish": "yarn rebuild:sqlite && electron-forge publish",
-    "start": "yarn rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
+    "make": "pnpm rebuild:sqlite && electron-forge make",
+    "package": "pnpm rebuild:sqlite && electron-forge package",
+    "publish": "pnpm rebuild:sqlite && electron-forge publish",
+    "start": "pnpm rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },

@@ -1,0 +1,32 @@
+blockExoticSubdeps: false # TODO: Enable after upgrading to Electron Forge 8
+minimumReleaseAge: 10080
+nodeLinker: hoisted
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - undici-types@6.21.0
+  - semver@6.3.1
+  - chokidar@4.0.3
+
+packages:
+  - "packages/*"
+
+tasks:
+  build:
+    dependsOn:
+      - ^build
+  package:
+    dependsOn:
+      - build
+  "package:ci":
+    dependsOn:
+      - build
+
+allowBuilds:
+  "@swc/core": true
+  better-sqlite3: true
+  electron: true
+  esbuild: true
+  modern-ahocorasick: true
+
+update:
+  githubActions: true

@@ -9,7 +9,7 @@
     "make": "pnpm rebuild:sqlite && electron-forge make",
     "package": "pnpm rebuild:sqlite && electron-forge package",
     "publish": "pnpm rebuild:sqlite && electron-forge publish",
-    "start": "pnpm rebuild:sqlite && dotenv -e ../../.env -- electron-forge start",
+    "start": "pnpm rebuild:sqlite && pnpm dotenv run -f ../../.env -- electron-forge start",
     "storybook": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build"
   },
@@ -60,7 +60,6 @@
     "@vitest/browser-playwright": "^4.1.11",
     "chromatic": "^13.3.5",
     "dotenv": "^18.0.4",
-    "dotenv-cli": "^11.0.0",
     "electron": "^39.8.10",
     "playwright": "^1.63.0",
     "prop-types": "^15.8.1",

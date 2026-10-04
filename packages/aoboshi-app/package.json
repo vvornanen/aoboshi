@@ -57,7 +57,7 @@
     "@types/sinonjs__fake-timers": "^15.0.1",
     "@vanilla-extract/vite-plugin": "^5.2.6",
     "@vitejs/plugin-react-swc": "^4.3.3",
-    "@vitest/browser-playwright": "^4.1.11",
+    "@vitest/browser-playwright": "^5.0.2",
     "chromatic": "^18.9.5",
     "dotenv": "^18.0.4",
     "electron": "^39.8.10",
@@ -67,7 +67,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.6",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.11",
+    "vitest": "^5.0.2",
     "vitest-mock-extended": "^5.1.1"
   },
   "productName": "Aoboshi"

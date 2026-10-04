@@ -138,11 +138,9 @@ describe("getTimeZone", () => {
     ];
 
     // This expected error is Temporal polyfill -specific and may change in the future
-    const expectedError = "Invalid time zone specified: Europe/Tampere";
+    const expectedError = "Unrecognized time zone Europe/Tampere";
 
-    expect(() => getTimeZone(timestamp, invalidConfig)).toThrowError(
-      expectedError,
-    );
+    expect(() => getTimeZone(timestamp, invalidConfig)).toThrow(expectedError);
   });
 
   test("infinite validity", () => {

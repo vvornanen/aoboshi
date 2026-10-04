@@ -39,9 +39,12 @@ export const getTimeZone = (
       (!validTo || Temporal.Instant.compare(validTo, instant) >= 0)
     );
   });
-  return timeZoneConfig
-    ? Temporal.TimeZone.from(timeZoneConfig.timeZone)
-    : Temporal.TimeZone.from("UTC");
+  const timeZone = timeZoneConfig ? timeZoneConfig.timeZone : "UTC";
+
+  // Throw error if time zone is not valid
+  Temporal.Now.zonedDateTimeISO(timeZone);
+
+  return timeZone;
 };
 
 /**

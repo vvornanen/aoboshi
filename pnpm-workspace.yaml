@@ -33,7 +33,6 @@ allowedDeprecatedVersions:
 
 allowBuilds:
   "@swc/core": true
-  electron: true
   esbuild: true
   modern-ahocorasick: true
 

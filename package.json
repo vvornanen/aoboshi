@@ -50,7 +50,7 @@
     "typescript-eslint": "^8.70.1",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.11",
-    "vitest-mock-extended": "^3.1.1"
+    "vitest-mock-extended": "^5.1.1"
   },
   "packageManager": "pnpm@12.8.1",
   "devEngines": {

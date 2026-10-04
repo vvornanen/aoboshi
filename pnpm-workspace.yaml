@@ -33,7 +33,6 @@ allowedDeprecatedVersions:
 
 allowBuilds:
   "@swc/core": true
-  better-sqlite3: true
   electron: true
   esbuild: true
   modern-ahocorasick: true

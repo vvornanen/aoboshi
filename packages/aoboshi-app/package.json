@@ -60,7 +60,7 @@
     "@vitest/browser-playwright": "^5.0.2",
     "chromatic": "^18.9.5",
     "dotenv": "^18.0.4",
-    "electron": "^39.8.10",
+    "electron": "^42.11.8",
     "playwright": "^1.63.0",
     "prop-types": "^15.8.1",
     "storybook": "^10.6.0",

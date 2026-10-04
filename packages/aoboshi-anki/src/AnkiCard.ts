@@ -127,7 +127,7 @@ export type AnkiCard = {
 export const fromInternalCard = (card: AnkiInternalCard): AnkiCard => ({
   id: card.cardId,
   created: Temporal.Instant.fromEpochMilliseconds(card.cardId).toString(),
-  modified: Temporal.Instant.fromEpochSeconds(card.mod).toString(),
+  modified: Temporal.Instant.fromEpochMilliseconds(card.mod * 1000).toString(),
   fields: card.fields,
   modelName: card.modelName,
   deckName: card.deckName,

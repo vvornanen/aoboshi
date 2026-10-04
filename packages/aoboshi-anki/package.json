@@ -7,7 +7,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@js-temporal/polyfill": "^0.4.4"
+    "@js-temporal/polyfill": "^0.5.1"
   },
   "exports": {
     ".": "./dist/index.js",

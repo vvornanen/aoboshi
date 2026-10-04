@@ -24,7 +24,7 @@ const getLastSyncTimestamp = () => {
   const lastIncrement = statisticsIncrementRepository.findLatest();
   return lastIncrement?.end
     ? Temporal.Instant.from(lastIncrement.end)
-    : Temporal.Instant.fromEpochSeconds(0);
+    : Temporal.Instant.fromEpochMilliseconds(0);
 };
 
 const doGenerateStatistics = async (

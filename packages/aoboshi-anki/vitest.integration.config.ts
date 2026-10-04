@@ -1,3 +1,4 @@
+import { loadEnv } from "vite";
 import { defineProject } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -7,5 +8,6 @@ export default defineProject({
     name: { label: "anki/integration", color: "blue" },
     environment: "node",
     include: ["tests/integration.test.ts"],
+    env: loadEnv("", process.cwd(), ""),
   },
 });

@@ -3,6 +3,9 @@ on: push
 permissions:
   contents: read
 
+env:
+  DO_NOT_TRACK: 1
+
 concurrency:
   group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
   cancel-in-progress: true
@@ -38,7 +41,7 @@ jobs:
         run: pnpm test
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v13
+        uses: chromaui/action@v18
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/aoboshi-app

@@ -14,10 +14,10 @@
     "./package.json": "./package.json"
   },
   "devDependencies": {
-    "dotenv": "^17.2.3",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vite-tsconfig-paths": "^6.0.3",
-    "vitest": "^4.0.16"
+    "vite": "7.3.6",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^5.0.2"
   }
 }

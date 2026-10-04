@@ -3,6 +3,9 @@ on: push
 permissions:
   contents: read
 
+env:
+  DO_NOT_TRACK: 1
+
 concurrency:
   group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
   cancel-in-progress: true
@@ -13,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -38,7 +41,7 @@ jobs:
         run: pnpm test
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v13
+        uses: chromaui/action@v18
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: packages/aoboshi-app
@@ -55,7 +58,7 @@ jobs:
           - macos-26
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Install pnpm and Node.js
         uses: pnpm/setup@v3
@@ -72,7 +75,7 @@ jobs:
         run: pnpm playwright test
 
       - name: Upload Playwright report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
         with:
           name: playwright-report-${{ matrix.os }}

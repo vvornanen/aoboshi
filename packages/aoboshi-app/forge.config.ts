@@ -44,7 +44,7 @@ export default {
       await exec(`mkdir -p ${nodeModulesDir}`);
 
       // SQLite cannot be bundled with vite, so the package and its transitive dependencies must be copied manually
-      const packages = ["better-sqlite3", "bindings", "file-uri-to-path"].map(
+      const packages = ["better-sqlite3", "node-addon-api"].map(
         getAbsolutePath,
       );
 

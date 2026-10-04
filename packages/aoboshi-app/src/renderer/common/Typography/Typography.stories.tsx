@@ -28,7 +28,7 @@ const TypographyDisplay: FunctionComponent<TypographyDisplayProps> = ({
         fontFamily:
           'ui-monospace,Menlo,Monaco,"Roboto Mono","Oxygen Mono","Ubuntu Monospace","Source Code Pro","Droid Sans Mono","Courier New",monospace',
         fontSize: "12px",
-        opacity: 0.6,
+        color: "oklch(0 0 0 / 54%)",
         width: 150,
         flexShrink: 0,
       }}

@@ -20,9 +20,7 @@ import { PreProcessingAnalyzer } from "~/statistics/PreProcessingAnalyzer";
 export type GetCardStatisticsByCharacter = (
   literal: string,
 ) =>
-  | CardStatisticsByCharacter
-  | null
-  | Promise<CardStatisticsByCharacter | null>;
+  CardStatisticsByCharacter | null | Promise<CardStatisticsByCharacter | null>;
 
 /**
  * Generates card review statistics aggregated by character.

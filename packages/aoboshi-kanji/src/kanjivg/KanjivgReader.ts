@@ -1,4 +1,5 @@
-import { XMLBuilder, XMLParser, XmlBuilderOptions } from "fast-xml-parser";
+import { XMLParser } from "fast-xml-parser";
+import XMLBuilder from "fast-xml-builder";
 import { CharacterUpdateValue } from "@vvornanen/aoboshi-core/characters";
 import { KvgGroup, KvgKanjivgFile, isGroup, isStroke } from "./KvgKanjivg";
 
@@ -41,14 +42,16 @@ const countStrokes = (groupnode: KvgGroup): number => {
 /** Reads character stroke information from KanjiVG xml data */
 export class KanjivgReader {
   getStrokes(xmlData: string | Buffer): CharacterUpdateValue[] {
-    const options: XmlBuilderOptions = {
+    const parser = new XMLParser({
+      ignoreAttributes: false,
+      preserveOrder: true,
+    });
+
+    const builder = new XMLBuilder({
       ignoreAttributes: false,
       preserveOrder: true,
       suppressEmptyNode: true,
-    };
-
-    const parser = new XMLParser(options);
-    const builder = new XMLBuilder(options);
+    });
 
     const [xmlNode, rootNode] = parser.parse(xmlData) as KvgKanjivgFile;
 

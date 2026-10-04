@@ -1,10 +1,5 @@
-import * as dotenv from "dotenv";
 import { expect, test } from "vitest";
 import { AnkiClient } from "~";
-
-dotenv.config({
-  quiet: true,
-});
 
 test("integration", async () => {
   const client = new AnkiClient(

@@ -1,9 +1,9 @@
 import { makeDecorator } from "storybook/preview-api";
 import * as FakeTimers from "@sinonjs/fake-timers";
-import { InstalledClock } from "@sinonjs/fake-timers";
+import type { Clock } from "@sinonjs/fake-timers";
 
 const RealDate = Date;
-let clock: InstalledClock;
+let clock: Clock;
 
 export const withFakeTimers = makeDecorator({
   name: "withFakeTimers",
